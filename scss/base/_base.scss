@@ -1,0 +1,98 @@
+// Styles de base pour le thème enfant
+
+// Reset et normalisation
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+// Typographie de base
+body {
+  font-family: $font-main;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  color: $color-main;
+}
+
+// Titres
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $font-title;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: $spacing-md;
+}
+
+h1 {
+  font-size: $h1-size;
+}
+h2 {
+  font-size: $h2-size;
+}
+h3 {
+  font-size: $h3-size;
+}
+h4 {
+  font-size: $h4-size;
+}
+h5 {
+  font-size: $h5-size;
+}
+h6 {
+  font-size: $h6-size;
+}
+
+// Liens
+a {
+  color: $color-orange;
+  text-decoration: none;
+  @include transition(color);
+
+  &:hover {
+    color: darken($color-orange, 15%);
+    text-decoration: underline;
+  }
+}
+
+// Paragraphes
+p {
+  margin-bottom: $spacing-md;
+}
+
+// Listes
+ul,
+ol {
+  margin-bottom: $spacing-md;
+  padding-left: $spacing-lg;
+}
+
+// Images
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+// Boutons de base
+button {
+  @include button-style($color-orange);
+
+  &.btn-secondary {
+    @include button-style($color-dark-blue);
+  }
+
+  &.btn-outline {
+    background: transparent;
+    color: $color-orange;
+    border: 2px solid $color-orange;
+
+    &:hover {
+      background: $color-orange;
+      color: $color-white;
+    }
+  }
+}

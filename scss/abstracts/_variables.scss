@@ -1,0 +1,93 @@
+// Variables principales du thème Abyss Energy Child
+// Basées sur les variables CSS du thème parent
+
+// Couleurs principales
+$color-orange: #ff6900;
+$color-light-orange: #f1d5c1;
+$color-dark-blue: #09497a;
+$color-main: #09497a;
+$color-light-grey: #dcd7d4;
+
+// Nouvelles couleurs personnalisées (exemples)
+$color-secondary: #ff7700;
+$color-accent: #0a5280;
+$color-success: #28a745;
+$color-warning: #ffc107;
+$color-danger: #dc3545;
+
+// Couleurs neutres
+$color-white: #ffffff;
+$color-black: #000000;
+$color-grey-100: #f8f9fa;
+$color-grey-200: #e9ecef;
+$color-grey-300: #dee2e6;
+$color-grey-400: #ced4da;
+$color-grey-500: #adb5bd;
+$color-grey-600: #6c757d;
+$color-grey-700: #495057;
+$color-grey-800: #343a40;
+$color-grey-900: #212529;
+
+// Typographie
+$font-title: "Baloo 2", sans-serif;
+$font-main: "Baloo 2", sans-serif;
+$font-size-base: 16px;
+$line-height-base: 1.5;
+
+// Tailles de police
+$font-size-xs: 0.75rem; // 12px
+$font-size-sm: 0.875rem; // 14px
+$font-size-md: 1rem; // 16px
+$font-size-lg: 1.125rem; // 18px
+$font-size-xl: 1.25rem; // 20px
+$font-size-xxl: 1.5rem; // 24px
+
+// Titres
+$h1-size: 2.5rem; // 40px
+$h2-size: 2rem; // 32px
+$h3-size: 1.75rem; // 28px
+$h4-size: 1.5rem; // 24px
+$h5-size: 1.25rem; // 20px
+$h6-size: 1rem; // 16px
+
+// Espacements
+$spacing-xs: 0.25rem; // 4px
+$spacing-sm: 0.5rem; // 8px
+$spacing-md: 1rem; // 16px
+$spacing-lg: 1.5rem; // 24px
+$spacing-xl: 2rem; // 32px
+$spacing-xxl: 3rem; // 48px
+
+// Breakpoints
+$breakpoint-xs: 480px;
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+$breakpoint-xxl: 1400px;
+
+// Transitions
+$transition-base: all 0.3s ease;
+$transition-fast: all 0.15s ease;
+$transition-slow: all 0.5s ease;
+
+// Border radius
+$border-radius-sm: 0.125rem; // 2px
+$border-radius-md: 0.25rem; // 4px
+$border-radius-lg: 0.5rem; // 8px
+$border-radius-xl: 1rem; // 16px
+
+// Shadows
+$shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+$shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+$shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.2);
+
+// Z-index
+$z-dropdown: 1000;
+$z-sticky: 1020;
+$z-fixed: 1030;
+$z-modal-backdrop: 1040;
+$z-modal: 1050;
+$z-popover: 1060;
+$z-tooltip: 1070;

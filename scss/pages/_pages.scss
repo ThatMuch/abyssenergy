@@ -1,0 +1,197 @@
+// Styles spécifiques aux pages
+
+// Page d'accueil
+.home {
+  .hero-section {
+    background: linear-gradient(135deg, $color-dark-blue, $color-orange);
+    color: $color-white;
+    padding: $spacing-xxl 0;
+    text-align: center;
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      margin-bottom: $spacing-lg;
+    }
+
+    .hero-description {
+      font-size: $font-size-lg;
+      margin-bottom: $spacing-xl;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  .features-section {
+    padding: $spacing-xxl 0;
+
+    .features-grid {
+      @include flex-grid(3, $spacing-xl);
+
+      @include respond-to(md) {
+        @include flex-grid(1, $spacing-lg);
+      }
+    }
+
+    .feature-item {
+      text-align: center;
+      padding: $spacing-lg;
+
+      .feature-icon {
+        font-size: 3rem;
+        color: $color-orange;
+        margin-bottom: $spacing-md;
+      }
+
+      h3 {
+        color: $color-dark-blue;
+        margin-bottom: $spacing-sm;
+      }
+    }
+  }
+}
+
+// Pages de contenu
+.page,
+.single {
+  .page-header {
+    background: $color-light-grey;
+    padding: $spacing-xl 0;
+    text-align: center;
+    margin-bottom: $spacing-xxl;
+
+    h1 {
+      color: $color-dark-blue;
+      margin-bottom: $spacing-sm;
+    }
+
+    .page-description {
+      color: $color-grey-600;
+      font-size: $font-size-lg;
+    }
+  }
+
+  .page-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 $spacing-lg;
+
+    .content-section {
+      @include vertical-spacing($spacing-xl);
+    }
+  }
+}
+
+// Page d'archive
+.archive {
+  .archive-header {
+    background: $color-dark-blue;
+    color: $color-white;
+    padding: $spacing-xl 0;
+    text-align: center;
+    margin-bottom: $spacing-xxl;
+
+    h1 {
+      margin-bottom: $spacing-sm;
+    }
+
+    .archive-description {
+      font-size: $font-size-lg;
+      opacity: 0.9;
+    }
+  }
+
+  .posts-grid {
+    @include flex-grid(2, $spacing-xl);
+
+    @include respond-to(md) {
+      @include flex-grid(1, $spacing-lg);
+    }
+  }
+
+  .post-card {
+    @include card-style();
+    @include transition();
+
+    &:hover {
+      transform: translateY(-5px);
+      @include box-shadow($shadow-lg);
+    }
+
+    .post-thumbnail {
+      @include aspect-ratio(16, 9);
+      margin-bottom: $spacing-md;
+      border-radius: $border-radius-md;
+      overflow: hidden;
+    }
+
+    .post-title {
+      color: $color-dark-blue;
+      margin-bottom: $spacing-sm;
+
+      a {
+        color: inherit;
+        text-decoration: none;
+
+        &:hover {
+          color: $color-orange;
+        }
+      }
+    }
+
+    .post-excerpt {
+      color: $color-grey-600;
+      margin-bottom: $spacing-md;
+    }
+
+    .post-meta {
+      font-size: $font-size-sm;
+      color: $color-grey-500;
+
+      .post-date {
+        margin-right: $spacing-sm;
+      }
+    }
+  }
+}
+
+// Page de contact
+.page-template-contact {
+  .contact-form {
+    background: $color-white;
+    @include card-style($spacing-xl);
+    max-width: 600px;
+    margin: 0 auto;
+
+    .form-group {
+      margin-bottom: $spacing-lg;
+    }
+
+    label {
+      display: block;
+      margin-bottom: $spacing-xs;
+      font-weight: 600;
+      color: $color-dark-blue;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: $spacing-sm;
+      border: 2px solid $color-grey-300;
+      border-radius: $border-radius-md;
+      font-family: $font-main;
+      @include transition(border-color);
+
+      &:focus {
+        outline: none;
+        border-color: $color-orange;
+      }
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+  }
+}

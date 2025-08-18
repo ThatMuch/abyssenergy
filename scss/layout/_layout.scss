@@ -1,0 +1,217 @@
+// Layout et structure
+
+// Header
+.site-header {
+  background: $color-white;
+  @include box-shadow($shadow-sm);
+  position: sticky;
+  top: 0;
+  z-index: $z-sticky;
+
+  .header-container {
+    @include container();
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: $spacing-md;
+    padding-bottom: $spacing-md;
+  }
+
+  .site-logo {
+    img {
+      max-height: 60px;
+      width: auto;
+    }
+  }
+
+  .main-navigation {
+    ul {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      gap: $spacing-lg;
+    }
+
+    a {
+      color: $color-dark-blue;
+      font-weight: 500;
+      text-decoration: none;
+      @include transition();
+
+      &:hover,
+      &.current-menu-item {
+        color: $color-orange;
+      }
+    }
+
+    // Menu mobile
+    @include respond-to(md) {
+      .menu-toggle {
+        display: block;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: $color-dark-blue;
+        cursor: pointer;
+      }
+
+      ul {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: $color-white;
+        @include box-shadow($shadow-lg);
+        flex-direction: column;
+        padding: $spacing-lg;
+
+        &.is-open {
+          display: flex;
+        }
+      }
+    }
+  }
+}
+
+// Main content
+.site-main {
+  min-height: 60vh;
+
+  .content-area {
+    @include container();
+    padding-top: $spacing-xxl;
+    padding-bottom: $spacing-xxl;
+  }
+}
+
+// Sidebar
+.sidebar {
+  background: $color-grey-100;
+  padding: $spacing-xl;
+
+  .widget {
+    @include vertical-spacing($spacing-xl);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .widget-title {
+    color: $color-dark-blue;
+    font-size: $font-size-lg;
+    margin-bottom: $spacing-md;
+    padding-bottom: $spacing-sm;
+    border-bottom: 2px solid $color-orange;
+  }
+
+  .widget-content {
+    ul {
+      list-style: none;
+      padding: 0;
+
+      li {
+        padding: $spacing-xs 0;
+        border-bottom: 1px solid $color-grey-200;
+
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+}
+
+// Footer
+.site-footer {
+  background: $color-dark-blue;
+  color: $color-white;
+  padding: $spacing-xxl 0 $spacing-lg 0;
+
+  .footer-container {
+    @include container();
+  }
+
+  .footer-widgets {
+    @include flex-grid(3, $spacing-xl);
+    margin-bottom: $spacing-xxl;
+
+    @include respond-to(md) {
+      @include flex-grid(1, $spacing-lg);
+    }
+  }
+
+  .footer-widget {
+    h3 {
+      color: $color-orange;
+      margin-bottom: $spacing-md;
+    }
+
+    p,
+    li {
+      color: rgba($color-white, 0.9);
+    }
+
+    a {
+      color: rgba($color-white, 0.9);
+
+      &:hover {
+        color: $color-orange;
+      }
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+
+      li {
+        padding: $spacing-xs 0;
+      }
+    }
+  }
+
+  .footer-bottom {
+    border-top: 1px solid rgba($color-white, 0.2);
+    padding-top: $spacing-lg;
+    text-align: center;
+
+    p {
+      margin: 0;
+      color: rgba($color-white, 0.7);
+      font-size: $font-size-sm;
+    }
+  }
+}
+
+// Layout containers
+.container-wide {
+  max-width: $breakpoint-xxl;
+  margin: 0 auto;
+  padding: 0 $spacing-lg;
+}
+
+.section {
+  padding: $spacing-xxl 0;
+
+  &--small {
+    padding: $spacing-xl 0;
+  }
+
+  &--large {
+    padding: 120px 0;
+  }
+}
+
+// Two column layout
+.two-column {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: $spacing-xxl;
+
+  @include respond-to(lg) {
+    grid-template-columns: 1fr;
+    gap: $spacing-xl;
+  }
+}

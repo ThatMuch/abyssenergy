@@ -1,0 +1,169 @@
+<!--
+Exemples d'utilisation des composants SCSS
+Copiez et collez ces exemples dans vos templates WordPress
+-->
+
+<!-- Exemple 1: Hero Section -->
+<section class="home">
+  <div class="hero-section">
+    <div class="container">
+      <h1>Bienvenue chez Abyss Energy</h1>
+      <p class="hero-description">
+        Solutions énergétiques innovantes pour un avenir durable
+      </p>
+      <a href="#contact" class="btn btn--large">Nous contacter</a>
+    </div>
+  </div>
+</section>
+
+<!-- Exemple 2: Section avec cartes -->
+<section class="section">
+  <div class="container">
+    <h2 class="text-center mb-5">Nos Services</h2>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card__header">
+            <h3 class="card__title">Énergie Renouvelable</h3>
+          </div>
+          <div class="card__content">
+            <p>Solutions complètes en énergie solaire et éolienne.</p>
+          </div>
+          <div class="card__footer">
+            <a href="#" class="btn btn--outline">En savoir plus</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card__header">
+            <h3 class="card__title">Consulting</h3>
+          </div>
+          <div class="card__content">
+            <p>Conseils experts pour optimiser votre consommation.</p>
+          </div>
+          <div class="card__footer">
+            <a href="#" class="btn btn--outline">En savoir plus</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card__header">
+            <h3 class="card__title">Maintenance</h3>
+          </div>
+          <div class="card__content">
+            <p>Service de maintenance pour vos installations.</p>
+          </div>
+          <div class="card__footer">
+            <a href="#" class="btn btn--outline">En savoir plus</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Exemple 3: Alertes -->
+<div class="container">
+  <div class="alert alert--primary">
+    <strong>Information :</strong> Nouvelle technologie disponible !
+  </div>
+  <div class="alert alert--success">
+    <strong>Succès :</strong> Votre demande a été envoyée avec succès.
+  </div>
+  <div class="alert alert--warning">
+    <strong>Attention :</strong> Maintenance programmée ce weekend.
+  </div>
+</div>
+
+<!-- Exemple 4: Badges et boutons -->
+<div class="container">
+  <h3>Nos Certifications</h3>
+  <span class="badge badge--primary">ISO 14001</span>
+  <span class="badge badge--secondary">Qualité</span>
+  <span class="badge badge--success">Éco-responsable</span>
+
+  <div class="mt-4">
+    <button class="btn btn--primary">Action principale</button>
+    <button class="btn btn--secondary ml-2">Action secondaire</button>
+    <button class="btn btn--outline ml-2">Action tertiaire</button>
+  </div>
+</div>
+
+<!-- Exemple 5: Layout deux colonnes -->
+<div class="container">
+  <div class="two-column">
+    <main>
+      <h2>Contenu principal</h2>
+      <p>Votre contenu principal ici...</p>
+    </main>
+    <aside class="sidebar">
+      <div class="widget">
+        <h3 class="widget-title">Widget Titre</h3>
+        <div class="widget-content">
+          <ul>
+            <li><a href="#">Lien 1</a></li>
+            <li><a href="#">Lien 2</a></li>
+            <li><a href="#">Lien 3</a></li>
+          </ul>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<!-- Exemple 6: Classes utilitaires -->
+<div class="container">
+  <!-- Espacements -->
+  <div class="mt-5 mb-4 pt-3 pb-3 bg-light">
+    <p class="text-center text-orange mb-0">Texte centré avec couleur orange</p>
+  </div>
+
+  <!-- Flexbox -->
+  <div class="d-flex justify-content-between align-items-center">
+    <span>Élément à gauche</span>
+    <span class="badge badge--primary">Badge</span>
+    <span>Élément à droite</span>
+  </div>
+
+  <!-- Grid responsive -->
+  <div class="row mt-4">
+    <div class="col-md-6 col-lg-4">
+      <p class="bg-orange text-white p-3 text-center">Colonne responsive</p>
+    </div>
+    <div class="col-md-6 col-lg-4">
+      <p class="bg-blue text-white p-3 text-center">Colonne responsive</p>
+    </div>
+    <div class="col-md-6 col-lg-4">
+      <p class="bg-light text-blue p-3 text-center">Colonne responsive</p>
+    </div>
+  </div>
+</div>
+
+<!-- Exemple 7: Formulaire avec styles -->
+<div class="container">
+  <div class="page-template-contact">
+    <form class="contact-form">
+      <div class="form-group">
+        <label for="name">Nom complet</label>
+        <input type="text" id="name" name="name" required />
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required />
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" required></textarea>
+      </div>
+      <button type="submit" class="btn btn--primary">Envoyer le message</button>
+    </form>
+  </div>
+</div>
+
+<!-- Exemple 8: Spinner de chargement -->
+<div class="text-center">
+  <div class="spinner"></div>
+  <p class="mt-2">Chargement en cours...</p>
+</div>

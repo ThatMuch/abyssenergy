@@ -1,0 +1,190 @@
+// Composants réutilisables
+
+// Cartes
+.card {
+  @include card-style();
+
+  &__header {
+    border-bottom: 1px solid $color-grey-200;
+    padding-bottom: $spacing-sm;
+    margin-bottom: $spacing-md;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: $font-size-xl;
+    color: $color-dark-blue;
+  }
+
+  &__content {
+    flex: 1;
+  }
+
+  &__footer {
+    border-top: 1px solid $color-grey-200;
+    padding-top: $spacing-sm;
+    margin-top: $spacing-md;
+  }
+}
+
+// Boutons
+.btn {
+  @include button-style($color-orange);
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  font-weight: 500;
+
+  &--primary {
+    @include button-style($color-orange);
+  }
+
+  &--secondary {
+    @include button-style($color-dark-blue);
+  }
+
+  &--outline {
+    background: transparent;
+    color: $color-orange;
+    border-color: $color-orange;
+
+    &:hover {
+      background: $color-orange;
+      color: $color-white;
+    }
+  }
+
+  &--large {
+    padding: $spacing-md $spacing-xl;
+    font-size: $font-size-lg;
+  }
+
+  &--small {
+    padding: $spacing-xs $spacing-sm;
+    font-size: $font-size-sm;
+  }
+}
+
+// Badge/Étiquettes
+.badge {
+  display: inline-block;
+  padding: $spacing-xs $spacing-sm;
+  font-size: $font-size-xs;
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: $border-radius-md;
+  background-color: $color-grey-500;
+  color: $color-white;
+
+  &--primary {
+    background-color: $color-orange;
+  }
+  &--secondary {
+    background-color: $color-dark-blue;
+  }
+  &--success {
+    background-color: $color-success;
+  }
+  &--warning {
+    background-color: $color-warning;
+    color: $color-black;
+  }
+  &--danger {
+    background-color: $color-danger;
+  }
+}
+
+// Alertes
+.alert {
+  position: relative;
+  padding: $spacing-md;
+  border: 1px solid transparent;
+  border-radius: $border-radius-md;
+  margin-bottom: $spacing-lg;
+
+  &--primary {
+    color: darken($color-orange, 20%);
+    background-color: lighten($color-orange, 35%);
+    border-color: lighten($color-orange, 25%);
+  }
+
+  &--success {
+    color: darken($color-success, 20%);
+    background-color: lighten($color-success, 45%);
+    border-color: lighten($color-success, 35%);
+  }
+
+  &--warning {
+    color: darken($color-warning, 20%);
+    background-color: lighten($color-warning, 25%);
+    border-color: lighten($color-warning, 15%);
+  }
+
+  &--danger {
+    color: darken($color-danger, 20%);
+    background-color: lighten($color-danger, 35%);
+    border-color: lighten($color-danger, 25%);
+  }
+}
+
+// Grille simple
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 (-$spacing-sm);
+}
+
+.col {
+  flex: 1;
+  padding: 0 $spacing-sm;
+
+  &-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+  &-4 {
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+  }
+  &-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+
+  @include respond-to(md) {
+    &-md-6 {
+      flex: 0 0 50%;
+      max-width: 50%;
+    }
+    &-md-4 {
+      flex: 0 0 33.333333%;
+      max-width: 33.333333%;
+    }
+    &-md-3 {
+      flex: 0 0 25%;
+      max-width: 25%;
+    }
+  }
+}
+
+// Loader/Spinner
+.spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba($color-orange, 0.3);
+  border-radius: 50%;
+  border-top-color: $color-orange;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,27 @@
+{
+	"name": "squarechilli-child-theme",
+	"version": "1.0.0",
+	"description": "Thème enfant WordPress avec support SCSS pour Abyss Energy",
+	"main": "index.php",
+	"scripts": {
+		"watch": "sass --watch scss/style.scss:style.css --style expanded --source-map",
+		"build": "sass scss/style.scss:style.css --style compressed",
+		"dev": "sass --watch scss/style.scss:style.css --style expanded --source-map --poll",
+		"lint": "stylelint scss/**/*.scss",
+		"lint:fix": "stylelint scss/**/*.scss --fix"
+	},
+	"devDependencies": {
+		"sass": "^1.77.0",
+		"stylelint": "^16.0.0",
+		"stylelint-config-standard-scss": "^13.0.0"
+	},
+	"keywords": [
+		"wordpress",
+		"theme",
+		"scss",
+		"sass",
+		"child-theme"
+	],
+	"author": "squarechilli",
+	"license": "GPL-2.0+"
+}

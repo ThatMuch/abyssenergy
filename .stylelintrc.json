@@ -1,0 +1,19 @@
+{
+	"extends": "stylelint-config-standard-scss",
+	"rules": {
+		"no-duplicate-selectors": true,
+		"color-hex-length": "short",
+		"selector-attribute-quotes": "always",
+		"function-url-quotes": "always",
+		"font-family-name-quotes": "always-where-recommended",
+		"comment-whitespace-inside": "always",
+		"comment-empty-line-before": "always",
+		"at-rule-no-unknown": null,
+		"scss/at-rule-no-unknown": true,
+		"scss/dollar-variable-colon-space-after": "always",
+		"scss/dollar-variable-colon-space-before": "never",
+		"scss/dollar-variable-no-missing-interpolation": true,
+		"scss/dollar-variable-pattern": "^[a-z]+([a-z0-9-]+[a-z0-9]+)?$",
+		"scss/double-slash-comment-whitespace-inside": "always"
+	}
+}
