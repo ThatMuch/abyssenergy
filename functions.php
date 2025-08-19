@@ -141,26 +141,255 @@ function squarechilli_child_theme_setup()
 add_action('after_setup_theme', 'squarechilli_child_theme_setup');
 
 /**
- * Exemple de fonction personnalisée
- * Décommentez et modifiez selon vos besoins
+ * Configuration spécifique pour la page des emplois
  */
-/*
-function squarechilli_child_custom_function() {
-    // Votre code personnalisé ici
+function squarechilli_child_jobs_setup()
+{
+	// Ajouter les variables de requête personnalisées pour les filtres d'emploi
+	add_action('init', 'squarechilli_child_add_job_query_vars');
+
+	// Modifier la requête principale pour les filtres d'emploi
+	add_action('pre_get_posts', 'squarechilli_child_modify_job_query');
 }
-*/
+add_action('after_setup_theme', 'squarechilli_child_jobs_setup');
 
 /**
- * Exemple de hook pour modifier le comportement du thème parent
- * Décommentez et modifiez selon vos besoins
+ * Ajouter les variables de requête personnalisées pour les filtres d'emploi
  */
-/*
-function squarechilli_child_modify_parent_function() {
-    // Supprimer une action du thème parent
-    // remove_action('hook_name', 'parent_function_name');
-
-    // Ajouter votre propre action
-    // add_action('hook_name', 'your_custom_function');
+function squarechilli_child_add_job_query_vars()
+{
+	global $wp;
+	$wp->add_query_var('job_search');
+	$wp->add_query_var('job_sector');
+	$wp->add_query_var('job_location');
+	$wp->add_query_var('job_type');
 }
-add_action('after_setup_theme', 'squarechilli_child_modify_parent_function');
-*/
+
+/**
+ * Modifier la requête principale pour les pages d'emploi
+ */
+function squarechilli_child_modify_job_query($query)
+{
+	if (!is_admin() && $query->is_main_query()) {
+
+		// Pour l'archive des emplois
+		if (is_post_type_archive('job')) {
+			$query->set('posts_per_page', 12);
+			$query->set('orderby', 'date');
+			$query->set('order', 'DESC');
+		}
+
+		// Pour les pages avec template de jobs
+		if (is_page() && get_page_template_slug() === 'page-jobs.php') {
+			// Les filtres sont gérés dans le template avec WP_Query
+		}
+	}
+}
+
+/**
+ * Shortcode pour afficher les emplois
+ */
+function squarechilli_child_jobs_shortcode($atts)
+{
+	$atts = shortcode_atts(array(
+		'number' => 6,
+		'sector' => '',
+		'location' => '',
+		'type' => '',
+		'layout' => 'grid' // grid ou list
+	), $atts, 'jobs_list');
+
+	$args = array(
+		'post_type' => 'job',
+		'post_status' => 'publish',
+		'posts_per_page' => intval($atts['number']),
+		'orderby' => 'date',
+		'order' => 'DESC'
+	);
+
+	// Filtres de taxonomie
+	$tax_query = array();
+
+	if (!empty($atts['sector'])) {
+		$tax_query[] = array(
+			'taxonomy' => 'job-sector',
+			'field'    => 'slug',
+			'terms'    => explode(',', $atts['sector']),
+		);
+	}
+
+	if (!empty($atts['location'])) {
+		$tax_query[] = array(
+			'taxonomy' => 'job-location',
+			'field'    => 'slug',
+			'terms'    => explode(',', $atts['location']),
+		);
+	}
+
+	if (!empty($tax_query)) {
+		$args['tax_query'] = $tax_query;
+	}
+
+	$jobs_query = new WP_Query($args);
+
+	if (!$jobs_query->have_posts()) {
+		return '<p class="no-jobs">Aucun emploi trouvé.</p>';
+	}
+
+	ob_start();
+?>
+
+	<div class="jobs-shortcode jobs-grid <?php echo esc_attr($atts['layout'] === 'list' ? 'list-view' : ''); ?>">
+		<?php while ($jobs_query->have_posts()) : $jobs_query->the_post(); ?>
+			<article class="job-card card">
+				<div class="card__content">
+
+					<!-- Badges -->
+					<div class="job-badges mb-3">
+						<?php
+						$job_type = get_field('job_type');
+						if ($job_type) : ?>
+							<span class="badge badge--primary"><?php echo esc_html($job_type); ?></span>
+							<?php endif;
+
+						$sectors = get_the_terms(get_the_ID(), 'job-sector');
+						if ($sectors && !is_wp_error($sectors)) :
+							foreach ($sectors as $sector) : ?>
+								<span class="badge badge--secondary"><?php echo esc_html($sector->name); ?></span>
+						<?php endforeach;
+						endif; ?>
+					</div>
+
+					<!-- Titre -->
+					<h3 class="job-title">
+						<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+					</h3>
+
+					<!-- Localisation -->
+					<?php
+					$locations = get_the_terms(get_the_ID(), 'job-location');
+					if ($locations && !is_wp_error($locations)) : ?>
+						<p class="job-location text-muted">
+							📍 <?php echo esc_html($locations[0]->name); ?>
+						</p>
+					<?php endif; ?>
+
+					<!-- Extrait -->
+					<div class="job-excerpt">
+						<?php
+						$excerpt = get_the_excerpt();
+						if ($excerpt) :
+							echo '<p>' . wp_trim_words($excerpt, 20, '...') . '</p>';
+						endif;
+						?>
+					</div>
+				</div>
+
+				<div class="card__footer">
+					<a href="<?php the_permalink(); ?>" class="btn btn--primary">
+						Voir le poste
+					</a>
+				</div>
+			</article>
+		<?php endwhile; ?>
+	</div>
+
+	<?php
+	wp_reset_postdata();
+	return ob_get_clean();
+}
+add_shortcode('jobs_list', 'squarechilli_child_jobs_shortcode');
+
+/**
+ * Widget pour afficher les emplois récents
+ */
+class Squarechilli_Child_Recent_Jobs_Widget extends WP_Widget
+{
+
+	public function __construct()
+	{
+		parent::__construct(
+			'squarechilli_recent_jobs',
+			'Emplois récents',
+			array('description' => 'Affiche les emplois récents dans la sidebar.')
+		);
+	}
+
+	public function widget($args, $instance)
+	{
+		$title = !empty($instance['title']) ? $instance['title'] : 'Emplois récents';
+		$number = !empty($instance['number']) ? absint($instance['number']) : 5;
+
+		echo $args['before_widget'];
+		echo $args['before_title'] . apply_filters('widget_title', $title) . $args['after_title'];
+
+		$jobs_query = new WP_Query(array(
+			'post_type' => 'job',
+			'posts_per_page' => $number,
+			'post_status' => 'publish',
+			'orderby' => 'date',
+			'order' => 'DESC'
+		));
+
+		if ($jobs_query->have_posts()) : ?>
+			<ul class="recent-jobs-list">
+				<?php while ($jobs_query->have_posts()) : $jobs_query->the_post(); ?>
+					<li class="recent-job-item">
+						<a href="<?php the_permalink(); ?>" class="recent-job-link">
+							<strong><?php the_title(); ?></strong>
+							<?php
+							$locations = get_the_terms(get_the_ID(), 'job-location');
+							if ($locations && !is_wp_error($locations)) : ?>
+								<small class="text-muted d-block">
+									📍 <?php echo esc_html($locations[0]->name); ?>
+								</small>
+							<?php endif; ?>
+						</a>
+					</li>
+				<?php endwhile; ?>
+			</ul>
+		<?php else : ?>
+			<p>Aucun emploi disponible.</p>
+		<?php endif;
+
+		wp_reset_postdata();
+		echo $args['after_widget'];
+	}
+
+	public function form($instance)
+	{
+		$title = !empty($instance['title']) ? $instance['title'] : '';
+		$number = !empty($instance['number']) ? absint($instance['number']) : 5;
+		?>
+		<p>
+			<label for="<?php echo esc_attr($this->get_field_id('title')); ?>">Titre :</label>
+			<input class="widefat" id="<?php echo esc_attr($this->get_field_id('title')); ?>"
+				name="<?php echo esc_attr($this->get_field_name('title')); ?>" type="text"
+				value="<?php echo esc_attr($title); ?>">
+		</p>
+		<p>
+			<label for="<?php echo esc_attr($this->get_field_id('number')); ?>">Nombre d'emplois :</label>
+			<input class="tiny-text" id="<?php echo esc_attr($this->get_field_id('number')); ?>"
+				name="<?php echo esc_attr($this->get_field_name('number')); ?>" type="number"
+				step="1" min="1" value="<?php echo esc_attr($number); ?>" size="3">
+		</p>
+<?php
+	}
+
+	public function update($new_instance, $old_instance)
+	{
+		$instance = array();
+		$instance['title'] = (!empty($new_instance['title'])) ? sanitize_text_field($new_instance['title']) : '';
+		$instance['number'] = (!empty($new_instance['number'])) ? absint($new_instance['number']) : 5;
+		return $instance;
+	}
+}
+
+/**
+ * Enregistrer le widget des emplois récents
+ */
+function squarechilli_child_register_jobs_widget()
+{
+	register_widget('Squarechilli_Child_Recent_Jobs_Widget');
+}
+add_action('widgets_init', 'squarechilli_child_register_jobs_widget');
