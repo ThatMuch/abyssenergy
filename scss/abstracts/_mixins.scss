@@ -54,7 +54,7 @@
 // Mixin pour les boutons
 @mixin button-style(
   $bg-color,
-  $text-color: $color-white,
+  $text-color: $white-100,
   $hover-bg: darken($bg-color, 10%)
 ) {
   background-color: $bg-color;
@@ -72,7 +72,7 @@
 
 // Mixin pour les cartes
 @mixin card-style($padding: $spacing-lg, $shadow: $shadow-md) {
-  background: $color-white;
+  background: $white-100;
   border-radius: $border-radius-lg;
   padding: $padding;
   @include box-shadow($shadow);

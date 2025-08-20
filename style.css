@@ -6,6 +6,8 @@ Author: squarechilli
 Template: squarechilli
 Version: 1.0.0
 */
+/* Primitives - default */
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Sora:wght@100..800&display=swap");
 @keyframes fadeIn {
   to {
     opacity: 1;
@@ -18,7 +20,7 @@ Version: 1.0.0
 }
 
 body {
-  font-family: "Baloo 2", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 16px;
   line-height: 1.5;
   color: #09497a;
@@ -30,34 +32,64 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Baloo 2", sans-serif;
+  font-family: "Sora", sans-serif;
   font-weight: 600;
   line-height: 1.2;
   margin-bottom: 1rem;
 }
 
 h1 {
-  font-size: 2.5rem;
+  font-size: 3rem;
+}
+@media (min-width: 768px) {
+  h1 {
+    font-size: 2.5rem;
+  }
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: 2.5rem;
+}
+@media (min-width: 768px) {
+  h2 {
+    font-size: 2rem;
+  }
 }
 
 h3 {
-  font-size: 1.75rem;
+  font-size: 2rem;
+}
+@media (min-width: 768px) {
+  h3 {
+    font-size: 1.75rem;
+  }
 }
 
 h4 {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
+}
+@media (min-width: 768px) {
+  h4 {
+    font-size: 1.5rem;
+  }
 }
 
 h5 {
   font-size: 1.25rem;
 }
+@media (min-width: 768px) {
+  h5 {
+    font-size: 1rem;
+  }
+}
 
 h6 {
   font-size: 1rem;
+}
+@media (min-width: 768px) {
+  h6 {
+    font-size: 3.5rem;
+  }
 }
 
 a {
@@ -87,7 +119,7 @@ img {
 
 button {
   background-color: #ff6900;
-  color: #ffffff;
+  color: white;
   border: none;
   padding: 0.5rem 1.5rem;
   border-radius: 0.25rem;
@@ -99,7 +131,7 @@ button:hover {
 }
 button.btn-secondary {
   background-color: #09497a;
-  color: #ffffff;
+  color: white;
   border: none;
   padding: 0.5rem 1.5rem;
   border-radius: 0.25rem;
@@ -116,7 +148,7 @@ button.btn-outline {
 }
 button.btn-outline:hover {
   background: #ff6900;
-  color: #ffffff;
+  color: white;
 }
 
 .mt-0 {
@@ -300,11 +332,11 @@ button.btn-outline:hover {
 }
 
 .text-white {
-  color: #ffffff !important;
+  color: white !important;
 }
 
 .text-muted {
-  color: #6c757d !important;
+  color: #8e8fa3 !important;
 }
 
 .bg-orange {
@@ -320,7 +352,7 @@ button.btn-outline:hover {
 }
 
 .bg-white {
-  background-color: #ffffff !important;
+  background-color: white !important;
 }
 
 .d-none {
@@ -428,7 +460,7 @@ button.btn-outline:hover {
 }
 
 .site-header {
-  background: #ffffff;
+  background: white;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
   position: sticky;
   top: 0;
@@ -484,7 +516,7 @@ button.btn-outline:hover {
     top: 100%;
     left: 0;
     right: 0;
-    background: #ffffff;
+    background: white;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
     flex-direction: column;
     padding: 1.5rem;
@@ -511,7 +543,7 @@ button.btn-outline:hover {
 }
 
 .sidebar {
-  background: #f8f9fa;
+  background: #ebecff;
   padding: 2rem;
 }
 .sidebar .widget {
@@ -534,7 +566,7 @@ button.btn-outline:hover {
 }
 .sidebar .widget-content ul li {
   padding: 0.25rem 0;
-  border-bottom: 1px solid #e9ecef;
+  border-bottom: 1px solid #e3e5ff;
 }
 .sidebar .widget-content ul li:last-child {
   border-bottom: none;
@@ -542,7 +574,7 @@ button.btn-outline:hover {
 
 .site-footer {
   background: #09497a;
-  color: #ffffff;
+  color: white;
   padding: 3rem 0 1.5rem 0;
 }
 .site-footer .footer-container {
@@ -635,13 +667,13 @@ button.btn-outline:hover {
 }
 
 .card {
-  background: #ffffff;
+  background: white;
   border-radius: 0.5rem;
   padding: 1.5rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 .card__header {
-  border-bottom: 1px solid #e9ecef;
+  border-bottom: 1px solid #e3e5ff;
   padding-bottom: 0.5rem;
   margin-bottom: 1rem;
 }
@@ -654,14 +686,14 @@ button.btn-outline:hover {
   flex: 1;
 }
 .card__footer {
-  border-top: 1px solid #e9ecef;
+  border-top: 1px solid #e3e5ff;
   padding-top: 0.5rem;
   margin-top: 1rem;
 }
 
 .btn {
   background-color: #ff6900;
-  color: #ffffff;
+  color: white;
   border: none;
   padding: 0.5rem 1.5rem;
   border-radius: 0.25rem;
@@ -679,7 +711,7 @@ button.btn-outline:hover {
 }
 .btn--primary {
   background-color: #ff6900;
-  color: #ffffff;
+  color: white;
   border: none;
   padding: 0.5rem 1.5rem;
   border-radius: 0.25rem;
@@ -691,7 +723,7 @@ button.btn-outline:hover {
 }
 .btn--secondary {
   background-color: #09497a;
-  color: #ffffff;
+  color: white;
   border: none;
   padding: 0.5rem 1.5rem;
   border-radius: 0.25rem;
@@ -708,7 +740,7 @@ button.btn-outline:hover {
 }
 .btn--outline:hover {
   background: #ff6900;
-  color: #ffffff;
+  color: white;
 }
 .btn--large {
   padding: 1rem 2rem;
@@ -729,8 +761,8 @@ button.btn-outline:hover {
   white-space: nowrap;
   vertical-align: baseline;
   border-radius: 0.25rem;
-  background-color: #adb5bd;
-  color: #ffffff;
+  background-color: #a4a6bd;
+  color: white;
 }
 .badge--primary {
   background-color: #ff6900;
@@ -743,7 +775,7 @@ button.btn-outline:hover {
 }
 .badge--warning {
   background-color: #ffc107;
-  color: #000000;
+  color: black;
 }
 .badge--danger {
   background-color: #dc3545;
@@ -831,7 +863,7 @@ button.btn-outline:hover {
 }
 .home .hero-section {
   background: linear-gradient(135deg, #09497a, #ff6900);
-  color: #ffffff;
+  color: white;
   padding: 3rem 0;
   text-align: center;
 }
@@ -895,7 +927,7 @@ button.btn-outline:hover {
 }
 .page .page-header .page-description,
 .single .page-header .page-description {
-  color: #6c757d;
+  color: #8e8fa3;
   font-size: 1.125rem;
 }
 .page .page-content,
@@ -912,7 +944,7 @@ button.btn-outline:hover {
 
 .archive .archive-header {
   background: #09497a;
-  color: #ffffff;
+  color: white;
   padding: 2rem 0;
   text-align: center;
   margin-bottom: 3rem;
@@ -943,7 +975,7 @@ button.btn-outline:hover {
   }
 }
 .archive .post-card {
-  background: #ffffff;
+  background: white;
   border-radius: 0.5rem;
   padding: 1.5rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -985,20 +1017,20 @@ button.btn-outline:hover {
   color: #ff6900;
 }
 .archive .post-card .post-excerpt {
-  color: #6c757d;
+  color: #8e8fa3;
   margin-bottom: 1rem;
 }
 .archive .post-card .post-meta {
   font-size: 0.875rem;
-  color: #adb5bd;
+  color: #a4a6bd;
 }
 .archive .post-card .post-meta .post-date {
   margin-right: 0.5rem;
 }
 
 .page-template-contact .contact-form {
-  background: #ffffff;
-  background: #ffffff;
+  background: white;
+  background: white;
   border-radius: 0.5rem;
   padding: 2rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -1018,9 +1050,9 @@ button.btn-outline:hover {
 .page-template-contact .contact-form textarea {
   width: 100%;
   padding: 0.5rem;
-  border: 2px solid #dee2e6;
+  border: 2px solid #d0d3ef;
   border-radius: 0.25rem;
-  font-family: "Baloo 2", sans-serif;
+  font-family: "Manrope", sans-serif;
   transition: border-color 0.3s ease;
 }
 .page-template-contact .contact-form input:focus,
@@ -1036,9 +1068,9 @@ button.btn-outline:hover {
 .jobs-listing-page .jobs-filters .form-control {
   width: 100%;
   padding: 0.5rem;
-  border: 2px solid #dee2e6;
+  border: 2px solid #d0d3ef;
   border-radius: 0.25rem;
-  font-family: "Baloo 2", sans-serif;
+  font-family: "Manrope", sans-serif;
   transition: border-color 0.3s ease;
 }
 .jobs-listing-page .jobs-filters .form-control:focus {
@@ -1140,19 +1172,19 @@ button.btn-outline:hover {
 }
 .jobs-listing-page .job-location {
   font-size: 0.875rem;
-  color: #6c757d;
+  color: #8e8fa3;
   margin-bottom: 0;
 }
 .jobs-listing-page .job-excerpt p {
-  color: #6c757d;
+  color: #8e8fa3;
   line-height: 1.5;
 }
 .jobs-listing-page .job-meta {
   font-size: 0.75rem;
-  color: #adb5bd;
+  color: #a4a6bd;
 }
 .jobs-listing-page .jobs-results-info {
-  border-bottom: 1px solid #e9ecef;
+  border-bottom: 1px solid #e3e5ff;
   padding-bottom: 1rem;
   margin-bottom: 1.5rem !important;
 }
@@ -1162,7 +1194,7 @@ button.btn-outline:hover {
 }
 .jobs-listing-page .jobs-view-toggle .btn.active {
   background-color: #ff6900;
-  color: #ffffff;
+  color: white;
   border-color: #ff6900;
 }
 @media (min-width: 768px) {
@@ -1188,7 +1220,7 @@ button.btn-outline:hover {
 .jobs-listing-page .jobs-pagination span.page-numbers:hover, .jobs-listing-page .jobs-pagination span.page-numbers.current {
   background-color: #ff6900;
   text-decoration: none;
-  color: #ffffff;
+  color: white;
 }
 .jobs-listing-page .jobs-pagination span.page-numbers.prev, .jobs-listing-page .jobs-pagination span.page-numbers.next {
   font-weight: 600;
@@ -1219,7 +1251,7 @@ button.btn-outline:hover {
   margin-bottom: 0.5rem;
 }
 .jobs-listing-page .spontaneous-application .card p {
-  color: #495057;
+  color: #78798a;
   margin-bottom: 1.5rem;
 }
 @media (min-width: 992px) {
@@ -1297,7 +1329,7 @@ button.btn-outline:hover {
 }
 .job-badges .badge[data-type=internship] {
   background-color: #ffc107;
-  color: #000000;
+  color: black;
 }
 
 @keyframes pulse {

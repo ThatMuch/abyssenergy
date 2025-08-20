@@ -1,4 +1,5 @@
 // Styles de base pour le thème enfant
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Sora:wght@100..800&display=swap");
 
 // Reset et normalisation
 *,
@@ -30,21 +31,39 @@ h6 {
 
 h1 {
   font-size: $h1-size;
+  @include respond-to(md) {
+    font-size: $h1-size-mobile;
+  }
 }
 h2 {
   font-size: $h2-size;
+  @include respond-to(md) {
+    font-size: $h2-size-mobile;
+  }
 }
 h3 {
   font-size: $h3-size;
+  @include respond-to(md) {
+    font-size: $h3-size-mobile;
+  }
 }
 h4 {
   font-size: $h4-size;
+  @include respond-to(md) {
+    font-size: $h4-size-mobile;
+  }
 }
 h5 {
   font-size: $h5-size;
+  @include respond-to(md) {
+    font-size: $h5-size-mobile;
+  }
 }
 h6 {
   font-size: $h6-size;
+  @include respond-to(md) {
+    font-size: $h6-size-mobile;
+  }
 }
 
 // Liens
@@ -92,7 +111,7 @@ button {
 
     &:hover {
       background: $color-orange;
-      color: $color-white;
+      color: $white-100;
     }
   }
 }

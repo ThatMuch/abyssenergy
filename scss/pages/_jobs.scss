@@ -6,7 +6,7 @@
     .form-control {
       width: 100%;
       padding: $spacing-sm;
-      border: 2px solid $color-grey-300;
+      border: 2px solid $neutral-300;
       border-radius: $border-radius-md;
       font-family: $font-main;
       @include transition(border-color);
@@ -132,14 +132,14 @@
   // Localisation
   .job-location {
     font-size: $font-size-sm;
-    color: $color-grey-600;
+    color: $neutral-600;
     margin-bottom: 0;
   }
 
   // Extrait de l'emploi
   .job-excerpt {
     p {
-      color: $color-grey-600;
+      color: $neutral-600;
       line-height: 1.5;
     }
   }
@@ -147,12 +147,12 @@
   // Métadonnées de l'emploi
   .job-meta {
     font-size: $font-size-xs;
-    color: $color-grey-500;
+    color: $neutral-500;
   }
 
   // Informations sur les résultats
   .jobs-results-info {
-    border-bottom: 1px solid $color-grey-200;
+    border-bottom: 1px solid $neutral-200;
     padding-bottom: $spacing-md;
     margin-bottom: $spacing-lg !important;
   }
@@ -165,7 +165,7 @@
     .btn {
       &.active {
         background-color: $color-orange;
-        color: $color-white;
+        color: $white-100;
         border-color: $color-orange;
       }
     }
@@ -196,7 +196,7 @@
       &.current {
         background-color: $color-orange;
         text-decoration: none;
-        color: $color-white;
+        color: $white-100;
       }
 
       &.prev,
@@ -246,7 +246,7 @@
       }
 
       p {
-        color: $color-grey-700;
+        color: $neutral-700;
         margin-bottom: $spacing-lg;
       }
     }
@@ -315,7 +315,7 @@
 
     &[data-type="internship"] {
       background-color: $color-warning;
-      color: $color-black;
+      color: $black-100;
     }
   }
 }

@@ -1,6 +1,60 @@
 // Variables principales du thème Abyss Energy Child
 // Basées sur les variables CSS du thème parent
 
+/* Primitives - default */
+$primary-50: #eef7feff;
+$primary-100: #ddedfbff;
+$primary-200: #b3daf7ff;
+$primary-300: #72bef1ff;
+$primary-400: #2e9ee8ff;
+$primary-500: #0083d5ff;
+$primary-600: #0066b0ff;
+$primary-700: #06508bff;
+$primary-800: #0a3f6aff;
+$primary-900: #0f395cff;
+$primary-950: #0d243bff;
+$secondary-50: #fff4ebff;
+$secondary-100: #ffebd0ff;
+$secondary-200: #ffd4a2ff;
+$secondary-300: #ffb86fff;
+$secondary-400: #ff8e38ff;
+$secondary-500: #ff711bff;
+$secondary-600: #f55911ff;
+$secondary-700: #c6430eff;
+$secondary-800: #983512ff;
+$secondary-900: #782d12ff;
+$secondary-950: #3e170aff;
+$tertiary-50: #ebfdfdff;
+$tertiary-100: #b8fdfcff;
+$tertiary-200: #70fbf8ff;
+$tertiary-300: #00f1f3ff;
+$tertiary-400: #00d9e0ff;
+$tertiary-500: #00b8c1ff;
+$tertiary-600: #008e99ff;
+$tertiary-700: #006c75ff;
+$tertiary-800: #00525aff;
+$tertiary-900: #00444aff;
+$tertiary-950: #00272dff;
+$neutral-50: #fbfaffff;
+$neutral-100: #ebecffff;
+$neutral-200: #e3e5ffff;
+$neutral-300: #d0d3efff;
+$neutral-400: #babcd6ff;
+$neutral-500: #a4a6bdff;
+$neutral-600: #8e8fa3ff;
+$neutral-700: #78798aff;
+$neutral-800: #616370ff;
+$neutral-900: #4b4c57ff;
+$neutral-950: #35363dff;
+$black-100: #000000ff;
+$white-100: #ffffffff;
+$white-75: #ffffffbf;
+$white-50: #ffffff80;
+$white-25: #ffffff40;
+$black-75: #000000bf;
+$black-50: #00000080;
+$black-25: #00000040;
+
 // Couleurs principales
 $color-orange: #ff6900;
 $color-light-orange: #f1d5c1;
@@ -9,28 +63,25 @@ $color-main: #09497a;
 $color-light-grey: #dcd7d4;
 
 // Nouvelles couleurs personnalisées (exemples)
-$color-secondary: #ff7700;
-$color-accent: #0a5280;
+$color-primary: $primary-800;
+$color-secondary: $secondary-400;
+$color-secondary-light: $secondary-300;
+$color-accent: $tertiary-600;
 $color-success: #28a745;
 $color-warning: #ffc107;
 $color-danger: #dc3545;
 
-// Couleurs neutres
-$color-white: #ffffff;
-$color-black: #000000;
-$color-grey-100: #f8f9fa;
-$color-grey-200: #e9ecef;
-$color-grey-300: #dee2e6;
-$color-grey-400: #ced4da;
-$color-grey-500: #adb5bd;
-$color-grey-600: #6c757d;
-$color-grey-700: #495057;
-$color-grey-800: #343a40;
-$color-grey-900: #212529;
+// Colors containers
+$interface-color-surface-container-low: $white-100;
+$interface-color-surface-container: $neutral-50;
+$interface-color-surface-container-high: $neutral-100;
+$interface-color-background-primary: $primary-50;
+$interface-color-background-secondary: $secondary-50;
+$interface-color-background-tertiary: $tertiary-50;
 
 // Typographie
-$font-title: "Baloo 2", sans-serif;
-$font-main: "Baloo 2", sans-serif;
+$font-title: "Sora", sans-serif;
+$font-main: "Manrope", sans-serif;
 $font-size-base: 16px;
 $line-height-base: 1.5;
 
@@ -43,12 +94,21 @@ $font-size-xl: 1.25rem; // 20px
 $font-size-xxl: 1.5rem; // 24px
 
 // Titres
-$h1-size: 2.5rem; // 40px
-$h2-size: 2rem; // 32px
-$h3-size: 1.75rem; // 28px
-$h4-size: 1.5rem; // 24px
+$d1-size: 3.5rem; // 56px
+$h1-size: 3rem; // 48px
+$h2-size: 2.5rem; // 40px
+$h3-size: 2rem; // 32px
+$h4-size: 1.75rem; // 28px
 $h5-size: 1.25rem; // 20px
 $h6-size: 1rem; // 16px
+// Titres mobiles
+$d1-size-mobile: 3rem; // 48px
+$h1-size-mobile: 2.5rem; // 40px
+$h2-size-mobile: 2rem; // 32px
+$h3-size-mobile: 1.75rem; // 28px
+$h4-size-mobile: 1.5rem; // 24px
+$h5-size-mobile: 1rem; // 16px
+$h6-size-mobile: 3.5rem; // 56px
 
 // Espacements
 $spacing-xs: 0.25rem; // 4px

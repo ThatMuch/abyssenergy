@@ -5,7 +5,7 @@
   @include card-style();
 
   &__header {
-    border-bottom: 1px solid $color-grey-200;
+    border-bottom: 1px solid $neutral-200;
     padding-bottom: $spacing-sm;
     margin-bottom: $spacing-md;
   }
@@ -21,7 +21,7 @@
   }
 
   &__footer {
-    border-top: 1px solid $color-grey-200;
+    border-top: 1px solid $neutral-200;
     padding-top: $spacing-sm;
     margin-top: $spacing-md;
   }
@@ -52,7 +52,7 @@
 
     &:hover {
       background: $color-orange;
-      color: $color-white;
+      color: $white-100;
     }
   }
 
@@ -78,8 +78,8 @@
   white-space: nowrap;
   vertical-align: baseline;
   border-radius: $border-radius-md;
-  background-color: $color-grey-500;
-  color: $color-white;
+  background-color: $neutral-500;
+  color: $white-100;
 
   &--primary {
     background-color: $color-orange;
@@ -92,7 +92,7 @@
   }
   &--warning {
     background-color: $color-warning;
-    color: $color-black;
+    color: $black-100;
   }
   &--danger {
     background-color: $color-danger;

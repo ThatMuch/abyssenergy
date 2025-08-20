@@ -146,10 +146,10 @@
   color: $color-dark-blue !important;
 }
 .text-white {
-  color: $color-white !important;
+  color: $white-100 !important;
 }
 .text-muted {
-  color: $color-grey-600 !important;
+  color: $neutral-600 !important;
 }
 
 // Couleurs de fond
@@ -163,7 +163,7 @@
   background-color: $color-light-grey !important;
 }
 .bg-white {
-  background-color: $color-white !important;
+  background-color: $white-100 !important;
 }
 
 // Display

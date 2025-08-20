@@ -4,7 +4,7 @@
 .home {
   .hero-section {
     background: linear-gradient(135deg, $color-dark-blue, $color-orange);
-    color: $color-white;
+    color: $white-100;
     padding: $spacing-xxl 0;
     text-align: center;
 
@@ -66,7 +66,7 @@
     }
 
     .page-description {
-      color: $color-grey-600;
+      color: $neutral-600;
       font-size: $font-size-lg;
     }
   }
@@ -86,7 +86,7 @@
 .archive {
   .archive-header {
     background: $color-dark-blue;
-    color: $color-white;
+    color: $white-100;
     padding: $spacing-xl 0;
     text-align: center;
     margin-bottom: $spacing-xxl;
@@ -140,13 +140,13 @@
     }
 
     .post-excerpt {
-      color: $color-grey-600;
+      color: $neutral-600;
       margin-bottom: $spacing-md;
     }
 
     .post-meta {
       font-size: $font-size-sm;
-      color: $color-grey-500;
+      color: $neutral-500;
 
       .post-date {
         margin-right: $spacing-sm;
@@ -158,7 +158,7 @@
 // Page de contact
 .page-template-contact {
   .contact-form {
-    background: $color-white;
+    background: $white-100;
     @include card-style($spacing-xl);
     max-width: 600px;
     margin: 0 auto;
@@ -178,7 +178,7 @@
     textarea {
       width: 100%;
       padding: $spacing-sm;
-      border: 2px solid $color-grey-300;
+      border: 2px solid $neutral-300;
       border-radius: $border-radius-md;
       font-family: $font-main;
       @include transition(border-color);
