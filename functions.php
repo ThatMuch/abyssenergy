@@ -629,3 +629,25 @@ function squarechilli_child_display_header_cta()
 <?php
 	return ob_get_clean();
 }
+
+// add in customizer site identity the logo for the footer
+function squarechilli_child_customize_register_footer_logo($wp_customize)
+{
+	// Ajouter le logo du footer
+	$wp_customize->add_setting('squarechilli_footer_logo', array(
+		'sanitize_callback' => 'esc_url_raw',
+		'transport'         => 'refresh',
+	));
+
+	$wp_customize->add_control(new WP_Customize_Image_Control(
+		$wp_customize,
+		'squarechilli_footer_logo',
+		array(
+			'label'    => __('Logo du Footer', 'squarechilli-child'),
+			'section'  => 'title_tagline',
+			'settings' => 'squarechilli_footer_logo',
+			'priority' => 30,
+		)
+	));
+}
+add_action('customize_register', 'squarechilli_child_customize_register_footer_logo');

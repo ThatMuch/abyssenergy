@@ -643,69 +643,59 @@ Version: 1.0.0
   border-bottom: none;
 }
 
-.site-footer {
-  background: #0f395c;
+.footer {
+  background: #0a3f6a;
   color: white;
-  padding: 3rem 0 1.5rem 0;
+  display: flex;
+  padding: 3rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
 }
-.site-footer .footer-container {
+.footer-links {
+  background-color: initial;
+  padding: 0;
+}
+.footer .footer-container {
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 1.5rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 1.5rem;
 }
-@media (min-width: 576px) {
-  .site-footer .footer-container {
+@media (max-width: 479px) {
+  .footer .footer-container {
+    flex-direction: column;
     padding: 0 2rem;
   }
 }
-.site-footer .footer-widgets {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-}
-.site-footer .footer-widgets > * {
-  flex: 1 1 calc((100% - 4rem) / 3);
-}
-.site-footer .footer-widgets {
-  margin-bottom: 3rem;
-}
-@media (min-width: 768px) {
-  .site-footer .footer-widgets {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-  }
-  .site-footer .footer-widgets > * {
-    flex: 1 1 calc((100% - 0rem) / 1);
-  }
-}
-.site-footer .footer-widget h3 {
-  color: #ff8e38;
-  margin-bottom: 1rem;
-}
-.site-footer .footer-widget p,
-.site-footer .footer-widget li {
-  color: rgba(255, 255, 255, 0.9);
-}
-.site-footer .footer-widget a {
-  color: rgba(255, 255, 255, 0.9);
-}
-.site-footer .footer-widget a:hover {
-  color: #ff8e38;
-}
-.site-footer .footer-widget ul {
+.footer .menu {
+  max-width: 170px;
   list-style: none;
   padding: 0;
 }
-.site-footer .footer-widget ul li {
+.footer .menu a {
+  color: rgba(255, 255, 255, 0.9);
+  font-family: "Manrope", sans-serif;
+}
+.footer .menu a:hover {
+  color: #ff8e38;
+}
+.footer .menu li {
   padding: 0.25rem 0;
 }
-.site-footer .footer-bottom {
+.footer .footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   padding-top: 1.5rem;
   text-align: center;
+  display: flex;
+  justify-content: center;
 }
-.site-footer .footer-bottom p {
+.footer .footer-bottom p {
   margin: 0;
   color: rgba(255, 255, 255, 0.7);
   font-size: 0.875rem;
