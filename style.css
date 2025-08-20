@@ -487,52 +487,57 @@ Author: squarechilli
 Template: squarechilli
 Version: 1.0.0
 */
-.site-header {
-  background: white;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
-  position: sticky;
-  top: 0;
-  z-index: 1020;
-}
-.site-header .header-container {
+.header {
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 1.5rem;
 }
 @media (min-width: 576px) {
-  .site-header .header-container {
+  .header {
     padding: 0 2rem;
   }
 }
-.site-header .header-container {
+.header {
+  border-radius: 9999px;
+  border-bottom: 1px solid #d0d3ef;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(2px);
+  position: sticky;
+  top: 0;
+  z-index: 1020;
   display: flex;
-  align-items: center;
+  padding: 0.5rem;
   justify-content: space-between;
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
+  align-items: center;
+  left: inherit;
+  right: inherit;
+  min-height: inherit;
 }
-.site-header .site-logo img {
-  max-height: 60px;
+.header__logo a {
+  display: block;
+}
+.header__logo a img {
+  max-height: 42px;
   width: auto;
 }
-.site-header .main-navigation ul {
+.header .main-navigation ul {
   display: flex;
   list-style: none;
   margin: 0;
   padding: 0;
   gap: 1.5rem;
 }
-.site-header .main-navigation a {
+.header .main-navigation a {
   color: #0f395c;
   font-weight: 500;
   text-decoration: none;
   transition: all 0.3s ease;
 }
-.site-header .main-navigation a:hover, .site-header .main-navigation a.current-menu-item {
+.header .main-navigation a:hover, .header .main-navigation a.current-menu-item {
   color: #ff8e38;
 }
 @media (min-width: 768px) {
-  .site-header .main-navigation .menu-toggle {
+  .header .main-navigation .menu-toggle {
     display: block;
     background: none;
     border: none;
@@ -540,7 +545,7 @@ Version: 1.0.0
     color: #0f395c;
     cursor: pointer;
   }
-  .site-header .main-navigation ul {
+  .header .main-navigation ul {
     display: none;
     position: absolute;
     top: 100%;
@@ -551,7 +556,7 @@ Version: 1.0.0
     flex-direction: column;
     padding: 1.5rem;
   }
-  .site-header .main-navigation ul.is-open {
+  .header .main-navigation ul.is-open {
     display: flex;
   }
 }
