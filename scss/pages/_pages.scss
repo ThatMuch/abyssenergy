@@ -121,9 +121,12 @@
 
     .post-thumbnail {
       @include aspect-ratio(16, 9);
-      margin-bottom: $spacing-md;
-      border-radius: $border-radius-md;
-      overflow: hidden;
+
+      & {
+        margin-bottom: $spacing-md;
+        border-radius: $border-radius-md;
+        overflow: hidden;
+      }
     }
 
     .post-title {

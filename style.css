@@ -498,16 +498,18 @@ Version: 1.0.0
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
 }
 @media (min-width: 576px) {
   .site-header .header-container {
     padding: 0 2rem;
   }
+}
+.site-header .header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
 }
 .site-header .site-logo img {
   max-height: 60px;
@@ -561,13 +563,15 @@ Version: 1.0.0
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 1.5rem;
-  padding-top: 3rem;
-  padding-bottom: 3rem;
 }
 @media (min-width: 576px) {
   .site-main .content-area {
     padding: 0 2rem;
   }
+}
+.site-main .content-area {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
 }
 
 .sidebar {
@@ -619,10 +623,12 @@ Version: 1.0.0
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
-  margin-bottom: 3rem;
 }
 .site-footer .footer-widgets > * {
   flex: 1 1 calc((100% - 4rem) / 3);
+}
+.site-footer .footer-widgets {
+  margin-bottom: 3rem;
 }
 @media (min-width: 768px) {
   .site-footer .footer-widgets {
@@ -830,7 +836,7 @@ Version: 1.0.0
 }
 .alert--success {
   color: rgb(20.2898550725, 84.7101449275, 35);
-  background-color: rgb(195.7028985507, 240.7971014493, 206);
+  background-color: rgb(154.5579710145, 230.9420289855, 172);
   border-color: rgb(154.5579710145, 230.9420289855, 172);
 }
 .alert--warning {
@@ -1029,15 +1035,12 @@ Version: 1.0.0
 }
 .archive .post-card .post-thumbnail {
   position: relative;
-  margin-bottom: 1rem;
-  border-radius: 0.25rem;
-  overflow: hidden;
 }
 .archive .post-card .post-thumbnail::before {
   content: "";
   display: block;
   width: 100%;
-  padding-top: 56.25%;
+  padding-top: calc(9 / 16 * 100%);
 }
 .archive .post-card .post-thumbnail > * {
   position: absolute;
@@ -1046,6 +1049,11 @@ Version: 1.0.0
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+.archive .post-card .post-thumbnail {
+  margin-bottom: 1rem;
+  border-radius: 0.25rem;
+  overflow: hidden;
 }
 .archive .post-card .post-title {
   color: #0f395c;

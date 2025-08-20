@@ -12,11 +12,14 @@
 
   .header-container {
     @include container();
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: map.get($spacings, "component-md");
-    padding-bottom: map.get($spacings, "component-md");
+
+    & {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: map.get($spacings, "component-md");
+      padding-bottom: map.get($spacings, "component-md");
+    }
   }
 
   .site-logo {
@@ -83,8 +86,11 @@
 
   .content-area {
     @include container();
-    padding-top: $spacing-2xl;
-    padding-bottom: $spacing-2xl;
+
+    & {
+      padding-top: $spacing-2xl;
+      padding-bottom: $spacing-2xl;
+    }
   }
 }
 
@@ -138,7 +144,10 @@
 
   .footer-widgets {
     @include flex-grid(3, $spacing-xl);
-    margin-bottom: $spacing-2xl;
+
+    & {
+      margin-bottom: $spacing-2xl;
+    }
 
     @include respond-to(md) {
       @include flex-grid(1, $spacing-lg);

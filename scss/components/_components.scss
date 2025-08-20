@@ -1,7 +1,8 @@
 // Composants réutilisables
 @use "../abstracts/variables" as *;
 @use "../abstracts/mixins" as *;
-
+@use "sass:map";
+@use "sass:color";
 // Cartes
 .card {
   @include card-style();
@@ -110,27 +111,27 @@
   margin-bottom: $spacing-lg;
 
   &--primary {
-    color: darken($color-secondary, 20%);
-    background-color: lighten($color-secondary, 35%);
-    border-color: lighten($color-secondary, 25%);
+    color: color.adjust($color-secondary, $lightness: -20%);
+    background-color: color.adjust($color-secondary, $lightness: 35%);
+    border-color: color.adjust($color-secondary, $lightness: 25%);
   }
 
   &--success {
-    color: darken($color-success, 20%);
-    background-color: lighten($color-success, 45%);
-    border-color: lighten($color-success, 35%);
+    color: color.adjust($color-success, $lightness: -20%);
+    background-color: color.adjust($color-success, $lightness: 35%);
+    border-color: color.adjust($color-success, $lightness: 35%);
   }
 
   &--warning {
-    color: darken($color-warning, 20%);
-    background-color: lighten($color-warning, 25%);
-    border-color: lighten($color-warning, 15%);
+    color: color.adjust($color-warning, $lightness: -20%);
+    background-color: color.adjust($color-warning, $lightness: 25%);
+    border-color: color.adjust($color-warning, $lightness: 15%);
   }
 
   &--danger {
-    color: darken($color-danger, 20%);
-    background-color: lighten($color-danger, 35%);
-    border-color: lighten($color-danger, 25%);
+    color: color.adjust($color-danger, $lightness: -20%);
+    background-color: color.adjust($color-danger, $lightness: 35%);
+    border-color: color.adjust($color-danger, $lightness: 25%);
   }
 }
 

@@ -1,5 +1,6 @@
 @use "../abstracts/variables" as *;
 @use "../abstracts/mixins" as *;
+@use "sass:map";
 // Styles de base pour le thème enfant
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Sora:wght@100..800&display=swap");
 // Reset et normalisation
@@ -27,7 +28,7 @@ h6 {
   font-family: $font-title;
   font-weight: 600;
   line-height: 1.2;
-  margin-bottom: map-get($spacings, "component-md");
+  margin-bottom: map.get($spacings, "component-md");
 }
 
 h1 {
