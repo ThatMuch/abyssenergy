@@ -11,7 +11,7 @@
     background: $white-50;
     backdrop-filter: blur(2px);
     position: sticky;
-    top: 0;
+    top: map.get($spacings, "component-sm");
     z-index: $z-sticky;
     display: flex;
     padding: map.get($spacings, "component-xs");
@@ -25,60 +25,71 @@
   &__logo {
     a {
       display: block;
+      height: 42px;
       img {
         max-height: 42px;
         width: auto;
       }
     }
   }
+  .side-menu:checked ~ nav {
+    @include respond-to(xs) {
+      max-height: 100vh;
+      padding-top: 100px;
+    }
+  }
 
-  .main-navigation {
-    ul {
-      display: flex;
+  .main-menu {
+    @include respond-to(xs) {
+      @include transition(max-height);
+      & {
+        height: 100vh;
+        background-color: $white-100;
+        position: fixed;
+        top: -1rem;
+        left: 0;
+        right: 0;
+        width: 100%;
+        overflow: hidden;
+        z-index: -1;
+
+        .menu-item {
+          margin-bottom: map.get($spacings, "component-md");
+        }
+      }
+    }
+
+    & {
+      margin: 0;
+    }
+    .menu {
       list-style: none;
       margin: 0;
       padding: 0;
-      gap: $spacing-lg;
-    }
+      .menu-item a {
+        color: $color-text-link;
+        text-decoration: none;
+        font-family: $font-main;
+        font-size: $font-size-md;
+        @include transition(color);
 
-    a {
-      color: $color-primary-dark;
-      font-weight: 500;
-      text-decoration: none;
-      @include transition();
-
-      &:hover,
-      &.current-menu-item {
-        color: $color-secondary;
-      }
-    }
-
-    // Menu mobile
-    @include respond-to(md) {
-      .menu-toggle {
-        display: block;
-        background: none;
-        border: none;
-        font-size: 1.5rem;
-        color: $color-primary-dark;
-        cursor: pointer;
-      }
-
-      ul {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: $white-100;
-        @include box-shadow($shadow-lg);
-        flex-direction: column;
-        padding: $spacing-lg;
-
-        &.is-open {
-          display: flex;
+        &:hover {
+          color: $color-secondary;
         }
       }
+    }
+  }
+
+  .hamb {
+    position: initial;
+    float: inherit;
+    right: inherit;
+    top: inherit;
+    background-color: transparent;
+    &-line,
+    &-line:before,
+    &-line:after {
+      background-color: $color-primary;
     }
   }
 }
