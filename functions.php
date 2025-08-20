@@ -373,7 +373,7 @@ class Squarechilli_Child_Recent_Jobs_Widget extends WP_Widget
 				name="<?php echo esc_attr($this->get_field_name('number')); ?>" type="number"
 				step="1" min="1" value="<?php echo esc_attr($number); ?>" size="3">
 		</p>
-<?php
+	<?php
 	}
 
 	public function update($new_instance, $old_instance)
@@ -393,3 +393,239 @@ function squarechilli_child_register_jobs_widget()
 	register_widget('Squarechilli_Child_Recent_Jobs_Widget');
 }
 add_action('widgets_init', 'squarechilli_child_register_jobs_widget');
+
+/**
+ * Configuration du CTA Header via le Customizer WordPress
+ */
+function squarechilli_child_header_cta_customize_register($wp_customize)
+{
+
+	// Section CTA Header
+	$wp_customize->add_section('squarechilli_header_cta_section', array(
+		'title'       => __('CTA Header', 'squarechilli-child'),
+		'description' => __('Configurez le bouton d\'appel à l\'action qui apparaît dans l\'en-tête du site.', 'squarechilli-child'),
+		'priority'    => 25,
+	));
+
+	// Activation du CTA Header
+	$wp_customize->add_setting('squarechilli_header_cta_enabled', array(
+		'default'           => false,
+		'sanitize_callback' => 'wp_validate_boolean',
+		'transport'         => 'refresh',
+	));
+
+	$wp_customize->add_control('squarechilli_header_cta_enabled', array(
+		'label'    => __('Activer le CTA dans le header', 'squarechilli-child'),
+		'section'  => 'squarechilli_header_cta_section',
+		'type'     => 'checkbox',
+		'priority' => 10,
+	));
+
+	// Texte du CTA
+	$wp_customize->add_setting('squarechilli_header_cta_text', array(
+		'default'           => __('Nous contacter', 'squarechilli-child'),
+		'sanitize_callback' => 'sanitize_text_field',
+		'transport'         => 'postMessage',
+	));
+
+	$wp_customize->add_control('squarechilli_header_cta_text', array(
+		'label'    => __('Texte du bouton', 'squarechilli-child'),
+		'section'  => 'squarechilli_header_cta_section',
+		'type'     => 'text',
+		'priority' => 20,
+	));
+
+	// URL du CTA
+	$wp_customize->add_setting('squarechilli_header_cta_url', array(
+		'default'           => home_url('/contact/'),
+		'sanitize_callback' => 'esc_url_raw',
+		'transport'         => 'refresh',
+	));
+
+	$wp_customize->add_control('squarechilli_header_cta_url', array(
+		'label'    => __('URL de destination', 'squarechilli-child'),
+		'section'  => 'squarechilli_header_cta_section',
+		'type'     => 'url',
+		'priority' => 30,
+	));
+
+	// Style du CTA
+	$wp_customize->add_setting('squarechilli_header_cta_style', array(
+		'default'           => 'primary',
+		'sanitize_callback' => 'sanitize_text_field',
+		'transport'         => 'refresh',
+	));
+
+	$wp_customize->add_control('squarechilli_header_cta_style', array(
+		'label'    => __('Style du bouton', 'squarechilli-child'),
+		'section'  => 'squarechilli_header_cta_section',
+		'type'     => 'select',
+		'priority' => 40,
+		'choices'  => array(
+			'primary'   => __('Primary', 'squarechilli-child'),
+			'secondary' => __('Secondary', 'squarechilli-child'),
+			'outline'   => __('Outline', 'squarechilli-child'),
+
+		),
+	));
+
+	// Taille du CTA
+	$wp_customize->add_setting('squarechilli_header_cta_size', array(
+		'default'           => 'medium',
+		'sanitize_callback' => 'sanitize_text_field',
+		'transport'         => 'refresh',
+	));
+
+	$wp_customize->add_control('squarechilli_header_cta_size', array(
+		'label'    => __('Taille du bouton', 'squarechilli-child'),
+		'section'  => 'squarechilli_header_cta_section',
+		'type'     => 'select',
+		'priority' => 50,
+		'choices'  => array(
+			'small'  => __('Petit', 'squarechilli-child'),
+			'medium' => __('Moyen', 'squarechilli-child'),
+			'large'  => __('Grand', 'squarechilli-child'),
+		),
+	));
+
+	// Icône du CTA
+	$wp_customize->add_setting('squarechilli_header_cta_icon', array(
+		'default'           => '',
+		'sanitize_callback' => 'sanitize_text_field',
+		'transport'         => 'postMessage',
+	));
+
+	$wp_customize->add_control('squarechilli_header_cta_icon', array(
+		'label'       => __('Icône (optionnel)', 'squarechilli-child'),
+		'description' => __('Code HTML de l\'icône (ex: &lt;i class="fas fa-phone"&gt;&lt;/i&gt;)', 'squarechilli-child'),
+		'section'     => 'squarechilli_header_cta_section',
+		'type'        => 'text',
+		'priority'    => 60,
+	));
+
+	// Ouverture dans un nouvel onglet
+	$wp_customize->add_setting('squarechilli_header_cta_target', array(
+		'default'           => false,
+		'sanitize_callback' => 'wp_validate_boolean',
+		'transport'         => 'refresh',
+	));
+
+	$wp_customize->add_control('squarechilli_header_cta_target', array(
+		'label'    => __('Ouvrir dans un nouvel onglet', 'squarechilli-child'),
+		'section'  => 'squarechilli_header_cta_section',
+		'type'     => 'checkbox',
+		'priority' => 70,
+	));
+
+	// Masquer sur mobile
+	$wp_customize->add_setting('squarechilli_header_cta_hide_mobile', array(
+		'default'           => false,
+		'sanitize_callback' => 'wp_validate_boolean',
+		'transport'         => 'refresh',
+	));
+
+	$wp_customize->add_control('squarechilli_header_cta_hide_mobile', array(
+		'label'    => __('Masquer sur mobile', 'squarechilli-child'),
+		'section'  => 'squarechilli_header_cta_section',
+		'type'     => 'checkbox',
+		'priority' => 80,
+	));
+}
+add_action('customize_register', 'squarechilli_child_header_cta_customize_register');
+
+/**
+ * Enqueue des scripts pour le CTA Header
+ */
+function squarechilli_child_enqueue_header_cta_assets()
+{
+	// Script pour le CTA Header
+	if (get_theme_mod('squarechilli_header_cta_enabled', false)) {
+		wp_enqueue_script(
+			'squarechilli-header-cta',
+			get_stylesheet_directory_uri() . '/js/header-cta.js',
+			array(),
+			squarechilli_child_get_file_version('/js/header-cta.js'),
+			true
+		);
+
+		// Variables pour le script header CTA
+		wp_localize_script('squarechilli-header-cta', 'squarechilliHeaderCTA', array(
+			'enabled' => get_theme_mod('squarechilli_header_cta_enabled', false),
+			'text' => get_theme_mod('squarechilli_header_cta_text', __('Nous contacter', 'squarechilli-child')),
+			'url' => get_theme_mod('squarechilli_header_cta_url', home_url('/contact/')),
+			'style' => get_theme_mod('squarechilli_header_cta_style', 'primary'),
+			'size' => get_theme_mod('squarechilli_header_cta_size', 'medium'),
+			'icon' => get_theme_mod('squarechilli_header_cta_icon', ''),
+			'target' => get_theme_mod('squarechilli_header_cta_target', false),
+			'hide_mobile' => get_theme_mod('squarechilli_header_cta_hide_mobile', false),
+		));
+	}
+}
+add_action('wp_enqueue_scripts', 'squarechilli_child_enqueue_header_cta_assets');
+
+/**
+ * Fonction pour afficher le CTA Header (utilisée pour preview et fallback)
+ */
+function squarechilli_child_display_header_cta()
+{
+	// Vérifier si le CTA est activé
+	if (!get_theme_mod('squarechilli_header_cta_enabled', false)) {
+		return '';
+	}
+
+	// Récupérer les paramètres
+	$text = get_theme_mod('squarechilli_header_cta_text', __('Nous contacter', 'squarechilli-child'));
+	$url = get_theme_mod('squarechilli_header_cta_url', home_url('/contact/'));
+	$style = get_theme_mod('squarechilli_header_cta_style', 'primary');
+	$size = get_theme_mod('squarechilli_header_cta_size', 'medium');
+	$icon = get_theme_mod('squarechilli_header_cta_icon', '');
+	$target = get_theme_mod('squarechilli_header_cta_target', false);
+	$hide_mobile = get_theme_mod('squarechilli_header_cta_hide_mobile', false);
+
+	// Si pas de texte ou d'URL, ne pas afficher
+	if (empty($text) || empty($url)) {
+		return '';
+	}
+
+	// Classes CSS
+	$button_classes = array(
+		'header-cta-btn',
+		'btn',
+		'btn--' . $style,
+		'btn--' . $size
+	);
+
+	if ($hide_mobile) {
+		$button_classes[] = 'header-cta-btn--hide-mobile';
+	}
+
+	// Attributs du lien
+	$link_attrs = array(
+		'href' => esc_url($url),
+		'class' => esc_attr(implode(' ', $button_classes))
+	);
+
+	if ($target) {
+		$link_attrs['target'] = '_blank';
+		$link_attrs['rel'] = 'noopener noreferrer';
+	}
+
+	// Construction du HTML
+	$attributes = '';
+	foreach ($link_attrs as $attr => $value) {
+		$attributes .= sprintf(' %s="%s"', $attr, $value);
+	}
+
+	ob_start();
+	?>
+	<div class="header-cta">
+		<a<?php echo $attributes; ?>>
+			<?php if (!empty($icon)) : ?>
+				<span class="header-cta-btn__icon"><?php echo wp_kses_post($icon); ?></span>
+			<?php endif; ?>
+			<span class="header-cta-btn__text"><?php echo esc_html($text); ?></span>
+			</a>
+	</div>
+<?php
+	return ob_get_clean();
+}

@@ -32,7 +32,7 @@
 
 // Boutons
 .btn {
-  @include button-style($color-secondary);
+  @include button-style($color-primary);
   display: inline-block;
   text-align: center;
   vertical-align: middle;
@@ -41,32 +41,28 @@
   font-weight: 500;
 
   &--primary {
-    @include button-style($color-secondary);
+    @include button-style($color-primary);
   }
 
   &--secondary {
-    @include button-style($color-primary-dark);
+    @include button-style($color-secondary, $color-text-black);
   }
 
   &--outline {
-    background: transparent;
-    color: $color-secondary;
-    border-color: $color-secondary;
+    @include button-style(transparent, $color-text-primary);
+    border: 2px solid $color-primary;
 
     &:hover {
-      background: $color-secondary;
-      color: $white-100;
+      background: rgba($color-primary, 0.3);
     }
   }
 
   &--large {
     padding: $spacing-md $spacing-xl;
-    font-size: $font-size-lg;
   }
 
   &--small {
     padding: $spacing-xs $spacing-sm;
-    font-size: $font-size-sm;
   }
 }
 
