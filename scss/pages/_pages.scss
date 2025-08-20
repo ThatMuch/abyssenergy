@@ -1,5 +1,6 @@
 // Styles spécifiques aux pages
-
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
 // Page d'accueil
 .home {
   .hero-section {

@@ -1,4 +1,6 @@
 // Composants réutilisables
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
 
 // Cartes
 .card {

@@ -1,3 +1,5 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
 // Styles de base pour le thème enfant
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Sora:wght@100..800&display=swap");
 // Reset et normalisation

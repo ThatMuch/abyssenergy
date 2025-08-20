@@ -1,3 +1,5 @@
+@use "./variables" as *;
+@use "sass:color";
 // Mixins pour le thème Abyss Energy Child
 
 // Mixin pour les media queries responsive
@@ -55,7 +57,7 @@
 @mixin button-style(
   $bg-color,
   $text-color: $white-100,
-  $hover-bg: darken($bg-color, 10%)
+  $hover-bg: color.adjust($bg-color, $lightness: -10%)
 ) {
   background-color: $bg-color;
   color: $text-color;

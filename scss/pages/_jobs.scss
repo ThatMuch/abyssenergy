@@ -1,5 +1,6 @@
 // Styles pour la page de listing des emplois
-
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
 .jobs-listing-page {
   // Formulaire de filtre
   .jobs-filters {
