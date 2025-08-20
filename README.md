@@ -40,8 +40,8 @@ npm run lint     # Vérification du code SCSS
 ### Variables personnalisables dans `scss/abstracts/_variables.scss` :
 
 ```scss
-$color-orange: #ff6900;
-$color-dark-blue: #09497a;
+$color-secondary: #ff6900;
+$color-primary-dark: #09497a;
 $font-title: "Baloo 2", sans-serif;
 ```
 
@@ -51,7 +51,7 @@ $font-title: "Baloo 2", sans-serif;
 @include respond-to(md) {
   /* styles responsive */
 }
-@include button-style($color-orange);
+@include button-style($color-secondary);
 @include card-style($spacing-lg, $shadow-md);
 ```
 

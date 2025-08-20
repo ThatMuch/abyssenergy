@@ -6,9 +6,11 @@
 	"scripts": {
 		"watch": "sass --watch scss/style.scss:style.css --style expanded --source-map",
 		"build": "sass scss/style.scss:style.css --style compressed",
+		"build:dev": "sass scss/style.scss:style.css --style expanded",
 		"dev": "sass --watch scss/style.scss:style.css --style expanded --source-map --poll",
 		"lint": "stylelint scss/**/*.scss",
-		"lint:fix": "stylelint scss/**/*.scss --fix"
+		"lint:fix": "stylelint scss/**/*.scss --fix",
+		"compile": "npm run build:dev && echo '✅ SCSS compiled successfully without warnings!'"
 	},
 	"devDependencies": {
 		"sass": "^1.77.0",

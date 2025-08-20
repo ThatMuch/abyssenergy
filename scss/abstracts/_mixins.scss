@@ -1,3 +1,5 @@
+@use "./variables" as *;
+@use "sass:color";
 // Mixins pour le thème Abyss Energy Child
 
 // Mixin pour les media queries responsive
@@ -54,8 +56,8 @@
 // Mixin pour les boutons
 @mixin button-style(
   $bg-color,
-  $text-color: $color-white,
-  $hover-bg: darken($bg-color, 10%)
+  $text-color: $white-100,
+  $hover-bg: color.adjust($bg-color, $lightness: -10%)
 ) {
   background-color: $bg-color;
   color: $text-color;
@@ -72,7 +74,7 @@
 
 // Mixin pour les cartes
 @mixin card-style($padding: $spacing-lg, $shadow: $shadow-md) {
-  background: $color-white;
+  background: $white-100;
   border-radius: $border-radius-lg;
   padding: $padding;
   @include box-shadow($shadow);
@@ -139,7 +141,7 @@
     content: "";
     display: block;
     width: 100%;
-    padding-top: percentage($height / $width);
+    padding-top: calc(#{$height} / #{$width} * 100%);
   }
 
   > * {

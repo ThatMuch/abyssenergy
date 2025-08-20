@@ -1,5 +1,8 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+@use "sass:map";
 // Styles de base pour le thème enfant
-
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Sora:wght@100..800&display=swap");
 // Reset et normalisation
 *,
 *::before,
@@ -12,7 +15,7 @@ body {
   font-family: $font-main;
   font-size: $font-size-base;
   line-height: $line-height-base;
-  color: $color-main;
+  color: $color-text-primary;
 }
 
 // Titres
@@ -25,36 +28,54 @@ h6 {
   font-family: $font-title;
   font-weight: 600;
   line-height: 1.2;
-  margin-bottom: $spacing-md;
+  margin-bottom: map.get($spacings, "component-md");
 }
 
 h1 {
   font-size: $h1-size;
+  @include respond-to(md) {
+    font-size: $h1-size-mobile;
+  }
 }
 h2 {
   font-size: $h2-size;
+  @include respond-to(md) {
+    font-size: $h2-size-mobile;
+  }
 }
 h3 {
   font-size: $h3-size;
+  @include respond-to(md) {
+    font-size: $h3-size-mobile;
+  }
 }
 h4 {
   font-size: $h4-size;
+  @include respond-to(md) {
+    font-size: $h4-size-mobile;
+  }
 }
 h5 {
   font-size: $h5-size;
+  @include respond-to(md) {
+    font-size: $h5-size-mobile;
+  }
 }
 h6 {
   font-size: $h6-size;
+  @include respond-to(md) {
+    font-size: $h6-size-mobile;
+  }
 }
 
 // Liens
 a {
-  color: $color-orange;
+  color: $color-text-link;
   text-decoration: none;
   @include transition(color);
 
   &:hover {
-    color: darken($color-orange, 15%);
+    color: $color-text-link-hover;
     text-decoration: underline;
   }
 }
@@ -79,20 +100,20 @@ img {
 
 // Boutons de base
 button {
-  @include button-style($color-orange);
+  @include button-style($color-secondary);
 
   &.btn-secondary {
-    @include button-style($color-dark-blue);
+    @include button-style($color-primary-dark);
   }
 
   &.btn-outline {
     background: transparent;
-    color: $color-orange;
-    border: 2px solid $color-orange;
+    color: $color-secondary;
+    border: 2px solid $color-secondary;
 
     &:hover {
-      background: $color-orange;
-      color: $color-white;
+      background: $color-secondary;
+      color: $white-100;
     }
   }
 }

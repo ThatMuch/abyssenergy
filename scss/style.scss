@@ -13,37 +13,19 @@ Version: 1.0.0
 // Il importe tous les autres fichiers dans le bon ordre
 
 // 1. Abstracts - Variables, mixins, fonctions
-@import "abstracts/variables";
-@import "abstracts/mixins";
+@use "abstracts/variables" as *;
+@use "abstracts/mixins" as *;
 
 // 2. Base - Reset, typographie, éléments de base
-@import "base/base";
-@import "base/utilities";
+@use "base/base" as *;
+@use "base/utilities" as *;
 
 // 3. Layout - Structure générale du site
-@import "layout/layout";
+@use "layout/layout" as *;
 
 // 4. Components - Composants réutilisables
-@import "components/components";
+@use "components/components" as *;
 
 // 5. Pages - Styles spécifiques aux pages
-@import "pages/pages";
-@import "pages/jobs";
-
-// ==========================================================================
-// STYLES PERSONNALISÉS
-// ==========================================================================
-// Ajoutez vos styles personnalisés ici ou créez de nouveaux fichiers partiels
-
-// Exemple de personnalisation rapide :
-/*
-.custom-section {
-  background: $color-light-orange;
-  padding: $spacing-xxl 0;
-
-  h2 {
-    color: $color-dark-blue;
-    text-align: center;
-  }
-}
-*/
+@use "pages/pages" as *;
+@use "pages/jobs" as *;

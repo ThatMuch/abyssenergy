@@ -1,19 +1,20 @@
 // Styles pour la page de listing des emplois
-
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
 .jobs-listing-page {
   // Formulaire de filtre
   .jobs-filters {
     .form-control {
       width: 100%;
       padding: $spacing-sm;
-      border: 2px solid $color-grey-300;
+      border: 2px solid $neutral-300;
       border-radius: $border-radius-md;
       font-family: $font-main;
       @include transition(border-color);
 
       &:focus {
         outline: none;
-        border-color: $color-orange;
+        border-color: $color-secondary;
       }
     }
 
@@ -21,7 +22,7 @@
       display: block;
       margin-bottom: $spacing-xs;
       font-weight: 600;
-      color: $color-dark-blue;
+      color: $color-primary-dark;
     }
   }
 
@@ -119,11 +120,11 @@
       text-decoration: none;
       font-size: $font-size-lg;
       font-weight: 600;
-      color: $color-dark-blue;
+      color: $color-primary-dark;
       @include transition(color);
 
       &:hover {
-        color: $color-orange !important;
+        color: $color-secondary !important;
         text-decoration: none;
       }
     }
@@ -132,14 +133,14 @@
   // Localisation
   .job-location {
     font-size: $font-size-sm;
-    color: $color-grey-600;
+    color: $neutral-600;
     margin-bottom: 0;
   }
 
   // Extrait de l'emploi
   .job-excerpt {
     p {
-      color: $color-grey-600;
+      color: $neutral-600;
       line-height: 1.5;
     }
   }
@@ -147,12 +148,12 @@
   // Métadonnées de l'emploi
   .job-meta {
     font-size: $font-size-xs;
-    color: $color-grey-500;
+    color: $neutral-500;
   }
 
   // Informations sur les résultats
   .jobs-results-info {
-    border-bottom: 1px solid $color-grey-200;
+    border-bottom: 1px solid $neutral-200;
     padding-bottom: $spacing-md;
     margin-bottom: $spacing-lg !important;
   }
@@ -164,9 +165,9 @@
 
     .btn {
       &.active {
-        background-color: $color-orange;
-        color: $color-white;
-        border-color: $color-orange;
+        background-color: $color-secondary;
+        color: $white-100;
+        border-color: $color-secondary;
       }
     }
 
@@ -187,16 +188,16 @@
     }
     span.page-numbers {
       padding: $spacing-sm $spacing-md;
-      color: $color-dark-blue;
+      color: $color-primary-dark;
       text-decoration: none;
       border-radius: $border-radius-md;
       @include transition();
 
       &:hover,
       &.current {
-        background-color: $color-orange;
+        background-color: $color-secondary;
         text-decoration: none;
-        color: $color-white;
+        color: $white-100;
       }
 
       &.prev,
@@ -213,7 +214,7 @@
       &:hover {
         background: none;
         border: none;
-        color: $color-dark-blue;
+        color: $color-primary-dark;
       }
     }
   }
@@ -226,7 +227,7 @@
     }
 
     h3 {
-      color: $color-dark-blue;
+      color: $color-primary-dark;
       margin-bottom: $spacing-sm;
     }
   }
@@ -234,19 +235,15 @@
   // CTA pour candidature spontanée
   .spontaneous-application {
     .card {
-      background: linear-gradient(
-        135deg,
-        $color-light-orange,
-        $color-light-grey
-      );
+      background: linear-gradient(135deg, $color-secondary-light, $neutral-50);
 
       h4 {
-        color: $color-dark-blue;
+        color: $color-primary-dark;
         margin-bottom: $spacing-sm;
       }
 
       p {
-        color: $color-grey-700;
+        color: $neutral-700;
         margin-bottom: $spacing-lg;
       }
     }
@@ -315,7 +312,7 @@
 
     &[data-type="internship"] {
       background-color: $color-warning;
-      color: $color-black;
+      color: $black-100;
     }
   }
 }
