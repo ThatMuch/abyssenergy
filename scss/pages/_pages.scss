@@ -3,9 +3,9 @@
 // Page d'accueil
 .home {
   .hero-section {
-    background: linear-gradient(135deg, $color-dark-blue, $color-orange);
+    background: linear-gradient(135deg, $color-primary-dark, $color-secondary);
     color: $white-100;
-    padding: $spacing-xxl 0;
+    padding: $spacing-2xl 0;
     text-align: center;
 
     h1 {
@@ -23,7 +23,7 @@
   }
 
   .features-section {
-    padding: $spacing-xxl 0;
+    padding: $spacing-2xl 0;
 
     .features-grid {
       @include flex-grid(3, $spacing-xl);
@@ -39,12 +39,12 @@
 
       .feature-icon {
         font-size: 3rem;
-        color: $color-orange;
+        color: $color-secondary;
         margin-bottom: $spacing-md;
       }
 
       h3 {
-        color: $color-dark-blue;
+        color: $color-primary-dark;
         margin-bottom: $spacing-sm;
       }
     }
@@ -55,13 +55,13 @@
 .page,
 .single {
   .page-header {
-    background: $color-light-grey;
+    background: $neutral-50;
     padding: $spacing-xl 0;
     text-align: center;
-    margin-bottom: $spacing-xxl;
+    margin-bottom: $spacing-2xl;
 
     h1 {
-      color: $color-dark-blue;
+      color: $color-primary-dark;
       margin-bottom: $spacing-sm;
     }
 
@@ -85,11 +85,11 @@
 // Page d'archive
 .archive {
   .archive-header {
-    background: $color-dark-blue;
+    background: $color-primary-dark;
     color: $white-100;
     padding: $spacing-xl 0;
     text-align: center;
-    margin-bottom: $spacing-xxl;
+    margin-bottom: $spacing-2xl;
 
     h1 {
       margin-bottom: $spacing-sm;
@@ -126,7 +126,7 @@
     }
 
     .post-title {
-      color: $color-dark-blue;
+      color: $color-primary-dark;
       margin-bottom: $spacing-sm;
 
       a {
@@ -134,7 +134,7 @@
         text-decoration: none;
 
         &:hover {
-          color: $color-orange;
+          color: $color-secondary;
         }
       }
     }
@@ -171,7 +171,7 @@
       display: block;
       margin-bottom: $spacing-xs;
       font-weight: 600;
-      color: $color-dark-blue;
+      color: $color-primary-dark;
     }
 
     input,
@@ -185,7 +185,7 @@
 
       &:focus {
         outline: none;
-        border-color: $color-orange;
+        border-color: $color-secondary;
       }
     }
 

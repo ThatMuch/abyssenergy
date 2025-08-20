@@ -13,7 +13,7 @@
   &__title {
     margin: 0;
     font-size: $font-size-xl;
-    color: $color-dark-blue;
+    color: $color-primary-dark;
   }
 
   &__content {
@@ -29,7 +29,7 @@
 
 // Boutons
 .btn {
-  @include button-style($color-orange);
+  @include button-style($color-secondary);
   display: inline-block;
   text-align: center;
   vertical-align: middle;
@@ -38,20 +38,20 @@
   font-weight: 500;
 
   &--primary {
-    @include button-style($color-orange);
+    @include button-style($color-secondary);
   }
 
   &--secondary {
-    @include button-style($color-dark-blue);
+    @include button-style($color-primary-dark);
   }
 
   &--outline {
     background: transparent;
-    color: $color-orange;
-    border-color: $color-orange;
+    color: $color-secondary;
+    border-color: $color-secondary;
 
     &:hover {
-      background: $color-orange;
+      background: $color-secondary;
       color: $white-100;
     }
   }
@@ -82,10 +82,10 @@
   color: $white-100;
 
   &--primary {
-    background-color: $color-orange;
+    background-color: $color-secondary;
   }
   &--secondary {
-    background-color: $color-dark-blue;
+    background-color: $color-primary-dark;
   }
   &--success {
     background-color: $color-success;
@@ -108,9 +108,9 @@
   margin-bottom: $spacing-lg;
 
   &--primary {
-    color: darken($color-orange, 20%);
-    background-color: lighten($color-orange, 35%);
-    border-color: lighten($color-orange, 25%);
+    color: darken($color-secondary, 20%);
+    background-color: lighten($color-secondary, 35%);
+    border-color: lighten($color-secondary, 25%);
   }
 
   &--success {
@@ -177,9 +177,9 @@
   display: inline-block;
   width: 20px;
   height: 20px;
-  border: 3px solid rgba($color-orange, 0.3);
+  border: 3px solid rgba($color-secondary, 0.3);
   border-radius: 50%;
-  border-top-color: $color-orange;
+  border-top-color: $color-secondary;
   animation: spin 1s ease-in-out infinite;
 }
 

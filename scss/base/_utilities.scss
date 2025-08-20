@@ -20,7 +20,7 @@
   margin-top: $spacing-xl !important;
 }
 .mt-6 {
-  margin-top: $spacing-xxl !important;
+  margin-top: $spacing-2xl !important;
 }
 
 .mb-0 {
@@ -42,7 +42,7 @@
   margin-bottom: $spacing-xl !important;
 }
 .mb-6 {
-  margin-bottom: $spacing-xxl !important;
+  margin-bottom: $spacing-2xl !important;
 }
 
 .ml-0 {
@@ -102,7 +102,7 @@
   padding-top: $spacing-xl !important;
 }
 .pt-6 {
-  padding-top: $spacing-xxl !important;
+  padding-top: $spacing-2xl !important;
 }
 
 .pb-0 {
@@ -124,7 +124,7 @@
   padding-bottom: $spacing-xl !important;
 }
 .pb-6 {
-  padding-bottom: $spacing-xxl !important;
+  padding-bottom: $spacing-2xl !important;
 }
 
 // Alignement de texte
@@ -140,10 +140,10 @@
 
 // Couleurs de texte
 .text-orange {
-  color: $color-orange !important;
+  color: $color-secondary !important;
 }
 .text-blue {
-  color: $color-dark-blue !important;
+  color: $color-primary-dark !important;
 }
 .text-white {
   color: $white-100 !important;
@@ -154,13 +154,13 @@
 
 // Couleurs de fond
 .bg-orange {
-  background-color: $color-orange !important;
+  background-color: $color-secondary !important;
 }
 .bg-blue {
-  background-color: $color-dark-blue !important;
+  background-color: $color-primary-dark !important;
 }
 .bg-light {
-  background-color: $color-light-grey !important;
+  background-color: $neutral-50 !important;
 }
 .bg-white {
   background-color: $white-100 !important;

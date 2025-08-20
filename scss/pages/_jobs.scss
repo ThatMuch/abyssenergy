@@ -13,7 +13,7 @@
 
       &:focus {
         outline: none;
-        border-color: $color-orange;
+        border-color: $color-secondary;
       }
     }
 
@@ -21,7 +21,7 @@
       display: block;
       margin-bottom: $spacing-xs;
       font-weight: 600;
-      color: $color-dark-blue;
+      color: $color-primary-dark;
     }
   }
 
@@ -119,11 +119,11 @@
       text-decoration: none;
       font-size: $font-size-lg;
       font-weight: 600;
-      color: $color-dark-blue;
+      color: $color-primary-dark;
       @include transition(color);
 
       &:hover {
-        color: $color-orange !important;
+        color: $color-secondary !important;
         text-decoration: none;
       }
     }
@@ -164,9 +164,9 @@
 
     .btn {
       &.active {
-        background-color: $color-orange;
+        background-color: $color-secondary;
         color: $white-100;
-        border-color: $color-orange;
+        border-color: $color-secondary;
       }
     }
 
@@ -187,14 +187,14 @@
     }
     span.page-numbers {
       padding: $spacing-sm $spacing-md;
-      color: $color-dark-blue;
+      color: $color-primary-dark;
       text-decoration: none;
       border-radius: $border-radius-md;
       @include transition();
 
       &:hover,
       &.current {
-        background-color: $color-orange;
+        background-color: $color-secondary;
         text-decoration: none;
         color: $white-100;
       }
@@ -213,7 +213,7 @@
       &:hover {
         background: none;
         border: none;
-        color: $color-dark-blue;
+        color: $color-primary-dark;
       }
     }
   }
@@ -226,7 +226,7 @@
     }
 
     h3 {
-      color: $color-dark-blue;
+      color: $color-primary-dark;
       margin-bottom: $spacing-sm;
     }
   }
@@ -234,14 +234,10 @@
   // CTA pour candidature spontanée
   .spontaneous-application {
     .card {
-      background: linear-gradient(
-        135deg,
-        $color-light-orange,
-        $color-light-grey
-      );
+      background: linear-gradient(135deg, $color-secondary-light, $neutral-50);
 
       h4 {
-        color: $color-dark-blue;
+        color: $color-primary-dark;
         margin-bottom: $spacing-sm;
       }
 

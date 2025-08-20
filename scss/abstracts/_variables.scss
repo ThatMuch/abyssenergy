@@ -1,5 +1,6 @@
 // Variables principales du thème Abyss Energy Child
 // Basées sur les variables CSS du thème parent
+@use "sass:map";
 
 /* Primitives - default */
 $primary-50: #eef7feff;
@@ -56,16 +57,12 @@ $black-50: #00000080;
 $black-25: #00000040;
 
 // Couleurs principales
-$color-orange: #ff6900;
-$color-light-orange: #f1d5c1;
-$color-dark-blue: #09497a;
-$color-main: #09497a;
-$color-light-grey: #dcd7d4;
-
-// Nouvelles couleurs personnalisées (exemples)
 $color-primary: $primary-800;
+$color-primary-light: $primary-700;
+$color-primary-dark: $primary-900;
 $color-secondary: $secondary-400;
 $color-secondary-light: $secondary-300;
+$color-secondary-dark: $secondary-600;
 $color-accent: $tertiary-600;
 $color-success: #28a745;
 $color-warning: #ffc107;
@@ -79,6 +76,14 @@ $interface-color-background-primary: $primary-50;
 $interface-color-background-secondary: $secondary-50;
 $interface-color-background-tertiary: $tertiary-50;
 
+// Text
+$color-text-black: $black-100;
+$color-text-grey: $neutral-800;
+$color-text-reverse: $white-100;
+$color-text-primary: $color-primary;
+$color-text-secondary: $color-secondary;
+$color-text-link: $color-primary;
+$color-text-link-hover: $primary-600;
 // Typographie
 $font-title: "Sora", sans-serif;
 $font-main: "Manrope", sans-serif;
@@ -116,15 +121,37 @@ $spacing-sm: 0.5rem; // 8px
 $spacing-md: 1rem; // 16px
 $spacing-lg: 1.5rem; // 24px
 $spacing-xl: 2rem; // 32px
-$spacing-xxl: 3rem; // 48px
+$spacing-2xl: 3rem; // 48px
+$spacing-3xl: 4rem; // 64px
+$spacing-4xl: 6rem; // 96px
+$spacing-5xl: 8rem; // 128px
+
+$spacings: (
+  "component-xs": $spacing-sm,
+  "component-sm": $spacing-md,
+  "component-md": $spacing-lg,
+  "component-lg": $spacing-xl,
+  "section-sm": $spacing-2xl,
+  "section-md": $spacing-3xl,
+  "section-lg": $spacing-4xl,
+  "section-xl": $spacing-5xl,
+);
 
 // Breakpoints
 $breakpoint-xs: 480px;
 $breakpoint-sm: 576px;
 $breakpoint-md: 768px;
-$breakpoint-lg: 992px;
-$breakpoint-xl: 1200px;
-$breakpoint-xxl: 1400px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+$breakpoint-xxl: 1440px;
+
+//Containers
+$container-xs: 100%;
+$container-sm: 540px;
+$container-md: 720px;
+$container-lg: 960px;
+$container-xl: 1140px;
+$container-2xl: 1320px;
 
 // Transitions
 $transition-base: all 0.3s ease;

@@ -13,8 +13,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-top: $spacing-md;
-    padding-bottom: $spacing-md;
+    padding-top: map.get($spacings, "component-md");
+    padding-bottom: map.get($spacings, "component-md");
   }
 
   .site-logo {
@@ -34,14 +34,14 @@
     }
 
     a {
-      color: $color-dark-blue;
+      color: $color-primary-dark;
       font-weight: 500;
       text-decoration: none;
       @include transition();
 
       &:hover,
       &.current-menu-item {
-        color: $color-orange;
+        color: $color-secondary;
       }
     }
 
@@ -52,7 +52,7 @@
         background: none;
         border: none;
         font-size: 1.5rem;
-        color: $color-dark-blue;
+        color: $color-primary-dark;
         cursor: pointer;
       }
 
@@ -81,8 +81,8 @@
 
   .content-area {
     @include container();
-    padding-top: $spacing-xxl;
-    padding-bottom: $spacing-xxl;
+    padding-top: $spacing-2xl;
+    padding-bottom: $spacing-2xl;
   }
 }
 
@@ -100,11 +100,11 @@
   }
 
   .widget-title {
-    color: $color-dark-blue;
+    color: $color-primary-dark;
     font-size: $font-size-lg;
     margin-bottom: $spacing-md;
     padding-bottom: $spacing-sm;
-    border-bottom: 2px solid $color-orange;
+    border-bottom: 2px solid $color-secondary;
   }
 
   .widget-content {
@@ -126,9 +126,9 @@
 
 // Footer
 .site-footer {
-  background: $color-dark-blue;
+  background: $color-primary-dark;
   color: $white-100;
-  padding: $spacing-xxl 0 $spacing-lg 0;
+  padding: $spacing-2xl 0 $spacing-lg 0;
 
   .footer-container {
     @include container();
@@ -136,7 +136,7 @@
 
   .footer-widgets {
     @include flex-grid(3, $spacing-xl);
-    margin-bottom: $spacing-xxl;
+    margin-bottom: $spacing-2xl;
 
     @include respond-to(md) {
       @include flex-grid(1, $spacing-lg);
@@ -145,7 +145,7 @@
 
   .footer-widget {
     h3 {
-      color: $color-orange;
+      color: $color-secondary;
       margin-bottom: $spacing-md;
     }
 
@@ -158,7 +158,7 @@
       color: rgba($white-100, 0.9);
 
       &:hover {
-        color: $color-orange;
+        color: $color-secondary;
       }
     }
 
@@ -193,7 +193,7 @@
 }
 
 .section {
-  padding: $spacing-xxl 0;
+  padding: $spacing-2xl 0;
 
   &--small {
     padding: $spacing-xl 0;
@@ -208,7 +208,7 @@
 .two-column {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  gap: $spacing-xxl;
+  gap: $spacing-2xl;
 
   @include respond-to(lg) {
     grid-template-columns: 1fr;

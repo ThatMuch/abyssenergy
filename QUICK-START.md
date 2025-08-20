@@ -33,8 +33,8 @@ npm run watch
 ### Variables principales (scss/abstracts/\_variables.scss)
 
 ```scss
-$color-orange: #ff6900; // Couleur principale
-$color-dark-blue: #09497a; // Couleur secondaire
+$color-secondary: #ff6900; // Couleur principale
+$color-primary-dark: #09497a; // Couleur secondaire
 $spacing-md: 1rem; // Espacement moyen
 ```
 
@@ -43,7 +43,7 @@ $spacing-md: 1rem; // Espacement moyen
 ```scss
 // Dans scss/components/_components.scss
 .ma-classe-custom {
-  background: $color-orange;
+  background: $color-secondary;
   padding: $spacing-lg;
   border-radius: $border-radius-md;
 

@@ -38,11 +38,11 @@ Version: 1.0.0
 // Exemple de personnalisation rapide :
 /*
 .custom-section {
-  background: $color-light-orange;
-  padding: $spacing-xxl 0;
+  background: $color-secondary-light;
+  padding: $spacing-2xl 0;
 
   h2 {
-    color: $color-dark-blue;
+    color: $color-primary-dark;
     text-align: center;
   }
 }

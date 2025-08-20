@@ -1,6 +1,5 @@
 // Styles de base pour le thème enfant
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Sora:wght@100..800&display=swap");
-
 // Reset et normalisation
 *,
 *::before,
@@ -13,7 +12,7 @@ body {
   font-family: $font-main;
   font-size: $font-size-base;
   line-height: $line-height-base;
-  color: $color-main;
+  color: $color-text-primary;
 }
 
 // Titres
@@ -26,7 +25,7 @@ h6 {
   font-family: $font-title;
   font-weight: 600;
   line-height: 1.2;
-  margin-bottom: $spacing-md;
+  margin-bottom: map-get($spacings, "component-md");
 }
 
 h1 {
@@ -68,12 +67,12 @@ h6 {
 
 // Liens
 a {
-  color: $color-orange;
+  color: $color-text-link;
   text-decoration: none;
   @include transition(color);
 
   &:hover {
-    color: darken($color-orange, 15%);
+    color: $color-text-link-hover;
     text-decoration: underline;
   }
 }
@@ -98,19 +97,19 @@ img {
 
 // Boutons de base
 button {
-  @include button-style($color-orange);
+  @include button-style($color-secondary);
 
   &.btn-secondary {
-    @include button-style($color-dark-blue);
+    @include button-style($color-primary-dark);
   }
 
   &.btn-outline {
     background: transparent;
-    color: $color-orange;
-    border: 2px solid $color-orange;
+    color: $color-secondary;
+    border: 2px solid $color-secondary;
 
     &:hover {
-      background: $color-orange;
+      background: $color-secondary;
       color: $white-100;
     }
   }
