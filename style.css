@@ -688,17 +688,29 @@ Version: 1.0.0
 .footer .menu li {
   padding: 0.25rem 0;
 }
-.footer .footer-bottom {
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  padding-top: 1.5rem;
+
+.footer-bottom {
+  padding: 0.625rem 0;
   text-align: center;
   display: flex;
   justify-content: center;
+  color: white;
+  background-color: #0d243b;
 }
-.footer .footer-bottom p {
+.footer-bottom p {
   margin: 0;
-  color: rgba(255, 255, 255, 0.7);
   font-size: 0.875rem;
+}
+.footer-bottom a {
+  color: white;
+  text-decoration: none;
+}
+.footer-bottom a:hover {
+  color: #ff8e38;
+}
+
+.otgs-development-site-front-end {
+  display: none;
 }
 
 .container-wide {
