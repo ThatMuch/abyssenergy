@@ -1,9 +1,16 @@
 /*!
-Theme Name: Abyss Energy Child
-Description: Thème enfant pour Abyss Energy (squarechilli)
-Author: squarechilli
-Template: squarechilli
+Theme Name: Thatmuch
+Description: Thème WordPress moderne et performant avec support SCSS pour Abyss Energy
+Author: Abyss Energy
 Version: 1.0.0
+Requires at least: 5.0
+Tested up to: 6.3
+Requires PHP: 7.4
+License: GPL v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: thatmuch
+Domain Path: /languages
+Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready
 */
 
 // ==========================================================================
@@ -13,19 +20,19 @@ Version: 1.0.0
 // Il importe tous les autres fichiers dans le bon ordre
 
 // 1. Abstracts - Variables, mixins, fonctions
-@use "abstracts/variables" as *;
-@use "abstracts/mixins" as *;
+@import "abstracts/variables";
+@import "abstracts/mixins";
 
 // 2. Base - Reset, typographie, éléments de base
-@use "base/base" as *;
-@use "base/utilities" as *;
+@import "base/base";
+@import "base/utilities";
 
 // 3. Layout - Structure générale du site
-@use "layout/layout" as *;
+@import "layout/layout";
 
 // 4. Components - Composants réutilisables
-@use "components/components" as *;
+@import "components/components";
 
 // 5. Pages - Styles spécifiques aux pages
-@use "pages/pages" as *;
+@import "pages/pages";
 @use "pages/jobs" as *;

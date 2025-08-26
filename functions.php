@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Functions et hooks pour le thème enfant Abyss Energy
+ * Functions et hooks pour le thème Thatmuch
  *
- * Ce fichier charge correctement les styles du thème parent et permet d'ajouter
- * des fonctionnalités personnalisées sans modifier le thème parent.
+ * Thème WordPress autonome et moderne pour Abyss Energy
+ * Comprend toutes les fonctionnalités nécessaires sans dépendance parent
  */
 
 // Empêcher l'accès direct au fichier
@@ -13,32 +13,60 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Enqueue les styles du thème parent et enfant
+ * Configuration du thème
  */
-function squarechilli_child_enqueue_styles()
+function thatmuch_setup()
 {
-	// Style du thème parent
+	// Support des images mises en avant
+	add_theme_support('post-thumbnails');
+	
+	// Support des menus de navigation
+	add_theme_support('menus');
+	
+	// Support du titre automatique
+	add_theme_support('title-tag');
+	
+	// Support des commentaires imbriqués
+	if (is_singular() && comments_open() && get_option('thread_comments')) {
+		wp_enqueue_script('comment-reply');
+	}
+	
+	// Enregistrement des menus
+	register_nav_menus(array(
+		'primary' => __('Menu Principal', 'thatmuch'),
+		'footer' => __('Menu Footer', 'thatmuch'),
+	));
+}
+add_action('after_setup_theme', 'thatmuch_setup');
+
+/**
+ * Enqueue les styles et scripts du thème
+ */
+function thatmuch_enqueue_scripts()
+{
+	// Style principal du thème
 	wp_enqueue_style(
-		'squarechilli-parent-style',
-		get_template_directory_uri() . '/style.css',
+		'thatmuch-style',
+		get_stylesheet_directory_uri() . '/style.css',
 		array(),
 		wp_get_theme()->get('Version')
 	);
-
-	// Style du thème enfant (chargé après le parent)
-	wp_enqueue_style(
-		'squarechilli-child-style',
-		get_stylesheet_directory_uri() . '/style.css',
-		array('squarechilli-parent-style'),
-		wp_get_theme()->get('Version')
+	
+	// Scripts JavaScript
+	wp_enqueue_script(
+		'thatmuch-general',
+		get_template_directory_uri() . '/js/general.js',
+		array(),
+		wp_get_theme()->get('Version'),
+		true
 	);
 }
-add_action('wp_enqueue_scripts', 'squarechilli_child_enqueue_styles');
+add_action('wp_enqueue_scripts', 'thatmuch_enqueue_scripts');
 
 /**
  * Compilation automatique des fichiers SCSS (mode développement uniquement)
  */
-function squarechilli_child_compile_scss()
+function thatmuch_compile_scss()
 {
 	// Ne pas compiler en production
 	if (defined('WP_ENV') && WP_ENV === 'production') {
@@ -77,48 +105,41 @@ function squarechilli_child_compile_scss()
 /**
  * Obtenir la version du fichier pour cache busting
  */
-function squarechilli_child_get_file_version($file)
+function thatmuch_get_file_version($file)
 {
 	$file_path = get_stylesheet_directory() . $file;
 	return file_exists($file_path) ? filemtime($file_path) : wp_get_theme()->get('Version');
 }
 
 // Compiler SCSS au chargement de l'admin et du front-end
-add_action('init', 'squarechilli_child_compile_scss');
-
-/**
- * Version améliorée de l'enqueue des styles avec versioning automatique
- */
-function squarechilli_child_enqueue_styles_improved()
-{
-	// Style du thème parent
-	wp_enqueue_style(
-		'squarechilli-parent-style',
-		get_template_directory_uri() . '/style.css',
-		array(),
-		squarechilli_child_get_file_version('/../squarechilli/style.css')
-	);
-
-	// Style du thème enfant
-	wp_enqueue_style(
-		'squarechilli-child-style',
-		get_stylesheet_directory_uri() . '/style.css',
-		array('squarechilli-parent-style'),
-		squarechilli_child_get_file_version('/style.css')
-	);
-}
-
-// Remplacer l'ancienne fonction par la nouvelle
-remove_action('wp_enqueue_scripts', 'squarechilli_child_enqueue_styles');
-add_action('wp_enqueue_scripts', 'squarechilli_child_enqueue_styles_improved');
+add_action('init', 'thatmuch_compile_scss');
 
 /**
  * Ajouter le support des fonctionnalités modernes de WordPress
  */
-function squarechilli_child_theme_setup()
+function thatmuch_additional_setup()
 {
 	// Support des images de fond personnalisées
 	add_theme_support('custom-background');
+
+	// Support du logo personnalisé
+	add_theme_support('custom-logo', array(
+		'height'      => 80,
+		'width'       => 250,
+		'flex-height' => true,
+		'flex-width'  => true,
+	));
+
+	// Support des formats de publication
+	add_theme_support('post-formats', array(
+		'gallery',
+		'video',
+		'audio',
+		'quote',
+		'link'
+	));
+}
+add_action('after_setup_theme', 'thatmuch_additional_setup');
 
 	// Support du logo personnalisé
 	add_theme_support('custom-logo', array(
@@ -138,25 +159,25 @@ function squarechilli_child_theme_setup()
 	// Support des embeds responsive
 	add_theme_support('responsive-embeds');
 }
-add_action('after_setup_theme', 'squarechilli_child_theme_setup');
+add_action('after_setup_theme', 'thatmuch_theme_setup');
 
 /**
  * Configuration spécifique pour la page des emplois
  */
-function squarechilli_child_jobs_setup()
+function thatmuch_jobs_setup()
 {
 	// Ajouter les variables de requête personnalisées pour les filtres d'emploi
-	add_action('init', 'squarechilli_child_add_job_query_vars');
+	add_action('init', 'thatmuch_add_job_query_vars');
 
 	// Modifier la requête principale pour les filtres d'emploi
-	add_action('pre_get_posts', 'squarechilli_child_modify_job_query');
+	add_action('pre_get_posts', 'thatmuch_modify_job_query');
 }
-add_action('after_setup_theme', 'squarechilli_child_jobs_setup');
+add_action('after_setup_theme', 'thatmuch_jobs_setup');
 
 /**
  * Ajouter les variables de requête personnalisées pour les filtres d'emploi
  */
-function squarechilli_child_add_job_query_vars()
+function thatmuch_add_job_query_vars()
 {
 	global $wp;
 	$wp->add_query_var('job_search');
@@ -168,7 +189,7 @@ function squarechilli_child_add_job_query_vars()
 /**
  * Modifier la requête principale pour les pages d'emploi
  */
-function squarechilli_child_modify_job_query($query)
+function thatmuch_modify_job_query($query)
 {
 	if (!is_admin() && $query->is_main_query()) {
 
@@ -189,7 +210,7 @@ function squarechilli_child_modify_job_query($query)
 /**
  * Shortcode pour afficher les emplois
  */
-function squarechilli_child_jobs_shortcode($atts)
+function thatmuch_jobs_shortcode($atts)
 {
 	$atts = shortcode_atts(array(
 		'number' => 6,
@@ -298,12 +319,12 @@ function squarechilli_child_jobs_shortcode($atts)
 	wp_reset_postdata();
 	return ob_get_clean();
 }
-add_shortcode('jobs_list', 'squarechilli_child_jobs_shortcode');
+add_shortcode('jobs_list', 'thatmuch_jobs_shortcode');
 
 /**
  * Widget pour afficher les emplois récents
  */
-class Squarechilli_Child_Recent_Jobs_Widget extends WP_Widget
+class Thatmuch_Recent_Jobs_Widget extends WP_Widget
 {
 
 	public function __construct()
@@ -388,16 +409,16 @@ class Squarechilli_Child_Recent_Jobs_Widget extends WP_Widget
 /**
  * Enregistrer le widget des emplois récents
  */
-function squarechilli_child_register_jobs_widget()
+function thatmuch_register_jobs_widget()
 {
-	register_widget('Squarechilli_Child_Recent_Jobs_Widget');
+	register_widget('Thatmuch_Recent_Jobs_Widget');
 }
-add_action('widgets_init', 'squarechilli_child_register_jobs_widget');
+add_action('widgets_init', 'thatmuch_register_jobs_widget');
 
 /**
  * Configuration du CTA Header via le Customizer WordPress
  */
-function squarechilli_child_header_cta_customize_register($wp_customize)
+function thatmuch_header_cta_customize_register($wp_customize)
 {
 
 	// Section CTA Header
@@ -531,12 +552,12 @@ function squarechilli_child_header_cta_customize_register($wp_customize)
 		'priority' => 80,
 	));
 }
-add_action('customize_register', 'squarechilli_child_header_cta_customize_register');
+add_action('customize_register', 'thatmuch_header_cta_customize_register');
 
 /**
  * Enqueue des scripts pour le CTA Header
  */
-function squarechilli_child_enqueue_header_cta_assets()
+function thatmuch_enqueue_header_cta_assets()
 {
 	// Script pour le CTA Header
 	if (get_theme_mod('squarechilli_header_cta_enabled', false)) {
@@ -544,7 +565,7 @@ function squarechilli_child_enqueue_header_cta_assets()
 			'squarechilli-header-cta',
 			get_stylesheet_directory_uri() . '/js/header-cta.js',
 			array(),
-			squarechilli_child_get_file_version('/js/header-cta.js'),
+			thatmuch_get_file_version('/js/header-cta.js'),
 			true
 		);
 
@@ -561,12 +582,12 @@ function squarechilli_child_enqueue_header_cta_assets()
 		));
 	}
 }
-add_action('wp_enqueue_scripts', 'squarechilli_child_enqueue_header_cta_assets');
+add_action('wp_enqueue_scripts', 'thatmuch_enqueue_header_cta_assets');
 
 /**
  * Fonction pour afficher le CTA Header (utilisée pour preview et fallback)
  */
-function squarechilli_child_display_header_cta()
+function thatmuch_display_header_cta()
 {
 	// Vérifier si le CTA est activé
 	if (!get_theme_mod('squarechilli_header_cta_enabled', false)) {
@@ -631,7 +652,7 @@ function squarechilli_child_display_header_cta()
 }
 
 // add in customizer site identity the logo for the footer
-function squarechilli_child_customize_register_footer_logo($wp_customize)
+function thatmuch_customize_register_footer_logo($wp_customize)
 {
 	// Ajouter le logo du footer
 	$wp_customize->add_setting('squarechilli_footer_logo', array(
@@ -650,4 +671,4 @@ function squarechilli_child_customize_register_footer_logo($wp_customize)
 		)
 	));
 }
-add_action('customize_register', 'squarechilli_child_customize_register_footer_logo');
+add_action('customize_register', 'thatmuch_customize_register_footer_logo');
