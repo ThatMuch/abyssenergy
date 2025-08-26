@@ -673,10 +673,20 @@ Version: 1.0.0
     padding: 0 2rem;
   }
 }
+@media (max-width: 479px) {
+  .footer .footer-container {
+    padding: 0;
+  }
+}
 .footer .menu {
   max-width: 170px;
   list-style: none;
   padding: 0;
+}
+@media (max-width: 479px) {
+  .footer .menu {
+    max-width: 100%;
+  }
 }
 .footer .menu a {
   color: rgba(255, 255, 255, 0.9);

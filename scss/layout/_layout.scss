@@ -161,12 +161,18 @@
   }
   .footer-container {
     @include flex-container();
+    @include respond-to(xs) {
+      padding: 0;
+    }
   }
 
   .menu {
     max-width: 170px;
     list-style: none;
     padding: 0;
+    @include respond-to(xs) {
+      max-width: 100%;
+    }
     a {
       color: rgba($white-100, 0.9);
       font-family: $font-main;
