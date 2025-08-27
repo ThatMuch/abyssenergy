@@ -16,6 +16,13 @@ body {
   font-size: $font-size-base;
   line-height: $line-height-base;
   color: $color-text-primary;
+  padding: 0;
+  margin: map.get($spacings, "section-xs") 0 0 0;
+  background: linear-gradient(
+    180deg,
+    $interface-color-background-primary 0%,
+    #fff 31.37%
+  );
 }
 
 // Titres
@@ -26,42 +33,48 @@ h4,
 h5,
 h6 {
   font-family: $font-title;
-  font-weight: 600;
-  line-height: 1.2;
+  font-weight: 700;
+  line-height: 150%;
   margin-bottom: map.get($spacings, "component-md");
 }
 
-h1 {
+h1,
+.h1 {
   font-size: $h1-size;
   @include respond-to(md) {
     font-size: $h1-size-mobile;
   }
 }
-h2 {
+h2,
+.h2 {
   font-size: $h2-size;
   @include respond-to(md) {
     font-size: $h2-size-mobile;
   }
 }
-h3 {
+h3,
+.h3 {
   font-size: $h3-size;
   @include respond-to(md) {
     font-size: $h3-size-mobile;
   }
 }
-h4 {
+h4,
+.h4 {
   font-size: $h4-size;
   @include respond-to(md) {
     font-size: $h4-size-mobile;
   }
 }
-h5 {
+h5,
+.h5 {
   font-size: $h5-size;
   @include respond-to(md) {
     font-size: $h5-size-mobile;
   }
 }
-h6 {
+h6,
+.h6 {
   font-size: $h6-size;
   @include respond-to(md) {
     font-size: $h6-size-mobile;

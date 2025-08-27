@@ -122,6 +122,10 @@
   @include respond-to(sm) {
     padding: 0 $spacing-xl;
   }
+
+  @include respond-to(xs) {
+    max-width: $breakpoint-sm;
+  }
 }
 
 // Mixin pour masquer le texte (screen reader only)

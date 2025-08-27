@@ -56,19 +56,12 @@
 .page,
 .single {
   .page-header {
-    background: $neutral-50;
-    padding: $spacing-xl 0;
-    text-align: center;
     margin-bottom: $spacing-2xl;
-
-    h1 {
-      color: $color-primary-dark;
-      margin-bottom: $spacing-sm;
-    }
-
     .page-description {
-      color: $neutral-600;
-      font-size: $font-size-lg;
+      font-size: $h3-size;
+      @include respond-to(md) {
+        font-size: $h3-size-mobile;
+      }
     }
   }
 

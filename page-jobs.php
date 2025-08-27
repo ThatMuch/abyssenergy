@@ -11,25 +11,44 @@ get_header(); ?>
 
 <div class="jobs-listing-page">
 	<!-- En-tête de la page -->
-	<section class="page-header bg-blue text-white">
+	<section class="page-header">
 		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-md-8 text-center">
-					<h1 class="mb-3"><?php the_title(); ?></h1>
-					<?php if (get_the_content()) : ?>
-						<div class="page-description">
-							<?php the_content(); ?>
+			<div class="row">
+				<div class="col-md-6">
+					<div>
+						<h1 class=" mb-3"><?php the_title(); ?></h1>
+						<?php if (get_the_content()) : ?>
+							<h2 class="page-description">
+								<?php the_content(); ?>
+					</div>
+				<?php else : ?>
+					<h2 class="page-description">
+						Connecting <span class="text-orange">skilled professionals</span> with global projects
+					</h2>
+				<?php endif; ?>
+				<form action="" method="GET" class="job-search-form d-flex gap-2">
+					<input
+						type="text"
+						id="job-search"
+						name="job_search"
+						class="form-control"
+						placeholder="Find your next position"
+						value="<?php echo esc_attr(get_query_var('job_search')); ?>">
+					<button type="submit" class="btn btn--primary btn--icon"><i class="fas fa-search"></i></button>
+				</form>
+				</div>
+				<div class="col-md-3">
+					<?php if (has_post_thumbnail()) : ?>
+						<div class="page-header-image">
+							<?php the_post_thumbnail('medium_large', array('class' => 'img-fluid')); ?>
 						</div>
-					<?php else : ?>
-						<p class="page-description">
-							Découvrez nos opportunités de carrière et rejoignez notre équipe dynamique.
-						</p>
 					<?php endif; ?>
 				</div>
 			</div>
 		</div>
+		<img src="<?php echo get_template_directory_uri(); ?>/images/Cloud-2.svg" alt="Cloud" class="page-header-background">
+		<img src="<?php echo get_template_directory_uri(); ?>/images/Cloud-1.svg" alt="Cloud" class="page-header-background">
 	</section>
-
 	<!-- Filtres et recherche -->
 	<section class="jobs-filters section--small">
 		<div class="container">
