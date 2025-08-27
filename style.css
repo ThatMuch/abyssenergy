@@ -1,14 +1,10 @@
-/*
-Theme Name: Abyss Energy
-Description: Thème WordPress moderne et performant pour Abyss Energy
-Author: THATMUCH
-Version: 1.0.0
-Requires at least: 5.0
-Tested up to: 6.3
-Requires PHP: 7.4
-License: GPL v2 or later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Text Domain: abyssenergy
-Domain Path: /languages
-Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready
-*/
+@use "abstracts/variables";
+@use "abstracts/mixins";
+@use "base/base";
+@use "base/utilities";
+@use "layout/layout";
+@use "components/components";
+@use "pages/pages";
+@use "pages/jobs" as *;
+
+/*# sourceMappingURL=style.css.map */

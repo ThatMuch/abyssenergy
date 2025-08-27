@@ -862,3 +862,10 @@ function abyssenergy_customize_register_footer_logo($wp_customize)
 	));
 }
 add_action('customize_register', 'abyssenergy_customize_register_footer_logo');
+
+
+// a function to trnaform text in uppercase to lower case
+function abyssenergy_to_lowercase($text)
+{
+	return strtolower($text);
+}

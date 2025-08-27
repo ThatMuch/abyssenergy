@@ -106,9 +106,9 @@
 }
 
 // Mixin pour les cartes
-@mixin card-style($padding: $spacing-lg, $shadow: $shadow-md) {
+@mixin card-style($padding: $spacing-lg, $shadow: $shadow-lg) {
   background: $white-100;
-  border-radius: $border-radius-lg;
+  border-radius: $border-radius-xl;
   padding: $padding;
   @include box-shadow($shadow);
 }

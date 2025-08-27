@@ -179,112 +179,56 @@ get_header(); ?>
 			<?php if ($jobs_query->have_posts()) : ?>
 
 				<!-- Compteur de résultats -->
-				<div class="jobs-results-info mb-4">
-					<div class="row align-items-center">
-						<div class="col-md-6">
-							<p class="text-muted mb-0">
-								<?php
-								printf(
-									_n('%s emploi trouvé', '%s emplois trouvés', $jobs_query->found_posts, 'text-domain'),
-									'<strong>' . number_format_i18n($jobs_query->found_posts) . '</strong>'
-								);
-								?>
-							</p>
-						</div>
-						<div class="col-md-6 text-md-right">
-							<div class="jobs-view-toggle">
-								<button class="btn btn--outline btn--small" id="view-grid" title="Vue grille">
-									⊞
-								</button>
-								<button class="btn btn--outline btn--small active" id="view-list" title="Vue liste">
-									☰
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
+				<p class="">
+					<?php
+					printf(
+						_n('Your search resulted in %s matching job', 'Your search resulted in %s matching jobs', $jobs_query->found_posts, 'text-domain'),
+						'<strong class="text-orange">' . number_format_i18n($jobs_query->found_posts) . '</strong>'
+					);
+					?>
+				</p>
 
 				<!-- Grille des emplois -->
 				<div class="jobs-grid" id="jobs-container">
-					<?php while ($jobs_query->have_posts()) : $jobs_query->the_post(); ?>
+					<?php while ($jobs_query->have_posts()) : $jobs_query->the_post();
+						$sectors = get_the_terms(get_the_ID(), 'job-sector'); ?>
 
-						<article class="job-card card">
-							<div class="card__content">
+						<article class="job-card card <?php echo esc_html($sectors[0]->slug); ?>-card">
+							<a href="<?php the_permalink(); ?>" class="job-card-link">
+								<div class="card__content">
+									<!-- Badges -->
+									<div class="job-badges mb-3">
+										<?php
+										// Secteur
 
-								<!-- Badges -->
-								<div class="job-badges mb-3">
-									<?php
-									// Type d'emploi (si disponible)
-									$job_type = get_field('job_type');
-									if ($job_type) : ?>
-										<span class="badge badge--primary"><?php echo esc_html($job_type); ?></span>
-										<?php endif;
+										if ($sectors && !is_wp_error($sectors)) :
+											foreach ($sectors as $sector) : ?>
+												<span class="job-sector"><?php echo esc_html($sector->name); ?></span>
+										<?php endforeach;
+										endif; ?>
+									</div>
 
-									// Secteur
-									$sectors = get_the_terms(get_the_ID(), 'job-sector');
-									if ($sectors && !is_wp_error($sectors)) :
-										foreach ($sectors as $sector) : ?>
-											<span class="badge badge--secondary"><?php echo esc_html($sector->name); ?></span>
-									<?php endforeach;
-									endif; ?>
+									<!-- Titre et localisation -->
+									<div class="job-header mb-3">
+										<h4 class="job-title">
+											<?php echo mb_strtolower(get_the_title(), 'UTF-8'); ?>
+										</h4>
+									</div>
+
 								</div>
-
-								<!-- Titre et localisation -->
-								<div class="job-header mb-3">
-									<h3 class="job-title mb-2">
-										<a href="<?php the_permalink(); ?>" class="text-blue">
-											<?php the_title(); ?>
-										</a>
-									</h3>
-
+								<div class="card__footer">
 									<?php
-									$locations = get_the_terms(get_the_ID(), 'job-location');
-									if ($locations && !is_wp_error($locations)) : ?>
-										<p class="job-location text-muted mb-0">
-											📍 <?php echo esc_html($locations[0]->name); ?>
+									$city = get_field('job_city');
+									$state = get_field('job_state');
+
+									if ($city && !is_wp_error($city)) : ?>
+										<p class="job-location">
+											<i class="fas fa-map-marker-alt mr-2"></i>
+											<?php echo esc_html($city); ?>, <?php echo esc_html($state); ?>
 										</p>
 									<?php endif; ?>
 								</div>
-
-								<!-- Extrait -->
-								<div class="job-excerpt mb-3">
-									<?php
-									$excerpt = get_the_excerpt();
-									if ($excerpt) :
-										echo '<p>' . wp_trim_words($excerpt, 25, '...') . '</p>';
-									else :
-										echo '<p>' . wp_trim_words(get_the_content(), 25, '...') . '</p>';
-									endif;
-									?>
-								</div>
-
-								<!-- Métadonnées -->
-								<div class="job-meta">
-									<small class="text-muted">
-										Publié le <?php echo get_the_date('j F Y'); ?>
-									</small>
-								</div>
-							</div>
-
-							<div class="card__footer">
-								<div class="d-flex justify-content-between align-items-center">
-									<a href="<?php the_permalink(); ?>" class="btn btn--primary">
-										Voir le poste
-									</a>
-
-									<?php
-									// Bouton de candidature rapide si disponible
-									$apply_url = get_field('external_apply_url');
-									if ($apply_url) : ?>
-										<a href="<?php echo esc_url($apply_url); ?>"
-											class="btn btn--outline btn--small"
-											target="_blank"
-											rel="noopener">
-											Postuler →
-										</a>
-									<?php endif; ?>
-								</div>
-							</div>
+							</a>
 						</article>
 
 					<?php endwhile; ?>
