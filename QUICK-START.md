@@ -56,7 +56,7 @@ $spacing-md: 1rem; // Espacement moyen
 ## 🛠️ Structure des fichiers
 
 ```
-squarechilli-child/
+abyssenergy-child/
 ├── style.css                 ✅ CSS compilé avec en-tête WordPress
 ├── functions.php             ✅ Fonctions du thème enfant
 ├── dev.sh                    ✅ Script de développement

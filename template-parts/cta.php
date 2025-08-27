@@ -5,7 +5,7 @@
  *
  * Ce fichier peut être inclus dans d'autres templates pour afficher le CTA
  *
- * @package Squarechilli_Child
+ * @package abyssenergy_Child
  */
 
 // Ne pas accéder directement
@@ -14,19 +14,19 @@ if (!defined('ABSPATH')) {
 }
 
 // Vérifier si le CTA est activé
-if (!get_theme_mod('squarechilli_cta_enabled', false)) {
+if (!get_theme_mod('abyssenergy_cta_enabled', false)) {
 	return;
 }
 
 // Récupérer les paramètres du CTA
 $cta_data = array(
-	'title' => get_theme_mod('squarechilli_cta_title', __('Rejoignez-nous dès aujourd\'hui', 'squarechilli-child')),
-	'subtitle' => get_theme_mod('squarechilli_cta_subtitle', __('Découvrez nos opportunités et faites partie de notre équipe innovante.', 'squarechilli-child')),
-	'button_text' => get_theme_mod('squarechilli_cta_button_text', __('Découvrir nos offres', 'squarechilli-child')),
-	'button_url' => get_theme_mod('squarechilli_cta_button_url', home_url('/emplois/')),
-	'secondary_text' => get_theme_mod('squarechilli_cta_secondary_text', __('En savoir plus', 'squarechilli-child')),
-	'secondary_url' => get_theme_mod('squarechilli_cta_secondary_url', home_url('/about/')),
-	'style' => get_theme_mod('squarechilli_cta_style', 'primary'),
+	'title' => get_theme_mod('abyssenergy_cta_title', __('Rejoignez-nous dès aujourd\'hui', 'abyssenergy-child')),
+	'subtitle' => get_theme_mod('abyssenergy_cta_subtitle', __('Découvrez nos opportunités et faites partie de notre équipe innovante.', 'abyssenergy-child')),
+	'button_text' => get_theme_mod('abyssenergy_cta_button_text', __('Découvrir nos offres', 'abyssenergy-child')),
+	'button_url' => get_theme_mod('abyssenergy_cta_button_url', home_url('/emplois/')),
+	'secondary_text' => get_theme_mod('abyssenergy_cta_secondary_text', __('En savoir plus', 'abyssenergy-child')),
+	'secondary_url' => get_theme_mod('abyssenergy_cta_secondary_url', home_url('/about/')),
+	'style' => get_theme_mod('abyssenergy_cta_style', 'primary'),
 );
 
 // Permettre la personnalisation via des arguments
@@ -36,8 +36,8 @@ if (isset($args) && is_array($args)) {
 
 // Classes CSS
 $cta_classes = array(
-	'squarechilli-cta',
-	'squarechilli-cta--' . esc_attr($cta_data['style'])
+	'abyssenergy-cta',
+	'abyssenergy-cta--' . esc_attr($cta_data['style'])
 );
 
 // Ajouter des classes personnalisées si fournies
@@ -48,28 +48,28 @@ if (isset($cta_data['extra_classes'])) {
 
 <section class="<?php echo esc_attr(implode(' ', $cta_classes)); ?>" data-cta-style="<?php echo esc_attr($cta_data['style']); ?>">
 	<div class="container">
-		<div class="squarechilli-cta__content">
+		<div class="abyssenergy-cta__content">
 
 			<!-- Section texte -->
-			<div class="squarechilli-cta__text">
+			<div class="abyssenergy-cta__text">
 				<?php if (!empty($cta_data['title'])) : ?>
-					<h2 class="squarechilli-cta__title">
+					<h2 class="abyssenergy-cta__title">
 						<?php echo esc_html($cta_data['title']); ?>
 					</h2>
 				<?php endif; ?>
 
 				<?php if (!empty($cta_data['subtitle'])) : ?>
-					<p class="squarechilli-cta__subtitle">
+					<p class="abyssenergy-cta__subtitle">
 						<?php echo esc_html($cta_data['subtitle']); ?>
 					</p>
 				<?php endif; ?>
 			</div>
 
 			<!-- Section actions -->
-			<div class="squarechilli-cta__actions">
+			<div class="abyssenergy-cta__actions">
 				<?php if (!empty($cta_data['button_text']) && !empty($cta_data['button_url'])) : ?>
 					<a href="<?php echo esc_url($cta_data['button_url']); ?>"
-						class="btn btn--primary btn--lg squarechilli-cta__button"
+						class="btn btn--primary btn--lg abyssenergy-cta__button"
 						<?php if (isset($cta_data['button_target'])) : ?>
 						target="<?php echo esc_attr($cta_data['button_target']); ?>"
 						<?php endif; ?>
@@ -85,7 +85,7 @@ if (isset($cta_data['extra_classes'])) {
 
 				<?php if (!empty($cta_data['secondary_text']) && !empty($cta_data['secondary_url'])) : ?>
 					<a href="<?php echo esc_url($cta_data['secondary_url']); ?>"
-						class="btn btn--outline btn--lg squarechilli-cta__secondary"
+						class="btn btn--outline btn--lg abyssenergy-cta__secondary"
 						<?php if (isset($cta_data['secondary_target'])) : ?>
 						target="<?php echo esc_attr($cta_data['secondary_target']); ?>"
 						<?php endif; ?>
@@ -117,5 +117,5 @@ if (isset($cta_data['extra_classes'])) {
 
 <?php
 // Hook pour permettre d'ajouter du contenu après le CTA
-do_action('squarechilli_cta_after', $cta_data);
+do_action('abyssenergy_cta_after', $cta_data);
 ?>

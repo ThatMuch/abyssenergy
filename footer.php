@@ -1,4 +1,4 @@
-<?php $footer_logo = get_theme_mod('squarechilli_footer_logo', ''); ?>
+<?php $footer_logo = get_theme_mod('abyssenergy_footer_logo', ''); ?>
 <footer class='footer'>
     <img src="<?php echo esc_url($footer_logo); ?>" alt="<?php bloginfo('name'); ?>" class='footer-logo'>
     <div class='footer-links'>

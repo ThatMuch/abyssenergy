@@ -1,6 +1,6 @@
-# Thème Enfant Abyss Energy avec SCSS (squarechilli-child)
+# Thème Enfant Abyss Energy avec SCSS (abyssenergy-child)
 
-Ce thème enfant est basé sur le thème parent `squarechilli` et inclut un workflow complet SCSS pour un développement moderne et efficace.
+Ce thème enfant est basé sur le thème parent `abyssenergy` et inclut un workflow complet SCSS pour un développement moderne et efficace.
 
 ## 🚀 Fonctionnalités
 
@@ -23,7 +23,7 @@ Ce thème enfant est basé sur le thème parent `squarechilli` et inclut un work
 ### 2. Installation des dépendances SCSS (optionnel)
 
 ```bash
-cd /path/to/squarechilli-child/
+cd /path/to/abyssenergy-child/
 npm install
 ```
 

@@ -136,7 +136,7 @@ add_theme_support('editor-color-palette', array(
 
 //editor styles
 add_theme_support('editor-styles');
-add_editor_style('css/admin-theme-squarechilli.css');
+add_editor_style('css/admin-theme-abyssenergy.css');
 
 
 //customise wordpress bits
@@ -154,7 +154,7 @@ add_filter('login_headerurl', 'my_login_logo_url');
 
 function my_login_logo_url_title()
 {
-	return 'squarechilli';
+	return 'abyssenergy';
 }
 add_filter('login_headertext', 'my_login_logo_url_title');
 
@@ -520,7 +520,7 @@ class Abyssenergy_Recent_Jobs_Widget extends WP_Widget
 	public function __construct()
 	{
 		parent::__construct(
-			'squarechilli_recent_jobs',
+			'abyssenergy_recent_jobs',
 			'Emplois récents',
 			array('description' => 'Affiche les emplois récents dans la sidebar.')
 		);
@@ -612,64 +612,64 @@ function abyssenergy_header_cta_customize_register($wp_customize)
 {
 
 	// Section CTA Header
-	$wp_customize->add_section('squarechilli_header_cta_section', array(
+	$wp_customize->add_section('abyssenergy_header_cta_section', array(
 		'title'       => __('CTA Header', 'abyssenergy'),
 		'description' => __('Configurez le bouton d\'appel à l\'action qui apparaît dans l\'en-tête du site.', 'abyssenergy'),
 		'priority'    => 25,
 	));
 
 	// Activation du CTA Header
-	$wp_customize->add_setting('squarechilli_header_cta_enabled', array(
+	$wp_customize->add_setting('abyssenergy_header_cta_enabled', array(
 		'default'           => false,
 		'sanitize_callback' => 'wp_validate_boolean',
 		'transport'         => 'refresh',
 	));
 
-	$wp_customize->add_control('squarechilli_header_cta_enabled', array(
+	$wp_customize->add_control('abyssenergy_header_cta_enabled', array(
 		'label'    => __('Activer le CTA dans le header', 'abyssenergy'),
-		'section'  => 'squarechilli_header_cta_section',
+		'section'  => 'abyssenergy_header_cta_section',
 		'type'     => 'checkbox',
 		'priority' => 10,
 	));
 
 	// Texte du CTA
-	$wp_customize->add_setting('squarechilli_header_cta_text', array(
+	$wp_customize->add_setting('abyssenergy_header_cta_text', array(
 		'default'           => __('Nous contacter', 'abyssenergy'),
 		'sanitize_callback' => 'sanitize_text_field',
 		'transport'         => 'postMessage',
 	));
 
-	$wp_customize->add_control('squarechilli_header_cta_text', array(
+	$wp_customize->add_control('abyssenergy_header_cta_text', array(
 		'label'    => __('Texte du bouton', 'abyssenergy'),
-		'section'  => 'squarechilli_header_cta_section',
+		'section'  => 'abyssenergy_header_cta_section',
 		'type'     => 'text',
 		'priority' => 20,
 	));
 
 	// URL du CTA
-	$wp_customize->add_setting('squarechilli_header_cta_url', array(
+	$wp_customize->add_setting('abyssenergy_header_cta_url', array(
 		'default'           => home_url('/contact/'),
 		'sanitize_callback' => 'esc_url_raw',
 		'transport'         => 'refresh',
 	));
 
-	$wp_customize->add_control('squarechilli_header_cta_url', array(
+	$wp_customize->add_control('abyssenergy_header_cta_url', array(
 		'label'    => __('URL de destination', 'abyssenergy'),
-		'section'  => 'squarechilli_header_cta_section',
+		'section'  => 'abyssenergy_header_cta_section',
 		'type'     => 'url',
 		'priority' => 30,
 	));
 
 	// Style du CTA
-	$wp_customize->add_setting('squarechilli_header_cta_style', array(
+	$wp_customize->add_setting('abyssenergy_header_cta_style', array(
 		'default'           => 'primary',
 		'sanitize_callback' => 'sanitize_text_field',
 		'transport'         => 'refresh',
 	));
 
-	$wp_customize->add_control('squarechilli_header_cta_style', array(
+	$wp_customize->add_control('abyssenergy_header_cta_style', array(
 		'label'    => __('Style du bouton', 'abyssenergy'),
-		'section'  => 'squarechilli_header_cta_section',
+		'section'  => 'abyssenergy_header_cta_section',
 		'type'     => 'select',
 		'priority' => 40,
 		'choices'  => array(
@@ -681,15 +681,15 @@ function abyssenergy_header_cta_customize_register($wp_customize)
 	));
 
 	// Taille du CTA
-	$wp_customize->add_setting('squarechilli_header_cta_size', array(
+	$wp_customize->add_setting('abyssenergy_header_cta_size', array(
 		'default'           => 'medium',
 		'sanitize_callback' => 'sanitize_text_field',
 		'transport'         => 'refresh',
 	));
 
-	$wp_customize->add_control('squarechilli_header_cta_size', array(
+	$wp_customize->add_control('abyssenergy_header_cta_size', array(
 		'label'    => __('Taille du bouton', 'abyssenergy'),
-		'section'  => 'squarechilli_header_cta_section',
+		'section'  => 'abyssenergy_header_cta_section',
 		'type'     => 'select',
 		'priority' => 50,
 		'choices'  => array(
@@ -700,44 +700,44 @@ function abyssenergy_header_cta_customize_register($wp_customize)
 	));
 
 	// Icône du CTA
-	$wp_customize->add_setting('squarechilli_header_cta_icon', array(
+	$wp_customize->add_setting('abyssenergy_header_cta_icon', array(
 		'default'           => '',
 		'sanitize_callback' => 'sanitize_text_field',
 		'transport'         => 'postMessage',
 	));
 
-	$wp_customize->add_control('squarechilli_header_cta_icon', array(
+	$wp_customize->add_control('abyssenergy_header_cta_icon', array(
 		'label'       => __('Icône (optionnel)', 'abyssenergy'),
 		'description' => __('Code HTML de l\'icône (ex: &lt;i class="fas fa-phone"&gt;&lt;/i&gt;)', 'abyssenergy'),
-		'section'     => 'squarechilli_header_cta_section',
+		'section'     => 'abyssenergy_header_cta_section',
 		'type'        => 'text',
 		'priority'    => 60,
 	));
 
 	// Ouverture dans un nouvel onglet
-	$wp_customize->add_setting('squarechilli_header_cta_target', array(
+	$wp_customize->add_setting('abyssenergy_header_cta_target', array(
 		'default'           => false,
 		'sanitize_callback' => 'wp_validate_boolean',
 		'transport'         => 'refresh',
 	));
 
-	$wp_customize->add_control('squarechilli_header_cta_target', array(
+	$wp_customize->add_control('abyssenergy_header_cta_target', array(
 		'label'    => __('Ouvrir dans un nouvel onglet', 'abyssenergy'),
-		'section'  => 'squarechilli_header_cta_section',
+		'section'  => 'abyssenergy_header_cta_section',
 		'type'     => 'checkbox',
 		'priority' => 70,
 	));
 
 	// Masquer sur mobile
-	$wp_customize->add_setting('squarechilli_header_cta_hide_mobile', array(
+	$wp_customize->add_setting('abyssenergy_header_cta_hide_mobile', array(
 		'default'           => false,
 		'sanitize_callback' => 'wp_validate_boolean',
 		'transport'         => 'refresh',
 	));
 
-	$wp_customize->add_control('squarechilli_header_cta_hide_mobile', array(
+	$wp_customize->add_control('abyssenergy_header_cta_hide_mobile', array(
 		'label'    => __('Masquer sur mobile', 'abyssenergy'),
-		'section'  => 'squarechilli_header_cta_section',
+		'section'  => 'abyssenergy_header_cta_section',
 		'type'     => 'checkbox',
 		'priority' => 80,
 	));
@@ -750,9 +750,9 @@ add_action('customize_register', 'abyssenergy_header_cta_customize_register');
 function abyssenergy_enqueue_header_cta_assets()
 {
 	// Script pour le CTA Header
-	if (get_theme_mod('squarechilli_header_cta_enabled', false)) {
+	if (get_theme_mod('abyssenergy_header_cta_enabled', false)) {
 		wp_enqueue_script(
-			'squarechilli-header-cta',
+			'abyssenergy-header-cta',
 			get_stylesheet_directory_uri() . '/js/header-cta.js',
 			array(),
 			abyssenergy_get_file_version('/js/header-cta.js'),
@@ -760,15 +760,15 @@ function abyssenergy_enqueue_header_cta_assets()
 		);
 
 		// Variables pour le script header CTA
-		wp_localize_script('squarechilli-header-cta', 'squarechilliHeaderCTA', array(
-			'enabled' => get_theme_mod('squarechilli_header_cta_enabled', false),
-			'text' => get_theme_mod('squarechilli_header_cta_text', __('Nous contacter', 'abyssenergy')),
-			'url' => get_theme_mod('squarechilli_header_cta_url', home_url('/contact/')),
-			'style' => get_theme_mod('squarechilli_header_cta_style', 'primary'),
-			'size' => get_theme_mod('squarechilli_header_cta_size', 'medium'),
-			'icon' => get_theme_mod('squarechilli_header_cta_icon', ''),
-			'target' => get_theme_mod('squarechilli_header_cta_target', false),
-			'hide_mobile' => get_theme_mod('squarechilli_header_cta_hide_mobile', false),
+		wp_localize_script('abyssenergy-header-cta', 'abyssenergyHeaderCTA', array(
+			'enabled' => get_theme_mod('abyssenergy_header_cta_enabled', false),
+			'text' => get_theme_mod('abyssenergy_header_cta_text', __('Nous contacter', 'abyssenergy')),
+			'url' => get_theme_mod('abyssenergy_header_cta_url', home_url('/contact/')),
+			'style' => get_theme_mod('abyssenergy_header_cta_style', 'primary'),
+			'size' => get_theme_mod('abyssenergy_header_cta_size', 'medium'),
+			'icon' => get_theme_mod('abyssenergy_header_cta_icon', ''),
+			'target' => get_theme_mod('abyssenergy_header_cta_target', false),
+			'hide_mobile' => get_theme_mod('abyssenergy_header_cta_hide_mobile', false),
 		));
 	}
 }
@@ -780,18 +780,18 @@ add_action('wp_enqueue_scripts', 'abyssenergy_enqueue_header_cta_assets');
 function abyssenergy_display_header_cta()
 {
 	// Vérifier si le CTA est activé
-	if (!get_theme_mod('squarechilli_header_cta_enabled', false)) {
+	if (!get_theme_mod('abyssenergy_header_cta_enabled', false)) {
 		return '';
 	}
 
 	// Récupérer les paramètres
-	$text = get_theme_mod('squarechilli_header_cta_text', __('Nous contacter', 'abyssenergy'));
-	$url = get_theme_mod('squarechilli_header_cta_url', home_url('/contact/'));
-	$style = get_theme_mod('squarechilli_header_cta_style', 'primary');
-	$size = get_theme_mod('squarechilli_header_cta_size', 'medium');
-	$icon = get_theme_mod('squarechilli_header_cta_icon', '');
-	$target = get_theme_mod('squarechilli_header_cta_target', false);
-	$hide_mobile = get_theme_mod('squarechilli_header_cta_hide_mobile', false);
+	$text = get_theme_mod('abyssenergy_header_cta_text', __('Nous contacter', 'abyssenergy'));
+	$url = get_theme_mod('abyssenergy_header_cta_url', home_url('/contact/'));
+	$style = get_theme_mod('abyssenergy_header_cta_style', 'primary');
+	$size = get_theme_mod('abyssenergy_header_cta_size', 'medium');
+	$icon = get_theme_mod('abyssenergy_header_cta_icon', '');
+	$target = get_theme_mod('abyssenergy_header_cta_target', false);
+	$hide_mobile = get_theme_mod('abyssenergy_header_cta_hide_mobile', false);
 
 	// Si pas de texte ou d'URL, ne pas afficher
 	if (empty($text) || empty($url)) {
@@ -845,18 +845,18 @@ function abyssenergy_display_header_cta()
 function abyssenergy_customize_register_footer_logo($wp_customize)
 {
 	// Ajouter le logo du footer
-	$wp_customize->add_setting('squarechilli_footer_logo', array(
+	$wp_customize->add_setting('abyssenergy_footer_logo', array(
 		'sanitize_callback' => 'esc_url_raw',
 		'transport'         => 'refresh',
 	));
 
 	$wp_customize->add_control(new WP_Customize_Image_Control(
 		$wp_customize,
-		'squarechilli_footer_logo',
+		'abyssenergy_footer_logo',
 		array(
 			'label'    => __('Logo du Footer', 'abyssenergy'),
 			'section'  => 'title_tagline',
-			'settings' => 'squarechilli_footer_logo',
+			'settings' => 'abyssenergy_footer_logo',
 			'priority' => 30,
 		)
 	));

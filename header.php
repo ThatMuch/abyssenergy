@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="author" content="squarechilli website and graphic design">
+    <meta name="author" content="THATMUCH website and graphic design">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,8 +11,8 @@
     <link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="apple-touch-icon"
-        href="/wp-content/themes/squarechilli/images/Home+screen+icon.png" />
-    <link rel="icon" type="image/x-icon" href="/wp-content/themes/squarechilli/images/site_favicon_16_1713442626756.ico" />
+        href="/wp-content/themes/abyssenergy/images/Home+screen+icon.png" />
+    <link rel="icon" type="image/x-icon" href="/wp-content/themes/abyssenergy/images/site_favicon_16_1713442626756.ico" />
     <!--[if lt IE 9]>
     <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
