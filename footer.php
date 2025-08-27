@@ -5,11 +5,8 @@
         <div class='footer-container'>
 
             <?php wp_nav_menu(array('theme_location' => 'footer-menu1', 'container' => false, 'menu_class' => 'menu', 'menu_id' => '')); ?>
-
             <?php wp_nav_menu(array('theme_location' => 'footer-menu2', 'container' => false, 'menu_class' => 'menu', 'menu_id' => '')); ?>
-
             <?php wp_nav_menu(array('theme_location' => 'footer-menu3', 'container' => false, 'menu_class' => 'menu', 'menu_id' => '')); ?>
-
             <?php wp_nav_menu(array('theme_location' => 'footer-menu4', 'container' => false, 'menu_class' => 'menu', 'menu_id' => '')); ?>
             <?php wp_nav_menu(array('theme_location' => 'footer-menu5', 'container' => false, 'menu_class' => 'menu', 'menu_id' => '')); ?>
             <?php wp_nav_menu(array('theme_location' => 'footer-menu6', 'container' => false, 'menu_class' => 'menu', 'menu_id' => '')); ?>

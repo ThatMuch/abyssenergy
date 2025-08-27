@@ -3,11 +3,10 @@
 @use "../abstracts/mixins" as *;
 @use "sass:map";
 // Header
-#side-menu {
-  display: none;
-}
-
 .header {
+  .side-menu {
+    display: none;
+  }
   @include container();
   & {
     border-radius: $border-radius-full;
