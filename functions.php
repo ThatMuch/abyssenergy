@@ -5,6 +5,8 @@
  *
  * Thème WordPress autonome et moderne pour Abyss Energy
  * Comprend toutes les fonctionnalités nécessaires sans dépendance parent
+ * Thème WordPress autonome et moderne pour Abyss Energy
+ * Comprend toutes les fonctionnalités nécessaires sans dépendance parent
  */
 
 // Empêcher l'accès direct au fichier
@@ -309,6 +311,25 @@ function abyssenergy_theme_setup()
 {
 	// Support des images de fond personnalisées
 	add_theme_support('custom-background');
+
+	// Support du logo personnalisé
+	add_theme_support('custom-logo', array(
+		'height'      => 80,
+		'width'       => 250,
+		'flex-height' => true,
+		'flex-width'  => true,
+	));
+
+	// Support des formats de publication
+	add_theme_support('post-formats', array(
+		'gallery',
+		'video',
+		'audio',
+		'quote',
+		'link'
+	));
+}
+add_action('after_setup_theme', 'thatmuch_additional_setup');
 
 	// Support du logo personnalisé
 	add_theme_support('custom-logo', array(

@@ -5,19 +5,19 @@
 // Il importe tous les autres fichiers dans le bon ordre
 
 // 1. Abstracts - Variables, mixins, fonctions
-@use "abstracts/variables" as *;
-@use "abstracts/mixins" as *;
+@import "abstracts/variables";
+@import "abstracts/mixins";
 
 // 2. Base - Reset, typographie, éléments de base
-@use "base/base" as *;
-@use "base/utilities" as *;
+@import "base/base";
+@import "base/utilities";
 
 // 3. Layout - Structure générale du site
-@use "layout/layout" as *;
+@import "layout/layout";
 
 // 4. Components - Composants réutilisables
-@use "components/components" as *;
+@import "components/components";
 
 // 5. Pages - Styles spécifiques aux pages
-@use "pages/pages" as *;
+@import "pages/pages";
 @use "pages/jobs" as *;
