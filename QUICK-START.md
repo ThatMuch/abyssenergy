@@ -9,7 +9,7 @@ Le thème enfant est maintenant correctement configuré avec l'en-tête WordPres
 1. **Allez dans l'administration WordPress**
 
    - `Apparence > Thèmes`
-   - Activez "Abyss Energy Child"
+   - Activez "Abyss Energy "
 
 2. **Vérifiez l'activation**
    - Le thème devrait maintenant être reconnu par WordPress

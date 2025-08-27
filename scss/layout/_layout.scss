@@ -3,6 +3,10 @@
 @use "../abstracts/mixins" as *;
 @use "sass:map";
 // Header
+#side-menu {
+  display: none;
+}
+
 .header {
   @include container();
   & {
@@ -17,9 +21,9 @@
     padding: map.get($spacings, "component-xs");
     justify-content: space-between;
     align-items: center;
-    left: inherit;
-    right: inherit;
-    min-height: inherit;
+    li {
+      display: inline-block;
+    }
   }
 
   &__logo {
@@ -32,14 +36,33 @@
       }
     }
   }
-  .side-menu:checked ~ nav {
+
+  .side-menu {
     @include respond-to(xs) {
-      max-height: 100vh;
-      padding-top: 100px;
+      display: none;
+    }
+    /* Toggle menu icon */
+    &:checked ~ nav {
+      @include respond-to(xs) {
+        max-height: 100vh;
+        padding-top: 100px;
+      }
+    }
+    &:checked ~ .hamb .hamb-line {
+      background: transparent;
+      &::before {
+        transform: rotate(-45deg);
+        top: 0;
+      }
+      &::after {
+        transform: rotate(45deg);
+        bottom: 0;
+      }
     }
   }
 
   .main-menu {
+    // Mobile menu
     @include respond-to(xs) {
       @include transition(max-height);
       & {
@@ -58,9 +81,49 @@
         }
       }
     }
-
+    // Default menu
     & {
       margin: 0;
+      position: relative;
+      display: inline-block;
+      ul > li {
+        position: relative;
+        margin-left: 20px;
+        &:hover > ul {
+          display: block;
+        }
+        &:last-of-type {
+          border-bottom: 0;
+          ul {
+            right: 0;
+            left: auto;
+          }
+        }
+        a {
+          padding: 0;
+          color: $color-secondary;
+          display: block;
+          &:hover {
+            color: $color-secondary;
+            text-decoration: underline;
+          }
+        }
+      }
+      ul ul {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: $white-100;
+        padding: 7px 0 7px 0;
+        z-index: 9999999999;
+        border-radius: 10px;
+        border: 2px solid $primary-950;
+        ul {
+          top: 0;
+          left: 100%;
+        }
+      }
     }
     .menu {
       list-style: none;
@@ -79,17 +142,41 @@
       }
     }
   }
-
+  /* Menu Icon */
   .hamb {
-    position: initial;
-    float: inherit;
-    right: inherit;
-    top: inherit;
-    background-color: transparent;
-    &-line,
-    &-line:before,
-    &-line:after {
-      background-color: $color-primary;
+    @include respond-to(xs) {
+      display: block;
+      cursor: pointer;
+      float: right;
+      padding: 20px 20px;
+      background-color: var(--color-orange);
+      z-index: 999;
+    }
+    & {
+      display: none;
+    }
+    &-line {
+      background: $white-100;
+      display: block;
+      height: 2px;
+      position: relative;
+      width: 24px;
+      &:before,
+      &:after {
+        background: $white-100;
+        content: "";
+        display: block;
+        height: 100%;
+        position: absolute;
+        transition: all 0.2s ease-out;
+        width: 100%;
+      }
+      &:before {
+        top: -5px;
+      }
+      &:after {
+        bottom: -5px;
+      }
     }
   }
 }
