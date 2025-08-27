@@ -32,25 +32,22 @@
 </head>
 
 <body <?php body_class(); ?>>
-    <header>
-        <div class="wrapper">
-            <div class="logo">
-                <?php
-                if (! is_front_page()) {
-                    echo '<a href="/"><img src="' . get_stylesheet_directory_uri() . '/images/abyss-energy-logo.webp" alt="Abyss Energy Recruitment logo" /></a>';
-                } else {
-                    echo '<h1><a href="/">Abyss Energy Recruitment</a></h1>';
-                }
-                ?>
-            </div>
-            <div>
-                <input class="side-menu" type="checkbox" id="side-menu" />
-                <label class="hamb" for="side-menu"><span class="hamb-line"></span></label>
-                <nav class='main-menu'>
-                    <?php wp_nav_menu(array('theme_location' => 'main-menu', 'container' => false, 'menu_class' => 'menu', 'menu_id' => '',)); ?>
-                </nav>
-            </div>
-
+    <header class="header">
+        <div class="header__logo">
+            <?php
+            if (function_exists('the_custom_logo')) {
+                the_custom_logo();
+            } else { ?>
+                <a href="<?php echo esc_url(home_url('/')); ?>" class="header__logo-link">
+                    <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo.svg" alt="<?php bloginfo('name'); ?>" class="header__logo-image">
+                </a>
+            <?php } ?>
         </div>
-
+        <div>
+            <input class="side-menu" type="checkbox" id="side-menu" />
+            <label class="hamb" for="side-menu"><span class="hamb-line"></span></label>
+            <nav class='main-menu'>
+                <?php wp_nav_menu(array('theme_location' => 'main-menu', 'container' => false, 'menu_class' => 'menu', 'menu_id' => '',)); ?>
+            </nav>
+        </div>
     </header>

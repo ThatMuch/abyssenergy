@@ -329,26 +329,26 @@ function abyssenergy_theme_setup()
 		'link'
 	));
 }
-add_action('after_setup_theme', 'thatmuch_additional_setup');
+add_action('after_setup_theme', 'abyssenergy_theme_setup');
 
-	// Support du logo personnalisé
-	add_theme_support('custom-logo', array(
-		'height'      => 100,
-		'width'       => 400,
-		'flex-height' => true,
-		'flex-width'  => true,
-	));
+// Support du logo personnalisé
+add_theme_support('custom-logo', array(
+	'height'      => 100,
+	'width'       => 400,
+	'flex-height' => true,
+	'flex-width'  => true,
+));
 
-	// Support des couleurs personnalisées
-	add_theme_support('custom-header');
+// Support des couleurs personnalisées
+add_theme_support('custom-header');
 
-	// Support de l'éditeur de blocs
-	add_theme_support('wp-block-styles');
-	add_theme_support('align-wide');
+// Support de l'éditeur de blocs
+add_theme_support('wp-block-styles');
+add_theme_support('align-wide');
 
-	// Support des embeds responsive
-	add_theme_support('responsive-embeds');
-}
+// Support des embeds responsive
+add_theme_support('responsive-embeds');
+
 add_action('after_setup_theme', 'abyssenergy_theme_setup');
 
 /**
