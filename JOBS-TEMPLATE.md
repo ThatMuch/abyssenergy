@@ -116,7 +116,7 @@ Les styles se trouvent dans `scss/pages/_jobs.scss` :
 
 ### Ajouter des champs personnalisés
 
-Dans `functions.php`, modifiez la fonction `squarechilli_child_jobs_shortcode()` pour inclure vos champs ACF :
+Dans `functions.php`, modifiez la fonction `abyssenergy_child_jobs_shortcode()` pour inclure vos champs ACF :
 
 ```php
 // Exemple : afficher le salaire
@@ -163,6 +163,8 @@ Modifiez le template `page-jobs.php` pour ajouter de nouveaux filtres :
 ```css
 .jobs-listing-page      /* Page principale */
 /* Page principale */
+/* Page principale */
+/* Page principale */
 .jobs-archive-page      /* Archive des emplois */
 .jobs-grid              /* Grille des emplois */
 .jobs-grid.list-view; /* Vue en liste */
@@ -172,6 +174,8 @@ Modifiez le template `page-jobs.php` pour ajouter de nouveaux filtres :
 
 ```css
 .job-card               /* Carte individuelle */
+/* Carte individuelle */
+/* Carte individuelle */
 /* Carte individuelle */
 .job-badges             /* Conteneur des badges */
 .job-title              /* Titre de l'emploi */
@@ -184,6 +188,8 @@ Modifiez le template `page-jobs.php` pour ajouter de nouveaux filtres :
 
 ```css
 .jobs-filters           /* Formulaire de filtrage */
+/* Formulaire de filtrage */
+/* Formulaire de filtrage */
 /* Formulaire de filtrage */
 .jobs-view-toggle       /* Boutons de vue */
 .jobs-pagination        /* Navigation des pages */
@@ -231,4 +237,4 @@ Pour des personnalisations avancées :
 
 ---
 
-**Développé pour Abyss Energy par squarechilli** 🚀
+**Développé pour Abyss Energy par abyssenergy** 🚀

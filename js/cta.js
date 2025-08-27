@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Animation au scroll pour le CTA
     function initCTAScrollAnimation() {
-        const ctaElements = document.querySelectorAll('.squarechilli-cta');
+        const ctaElements = document.querySelectorAll('.abyssenergy-cta');
 
         if (ctaElements.length === 0) return;
 
@@ -40,9 +40,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (typeof wp !== 'undefined' && wp.customize) {
 
             // Titre
-            wp.customize('squarechilli_cta_title', function(value) {
+            wp.customize('abyssenergy_cta_title', function(value) {
                 value.bind(function(newValue) {
-                    const titleElement = document.querySelector('.squarechilli-cta__title');
+                    const titleElement = document.querySelector('.abyssenergy-cta__title');
                     if (titleElement) {
                         titleElement.textContent = newValue;
                     }
@@ -50,9 +50,9 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             // Sous-titre
-            wp.customize('squarechilli_cta_subtitle', function(value) {
+            wp.customize('abyssenergy_cta_subtitle', function(value) {
                 value.bind(function(newValue) {
-                    const subtitleElement = document.querySelector('.squarechilli-cta__subtitle');
+                    const subtitleElement = document.querySelector('.abyssenergy-cta__subtitle');
                     if (subtitleElement) {
                         subtitleElement.textContent = newValue;
                     }
@@ -60,9 +60,9 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             // Texte du bouton principal
-            wp.customize('squarechilli_cta_button_text', function(value) {
+            wp.customize('abyssenergy_cta_button_text', function(value) {
                 value.bind(function(newValue) {
-                    const buttonElement = document.querySelector('.squarechilli-cta__button');
+                    const buttonElement = document.querySelector('.abyssenergy-cta__button');
                     if (buttonElement) {
                         buttonElement.textContent = newValue;
                     }
@@ -70,9 +70,9 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             // Texte du bouton secondaire
-            wp.customize('squarechilli_cta_secondary_text', function(value) {
+            wp.customize('abyssenergy_cta_secondary_text', function(value) {
                 value.bind(function(newValue) {
-                    const secondaryElement = document.querySelector('.squarechilli-cta__secondary');
+                    const secondaryElement = document.querySelector('.abyssenergy-cta__secondary');
                     if (secondaryElement) {
                         secondaryElement.textContent = newValue;
                     }
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Analytics et tracking (optionnel)
     function initCTATracking() {
-        const ctaButtons = document.querySelectorAll('.squarechilli-cta__button, .squarechilli-cta__secondary');
+        const ctaButtons = document.querySelectorAll('.abyssenergy-cta__button, .abyssenergy-cta__secondary');
 
         ctaButtons.forEach(button => {
             button.addEventListener('click', function(e) {
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     gtag('event', 'cta_click', {
                         'cta_text': this.textContent.trim(),
                         'cta_url': this.href,
-                        'cta_type': this.classList.contains('squarechilli-cta__button') ? 'primary' : 'secondary'
+                        'cta_type': this.classList.contains('abyssenergy-cta__button') ? 'primary' : 'secondary'
                     });
                 }
 
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         'event': 'cta_click',
                         'cta_text': this.textContent.trim(),
                         'cta_url': this.href,
-                        'cta_type': this.classList.contains('squarechilli-cta__button') ? 'primary' : 'secondary'
+                        'cta_type': this.classList.contains('abyssenergy-cta__button') ? 'primary' : 'secondary'
                     });
                 }
 
@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log('CTA clicked:', {
                     text: this.textContent.trim(),
                     url: this.href,
-                    type: this.classList.contains('squarechilli-cta__button') ? 'primary' : 'secondary'
+                    type: this.classList.contains('abyssenergy-cta__button') ? 'primary' : 'secondary'
                 });
             });
         });
@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Effet parallaxe subtil (optionnel)
     function initCTAParallax() {
-        const ctaElements = document.querySelectorAll('.squarechilli-cta');
+        const ctaElements = document.querySelectorAll('.abyssenergy-cta');
 
         if (ctaElements.length === 0) return;
 
@@ -165,10 +165,10 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Export pour usage externe si nécessaire
-window.SquarechilliCTA = {
+window.abyssenergyCTA = {
     init: function() {
         // Réinitialiser les animations après changement de contenu
-        const event = new CustomEvent('squarechilli:cta:init');
+        const event = new CustomEvent('abyssenergy:cta:init');
         document.dispatchEvent(event);
     }
 };

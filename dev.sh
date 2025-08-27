@@ -12,14 +12,14 @@ NC='\033[0m' # No Color
 
 # Fonction d'aide
 show_help() {
-    echo -e "${BLUE}🎨 Script de développement SCSS pour squarechilli-child${NC}"
+    echo -e "${BLUE}🎨 Script de développement SCSS pour abyssenergy${NC}"
     echo ""
     echo "Usage: ./dev.sh [commande]"
     echo ""
     echo "Commandes disponibles:"
     echo -e "  ${GREEN}watch${NC}   - Surveille les fichiers SCSS et compile automatiquement"
     echo -e "  ${GREEN}build${NC}   - Compile le SCSS en mode production (minifié)"
-    echo -e "  ${GREEN}dev${NC}     - Compile en mode développement (expanded)"
+    echo -e "  ${GREEN}dev${NC}     - Compile en mode développement (compressed)"
     echo -e "  ${GREEN}lint${NC}    - Vérifie la syntaxe SCSS"
     echo -e "  ${GREEN}fix${NC}     - Corrige automatiquement les erreurs de style"
     echo -e "  ${GREEN}clean${NC}   - Supprime les fichiers CSS générés"
@@ -70,7 +70,7 @@ case "${1:-help}" in
         echo -e "${BLUE}🛠️  Compilation en mode développement...${NC}"
         check_npm
         check_dependencies
-        sass scss/style.scss:style.css --style expanded --source-map
+        sass scss/style.scss:style.min.css --style compressed --source-map
         echo -e "${GREEN}✅ Compilation terminée !${NC}"
         ;;
 
@@ -78,7 +78,7 @@ case "${1:-help}" in
         echo -e "${BLUE}🛠️  Compilation en mode développement (sans minification)...${NC}"
         check_npm
         check_dependencies
-        sass scss/style.scss:style.css --style expanded
+        sass scss/style.scss:style.min.css --style compressed
         echo -e "${GREEN}✅ Compilation terminée !${NC}"
         ;;
 
@@ -99,7 +99,7 @@ case "${1:-help}" in
 
     "clean")
         echo -e "${BLUE}🧹 Nettoyage des fichiers CSS...${NC}"
-        rm -f style.css style.css.map
+        rm -f style.min.css style.min.css.map
         echo -e "${GREEN}✅ Fichiers nettoyés !${NC}"
         ;;
 

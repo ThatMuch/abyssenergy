@@ -1,10 +1,12 @@
 <?php
 
 /**
- * Functions et hooks pour le thème enfant Abyss Energy
+ * Functions et hooks pour le thème Abyss Energy
  *
- * Ce fichier charge correctement les styles du thème parent et permet d'ajouter
- * des fonctionnalités personnalisées sans modifier le thème parent.
+ * Thème WordPress autonome et moderne pour Abyss Energy
+ * Comprend toutes les fonctionnalités nécessaires sans dépendance parent
+ * Thème WordPress autonome et moderne pour Abyss Energy
+ * Comprend toutes les fonctionnalités nécessaires sans dépendance parent
  */
 
 // Empêcher l'accès direct au fichier
@@ -12,33 +14,224 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-/**
- * Enqueue les styles du thème parent et enfant
- */
-function squarechilli_child_enqueue_styles()
-{
-	// Style du thème parent
-	wp_enqueue_style(
-		'squarechilli-parent-style',
-		get_template_directory_uri() . '/style.css',
-		array(),
-		wp_get_theme()->get('Version')
-	);
+//images
+add_theme_support('post-thumbnails');
 
-	// Style du thème enfant (chargé après le parent)
-	wp_enqueue_style(
-		'squarechilli-child-style',
-		get_stylesheet_directory_uri() . '/style.css',
-		array('squarechilli-parent-style'),
-		wp_get_theme()->get('Version')
+set_post_thumbnail_size(385, 288, true); //featured image - the true sets it to this size exactly, omitting this will scale longest side. Call by  the_post_thumbnail();
+//medium add_image_size( 'two-col-standard', 534, 313, true ); //repeat this for other thumbs. Call by  the_post_thumbnail('blogfeatured');
+add_image_size('barbers', 288, 360, true);
+add_image_size('third-width', 377, 323, true);
+add_image_size('page-header', 1440, 430, true);
+
+
+// add menu support and fallback menu if menu doesn't exist
+add_action('init', 'register_my_menus');
+
+function register_my_menus()
+{
+	register_nav_menus(
+		array(
+			'main-menu' => __('Main menu'),
+			'footer-menu1' => __('Footer menu col 1'),
+			'footer-menu2' => __('Footer menu col 2'),
+			'footer-menu3' => __('Footer menu col 3'),
+			'footer-menu4' => __('Footer menu col 4'),
+			'footer-menu5' => __('Footer menu col 5'),
+			'footer-menu6' => __('Footer menu col 6'),
+		)
 	);
 }
-add_action('wp_enqueue_scripts', 'squarechilli_child_enqueue_styles');
+
+//acf options page
+if (function_exists('acf_add_options_page')) {
+
+	acf_add_options_page(array(
+		'page_title'   => 'General Options',
+		'menu_title'  => 'General Options',
+		'menu_slug'   => 'theme-general-settings',
+		'capability'  => 'edit_posts',
+		'redirect'    => false
+	));
+}
+
+//turn off the menu bar for all but admin
+add_action('after_setup_theme', 'remove_admin_bar');
+function remove_admin_bar()
+{
+	if (!current_user_can('administrator') && !is_admin()) {
+		show_admin_bar(false);
+	}
+}
+//align wide options
+add_theme_support('align-wide');
+
+add_theme_support('title-tag');
+
+//remove inline block styling
+remove_action('init', 'register_block_core_gallery');
+
+//and the stylesheets
+function prefix_remove_core_block_styles()
+{
+	wp_dequeue_style('wp-block-columns');
+	wp_dequeue_style('wp-block-column');
+}
+add_action('wp_enqueue_scripts', 'prefix_remove_core_block_styles');
+
+
+//gutenberg custom colour samples
+add_theme_support('editor-color-palette', array(
+	array(
+		'name'  => __('Orange', 'thatmuch'),
+		'slug'  => 'colour-orange',
+		'color'  => '#ff6b01',
+	),
+	array(
+		'name'  => __('Light Orange', 'thatmuch'),
+		'slug'  => 'colour-lightorange',
+		'color'  => '#F1D5C1',
+	),
+	array(
+		'name'  => __('Dark Blue', 'thatmuch'),
+		'slug'  => 'colour-darkblue',
+		'color' => '#0d4a77',
+	),
+	array(
+		'name'  => __('Light Grey', 'thatmuch'),
+		'slug'  => 'colour-lightgrey',
+		'color' => '#dcd7d4',
+	),
+	array(
+		'name'  => __('Grey', 'thatmuch'),
+		'slug'  => 'colour-grey',
+		'color' => '#7b7672',
+	),
+	array(
+		'name'  => __('Green', 'thatmuch'),
+		'slug'  => 'colour-green',
+		'color' => '#528326',
+	),
+	array(
+		'name'  => __('Light Blue', 'thatmuch'),
+		'slug'  => 'colour-lightblue',
+		'color' => '#007ce0',
+	),
+	array(
+		'name'  => __('Lightest Blue', 'thatmuch'),
+		'slug'  => 'colour-lightestblue',
+		'color' => '#e5f2fc',
+	),
+	array(
+		'name'  => __('White', 'thatmuch'),
+		'slug'  => 'colour-white',
+		'color' => '#fff',
+	),
+	array(
+		'name'  => __('Black', 'thatmuch'),
+		'slug'  => 'colour-black',
+		'color' => '#000',
+	),
+
+));
+
+//editor styles
+add_theme_support('editor-styles');
+add_editor_style('css/admin-theme-abyssenergy.css');
+
+
+//customise wordpress bits
+function custom_login_css()
+{
+	echo '<link rel="stylesheet" type="text/css" href="' . get_stylesheet_directory_uri() . '/css/login-styles.css" />';
+}
+add_action('login_head', 'custom_login_css');
+
+function my_login_logo_url()
+{
+	return get_bloginfo('url');
+}
+add_filter('login_headerurl', 'my_login_logo_url');
+
+function my_login_logo_url_title()
+{
+	return 'abyssenergy';
+}
+add_filter('login_headertext', 'my_login_logo_url_title');
+
+add_filter('login_errors', function ($a) {
+	return null;
+}); //remove login errors so bots can't hack as easily
+
+//excerpt length
+add_filter('excerpt_length', function ($length) {
+	return 20;
+});
+
+function hide_update_notice_to_all_but_admin_users()
+{
+	if (!current_user_can('update_core')) {
+		remove_action('admin_notices', 'update_nag', 3);
+	}
+}
+add_action('admin_head', 'hide_update_notice_to_all_but_admin_users', 1);
+
+//display wordpress image sizes in admin
+function display_custom_image_sizes($sizes)
+{
+	global $_wp_additional_image_sizes;
+	if (empty($_wp_additional_image_sizes))
+		return $sizes;
+
+	foreach ($_wp_additional_image_sizes as $id => $data) {
+		if (!isset($sizes[$id]))
+			$sizes[$id] = ucfirst(str_replace('-', ' ', $id));
+	}
+
+	return $sizes;
+}
+add_filter('image_size_names_choose', 'display_custom_image_sizes');
+
+//remove height and width from images
+add_filter('get_image_tag', 'remove_width_and_height_attribute', 10);
+add_filter('post_thumbnail_html', 'remove_width_and_height_attribute', 10);
+add_filter('image_send_to_editor', 'remove_width_and_height_attribute', 10);
+
+function remove_width_and_height_attribute($html)
+{
+	return preg_replace('/(height|width)="\d*"\s/', "", $html);
+}
+
+//admin footer text
+function change_footer_admin()
+{
+	echo 'Made by <a href="https://www.thatmuch.fr">THATMUCH</a>.';
+}
+
+add_filter('admin_footer_text', 'change_footer_admin');
+
+//remove wordpress logo
+add_action('admin_bar_menu', 'remove_wp_logo', 999);
+
+function remove_wp_logo($wp_admin_bar)
+{
+	$wp_admin_bar->remove_node('wp-logo');
+}
+
+//ask the browser not to cache the job search page
+add_action('template_redirect', 'update_header_cache');
+function update_header_cache()
+{
+	if (is_page(36)) {
+		header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+		header('Pragma: no-cache');
+		header('Expires: Thu, 01 Dec 1990 16:00:00 GMT');
+	}
+}
 
 /**
  * Compilation automatique des fichiers SCSS (mode développement uniquement)
  */
-function squarechilli_child_compile_scss()
+function abyssenergy_compile_scss()
 {
 	// Ne pas compiler en production
 	if (defined('WP_ENV') && WP_ENV === 'production') {
@@ -77,86 +270,104 @@ function squarechilli_child_compile_scss()
 /**
  * Obtenir la version du fichier pour cache busting
  */
-function squarechilli_child_get_file_version($file)
+function abyssenergy_get_file_version($file)
 {
 	$file_path = get_stylesheet_directory() . $file;
 	return file_exists($file_path) ? filemtime($file_path) : wp_get_theme()->get('Version');
 }
 
 // Compiler SCSS au chargement de l'admin et du front-end
-add_action('init', 'squarechilli_child_compile_scss');
+add_action('init', 'abyssenergy_compile_scss');
 
 /**
- * Version améliorée de l'enqueue des styles avec versioning automatique
+ * Enqueue des styles et scripts du thème
  */
-function squarechilli_child_enqueue_styles_improved()
+function abyssenergy_enqueue_scripts()
 {
-	// Style du thème parent
+	// Style principal du thème
 	wp_enqueue_style(
-		'squarechilli-parent-style',
-		get_template_directory_uri() . '/style.css',
+		'abyssenergy-style',
+		get_stylesheet_directory_uri() . '/style.min.css',
 		array(),
-		squarechilli_child_get_file_version('/../squarechilli/style.css')
+		abyssenergy_get_file_version('/style.min.css')
 	);
 
-	// Style du thème enfant
-	wp_enqueue_style(
-		'squarechilli-child-style',
-		get_stylesheet_directory_uri() . '/style.css',
-		array('squarechilli-parent-style'),
-		squarechilli_child_get_file_version('/style.css')
+	// Script général du thème
+	wp_enqueue_script(
+		'abyssenergy-general',
+		get_stylesheet_directory_uri() . '/js/general.js',
+		array('jquery'),
+		abyssenergy_get_file_version('/js/general.js'),
+		true
 	);
 }
 
-// Remplacer l'ancienne fonction par la nouvelle
-remove_action('wp_enqueue_scripts', 'squarechilli_child_enqueue_styles');
-add_action('wp_enqueue_scripts', 'squarechilli_child_enqueue_styles_improved');
+add_action('wp_enqueue_scripts', 'abyssenergy_enqueue_scripts');
 
 /**
- * Ajouter le support des fonctionnalités modernes de WordPress
+ * Configuration du thème
  */
-function squarechilli_child_theme_setup()
+function abyssenergy_theme_setup()
 {
 	// Support des images de fond personnalisées
 	add_theme_support('custom-background');
 
 	// Support du logo personnalisé
 	add_theme_support('custom-logo', array(
-		'height'      => 100,
-		'width'       => 400,
+		'height'      => 80,
+		'width'       => 250,
 		'flex-height' => true,
 		'flex-width'  => true,
 	));
 
-	// Support des couleurs personnalisées
-	add_theme_support('custom-header');
-
-	// Support de l'éditeur de blocs
-	add_theme_support('wp-block-styles');
-	add_theme_support('align-wide');
-
-	// Support des embeds responsive
-	add_theme_support('responsive-embeds');
+	// Support des formats de publication
+	add_theme_support('post-formats', array(
+		'gallery',
+		'video',
+		'audio',
+		'quote',
+		'link'
+	));
 }
-add_action('after_setup_theme', 'squarechilli_child_theme_setup');
+add_action('after_setup_theme', 'abyssenergy_theme_setup');
+
+// Support du logo personnalisé
+add_theme_support('custom-logo', array(
+	'height'      => 100,
+	'width'       => 400,
+	'flex-height' => true,
+	'flex-width'  => true,
+));
+
+// Support des couleurs personnalisées
+add_theme_support('custom-header');
+
+// Support de l'éditeur de blocs
+add_theme_support('wp-block-styles');
+add_theme_support('align-wide');
+
+// Support des embeds responsive
+add_theme_support('responsive-embeds');
+
+add_action('after_setup_theme', 'abyssenergy_theme_setup');
 
 /**
  * Configuration spécifique pour la page des emplois
  */
-function squarechilli_child_jobs_setup()
+function abyssenergy_jobs_setup()
 {
 	// Ajouter les variables de requête personnalisées pour les filtres d'emploi
-	add_action('init', 'squarechilli_child_add_job_query_vars');
+	add_action('init', 'abyssenergy_add_job_query_vars');
 
 	// Modifier la requête principale pour les filtres d'emploi
-	add_action('pre_get_posts', 'squarechilli_child_modify_job_query');
+	add_action('pre_get_posts', 'abyssenergy_modify_job_query');
 }
-add_action('after_setup_theme', 'squarechilli_child_jobs_setup');
+add_action('after_setup_theme', 'abyssenergy_jobs_setup');
 
 /**
  * Ajouter les variables de requête personnalisées pour les filtres d'emploi
  */
-function squarechilli_child_add_job_query_vars()
+function abyssenergy_add_job_query_vars()
 {
 	global $wp;
 	$wp->add_query_var('job_search');
@@ -168,7 +379,7 @@ function squarechilli_child_add_job_query_vars()
 /**
  * Modifier la requête principale pour les pages d'emploi
  */
-function squarechilli_child_modify_job_query($query)
+function abyssenergy_modify_job_query($query)
 {
 	if (!is_admin() && $query->is_main_query()) {
 
@@ -189,7 +400,7 @@ function squarechilli_child_modify_job_query($query)
 /**
  * Shortcode pour afficher les emplois
  */
-function squarechilli_child_jobs_shortcode($atts)
+function abyssenergy_jobs_shortcode($atts)
 {
 	$atts = shortcode_atts(array(
 		'number' => 6,
@@ -298,18 +509,18 @@ function squarechilli_child_jobs_shortcode($atts)
 	wp_reset_postdata();
 	return ob_get_clean();
 }
-add_shortcode('jobs_list', 'squarechilli_child_jobs_shortcode');
+add_shortcode('jobs_list', 'abyssenergy_jobs_shortcode');
 
 /**
  * Widget pour afficher les emplois récents
  */
-class Squarechilli_Child_Recent_Jobs_Widget extends WP_Widget
+class Abyssenergy_Recent_Jobs_Widget extends WP_Widget
 {
 
 	public function __construct()
 	{
 		parent::__construct(
-			'squarechilli_recent_jobs',
+			'abyssenergy_recent_jobs',
 			'Emplois récents',
 			array('description' => 'Affiche les emplois récents dans la sidebar.')
 		);
@@ -388,199 +599,199 @@ class Squarechilli_Child_Recent_Jobs_Widget extends WP_Widget
 /**
  * Enregistrer le widget des emplois récents
  */
-function squarechilli_child_register_jobs_widget()
+function abyssenergy_register_jobs_widget()
 {
-	register_widget('Squarechilli_Child_Recent_Jobs_Widget');
+	register_widget('Abyssenergy_Recent_Jobs_Widget');
 }
-add_action('widgets_init', 'squarechilli_child_register_jobs_widget');
+add_action('widgets_init', 'abyssenergy_register_jobs_widget');
 
 /**
  * Configuration du CTA Header via le Customizer WordPress
  */
-function squarechilli_child_header_cta_customize_register($wp_customize)
+function abyssenergy_header_cta_customize_register($wp_customize)
 {
 
 	// Section CTA Header
-	$wp_customize->add_section('squarechilli_header_cta_section', array(
-		'title'       => __('CTA Header', 'squarechilli-child'),
-		'description' => __('Configurez le bouton d\'appel à l\'action qui apparaît dans l\'en-tête du site.', 'squarechilli-child'),
+	$wp_customize->add_section('abyssenergy_header_cta_section', array(
+		'title'       => __('CTA Header', 'abyssenergy'),
+		'description' => __('Configurez le bouton d\'appel à l\'action qui apparaît dans l\'en-tête du site.', 'abyssenergy'),
 		'priority'    => 25,
 	));
 
 	// Activation du CTA Header
-	$wp_customize->add_setting('squarechilli_header_cta_enabled', array(
+	$wp_customize->add_setting('abyssenergy_header_cta_enabled', array(
 		'default'           => false,
 		'sanitize_callback' => 'wp_validate_boolean',
 		'transport'         => 'refresh',
 	));
 
-	$wp_customize->add_control('squarechilli_header_cta_enabled', array(
-		'label'    => __('Activer le CTA dans le header', 'squarechilli-child'),
-		'section'  => 'squarechilli_header_cta_section',
+	$wp_customize->add_control('abyssenergy_header_cta_enabled', array(
+		'label'    => __('Activer le CTA dans le header', 'abyssenergy'),
+		'section'  => 'abyssenergy_header_cta_section',
 		'type'     => 'checkbox',
 		'priority' => 10,
 	));
 
 	// Texte du CTA
-	$wp_customize->add_setting('squarechilli_header_cta_text', array(
-		'default'           => __('Nous contacter', 'squarechilli-child'),
+	$wp_customize->add_setting('abyssenergy_header_cta_text', array(
+		'default'           => __('Nous contacter', 'abyssenergy'),
 		'sanitize_callback' => 'sanitize_text_field',
 		'transport'         => 'postMessage',
 	));
 
-	$wp_customize->add_control('squarechilli_header_cta_text', array(
-		'label'    => __('Texte du bouton', 'squarechilli-child'),
-		'section'  => 'squarechilli_header_cta_section',
+	$wp_customize->add_control('abyssenergy_header_cta_text', array(
+		'label'    => __('Texte du bouton', 'abyssenergy'),
+		'section'  => 'abyssenergy_header_cta_section',
 		'type'     => 'text',
 		'priority' => 20,
 	));
 
 	// URL du CTA
-	$wp_customize->add_setting('squarechilli_header_cta_url', array(
+	$wp_customize->add_setting('abyssenergy_header_cta_url', array(
 		'default'           => home_url('/contact/'),
 		'sanitize_callback' => 'esc_url_raw',
 		'transport'         => 'refresh',
 	));
 
-	$wp_customize->add_control('squarechilli_header_cta_url', array(
-		'label'    => __('URL de destination', 'squarechilli-child'),
-		'section'  => 'squarechilli_header_cta_section',
+	$wp_customize->add_control('abyssenergy_header_cta_url', array(
+		'label'    => __('URL de destination', 'abyssenergy'),
+		'section'  => 'abyssenergy_header_cta_section',
 		'type'     => 'url',
 		'priority' => 30,
 	));
 
 	// Style du CTA
-	$wp_customize->add_setting('squarechilli_header_cta_style', array(
+	$wp_customize->add_setting('abyssenergy_header_cta_style', array(
 		'default'           => 'primary',
 		'sanitize_callback' => 'sanitize_text_field',
 		'transport'         => 'refresh',
 	));
 
-	$wp_customize->add_control('squarechilli_header_cta_style', array(
-		'label'    => __('Style du bouton', 'squarechilli-child'),
-		'section'  => 'squarechilli_header_cta_section',
+	$wp_customize->add_control('abyssenergy_header_cta_style', array(
+		'label'    => __('Style du bouton', 'abyssenergy'),
+		'section'  => 'abyssenergy_header_cta_section',
 		'type'     => 'select',
 		'priority' => 40,
 		'choices'  => array(
-			'primary'   => __('Primary', 'squarechilli-child'),
-			'secondary' => __('Secondary', 'squarechilli-child'),
-			'outline'   => __('Outline', 'squarechilli-child'),
+			'primary'   => __('Primary', 'abyssenergy'),
+			'secondary' => __('Secondary', 'abyssenergy'),
+			'outline'   => __('Outline', 'abyssenergy'),
 
 		),
 	));
 
 	// Taille du CTA
-	$wp_customize->add_setting('squarechilli_header_cta_size', array(
+	$wp_customize->add_setting('abyssenergy_header_cta_size', array(
 		'default'           => 'medium',
 		'sanitize_callback' => 'sanitize_text_field',
 		'transport'         => 'refresh',
 	));
 
-	$wp_customize->add_control('squarechilli_header_cta_size', array(
-		'label'    => __('Taille du bouton', 'squarechilli-child'),
-		'section'  => 'squarechilli_header_cta_section',
+	$wp_customize->add_control('abyssenergy_header_cta_size', array(
+		'label'    => __('Taille du bouton', 'abyssenergy'),
+		'section'  => 'abyssenergy_header_cta_section',
 		'type'     => 'select',
 		'priority' => 50,
 		'choices'  => array(
-			'small'  => __('Petit', 'squarechilli-child'),
-			'medium' => __('Moyen', 'squarechilli-child'),
-			'large'  => __('Grand', 'squarechilli-child'),
+			'small'  => __('Petit', 'abyssenergy'),
+			'medium' => __('Moyen', 'abyssenergy'),
+			'large'  => __('Grand', 'abyssenergy'),
 		),
 	));
 
 	// Icône du CTA
-	$wp_customize->add_setting('squarechilli_header_cta_icon', array(
+	$wp_customize->add_setting('abyssenergy_header_cta_icon', array(
 		'default'           => '',
 		'sanitize_callback' => 'sanitize_text_field',
 		'transport'         => 'postMessage',
 	));
 
-	$wp_customize->add_control('squarechilli_header_cta_icon', array(
-		'label'       => __('Icône (optionnel)', 'squarechilli-child'),
-		'description' => __('Code HTML de l\'icône (ex: &lt;i class="fas fa-phone"&gt;&lt;/i&gt;)', 'squarechilli-child'),
-		'section'     => 'squarechilli_header_cta_section',
+	$wp_customize->add_control('abyssenergy_header_cta_icon', array(
+		'label'       => __('Icône (optionnel)', 'abyssenergy'),
+		'description' => __('Code HTML de l\'icône (ex: &lt;i class="fas fa-phone"&gt;&lt;/i&gt;)', 'abyssenergy'),
+		'section'     => 'abyssenergy_header_cta_section',
 		'type'        => 'text',
 		'priority'    => 60,
 	));
 
 	// Ouverture dans un nouvel onglet
-	$wp_customize->add_setting('squarechilli_header_cta_target', array(
+	$wp_customize->add_setting('abyssenergy_header_cta_target', array(
 		'default'           => false,
 		'sanitize_callback' => 'wp_validate_boolean',
 		'transport'         => 'refresh',
 	));
 
-	$wp_customize->add_control('squarechilli_header_cta_target', array(
-		'label'    => __('Ouvrir dans un nouvel onglet', 'squarechilli-child'),
-		'section'  => 'squarechilli_header_cta_section',
+	$wp_customize->add_control('abyssenergy_header_cta_target', array(
+		'label'    => __('Ouvrir dans un nouvel onglet', 'abyssenergy'),
+		'section'  => 'abyssenergy_header_cta_section',
 		'type'     => 'checkbox',
 		'priority' => 70,
 	));
 
 	// Masquer sur mobile
-	$wp_customize->add_setting('squarechilli_header_cta_hide_mobile', array(
+	$wp_customize->add_setting('abyssenergy_header_cta_hide_mobile', array(
 		'default'           => false,
 		'sanitize_callback' => 'wp_validate_boolean',
 		'transport'         => 'refresh',
 	));
 
-	$wp_customize->add_control('squarechilli_header_cta_hide_mobile', array(
-		'label'    => __('Masquer sur mobile', 'squarechilli-child'),
-		'section'  => 'squarechilli_header_cta_section',
+	$wp_customize->add_control('abyssenergy_header_cta_hide_mobile', array(
+		'label'    => __('Masquer sur mobile', 'abyssenergy'),
+		'section'  => 'abyssenergy_header_cta_section',
 		'type'     => 'checkbox',
 		'priority' => 80,
 	));
 }
-add_action('customize_register', 'squarechilli_child_header_cta_customize_register');
+add_action('customize_register', 'abyssenergy_header_cta_customize_register');
 
 /**
  * Enqueue des scripts pour le CTA Header
  */
-function squarechilli_child_enqueue_header_cta_assets()
+function abyssenergy_enqueue_header_cta_assets()
 {
 	// Script pour le CTA Header
-	if (get_theme_mod('squarechilli_header_cta_enabled', false)) {
+	if (get_theme_mod('abyssenergy_header_cta_enabled', false)) {
 		wp_enqueue_script(
-			'squarechilli-header-cta',
+			'abyssenergy-header-cta',
 			get_stylesheet_directory_uri() . '/js/header-cta.js',
 			array(),
-			squarechilli_child_get_file_version('/js/header-cta.js'),
+			abyssenergy_get_file_version('/js/header-cta.js'),
 			true
 		);
 
 		// Variables pour le script header CTA
-		wp_localize_script('squarechilli-header-cta', 'squarechilliHeaderCTA', array(
-			'enabled' => get_theme_mod('squarechilli_header_cta_enabled', false),
-			'text' => get_theme_mod('squarechilli_header_cta_text', __('Nous contacter', 'squarechilli-child')),
-			'url' => get_theme_mod('squarechilli_header_cta_url', home_url('/contact/')),
-			'style' => get_theme_mod('squarechilli_header_cta_style', 'primary'),
-			'size' => get_theme_mod('squarechilli_header_cta_size', 'medium'),
-			'icon' => get_theme_mod('squarechilli_header_cta_icon', ''),
-			'target' => get_theme_mod('squarechilli_header_cta_target', false),
-			'hide_mobile' => get_theme_mod('squarechilli_header_cta_hide_mobile', false),
+		wp_localize_script('abyssenergy-header-cta', 'abyssenergyHeaderCTA', array(
+			'enabled' => get_theme_mod('abyssenergy_header_cta_enabled', false),
+			'text' => get_theme_mod('abyssenergy_header_cta_text', __('Nous contacter', 'abyssenergy')),
+			'url' => get_theme_mod('abyssenergy_header_cta_url', home_url('/contact/')),
+			'style' => get_theme_mod('abyssenergy_header_cta_style', 'primary'),
+			'size' => get_theme_mod('abyssenergy_header_cta_size', 'medium'),
+			'icon' => get_theme_mod('abyssenergy_header_cta_icon', ''),
+			'target' => get_theme_mod('abyssenergy_header_cta_target', false),
+			'hide_mobile' => get_theme_mod('abyssenergy_header_cta_hide_mobile', false),
 		));
 	}
 }
-add_action('wp_enqueue_scripts', 'squarechilli_child_enqueue_header_cta_assets');
+add_action('wp_enqueue_scripts', 'abyssenergy_enqueue_header_cta_assets');
 
 /**
  * Fonction pour afficher le CTA Header (utilisée pour preview et fallback)
  */
-function squarechilli_child_display_header_cta()
+function abyssenergy_display_header_cta()
 {
 	// Vérifier si le CTA est activé
-	if (!get_theme_mod('squarechilli_header_cta_enabled', false)) {
+	if (!get_theme_mod('abyssenergy_header_cta_enabled', false)) {
 		return '';
 	}
 
 	// Récupérer les paramètres
-	$text = get_theme_mod('squarechilli_header_cta_text', __('Nous contacter', 'squarechilli-child'));
-	$url = get_theme_mod('squarechilli_header_cta_url', home_url('/contact/'));
-	$style = get_theme_mod('squarechilli_header_cta_style', 'primary');
-	$size = get_theme_mod('squarechilli_header_cta_size', 'medium');
-	$icon = get_theme_mod('squarechilli_header_cta_icon', '');
-	$target = get_theme_mod('squarechilli_header_cta_target', false);
-	$hide_mobile = get_theme_mod('squarechilli_header_cta_hide_mobile', false);
+	$text = get_theme_mod('abyssenergy_header_cta_text', __('Nous contacter', 'abyssenergy'));
+	$url = get_theme_mod('abyssenergy_header_cta_url', home_url('/contact/'));
+	$style = get_theme_mod('abyssenergy_header_cta_style', 'primary');
+	$size = get_theme_mod('abyssenergy_header_cta_size', 'medium');
+	$icon = get_theme_mod('abyssenergy_header_cta_icon', '');
+	$target = get_theme_mod('abyssenergy_header_cta_target', false);
+	$hide_mobile = get_theme_mod('abyssenergy_header_cta_hide_mobile', false);
 
 	// Si pas de texte ou d'URL, ne pas afficher
 	if (empty($text) || empty($url)) {
@@ -631,23 +842,23 @@ function squarechilli_child_display_header_cta()
 }
 
 // add in customizer site identity the logo for the footer
-function squarechilli_child_customize_register_footer_logo($wp_customize)
+function abyssenergy_customize_register_footer_logo($wp_customize)
 {
 	// Ajouter le logo du footer
-	$wp_customize->add_setting('squarechilli_footer_logo', array(
+	$wp_customize->add_setting('abyssenergy_footer_logo', array(
 		'sanitize_callback' => 'esc_url_raw',
 		'transport'         => 'refresh',
 	));
 
 	$wp_customize->add_control(new WP_Customize_Image_Control(
 		$wp_customize,
-		'squarechilli_footer_logo',
+		'abyssenergy_footer_logo',
 		array(
-			'label'    => __('Logo du Footer', 'squarechilli-child'),
+			'label'    => __('Logo du Footer', 'abyssenergy'),
 			'section'  => 'title_tagline',
-			'settings' => 'squarechilli_footer_logo',
+			'settings' => 'abyssenergy_footer_logo',
 			'priority' => 30,
 		)
 	));
 }
-add_action('customize_register', 'squarechilli_child_customize_register_footer_logo');
+add_action('customize_register', 'abyssenergy_customize_register_footer_logo');

@@ -9,7 +9,7 @@ Le thème enfant est maintenant correctement configuré avec l'en-tête WordPres
 1. **Allez dans l'administration WordPress**
 
    - `Apparence > Thèmes`
-   - Activez "Abyss Energy Child"
+   - Activez "Abyss Energy "
 
 2. **Vérifiez l'activation**
    - Le thème devrait maintenant être reconnu par WordPress
@@ -56,7 +56,7 @@ $spacing-md: 1rem; // Espacement moyen
 ## 🛠️ Structure des fichiers
 
 ```
-squarechilli-child/
+abyssenergy-child/
 ├── style.css                 ✅ CSS compilé avec en-tête WordPress
 ├── functions.php             ✅ Fonctions du thème enfant
 ├── dev.sh                    ✅ Script de développement

@@ -79,8 +79,8 @@ class HeaderCTA {
 
     getCTAData() {
         // Récupérer les données depuis les variables localisées WordPress
-        if (typeof squarechilliHeaderCTA !== 'undefined') {
-            return squarechilliHeaderCTA;
+        if (typeof abyssenergyHeaderCTA !== 'undefined') {
+            return abyssenergyHeaderCTA;
         }
 
         // Fallback: chercher dans un élément script
@@ -208,7 +208,7 @@ class HeaderCTA {
         if (typeof wp === 'undefined' || !wp.customize) return;
 
         // Texte du bouton
-        wp.customize('squarechilli_header_cta_text', (value) => {
+        wp.customize('abyssenergy_header_cta_text', (value) => {
             value.bind((newValue) => {
                 const textElement = this.ctaElement?.querySelector('.header-cta-btn__text');
                 if (textElement) {
@@ -218,7 +218,7 @@ class HeaderCTA {
         });
 
         // Style du bouton
-        wp.customize('squarechilli_header_cta_style', (value) => {
+        wp.customize('abyssenergy_header_cta_style', (value) => {
             value.bind((newValue) => {
                 const button = this.ctaElement?.querySelector('.header-cta-btn');
                 if (button) {
@@ -231,7 +231,7 @@ class HeaderCTA {
         });
 
         // Taille du bouton
-        wp.customize('squarechilli_header_cta_size', (value) => {
+        wp.customize('abyssenergy_header_cta_size', (value) => {
             value.bind((newValue) => {
                 const button = this.ctaElement?.querySelector('.header-cta-btn');
                 if (button) {
@@ -242,7 +242,7 @@ class HeaderCTA {
         });
 
         // Activation/désactivation
-        wp.customize('squarechilli_header_cta_enabled', (value) => {
+        wp.customize('abyssenergy_header_cta_enabled', (value) => {
             value.bind((newValue) => {
                 if (newValue && !this.isInjected) {
                     this.injectCTA();

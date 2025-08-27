@@ -1,11 +1,3 @@
-/*!
-Theme Name: Abyss Energy Child
-Description: Thème enfant pour Abyss Energy (squarechilli)
-Author: squarechilli
-Template: squarechilli
-Version: 1.0.0
-*/
-
 // ==========================================================================
 // CONFIGURATION SCSS
 // ==========================================================================
@@ -13,19 +5,19 @@ Version: 1.0.0
 // Il importe tous les autres fichiers dans le bon ordre
 
 // 1. Abstracts - Variables, mixins, fonctions
-@use "abstracts/variables" as *;
-@use "abstracts/mixins" as *;
+@use "abstracts/variables";
+@use "abstracts/mixins";
 
 // 2. Base - Reset, typographie, éléments de base
-@use "base/base" as *;
-@use "base/utilities" as *;
+@use "base/base";
+@use "base/utilities";
 
 // 3. Layout - Structure générale du site
-@use "layout/layout" as *;
+@use "layout/layout";
 
 // 4. Components - Composants réutilisables
-@use "components/components" as *;
+@use "components/components";
 
 // 5. Pages - Styles spécifiques aux pages
-@use "pages/pages" as *;
+@use "pages/pages";
 @use "pages/jobs" as *;
