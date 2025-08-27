@@ -42,10 +42,16 @@
       display: none;
     }
     /* Toggle menu icon */
-    &:checked ~ nav {
+    &:checked ~ .main-menu {
       @include respond-to(xs) {
         max-height: 100vh;
         padding-top: 100px;
+        display: block;
+        .menu {
+          display: flex;
+          flex-direction: column;
+          gap: map.get($spacings, "component-md");
+        }
       }
     }
     &:checked ~ .hamb .hamb-line {
@@ -62,25 +68,6 @@
   }
 
   .main-menu {
-    // Mobile menu
-    @include respond-to(xs) {
-      @include transition(max-height);
-      & {
-        height: 100vh;
-        background-color: $white-100;
-        position: fixed;
-        top: -1rem;
-        left: 0;
-        right: 0;
-        width: 100%;
-        overflow: hidden;
-        z-index: -1;
-
-        .menu-item {
-          margin-bottom: map.get($spacings, "component-md");
-        }
-      }
-    }
     // Default menu
     & {
       margin: 0;
@@ -125,6 +112,26 @@
         }
       }
     }
+    // Mobile menu
+    @include respond-to(xs) {
+      @include transition(max-height);
+      & {
+        height: 100vh;
+        background-color: $white-100;
+        position: fixed;
+        top: -1rem;
+        left: 0;
+        right: 0;
+        width: 100%;
+        overflow: hidden;
+        z-index: -1;
+        display: none;
+        .menu-item {
+          margin-bottom: map.get($spacings, "component-md");
+        }
+      }
+    }
+
     .menu {
       list-style: none;
       margin: 0;
@@ -144,26 +151,23 @@
   }
   /* Menu Icon */
   .hamb {
+    display: none;
     @include respond-to(xs) {
       display: block;
       cursor: pointer;
       float: right;
       padding: 20px 20px;
-      background-color: var(--color-orange);
-      z-index: 999;
     }
-    & {
-      display: none;
-    }
+
     &-line {
-      background: $white-100;
+      background: $color-primary;
       display: block;
       height: 2px;
       position: relative;
       width: 24px;
       &:before,
       &:after {
-        background: $white-100;
+        background: $color-primary;
         content: "";
         display: block;
         height: 100%;
