@@ -207,7 +207,11 @@ get_header(); ?>
 										<?php endforeach;
 										endif; ?>
 									</div>
-
+									<?php
+									if (get_the_time('U') > strtotime('-5 days')) {
+										echo '<span class="new">New</span>';
+									}
+									?>
 									<!-- Titre et localisation -->
 									<div class="job-header mb-3">
 										<h4 class="job-title">
