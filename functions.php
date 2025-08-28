@@ -373,6 +373,7 @@ function abyssenergy_add_job_query_vars()
 	$wp->add_query_var('job_search');
 	$wp->add_query_var('job_sector');
 	$wp->add_query_var('job_location');
+	$wp->add_query_var('job_country');
 	$wp->add_query_var('job_type');
 }
 

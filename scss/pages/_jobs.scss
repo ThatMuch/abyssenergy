@@ -55,29 +55,6 @@
       max-width: 25rem;
     }
   }
-  // Formulaire de filtre
-  .jobs-filters {
-    .form-control {
-      width: 100%;
-      padding: $spacing-sm;
-      border: 2px solid $neutral-300;
-      border-radius: $border-radius-md;
-      font-family: $font-main;
-      @include transition(border-color);
-
-      &:focus {
-        outline: none;
-        border-color: $color-secondary;
-      }
-    }
-
-    .form-label {
-      display: block;
-      margin-bottom: $spacing-xs;
-      font-weight: 600;
-      color: $color-primary-dark;
-    }
-  }
 
   // Grille des emplois
   .jobs-grid {
@@ -111,25 +88,6 @@
           margin-bottom: 0 !important;
 
           @include respond-to(md) {
-            margin-bottom: $spacing-md !important;
-          }
-        }
-
-        .job-excerpt {
-          flex: 2;
-          margin-bottom: 0 !important;
-
-          @include respond-to(md) {
-            margin-bottom: $spacing-md !important;
-          }
-        }
-
-        .job-meta {
-          flex: 1;
-          text-align: right;
-
-          @include respond-to(md) {
-            text-align: left !important;
             margin-bottom: $spacing-md !important;
           }
         }
@@ -236,7 +194,7 @@
       #fff 110.25%
     );
     &::before {
-      background: url("./images/sector-renewables.webp") no-repeat center/cover;
+      background: url("./images/sector-renewable.webp") no-repeat center/cover;
     }
 
     .job-sector {
@@ -298,13 +256,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-  }
-
-  // Informations sur les résultats
-  .jobs-results-info {
-    border-bottom: 1px solid $neutral-200;
-    padding-bottom: $spacing-md;
-    margin-bottom: $spacing-lg !important;
+    text-transform: capitalize;
   }
 
   // Pagination
@@ -318,23 +270,36 @@
       align-items: center;
     }
     span.page-numbers {
-      padding: $spacing-sm $spacing-md;
       color: $color-primary-dark;
       text-decoration: none;
       border-radius: $border-radius-md;
       @include transition();
-
+      width: 2rem;
+      height: 2rem;
+      display: block;
+      text-align: center;
+      line-height: 2rem;
       &:hover,
       &.current {
         background-color: $color-secondary;
         text-decoration: none;
         color: $white-100;
+        border-radius: $border-radius-full;
       }
+    }
 
-      &.prev,
-      &.next {
-        font-weight: 600;
-      }
+    .prev,
+    .next {
+      font-weight: 600;
+      background-color: $color-primary;
+      text-decoration: none;
+      color: $white-100;
+      border-radius: $border-radius-full;
+      width: 2rem;
+      height: 2rem;
+      display: block;
+      text-align: center;
+      line-height: 2rem;
     }
 
     .page-numbers.dots {
