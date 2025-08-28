@@ -373,6 +373,7 @@ function abyssenergy_add_job_query_vars()
 	$wp->add_query_var('job_search');
 	$wp->add_query_var('job_sector');
 	$wp->add_query_var('job_location');
+	$wp->add_query_var('job_country');
 	$wp->add_query_var('job_type');
 }
 
@@ -862,3 +863,10 @@ function abyssenergy_customize_register_footer_logo($wp_customize)
 	));
 }
 add_action('customize_register', 'abyssenergy_customize_register_footer_logo');
+
+
+// a function to trnaform text in uppercase to lower case
+function abyssenergy_to_lowercase($text)
+{
+	return strtolower($text);
+}

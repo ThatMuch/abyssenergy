@@ -129,6 +129,28 @@
   padding-bottom: $spacing-2xl !important;
 }
 
+.gap-0 {
+  gap: 0 !important;
+}
+.gap-1 {
+  gap: $spacing-xs !important;
+}
+.gap-2 {
+  gap: $spacing-sm !important;
+}
+.gap-3 {
+  gap: $spacing-md !important;
+}
+.gap-4 {
+  gap: $spacing-lg !important;
+}
+.gap-5 {
+  gap: $spacing-xl !important;
+}
+.gap-6 {
+  gap: $spacing-2xl !important;
+}
+
 // Alignement de texte
 .text-left {
   text-align: left !important;
@@ -158,8 +180,14 @@
 .bg-orange {
   background-color: $color-secondary !important;
 }
+.has-colour-orange-color {
+  color: $color-secondary !important;
+}
 .bg-blue {
   background-color: $color-primary-dark !important;
+}
+.has-colour-blue-color {
+  color: $color-primary !important;
 }
 .bg-light {
   background-color: $neutral-50 !important;

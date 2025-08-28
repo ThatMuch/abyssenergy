@@ -64,6 +64,154 @@
   &--small {
     padding: $spacing-xs $spacing-sm;
   }
+
+  &--icon {
+    display: flex;
+    width: 2.75rem;
+    height: 2.75rem;
+    justify-content: center;
+    align-items: center;
+    border-radius: $border-radius-full;
+    i {
+      font-size: $font-size-sm;
+    }
+    & .btn--small {
+      width: 2rem;
+      height: 2rem;
+      i {
+        font-size: $font-size-xs;
+      }
+    }
+
+    & .btn--large {
+      width: 3.25rem;
+      height: 3.25rem;
+      i {
+        font-size: $font-size-md;
+      }
+    }
+  }
+}
+
+// Inputs
+input,
+.input {
+  width: 100%;
+  padding: $spacing-sm $spacing-md;
+  font-size: $font-size-base;
+  border: 3px solid $neutral-200;
+  border-radius: $border-radius-full;
+  background-color: $white-100;
+  color: $color-text-primary;
+  font-family: $font-main;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: 0.0625rem;
+
+  @include transition();
+
+  &::placeholder {
+    color: $neutral-500;
+    opacity: 1;
+  }
+
+  &:focus {
+    border-color: $color-primary;
+    outline: none;
+  }
+
+  &--error {
+    border-color: $color-danger;
+
+    &:focus {
+      box-shadow: 0 0 0 3px rgba($color-danger, 0.2);
+    }
+  }
+
+  input:disabled,
+  &--disabled {
+    background-color: $neutral-100;
+    cursor: not-allowed;
+    color: $neutral-500;
+  }
+}
+
+// Select
+select,
+select::picker(select) {
+  appearance: base-select;
+}
+
+select {
+  /* Style du bouton select */
+
+  border-radius: $border-radius-full;
+  border: 2px solid $color-primary;
+  color: $color-primary;
+  font-size: $font-size-md;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5rem; /* 150% */
+  display: block;
+  padding: 0.625rem 1rem 0.625rem 1rem;
+  position: relative;
+  width: 250px;
+  max-width: 100%;
+  &:before {
+    content: "";
+    height: 12px;
+    width: 12px;
+    position: absolute;
+    right: 1rem;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 1;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z' /%3E%3C/svg%3E");
+  }
+}
+
+select::picker-icon {
+  /* Pseudo élément représentant la flèche */
+  display: none;
+}
+
+select::picker(select) {
+  /* Menu déroulant */
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.4s allow-discrete;
+  border: none;
+  border-radius: $border-radius-md;
+}
+
+select::picker(select):popover-open {
+  transform: translateY(8px);
+  opacity: 1;
+  @starting-style {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+option {
+  padding: 0.5rem;
+  color: $color-primary;
+  &:hover {
+    background: $neutral-200;
+  }
+}
+option::checkmark {
+  /* Coche à gauche des options */
+  font-size: 1.5rem;
+  font-family: $font-main;
+}
+
+option,
+selectedcontent {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 // Badge/Étiquettes
@@ -141,10 +289,18 @@
 .col {
   flex: 1;
   padding: 0 $spacing-sm;
+  &-5 {
+    flex: 0 0 41.666667%;
+    max-width: 41.666667%;
+  }
 
   &-6 {
     flex: 0 0 50%;
     max-width: 50%;
+  }
+  &-7 {
+    flex: 0 0 58.333333%;
+    max-width: 58.333333%;
   }
   &-4 {
     flex: 0 0 33.333333%;
@@ -156,9 +312,18 @@
   }
 
   @include respond-to(md) {
+    &-md-5 {
+      flex: 0 0 41.666667%;
+      max-width: 41.666667%;
+    }
     &-md-6 {
       flex: 0 0 50%;
       max-width: 50%;
+    }
+
+    &-md-7 {
+      flex: 0 0 58.333333%;
+      max-width: 58.333333%;
     }
     &-md-4 {
       flex: 0 0 33.333333%;

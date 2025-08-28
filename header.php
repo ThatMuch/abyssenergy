@@ -32,6 +32,7 @@
 </head>
 
 <body <?php body_class(); ?>>
+
     <header class="header">
         <div class="header__logo">
             <?php
