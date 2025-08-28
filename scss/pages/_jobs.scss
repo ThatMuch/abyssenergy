@@ -3,6 +3,7 @@
 @use "../abstracts/mixins" as *;
 @use "sass:map";
 .jobs-listing-page {
+  overflow-x: hidden;
   .page-header {
     position: relative;
     padding-bottom: $spacing-3xl;
@@ -25,6 +26,9 @@
       margin-right: auto;
       img {
         margin: 0 auto;
+        @include respond-to(xs) {
+          width: 200px;
+        }
       }
     }
 
@@ -56,11 +60,22 @@
     }
   }
 
+  .jobs-filter-form .row {
+    @include respond-to(xs) {
+      justify-content: center;
+    }
+  }
+
   // Grille des emplois
   .jobs-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     gap: $spacing-xl;
+
+    @include respond-to(xs) {
+      grid-template-columns: auto;
+      gap: $spacing-lg;
+    }
 
     // Vue liste
     &.list-view {
@@ -225,6 +240,11 @@
     -webkit-line-clamp: 2;
     text-transform: capitalize;
     font-weight: 700;
+
+    @include respond-to(xs) {
+      font-size: $font-size-lg;
+      height: 3.4375rem;
+    }
 
     a {
       text-decoration: none;
