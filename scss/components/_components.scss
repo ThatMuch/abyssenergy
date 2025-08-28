@@ -311,6 +311,11 @@ selectedcontent {
     max-width: 25%;
   }
 
+  &-9 {
+    flex: 0 0 75%;
+    max-width: 75%;
+  }
+
   @include respond-to(md) {
     &-md-5 {
       flex: 0 0 41.666667%;
@@ -332,6 +337,11 @@ selectedcontent {
     &-md-3 {
       flex: 0 0 25%;
       max-width: 25%;
+    }
+
+    &-md-9 {
+      flex: 0 0 75%;
+      max-width: 75%;
     }
   }
 }
