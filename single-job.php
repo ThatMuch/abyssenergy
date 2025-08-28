@@ -1,89 +1,83 @@
 <?php get_header(); ?>
 <section class='content job-detail'>
     <div class="container">
+        <a href="<?php echo get_permalink(); ?>" class="btn btn--outline mb-5"><i class="fa fa-chevron-left"></i> Back</a>
         <?php if (have_posts()) : ?>
             <?php while (have_posts()) : the_post(); ?>
                 <section class="job-detail-header">
+                    <span class="job-sector">
+                        <?php
+                        $sector_meta = get_the_terms($post->ID, 'job-sector');
+                        $sector = join(', ', wp_list_pluck($sector_meta, 'name'));
+                        echo $sector; ?>
+                    </span>
+                    <?php
+                    if (get_the_time('U') > strtotime('-5 days')) {
+                        echo '<span class="new">New</span>';
+                    }
+                    ?>
                     <h1 class="job-detail-title"><?php the_title(); ?></h1>
+                    <span class="job-skill">
+                        <?php
+                        $skill_meta = get_the_terms($post->ID, 'job-skill');
+                        $skill = join(', ', wp_list_pluck($skill_meta, 'name'));
+                        echo $skill;
+                        ?>
+                    </span>
                 </section>
-                <div class="row">
-                    <div class="col-md-9 pr-4">
-                        <h2 class='job-detail-title'>Job Detail</h2>
-                        <div class='job-detail-info'>
-                            <?php
-                            $sity = get_field('job_city');
-                            $state = get_field('job_state');
 
+                <section class="job-detail-info">
+                    <div class="row">
+                        <div class="col col-md-3">
+                            <p>Location</p>
+                            <?php
+                            $city = get_field('job_city');
+                            $state = get_field('job_state');
+                            ?>
+                            <p class="job-location">
+                                <i class="fas fa-map-marker-alt mr-2"></i>
+                                <?php echo esc_html($city); ?>, <?php echo esc_html($state); ?>
+                            </p>
+                        </div>
+                        <div class="col col-md-3">
+                            <p>Category</p>
+                            <?php
                             $category_meta = get_the_terms($post->ID, 'job-category');
                             $category = join(', ', wp_list_pluck($category_meta, 'name'));
-
+                            ?>
+                            <span class="tag tag-primary">
+                                <?php echo esc_html($category); ?>
+                            </span>
+                        </div>
+                        <div class="col col-md-3">
+                            <p>Work type</p>
+                            <?php
                             $emp_meta = get_the_terms($post->ID, 'job-type');
                             $emp = join(', ', wp_list_pluck($emp_meta, 'name'));
-
-                            $skill_meta = get_the_terms($post->ID, 'job-skill');
-                            $skill = join(', ', wp_list_pluck($skill_meta, 'name'));
-
-                            $sector_meta = get_the_terms($post->ID, 'job-sector');
-                            $sector = join(', ', wp_list_pluck($sector_meta, 'name'));
-
-
                             ?>
-
-                            <p><?php if ($emp) {
-                                    echo '<span>Work Type:</span>' . $emp . '';
-                                } ?></p>
-                            <p><?php if ($sity) {
-                                    echo '<span>Location:</span>' . $sity . ', ' . $state . '';
-                                } ?></p>
-                            <p><?php if ($sector) {
-                                    echo '<span>Sector:</span>' . $sector . '';
-                                } ?></p>
-                            <p><?php if ($category) {
-                                    echo '<span>Category:</span>' . $category . '';
-                                } ?></p>
-                            <p><?php if ($skill) {
-                                    echo '<span>Role:</span>' . $skill . '';
-                                } ?></p>
-                            <div class='share'>
-                                <?php
-                                $jobUrl = untrailingslashit(get_permalink());
-                                $jobTitle = get_the_title();
-                                ?>
-
-                                <p><span><strong>Share this job:</strong></span>
-
-                                    <a class="btn btn-default btn-block btn-white job-social-share" data-social="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo $jobUrl; ?>&title=<?php echo $jobTitle; ?>&source=Abyss" target="_blank" style="display:inline"><i class="fa-brands fa-linkedin-in"></i></a>
-
-
-                                    <a class="btn btn-default btn-block btn-white job-social-share" data-social="whatsapp" href="https://api.whatsapp.com/send?text=New job opening / Nouveau poste disponible - <?php echo $jobUrl; ?>" target="_blank" style="display:inline"><i class="fa-brands fa-whatsapp"></i></a>
-
-                                    <a class="btn btn-default btn-block btn-white job-social-share" data-social="email" href="mailto:?subject=New job opening / Nouveau poste disponible&body=<?php echo $jobUrl; ?>" style="display:inline"><i class="fa-regular     fa-envelope"></i></a>
-
-                                </p>
-                                <p><span>About Us:</span>Abyss Energy is a consulting firm specializing in engineering and recruitment</p>
-                            </div>
-                        </div>
-
-                        <h2 style='margin-top: 28px;padding-bottom: 0'>Job Description</h2>
-                        <?php the_content(); ?>
-                        <div class="wp-block-buttons is-layout-flex wp-container-core-buttons-is-layout-1 wp-block-buttons-is-layout-flex">
-                            <div class="wp-block-button is-style-fill showtabs">
-                                <a href='/search-jobs/' class="wp-block-button__link has-colour-white-color has-colour-orange-background-color has-text-color has-background has-link-color has-text-align-center wp-element-button" style="border-radius:10px">Back to all jobs</a>
-                            </div>
+                            <span class="tag tag-primary">
+                                <?php echo esc_html($emp); ?>
+                            </span>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                </section>
+                <div class="row">
+                    <div class="col col-md-9 pr-4">
+                        <h2 style='margin-top: 28px;padding-bottom: 0'>Job Description</h2>
+                        <?php the_content(); ?>
+                    </div>
+                    <div class="col col-md-3">
                         <div class="card">
                             <h2>Apply</h2>
                             <?php
-                            $jobID = get_field('job_id');
-                            $owner = get_field('recruiter_email');
-                            $screeningQuestion = get_field('screening_question');
-                            $screeningQuestion = implode(', ', $screeningQuestion);
+                            // $jobID = get_field('job_id');
+                            // $owner = get_field('recruiter_email');
+                            // $screeningQuestion = get_field('screening_question');
+                            // $screeningQuestion = implode(', ', $screeningQuestion);
 
-                            $skill_meta = get_the_terms($post->ID, 'job-skill');
-                            $skill = join(', ', wp_list_pluck($skill_meta, 'name'));
-                            echo do_shortcode('[gravityform id="1" title="false" ajax="true" field_values="jobID=' . $jobID . '&owner=' . $owner . '&screening=' . $screeningQuestion . '&position=' . $skill . '"]');
+                            // $skill_meta = get_the_terms($post->ID, 'job-skill');
+                            // $skill = join(', ', wp_list_pluck($skill_meta, 'name'));
+                            // echo do_shortcode('[gravityform id="1" title="false" ajax="true" field_values="jobID=' . $jobID . '&owner=' . $owner . '&screening=' . $screeningQuestion . '&position=' . $skill . '"]');
                             ?>
                         </div>
                     </div>
