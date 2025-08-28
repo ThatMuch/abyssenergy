@@ -1,14 +1,19 @@
 <?php get_header(); ?>
 <section class='content job-detail'>
     <div class="container">
-        <a href="<?php echo get_permalink(); ?>" class="btn btn--outline mb-5"><i class="fa fa-chevron-left"></i> Back</a>
+        <a href="<?php // go back to previous page
+                    echo esc_url(wp_get_referer());
+                    ?>" class="btn btn--outline mb-5"><i class="fa fa-chevron-left"></i> Back</a>
         <?php if (have_posts()) : ?>
             <?php while (have_posts()) : the_post(); ?>
                 <section class="job-detail-header">
                     <span class="job-sector">
                         <?php
                         $sector_meta = get_the_terms($post->ID, 'job-sector');
-                        $sector = join(', ', wp_list_pluck($sector_meta, 'name'));
+                        $sector = '';
+                        if ($sector_meta && !is_wp_error($sector_meta)) {
+                            $sector = join(', ', wp_list_pluck($sector_meta, 'name'));
+                        }
                         echo $sector; ?>
                     </span>
                     <?php
@@ -20,7 +25,10 @@
                     <span class="job-skill">
                         <?php
                         $skill_meta = get_the_terms($post->ID, 'job-skill');
-                        $skill = join(', ', wp_list_pluck($skill_meta, 'name'));
+                        $skill = '';
+                        if ($skill_meta && !is_wp_error($skill_meta)) {
+                            $skill = join(', ', wp_list_pluck($skill_meta, 'name'));
+                        }
                         echo $skill;
                         ?>
                     </span>
@@ -36,14 +44,28 @@
                             ?>
                             <p class="job-location">
                                 <i class="fas fa-map-marker-alt mr-2"></i>
-                                <?php echo esc_html($city); ?>, <?php echo esc_html($state); ?>
+                                <?php
+                                if ($city) {
+                                    echo esc_html($city);
+                                    if ($state) {
+                                        echo ', ' . esc_html($state);
+                                    }
+                                } elseif ($state) {
+                                    echo esc_html($state);
+                                } else {
+                                    echo 'Location not specified';
+                                }
+                                ?>
                             </p>
                         </div>
                         <div class="col col-md-3">
                             <p>Category</p>
                             <?php
                             $category_meta = get_the_terms($post->ID, 'job-category');
-                            $category = join(', ', wp_list_pluck($category_meta, 'name'));
+                            $category = '';
+                            if ($category_meta && !is_wp_error($category_meta)) {
+                                $category = join(', ', wp_list_pluck($category_meta, 'name'));
+                            }
                             ?>
                             <span class="tag tag-primary">
                                 <?php echo esc_html($category); ?>
@@ -53,7 +75,10 @@
                             <p>Work type</p>
                             <?php
                             $emp_meta = get_the_terms($post->ID, 'job-type');
-                            $emp = join(', ', wp_list_pluck($emp_meta, 'name'));
+                            $emp = '';
+                            if ($emp_meta && !is_wp_error($emp_meta)) {
+                                $emp = join(', ', wp_list_pluck($emp_meta, 'name'));
+                            }
                             ?>
                             <span class="tag tag-primary">
                                 <?php echo esc_html($emp); ?>
@@ -70,14 +95,35 @@
                         <div class="card">
                             <h2>Apply</h2>
                             <?php
-                            // $jobID = get_field('job_id');
-                            // $owner = get_field('recruiter_email');
-                            // $screeningQuestion = get_field('screening_question');
-                            // $screeningQuestion = implode(', ', $screeningQuestion);
+                            $jobID = get_field('job_id');
+                            $owner = get_field('recruiter_email');
+                            $screeningQuestion = get_field('screening_question');
 
-                            // $skill_meta = get_the_terms($post->ID, 'job-skill');
-                            // $skill = join(', ', wp_list_pluck($skill_meta, 'name'));
-                            // echo do_shortcode('[gravityform id="1" title="false" ajax="true" field_values="jobID=' . $jobID . '&owner=' . $owner . '&screening=' . $screeningQuestion . '&position=' . $skill . '"]');
+                            // Vérifier si le champ est une chaîne JSON et la convertir en tableau si nécessaire
+                            if ($screeningQuestion && is_string($screeningQuestion)) {
+                                // Essayer de décoder au cas où c'est une chaîne JSON
+                                $decoded = json_decode($screeningQuestion, true);
+                                if (is_array($decoded)) {
+                                    $screeningQuestion = $decoded;
+                                }
+                            }
+
+                            // S'assurer que nous avons un tableau pour l'implode
+                            if ($screeningQuestion && is_array($screeningQuestion)) {
+                                $screeningQuestion = implode(', ', $screeningQuestion);
+                            } elseif ($screeningQuestion && !is_array($screeningQuestion)) {
+                                // Si c'est une chaîne mais pas un JSON valide, on la garde telle quelle
+                                $screeningQuestion = strval($screeningQuestion);
+                            } else {
+                                $screeningQuestion = '';
+                            }
+
+                            $skill_meta = get_the_terms($post->ID, 'job-skill');
+                            $skill = '';
+                            if ($skill_meta && !is_wp_error($skill_meta)) {
+                                $skill = join(', ', wp_list_pluck($skill_meta, 'name'));
+                            }
+                            echo do_shortcode('[gravityform id="1" title="false" ajax="true" field_values="jobID=' . $jobID . '&owner=' . $owner . '&position=' . $skill . '&screening=' . $screeningQuestion . '"]');
                             ?>
                         </div>
                     </div>
@@ -138,10 +184,16 @@
                             $state = get_field('job_state');
 
                             $category_meta = get_the_terms($post->ID, 'job-category');
-                            $category = join(', ', wp_list_pluck($category_meta, 'name'));
+                            $category = '';
+                            if ($category_meta && !is_wp_error($category_meta)) {
+                                $category = join(', ', wp_list_pluck($category_meta, 'name'));
+                            }
 
                             $sector_meta = get_the_terms($post->ID, 'job-sector');
-                            $sector = join(', ', wp_list_pluck($sector_meta, 'name'));
+                            $sector = '';
+                            if ($sector_meta && !is_wp_error($sector_meta)) {
+                                $sector = join(', ', wp_list_pluck($sector_meta, 'name'));
+                            }
 
                     ?>
                             <div class='job-result'>
@@ -159,7 +211,16 @@
                                         <?php if ($sector) {
                                             echo '<p>' . $sector . '</p>';
                                         }; ?>
-                                        <p><?php echo $sity; ?>, <?php echo $state; ?></p>
+                                        <p><?php
+                                            if ($sity) {
+                                                echo esc_html($sity);
+                                                if ($state) {
+                                                    echo ', ' . esc_html($state);
+                                                }
+                                            } elseif ($state) {
+                                                echo esc_html($state);
+                                            }
+                                            ?></p>
                                     </div>
                                 </a>
                             </div>
