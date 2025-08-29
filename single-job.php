@@ -92,7 +92,7 @@
                     </div>
                 </section>
                 <div class="row">
-                    <div class="col col-md-9 pr-4">
+                    <div class="col col-md-9">
                         <h2 style='margin-top: 28px;padding-bottom: 0'>Job Description</h2>
                         <?php the_content(); ?>
                     </div>
