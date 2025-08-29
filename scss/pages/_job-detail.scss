@@ -1,0 +1,31 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+@use "sass:map";
+.job-detail {
+  .job-sector {
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%; /* 1.3125rem */
+    letter-spacing: 0.0875rem;
+    text-transform: uppercase;
+  }
+  .new {
+    color: $color-secondary;
+    text-transform: uppercase;
+    background-color: #fff;
+    border: 1px solid $color-secondary;
+    font-size: $font-size-xs;
+    padding: 0.125rem 0.375rem;
+    border-radius: $border-radius-md;
+  }
+
+  .job-skill {
+    font-size: $font-size-xl;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%; /* 1.875rem */
+    letter-spacing: 0.0625rem;
+    margin-bottom: map.get($spacings, "component-xl");
+  }
+}
