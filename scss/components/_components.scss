@@ -3,6 +3,7 @@
 @use "../abstracts/mixins" as *;
 @use "sass:map";
 @use "sass:color";
+@use "job-card";
 // Cartes
 .card {
   @include card-style();
@@ -40,6 +41,11 @@
   border: 1px solid transparent;
   font-weight: 500;
 
+  &:disabled {
+    background-color: $neutral-100;
+    cursor: not-allowed;
+    color: $neutral-500;
+  }
   &--primary {
     @include button-style($color-primary);
   }
@@ -51,7 +57,9 @@
   &--outline {
     @include button-style(transparent, $color-text-primary);
     border: 2px solid $color-primary;
-
+    &:disabled {
+      border: 1px solid $neutral-200;
+    }
     &:hover {
       background: rgba($color-primary, 0.3);
     }
@@ -243,6 +251,21 @@ selectedcontent {
   }
   &--danger {
     background-color: $color-danger;
+  }
+}
+
+// Tag
+.tag {
+  display: inline-flex;
+  padding: map.get($spacings, "component-xs") map.get($spacings, "component-sm");
+  align-items: flex-start;
+  gap: map.get($spacings, "component-xs");
+  border-radius: $border-radius-lg;
+  background: $primary-100;
+
+  &-primary {
+    background: $color-primary;
+    color: $white-100;
   }
 }
 

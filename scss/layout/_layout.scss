@@ -307,14 +307,14 @@
 }
 
 .section {
-  padding: $spacing-2xl 0;
+  padding: map.get($spacings, "section-sm") 0;
 
   &--small {
-    padding: $spacing-xl 0;
+    padding: map.get($spacings, "section-sm") 0;
   }
 
   &--large {
-    padding: 120px 0;
+    padding: map.get($spacings, "section-xl") 0;
   }
 }
 

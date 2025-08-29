@@ -33,11 +33,10 @@
                         ?>
                     </span>
                 </section>
-
                 <section class="job-detail-info">
                     <div class="row">
                         <div class="col col-md-3">
-                            <p>Location</p>
+                            <p class="job-label">Location</p>
                             <?php
                             $city = get_field('job_city');
                             $state = get_field('job_state');
@@ -59,7 +58,7 @@
                             </p>
                         </div>
                         <div class="col col-md-3">
-                            <p>Category</p>
+                            <p class="job-label">Category</p>
                             <?php
                             $category_meta = get_the_terms($post->ID, 'job-category');
                             $category = '';
@@ -71,18 +70,24 @@
                                 <?php echo esc_html($category); ?>
                             </span>
                         </div>
-                        <div class="col col-md-3">
-                            <p>Work type</p>
-                            <?php
-                            $emp_meta = get_the_terms($post->ID, 'job-type');
-                            $emp = '';
-                            if ($emp_meta && !is_wp_error($emp_meta)) {
-                                $emp = join(', ', wp_list_pluck($emp_meta, 'name'));
-                            }
-                            ?>
-                            <span class="tag tag-primary">
-                                <?php echo esc_html($emp); ?>
-                            </span>
+                        <div class="col col-md-5">
+                            <p class="job-label">Work type</p>
+                            <div class="d-inline">
+                                <?php
+                                $emp_meta = get_the_terms($post->ID, 'job-type');
+
+                                // transform $emp_meta to string
+                                if ($emp_meta && !is_wp_error($emp_meta)) {
+                                    $emp_meta = wp_list_pluck($emp_meta, 'name');
+                                    $emp_meta = array_map('trim', $emp_meta);
+                                }
+                                $work_types = explode('–', implode('–', $emp_meta));
+
+                                foreach ($work_types as $type) {
+                                    echo '<span class="tag mr-2">' . esc_html($type) . '</span>';
+                                }
+                                ?>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -128,111 +133,10 @@
                         </div>
                     </div>
                 </div>
-                <section class="related-jobs">
-                    <?php
-                    // Get the current post's categories
-                    $current_post_id = get_the_ID();
-                    $categories = get_the_category();
 
-                    $category_ids = [];
-
-                    if (!empty($categories)) {
-                        foreach ($categories as $category) {
-                            $category_ids[] = $category->term_id;
-                        }
-                    }
-
-                    // Define query arguments
-                    $args = [
-                        'post_type' => 'job',
-                        'posts_per_page' => 3,
-                        'post__not_in' => [$current_post_id], // Exclude current post
-                        'orderby' => 'date',
-                        'order' => 'DESC'
-                    ];
-
-                    // If categories exist, filter by category
-                    if (!empty($category_ids)) {
-                        $args['category__in'] = $category_ids;
-                    }
-
-                    // Query the jobs
-                    $query = new WP_Query($args);
-
-                    // If no jobs found in the same category, fetch the latest 5 posts
-                    if (!$query->have_posts()) {
-                        $args = [
-                            'post_type' => 'job',
-                            'posts_per_page' => 3,
-                            'post__not_in' => [$current_post_id],
-                            'orderby' => 'date',
-                            'order' => 'DESC'
-                        ];
-                        $query = new WP_Query($args);
-                    }
-
-                    // Display the jobs
-                    if ($query->have_posts()) :
-                        echo '<h2>Similar Jobs</h2>';
-                        echo '<div class="similar-jobs">';
-                        while ($query->have_posts()) : $query->the_post();
-
-                            $client = get_field('job_client_name');
-
-                            $sity = get_field('job_city');
-
-                            $state = get_field('job_state');
-
-                            $category_meta = get_the_terms($post->ID, 'job-category');
-                            $category = '';
-                            if ($category_meta && !is_wp_error($category_meta)) {
-                                $category = join(', ', wp_list_pluck($category_meta, 'name'));
-                            }
-
-                            $sector_meta = get_the_terms($post->ID, 'job-sector');
-                            $sector = '';
-                            if ($sector_meta && !is_wp_error($sector_meta)) {
-                                $sector = join(', ', wp_list_pluck($sector_meta, 'name'));
-                            }
-
-                    ?>
-                            <div class='job-result'>
-                                <a href='<?php the_permalink(); ?>'>
-                                    <?php
-                                    if (get_the_time('U') > strtotime('-5 days')) {
-                                        echo '<div class="new">New</div>';
-                                    }
-                                    ?>
-                                    <h2><?php the_title(); ?></h2>
-                                    <div class="job-location">
-                                        <?php if ($category) {
-                                            echo '<p>' . $category . '</p>';
-                                        }; ?>
-                                        <?php if ($sector) {
-                                            echo '<p>' . $sector . '</p>';
-                                        }; ?>
-                                        <p><?php
-                                            if ($sity) {
-                                                echo esc_html($sity);
-                                                if ($state) {
-                                                    echo ', ' . esc_html($state);
-                                                }
-                                            } elseif ($state) {
-                                                echo esc_html($state);
-                                            }
-                                            ?></p>
-                                    </div>
-                                </a>
-                            </div>
-                    <?php endwhile;
-                        echo '</div>';
-                    endif;
-                    // Reset post data
-                    wp_reset_postdata();
-                    ?>
-                </section>
             <?php endwhile; ?>
         <?php endif; ?>
+        <?php get_template_part('template-parts/section-similar-jobs'); ?>
     </div>
 </section>
 
