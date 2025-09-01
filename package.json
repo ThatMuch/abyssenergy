@@ -13,7 +13,8 @@
 		"compile": "npm run build:dev && echo '✅ SCSS compiled successfully without warnings!'",
 		"clean:css": "node clean_css.py",
 		"browser-sync": "node browsersync.js",
-		"start": "concurrently \"npm run watch\" \"npm run browser-sync\""
+		"start": "concurrently --names \"SCSS,BS\" --prefix-colors \"blue.bold,green.bold\" --kill-others \"npm run watch\" \"npm run browser-sync\"",
+		"dev-server": "node dev-server.js"
 	},
 	"devDependencies": {
 		"browser-sync": "^3.0.4",
