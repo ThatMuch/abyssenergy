@@ -300,6 +300,15 @@ function abyssenergy_enqueue_scripts()
 		abyssenergy_get_file_version('/js/general.js'),
 		true
 	);
+
+	// Script pour la gestion des téléchargements de fichiers
+	wp_enqueue_script(
+		'abyssenergy-file-upload',
+		get_stylesheet_directory_uri() . '/js/file-upload.js',
+		array('jquery'),
+		abyssenergy_get_file_version('/js/file-upload.js'),
+		true
+	);
 }
 
 add_action('wp_enqueue_scripts', 'abyssenergy_enqueue_scripts');
