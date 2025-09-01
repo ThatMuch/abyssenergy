@@ -15,6 +15,12 @@ $linkedin = get_field('linkedin');
 // get_field google map
 $location_nancy = get_field('nancy');
 $location_paris = get_field('paris');
+
+// get post type consultants
+$consultants = get_posts(array(
+	'post_type' => 'consultants',
+	'posts_per_page' => -1,
+));
 ?>
 
 <div class="page page_contact">
@@ -52,6 +58,64 @@ $location_paris = get_field('paris');
 				</div>
 			</div>
 		</div>
+
+		<section class="section page_team">
+			<h2>Meet the team</h2>
+			<div class="team-members">
+				<div class="wrapper">
+					<?php foreach ($consultants as $consultant) : ?>
+						<div class="card card--consultant">
+							<div class="card--consultant_img">
+								<a href="<?php echo esc_html(get_field('linkedin', $consultant->ID)); ?>" class="card--consultant_link" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin mr-2"></i> </a>
+								<img src="<?php echo esc_url(get_the_post_thumbnail_url($consultant->ID, 'full')); ?>" alt="<?php echo esc_attr($consultant->post_title); ?>" />
+							</div>
+							<div class="card--consultant_footer">
+								<h3 class="mt-0 b1"><?php echo esc_html($consultant->post_title); ?></h3>
+								<p class="mb-0 mt-0"><?php echo esc_html(get_field('position', $consultant->ID)); ?></p>
+							</div>
+							<div class="card--consultant_back">
+								<p><?php echo $consultant->post_content; ?></p>
+							</div>
+						</div>
+					<?php endforeach; ?>
+				</div>
+			</div>
+			<div class="nav-buttons">
+				<button class="scroll-left btn btn--outline  btn--icon"><i class="fa fa-chevron-left"></i></button>
+				<button class="scroll-right btn btn--outline btn--icon"><i class="fa fa-chevron-right"></i></button>
+			</div>
+		</section>
 	</div>
+
+	<script>
+		const scrollLeftBtn = document.querySelector('.scroll-left');
+		const scrollRightBtn = document.querySelector('.scroll-right');
+		const wrapper = document.querySelector('.team-members');
+
+		scrollLeftBtn.addEventListener('click', () => {
+			wrapper.scrollBy({
+				top: 0,
+				left: -460,
+				behavior: 'smooth'
+			});
+		});
+
+		scrollRightBtn.addEventListener('click', () => {
+			wrapper.scrollBy({
+				top: 0,
+				left: 460,
+				behavior: 'smooth'
+			});
+		});
+
+		// disabled the button when reaching the end
+		const disableButtons = () => {
+			scrollLeftBtn.disabled = wrapper.scrollLeft === 0;
+			scrollRightBtn.disabled = wrapper.scrollLeft + wrapper.clientWidth >= wrapper.scrollWidth;
+		};
+
+		wrapper.addEventListener('scroll', disableButtons);
+		disableButtons();
+	</script>
 
 	<?php get_footer(); ?>

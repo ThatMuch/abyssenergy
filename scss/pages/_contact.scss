@@ -44,4 +44,99 @@
       }
     }
   }
+  .team-members {
+    overflow-x: auto;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    .wrapper {
+      display: flex;
+      gap: map.get($spacings, "component-md");
+      width: calc(16.8125rem * 7);
+      padding: 1rem 0 map.get($spacings, "component-lg") 0;
+      .card.job-card {
+        width: 16.8125rem;
+      }
+    }
+  }
+  .card--consultant {
+    position: relative;
+    padding: 0;
+    overflow: hidden;
+    background: linear-gradient(
+      180deg,
+      $interface-color-background-primary 0%,
+      $white-100 100%
+    );
+    transition: background 0.5s ease;
+
+    &:hover {
+      background: linear-gradient(180deg, $color-primary 0%, $primary-500 100%);
+      .card--consultant_back {
+        opacity: 1;
+      }
+      .card--consultant_footer {
+        opacity: 0;
+      }
+      .card--consultant_img img {
+        opacity: 0.18;
+        mix-blend-mode: luminosity;
+      }
+
+      .card--consultant_link {
+        i {
+          background-color: inherit;
+          color: #fff;
+          text-shadow: inherit;
+          -webkit-background-clip: text;
+          -moz-background-clip: text;
+          background-clip: text;
+        }
+      }
+    }
+
+    .card--consultant_link {
+      position: absolute;
+      right: 1rem;
+      top: 1rem;
+      z-index: 2;
+      i {
+        font-size: 1.5rem;
+        background-color: #782d12;
+        color: transparent;
+        text-shadow: 0px 1px 2px $color-secondary;
+        -webkit-background-clip: text;
+        -moz-background-clip: text;
+        background-clip: text;
+      }
+    }
+
+    &_footer {
+      background-color: #fff;
+      padding: map.get($spacings, "component-sm")
+        map.get($spacings, "component-md");
+      text-align: center;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      opacity: 1;
+
+      .b1 {
+        margin-bottom: map.get($map: $spacings, $key: "component-xs");
+      }
+    }
+    &_back {
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: map.get($map: $spacings, $key: "component-md");
+      color: $white-100;
+      transition: opacity 1s ease;
+      transition-delay: 0.2s;
+    }
+  }
 }
