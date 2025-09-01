@@ -1,4 +1,4 @@
-<section class="section-jobs">
+<section class="section section-jobs">
 	<?php
 	$args = [
 		'post_type' => 'job',
@@ -13,8 +13,8 @@
 	// Display the jobs
 	if ($query->have_posts()) : ?>
 
-		<span>Jobs and offers</span>
-		<h2>Connecting Professionals</h2>
+		<span class="section--subtitle">Jobs and offers</span>
+		<h2 class="section--title">Connecting Professionals</h2>
 		<div class="similar-jobs">
 			<div class="wrapper">
 				<?php while ($query->have_posts()) : $query->the_post(); ?>

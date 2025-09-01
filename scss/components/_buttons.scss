@@ -14,14 +14,17 @@
   border: 1px solid transparent;
   padding: $spacing-sm $spacing-md;
   font-weight: 500;
+  font-size: $font-size-sm;
   background-color: $color-primary;
   color: white;
-  border-radius: $border-radius-md;
+  border-radius: $border-radius-full;
   cursor: pointer;
   transition: all 0.3s ease;
 
   &:hover {
     background-color: color.adjust($color-primary, $lightness: -5%);
+    text-decoration: none;
+    color: white;
   }
 
   &:disabled {

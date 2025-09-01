@@ -1,4 +1,4 @@
-<section class="section-jobs">
+<section class="section section-jobs">
 	<?php
 	// Get the current post's categories
 	$current_post_id = get_the_ID();
@@ -44,8 +44,8 @@
 	// Display the jobs
 	if ($query->have_posts()) : ?>
 
-		<span>Jobs and offers</span>
-		<h2>Similar Jobs</h2>
+		<span class="section--subtitle">Jobs and offers</span>
+		<h2 class="section--title">Similar Jobs</h2>
 		<div class="similar-jobs">
 			<div class="wrapper">
 				<?php while ($query->have_posts()) : $query->the_post(); ?>

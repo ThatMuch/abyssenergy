@@ -309,13 +309,25 @@
 
 .section {
   padding: map.get($spacings, "section-sm") 0;
-
+  margin-top: map.get($spacings, "section-sm");
   &--small {
     padding: map.get($spacings, "section-sm") 0;
   }
 
   &--large {
     padding: map.get($spacings, "section-xl") 0;
+  }
+  &--title {
+    margin-top: 0;
+  }
+  &--subtitle {
+    color: $secondary-600;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+    letter-spacing: 0.245rem;
+    text-transform: uppercase;
   }
 }
 
