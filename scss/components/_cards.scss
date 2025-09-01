@@ -1,0 +1,32 @@
+/**
+ * Styles pour les cartes
+ */
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+// Cartes - style de base
+.card {
+  @include card-style();
+
+  &__header {
+    border-bottom: 1px solid $neutral-200;
+    padding-bottom: $spacing-sm;
+    margin-bottom: $spacing-md;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: $font-size-xl;
+    color: $color-primary-dark;
+  }
+
+  &__content {
+    flex: 1;
+  }
+
+  &__footer {
+    border-top: 1px solid $neutral-200;
+    padding-top: $spacing-sm;
+    margin-top: $spacing-md;
+  }
+}

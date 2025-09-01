@@ -1,0 +1,23 @@
+/**
+ * Styles pour les tags
+ */
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+@use "sass:map";
+
+// Tag
+.tag {
+  display: inline-flex;
+  padding: $spacing-xs $spacing-sm;
+  align-items: flex-start;
+  gap: $spacing-xs;
+  border-radius: $border-radius-lg;
+  background: $primary-100;
+  margin-right: $spacing-xs;
+  margin-bottom: $spacing-xs;
+
+  &-primary {
+    background: $color-primary;
+    color: $white-100;
+  }
+}

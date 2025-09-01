@@ -1,0 +1,39 @@
+/**
+ * Styles pour les alertes
+ */
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+@use "sass:color";
+
+// Alertes
+.alert {
+  position: relative;
+  padding: $spacing-md;
+  border: 1px solid transparent;
+  border-radius: $border-radius-md;
+  margin-bottom: $spacing-lg;
+
+  &--primary {
+    color: color.adjust($color-secondary, $lightness: -20%);
+    background-color: color.adjust($color-secondary, $lightness: 35%);
+    border-color: color.adjust($color-secondary, $lightness: 25%);
+  }
+
+  &--success {
+    color: color.adjust($color-success, $lightness: -20%);
+    background-color: color.adjust($color-success, $lightness: 35%);
+    border-color: color.adjust($color-success, $lightness: 35%);
+  }
+
+  &--warning {
+    color: color.adjust($color-warning, $lightness: -20%);
+    background-color: color.adjust($color-warning, $lightness: 25%);
+    border-color: color.adjust($color-warning, $lightness: 15%);
+  }
+
+  &--danger {
+    color: color.adjust($color-danger, $lightness: -20%);
+    background-color: color.adjust($color-danger, $lightness: 35%);
+    border-color: color.adjust($color-danger, $lightness: 25%);
+  }
+}
