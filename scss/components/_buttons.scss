@@ -4,6 +4,7 @@
 @use "../abstracts/variables" as *;
 @use "../abstracts/mixins" as *;
 @use "sass:color";
+@use "sass:map";
 
 // Styles de bouton - mixin de base
 @mixin button-base {
@@ -186,4 +187,14 @@ body .gform_wrapper .gform_page_footer button.button {
   i {
     font-size: $font-size-md;
   }
+}
+
+.nav-buttons {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: map.get($spacings, "component-xs");
+  margin-bottom: map.get($spacings, "component-lg");
 }

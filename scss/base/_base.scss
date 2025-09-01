@@ -82,6 +82,13 @@ h6,
   }
 }
 
+.b1 {
+  font-size: $b1-size;
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: 0.0625rem;
+}
+
 // Liens
 a {
   color: $color-text-link;
