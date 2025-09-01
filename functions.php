@@ -309,6 +309,15 @@ function abyssenergy_enqueue_scripts()
 		abyssenergy_get_file_version('/js/file-upload.js'),
 		true
 	);
+
+	// Script pour les sélecteurs multiples personnalisés
+	wp_enqueue_script(
+		'abyssenergy-multiselect',
+		get_stylesheet_directory_uri() . '/js/multiselect.js',
+		array('jquery'),
+		abyssenergy_get_file_version('/js/multiselect.js'),
+		true
+	);
 }
 
 add_action('wp_enqueue_scripts', 'abyssenergy_enqueue_scripts');
@@ -380,10 +389,51 @@ function abyssenergy_add_job_query_vars()
 {
 	global $wp;
 	$wp->add_query_var('job_search');
-	$wp->add_query_var('job_sector');
-	$wp->add_query_var('job_location');
-	$wp->add_query_var('job_country');
+	$wp->add_query_var('job_sector'); // Reste au singulier pour compatibilité
+	$wp->add_query_var('job_location'); // Reste au singulier pour compatibilité
+	$wp->add_query_var('job_country'); // Reste au singulier pour compatibilité
 	$wp->add_query_var('job_type');
+
+	// Ajout des variables pour les multisélects
+	$wp->add_query_var('job_sector_multi');
+	$wp->add_query_var('job_location_multi');
+	$wp->add_query_var('job_country_multi');
+
+	// Hook pour transformer les paramètres des tableaux en variables de requête
+	add_action('parse_request', 'abyssenergy_parse_multiselect_query');
+}
+
+/**
+ * Convertit les paramètres de tableau (job_sector[], etc.) en variables de requête
+ */
+function abyssenergy_parse_multiselect_query($wp)
+{
+	// Traiter les paramètres multiples pour le secteur
+	if (isset($_GET['job_sector']) && is_array($_GET['job_sector'])) {
+		// Filtrer les valeurs vides
+		$sectors = array_filter($_GET['job_sector']);
+		if (!empty($sectors)) {
+			$wp->query_vars['job_sector_multi'] = $sectors;
+		}
+	}
+
+	// Traiter les paramètres multiples pour la localisation
+	if (isset($_GET['job_location']) && is_array($_GET['job_location'])) {
+		// Filtrer les valeurs vides
+		$locations = array_filter($_GET['job_location']);
+		if (!empty($locations)) {
+			$wp->query_vars['job_location_multi'] = $locations;
+		}
+	}
+
+	// Traiter les paramètres multiples pour le pays
+	if (isset($_GET['job_country']) && is_array($_GET['job_country'])) {
+		// Filtrer les valeurs vides
+		$countries = array_filter($_GET['job_country']);
+		if (!empty($countries)) {
+			$wp->query_vars['job_country_multi'] = $countries;
+		}
+	}
 }
 
 /**

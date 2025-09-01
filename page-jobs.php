@@ -59,8 +59,16 @@ $job_args = array(
 $tax_query = array('relation' => 'AND');
 $meta_query = array('relation' => 'AND');
 
-// Filtre par secteur (taxonomie)
-if (get_query_var('job_sector')) {
+// Filtre par secteur (taxonomie) - Support multiselect
+if (get_query_var('job_sector_multi')) {
+	$sectors = get_query_var('job_sector_multi');
+	$tax_query[] = array(
+		'taxonomy' => 'job-sector',
+		'field'    => 'slug',
+		'terms'    => $sectors,
+		'operator' => 'IN',
+	);
+} elseif (get_query_var('job_sector')) { // Compatibilité avec l'ancien format
 	$tax_query[] = array(
 		'taxonomy' => 'job-sector',
 		'field'    => 'slug',
@@ -68,8 +76,27 @@ if (get_query_var('job_sector')) {
 	);
 }
 
-// Filtre par ville (champ personnalisé)
-if (get_query_var('job_location')) {
+// Filtre par ville (champ personnalisé) - Support multiselect
+if (get_query_var('job_location_multi')) {
+	$locations = get_query_var('job_location_multi');
+	if (count($locations) > 1) {
+		$location_meta_query = array('relation' => 'OR');
+		foreach ($locations as $location) {
+			$location_meta_query[] = array(
+				'key'     => 'job_city',
+				'value'   => $location,
+				'compare' => 'LIKE',
+			);
+		}
+		$meta_query[] = $location_meta_query;
+	} else {
+		$meta_query[] = array(
+			'key'     => 'job_city',
+			'value'   => $locations[0],
+			'compare' => 'LIKE',
+		);
+	}
+} elseif (get_query_var('job_location')) { // Compatibilité avec l'ancien format
 	$meta_query[] = array(
 		'key'     => 'job_city',
 		'value'   => get_query_var('job_location'),
@@ -77,8 +104,27 @@ if (get_query_var('job_location')) {
 	);
 }
 
-// Filtre par country (champ personnalisé)
-if (get_query_var('job_country')) {
+// Filtre par country (champ personnalisé) - Support multiselect
+if (get_query_var('job_country_multi')) {
+	$countries = get_query_var('job_country_multi');
+	if (count($countries) > 1) {
+		$country_meta_query = array('relation' => 'OR');
+		foreach ($countries as $country) {
+			$country_meta_query[] = array(
+				'key'     => 'job_country',
+				'value'   => $country,
+				'compare' => 'LIKE',
+			);
+		}
+		$meta_query[] = $country_meta_query;
+	} else {
+		$meta_query[] = array(
+			'key'     => 'job_country',
+			'value'   => $countries[0],
+			'compare' => 'LIKE',
+		);
+	}
+} elseif (get_query_var('job_country')) { // Compatibilité avec l'ancien format
 	$meta_query[] = array(
 		'key'     => 'job_country',
 		'value'   => get_query_var('job_country'),
@@ -146,39 +192,57 @@ $jobs_query = new WP_Query($job_args);
 		<div class="container">
 			<form class="jobs-filter-form" method="GET" action="">
 				<div class="d-flex gap-2 flex-wrap">
-					<select id="job-sector" name="job_sector">
+					<select id="job-sector" name="job_sector[]" class="abyss-multiselect" multiple data-search="true">
 						<option value="">All sectors</option>
 						<?php
 						$sectors = get_terms('job-sector', array('hide_empty' => true));
+						$selected_sectors = get_query_var('job_sector_multi') ? get_query_var('job_sector_multi') : array();
+						// Compatibilité avec l'ancien format
+						if (empty($selected_sectors) && get_query_var('job_sector')) {
+							$selected_sectors = array(get_query_var('job_sector'));
+						}
+
 						if (!is_wp_error($sectors) && !empty($sectors)) :
 							foreach ($sectors as $sector) : ?>
 								<option value="<?php echo esc_attr($sector->slug); ?>"
-									<?php selected(get_query_var('job_sector'), $sector->slug); ?>>
+									<?php echo in_array($sector->slug, $selected_sectors) ? 'selected' : ''; ?>>
 									<?php echo esc_html($sector->name); ?>
 								</option>
 						<?php endforeach;
 						endif; ?>
 					</select>
-					<select id="job-location" name="job_location">
+					<select id="job-location" name="job_location[]" class="abyss-multiselect" multiple data-search="true">
 						<option value="">All cities</option>
 						<?php
 						// get all the job cities from the job posts
+						$selected_locations = get_query_var('job_location_multi') ? get_query_var('job_location_multi') : array();
+						// Compatibilité avec l'ancien format
+						if (empty($selected_locations) && get_query_var('job_location')) {
+							$selected_locations = array(get_query_var('job_location'));
+						}
+
 						if (!is_wp_error($job_cities) && !empty($job_cities)) :
 							foreach ($job_cities as $city) : ?>
 								<option value="<?php echo esc_attr($city); ?>"
-									<?php selected(get_query_var('job_location'), $city); ?>>
+									<?php echo in_array($city, $selected_locations) ? 'selected' : ''; ?>>
 									<?php echo esc_html($city); ?>
 								</option>
 						<?php endforeach;
 						endif; ?>
 					</select>
-					<select id="job-country" name="job_country">
+					<select id="job-country" name="job_country[]" class="abyss-multiselect" multiple data-search="true">
 						<option value="">All countries</option>
 						<?php
+						$selected_countries = get_query_var('job_country_multi') ? get_query_var('job_country_multi') : array();
+						// Compatibilité avec l'ancien format
+						if (empty($selected_countries) && get_query_var('job_country')) {
+							$selected_countries = array(get_query_var('job_country'));
+						}
+
 						if (!is_wp_error($job_countries) && !empty($job_countries)) :
 							foreach ($job_countries as $country) : ?>
 								<option value="<?php echo esc_attr($country); ?>"
-									<?php selected(get_query_var('job_country'), $country); ?>>
+									<?php echo in_array($country, $selected_countries) ? 'selected' : ''; ?>>
 									<?php echo esc_html($country); ?>
 								</option>
 						<?php endforeach;
@@ -187,12 +251,20 @@ $jobs_query = new WP_Query($job_args);
 					<button type="submit" class="btn btn--primary">
 						Apply filters
 					</button>
-					<?php if (get_query_var('job_search') || get_query_var('job_sector') || get_query_var('job_location') || get_query_var('job_country')) : ?>
-						<div class="col-md-2">
-							<a href="<?php echo esc_url(get_permalink()); ?>" class="btn btn--outline btn--small">
-								✕ Clear filters
-							</a>
-						</div>
+					<?php if (
+						get_query_var('job_search') ||
+						get_query_var('job_sector') ||
+						get_query_var('job_location') ||
+						get_query_var('job_country') ||
+						get_query_var('job_sector_multi') ||
+						get_query_var('job_location_multi') ||
+						get_query_var('job_country_multi')
+					) : ?>
+
+						<a href="<?php echo esc_url(get_permalink()); ?>" class="btn btn--outline btn--small">
+							✕ Clear filters
+						</a>
+
 					<?php endif; ?>
 				</div>
 			</form>
