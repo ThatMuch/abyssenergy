@@ -27,9 +27,7 @@ get_header(); ?>
 	<!-- Contenu principal -->
 	<section class="archive-content section">
 		<div class="container">
-
 			<?php if (have_posts()) : ?>
-
 				<!-- Compteur de résultats -->
 				<div class="archive-info mb-4">
 					<div class="row align-items-center">
@@ -53,72 +51,13 @@ get_header(); ?>
 				</div>
 
 				<!-- Grille des emplois -->
-				<div class="posts-grid">
-					<?php while (have_posts()) : the_post(); ?>
-
-						<article <?php post_class('post-card'); ?>>
-							<div class="card__content">
-
-								<!-- Badges -->
-								<div class="job-badges mb-3">
-									<?php
-									// Type d'emploi
-									$job_type = get_field('job_type');
-									if ($job_type) : ?>
-										<span class="badge badge--primary"><?php echo esc_html($job_type); ?></span>
-										<?php endif;
-
-									// Secteur
-									$sectors = get_the_terms(get_the_ID(), 'job-sector');
-									if ($sectors && !is_wp_error($sectors)) :
-										foreach ($sectors as $sector) : ?>
-											<span class="badge badge--secondary"><?php echo esc_html($sector->name); ?></span>
-									<?php endforeach;
-									endif; ?>
-								</div>
-
-								<!-- Titre et métadonnées -->
-								<h2 class="post-title">
-									<a href="<?php the_permalink(); ?>">
-										<?php the_title(); ?>
-									</a>
-								</h2>
-
-								<?php
-								$locations = get_the_terms(get_the_ID(), 'job-location');
-								if ($locations && !is_wp_error($locations)) : ?>
-									<p class="job-location text-muted mb-3">
-										📍 <?php echo esc_html($locations[0]->name); ?>
-									</p>
-								<?php endif; ?>
-
-								<!-- Extrait -->
-								<div class="post-excerpt">
-									<?php
-									if (has_excerpt()) {
-										echo '<p>' . get_the_excerpt() . '</p>';
-									} else {
-										echo '<p>' . wp_trim_words(get_the_content(), 30, '...') . '</p>';
-									}
-									?>
-								</div>
-
-								<!-- Métadonnées -->
-								<div class="post-meta">
-									<small class="post-date text-muted">
-										Publié le <?php echo get_the_date('j F Y'); ?>
-									</small>
-								</div>
-							</div>
-
-							<div class="card__footer">
-								<a href="<?php the_permalink(); ?>" class="btn btn--primary">
-									Voir les détails
-								</a>
-							</div>
-						</article>
-
-					<?php endwhile; ?>
+				<div class="jobs-grid">
+					<?php
+					while (have_posts()) :
+						the_post();
+						get_template_part('template-parts/job-card');
+					endwhile;
+					?>
 				</div>
 
 				<!-- Pagination -->
@@ -136,7 +75,6 @@ get_header(); ?>
 				</div>
 
 			<?php else : ?>
-
 				<!-- Aucun emploi trouvé -->
 				<div class="no-posts-found text-center">
 					<div class="alert alert--warning">
@@ -158,7 +96,6 @@ get_header(); ?>
 						</div>
 					</div>
 				</div>
-
 			<?php endif; ?>
 		</div>
 	</section>

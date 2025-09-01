@@ -70,12 +70,12 @@
         "custom-fields"
     ],
     "taxonomies": "",
-    "has_archive": false,
-    "has_archive_slug": "",
+    "has_archive": true,
+    "has_archive_slug": "jobs",
     "rewrite": {
         "permalink_rewrite": "post_type_key",
         "with_front": "1",
-        "feeds": "0",
+        "feeds": "1",
         "pages": "1"
     },
     "query_var": "post_type_key",

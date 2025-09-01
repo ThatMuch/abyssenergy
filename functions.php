@@ -300,6 +300,15 @@ function abyssenergy_enqueue_scripts()
 		abyssenergy_get_file_version('/js/general.js'),
 		true
 	);
+
+	// Script pour la gestion des téléchargements de fichiers
+	wp_enqueue_script(
+		'abyssenergy-file-upload',
+		get_stylesheet_directory_uri() . '/js/file-upload.js',
+		array('jquery'),
+		abyssenergy_get_file_version('/js/file-upload.js'),
+		true
+	);
 }
 
 add_action('wp_enqueue_scripts', 'abyssenergy_enqueue_scripts');
@@ -870,3 +879,22 @@ function abyssenergy_to_lowercase($text)
 {
 	return strtolower($text);
 }
+
+/**
+ * Force la réactualisation des règles de réécriture pour les jobs
+ * Cela garantit que les permaliens vers les pages de jobs individuelles fonctionnent
+ */
+function abyssenergy_flush_rewrite_rules()
+{
+	// Vérifier si les règles ont déjà été vidées
+	$flushed = get_option('abyssenergy_rewrite_rules_flushed');
+
+	// Si les règles n'ont pas encore été vidées, le faire maintenant
+	if (!$flushed) {
+		flush_rewrite_rules();
+		update_option('abyssenergy_rewrite_rules_flushed', true);
+	}
+}
+add_action('init', 'abyssenergy_flush_rewrite_rules', 20); // Priorité plus basse pour s'assurer que le CPT est déjà enregistré
+
+add_filter('gform_disable_css', '__return_true');

@@ -4,16 +4,17 @@
 	"description": "Thème WordPress avec support SCSS pour Abyss Energy",
 	"main": "index.php",
 	"scripts": {
-		"watch": "sass --watch scss/style.scss:style.min.css --style compressed --source-map",
-		"build": "sass scss/style.scss:style.min.css --style compressed",
-		"build:dev": "sass scss/style.scss:style.min.css --style compressed",
-		"dev": "sass --watch scss/style.scss:style.min.css --style compressed --source-map --poll",
+		"watch": "npx sass --watch scss/style.scss:style.min.css --style compressed --source-map",
+		"build": "npx sass scss/style.scss:style.min.css --style compressed",
+		"build:dev": "npx sass scss/style.scss:style.min.css --style compressed",
+		"dev": "npx sass --watch scss/style.scss:style.min.css --style compressed --source-map --poll",
 		"lint": "stylelint scss/**/*.scss",
 		"lint:fix": "stylelint scss/**/*.scss --fix",
-		"compile": "npm run build:dev && echo '✅ SCSS compiled successfully without warnings!'"
+		"compile": "npm run build:dev && echo '✅ SCSS compiled successfully without warnings!'",
+		"clean:css": "node clean_css.py"
 	},
 	"devDependencies": {
-		"sass": "^1.77.0",
+		"sass": "^1.91.0",
 		"stylelint": "^16.0.0",
 		"stylelint-config-standard-scss": "^13.0.0"
 	},

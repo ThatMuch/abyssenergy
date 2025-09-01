@@ -1,0 +1,68 @@
+/**
+ * Styles pour les formulaires Gravity Forms
+ *
+ * Ce fichier contient des styles spécifiques pour personnaliser l'apparence des formulaires Gravity Forms.
+ * L'approche utilisée ici permet de remplacer les styles par défaut de Gravity Forms sans utiliser !important.
+ */
+
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+/* Réinitialisation des styles Gravity Forms */
+.gform_wrapper.gravity-theme {
+  // Réinitialisation de l'espacement
+  margin: 0;
+
+  // Permettre à nos styles d'espacement de fonctionner
+  .gform_fields {
+    grid-row-gap: 1.5rem;
+  }
+
+  // Style des labels
+  .gfield_label {
+    font-family: $font-main;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: $color-text-primary;
+  }
+
+  // Suppression des styles par défaut des champs
+  input:not([type="radio"]):not([type="checkbox"]):not([type="submit"]),
+  textarea,
+  select {
+    appearance: none;
+    background-color: transparent;
+  }
+
+  // Style du conteneur de champ
+  .gfield {
+    margin-bottom: 1.5rem;
+  }
+
+  // Style des messages de validation
+  .gfield_validation_message,
+  .validation_message {
+    color: $color-danger;
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 0.5rem 0 0;
+    background: transparent;
+    border: none;
+  }
+}
+
+/* Mise en page personnalisée */
+.gform_wrapper.gravity-theme form {
+  display: flex;
+  flex-direction: column;
+
+  .gform_footer {
+    margin-top: 1.5rem;
+    padding: 0;
+
+    input[type="submit"] {
+      margin-bottom: 0;
+    }
+  }
+}

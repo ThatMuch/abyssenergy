@@ -20,6 +20,7 @@
     padding: map.get($spacings, "component-xs");
     justify-content: space-between;
     align-items: center;
+    margin-bottom: map.get($spacings, "component-lg");
     li {
       display: inline-block;
     }
@@ -307,14 +308,26 @@
 }
 
 .section {
-  padding: $spacing-2xl 0;
-
+  padding: map.get($spacings, "section-sm") 0;
+  margin-top: map.get($spacings, "section-sm");
   &--small {
-    padding: $spacing-xl 0;
+    padding: map.get($spacings, "section-sm") 0;
   }
 
   &--large {
-    padding: 120px 0;
+    padding: map.get($spacings, "section-xl") 0;
+  }
+  &--title {
+    margin-top: 0;
+  }
+  &--subtitle {
+    color: $secondary-600;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+    letter-spacing: 0.245rem;
+    text-transform: uppercase;
   }
 }
 

@@ -146,7 +146,7 @@ $jobs_query = new WP_Query($job_args);
 		<div class="container">
 			<form class="jobs-filter-form" method="GET" action="">
 				<div class="row align-items-center gap-2">
-					<div class="col-md-2 mb-3">
+					<div class="col-md-2 ">
 						<select id="job-sector" name="job_sector">
 							<option value="">All sectors</option>
 							<?php
@@ -161,7 +161,7 @@ $jobs_query = new WP_Query($job_args);
 							endif; ?>
 						</select>
 					</div>
-					<div class="col-md-2 mb-3">
+					<div class="col-md-2 ">
 						<select id="job-location" name="job_location">
 							<option value="">All cities</option>
 							<?php
@@ -176,7 +176,7 @@ $jobs_query = new WP_Query($job_args);
 							endif; ?>
 						</select>
 					</div>
-					<div class="col-md-2 mb-3">
+					<div class="col-md-2 ">
 						<select id="job-country" name="job_country">
 							<option value="">All countries</option>
 							<?php
@@ -190,13 +190,13 @@ $jobs_query = new WP_Query($job_args);
 							endif; ?>
 						</select>
 					</div>
-					<div class="col-md-2 mb-3">
+					<div class="col-md-2 ">
 						<button type="submit" class="btn btn--primary">
 							Apply filters
 						</button>
 					</div>
 					<?php if (get_query_var('job_search') || get_query_var('job_sector') || get_query_var('job_location') || get_query_var('job_country')) : ?>
-						<div class="col-md-2 mb-3">
+						<div class="col-md-2">
 							<a href="<?php echo esc_url(get_permalink()); ?>" class="btn btn--outline btn--small">
 								✕ Clear filters
 							</a>
@@ -223,49 +223,12 @@ $jobs_query = new WP_Query($job_args);
 
 				<!-- Grille des emplois -->
 				<div class="jobs-grid" id="jobs-container">
-					<?php while ($jobs_query->have_posts()) : $jobs_query->the_post();
-						$sectors = get_the_terms(get_the_ID(), 'job-sector'); ?>
-						<article class="job-card card <?php echo esc_html($sectors[0]->slug); ?>-card">
-							<a href="<?php the_permalink(); ?>" class="job-card-link">
-								<div class="card__content">
-									<!-- Badges -->
-									<div class="job-badges mb-3">
-										<?php
-										// Secteur
-										if ($sectors && !is_wp_error($sectors)) :
-											foreach ($sectors as $sector) : ?>
-												<span class="job-sector"><?php echo esc_html($sector->name); ?></span>
-										<?php endforeach;
-										endif; ?>
-									</div>
-									<?php
-									if (get_the_time('U') > strtotime('-5 days')) {
-										echo '<span class="new">New</span>';
-									}
-									?>
-									<!-- Titre et localisation -->
-									<div class="job-header mb-3">
-										<h4 class="job-title">
-											<?php echo mb_strtolower(get_the_title(), 'UTF-8'); ?>
-										</h4>
-									</div>
-								</div>
-								<div class="card__footer">
-									<?php
-									$city = get_field('job_city');
-									$state = get_field('job_state');
-									$country = get_field('job_country');
-
-									if ($city && !is_wp_error($city)) : ?>
-										<p class="job-location">
-											<i class="fas fa-map-marker-alt mr-2"></i>
-											<?php echo esc_html($city); ?>, <?php echo esc_html($state); ?>
-										</p>
-									<?php endif; ?>
-								</div>
-							</a>
-						</article>
-					<?php endwhile; ?>
+					<?php
+					while ($jobs_query->have_posts()) :
+						$jobs_query->the_post();
+						get_template_part('template-parts/job-card');
+					endwhile;
+					?>
 				</div>
 				<!-- Pagination -->
 				<?php if ($jobs_query->max_num_pages > 1) : ?>
