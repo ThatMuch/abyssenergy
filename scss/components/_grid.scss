@@ -114,7 +114,7 @@ $grid-gutter-half: math.div($grid-gutter-width, 2);
   @for $i from 1 through $grid-columns {
     .col#{$infix}-#{$i} {
       flex: 0 0 auto;
-      width: percentage(math.div($i, $grid-columns));
+      width: math.percentage(math.div($i, $grid-columns));
     }
   }
 
@@ -128,7 +128,7 @@ $grid-gutter-half: math.div($grid-gutter-width, 2);
   // Classes d'offset
   @for $i from 0 through ($grid-columns - 1) {
     .offset#{$infix}-#{$i} {
-      margin-left: percentage(math.div($i, $grid-columns));
+      margin-left: math.percentage(math.div($i, $grid-columns));
     }
   }
 

@@ -92,11 +92,11 @@
                     </div>
                 </section>
                 <div class="row">
-                    <div class="col col-md-9">
+                    <div class="col col-xl-8">
                         <h2 style='margin-top: 28px;padding-bottom: 0'>Job Description</h2>
                         <?php the_content(); ?>
                     </div>
-                    <div class="col col-md-3">
+                    <div class="col col-xl-4">
                         <div class="card">
                             <h2>Apply</h2>
                             <?php

@@ -20,6 +20,7 @@
     padding: map.get($spacings, "component-xs");
     justify-content: space-between;
     align-items: center;
+    margin-bottom: map.get($spacings, "component-lg");
     li {
       display: inline-block;
     }
