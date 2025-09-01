@@ -887,3 +887,5 @@ function abyssenergy_flush_rewrite_rules()
 	}
 }
 add_action('init', 'abyssenergy_flush_rewrite_rules', 20); // Priorité plus basse pour s'assurer que le CPT est déjà enregistré
+
+add_filter('gform_disable_css', '__return_true');

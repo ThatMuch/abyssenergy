@@ -84,7 +84,7 @@
                                 $work_types = explode('–', implode('–', $emp_meta));
 
                                 foreach ($work_types as $type) {
-                                    echo '<span class="tag mr-2">' . esc_html($type) . '</span>';
+                                    echo '<span class="tag">' . esc_html($type) . '</span>';
                                 }
                                 ?>
                             </div>

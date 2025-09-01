@@ -5,6 +5,7 @@
 @use "sass:color";
 @use "job-card";
 @use "grid";
+@use "gravity-forms";
 // Cartes
 .card {
   @include card-style();
@@ -64,12 +65,23 @@
 }
 
 // Boutons standards (classe .button)
-.button {
+.button,
+.gform_button {
   @include button-base;
 }
 
 // Inputs de type submit
 input[type="submit"] {
+  @include button-base;
+}
+
+// Boutons de soumission Gravity Forms
+body .gform_wrapper .gform_footer input[type="submit"],
+body .gform_wrapper .gform_page_footer input[type="submit"],
+body .gform_wrapper .gform_footer input.button,
+body .gform_wrapper .gform_page_footer input.button,
+body .gform_wrapper .gform_footer button.button,
+body .gform_wrapper .gform_page_footer button.button {
   @include button-base;
 }
 
@@ -205,8 +217,8 @@ input[type="submit"] {
   width: 100%;
   padding: $spacing-sm $spacing-md;
   font-size: $font-size-base;
-  border: 3px solid $neutral-200 !important;
-  border-radius: $border-radius-full !important;
+  border: 3px solid $neutral-200;
+  border-radius: $border-radius-full;
   background-color: $white-100;
   color: $color-text-primary;
   font-family: $font-main;
@@ -214,7 +226,7 @@ input[type="submit"] {
   font-style: normal;
   font-weight: 500;
   letter-spacing: 0.0625rem;
-  box-shadow: none !important;
+  box-shadow: none;
   @include transition();
 
   &::placeholder {
@@ -264,13 +276,37 @@ input[type="number"],
   background-color: $neutral-100;
   cursor: not-allowed;
   color: $neutral-500;
-} /* Styles pour Gravity Forms */
-.ginput_container_text input,
-.ginput_container_email input,
-.ginput_container_phone input,
-.ginput_container_password input,
-.gform-theme--framework .gfield input {
+} /* Styles pour Gravity Forms - Utilisation de sélecteurs plus spécifiques */
+body .gform_wrapper .ginput_container_text input,
+body .gform_wrapper .ginput_container_email input,
+body .gform_wrapper .ginput_container_phone input,
+body .gform_wrapper .ginput_container_password input,
+body .gform_wrapper .gform-theme--framework .gfield input,
+body .gform_wrapper.gravity-theme input[type="text"],
+body .gform_wrapper.gravity-theme input[type="email"],
+body .gform_wrapper.gravity-theme input[type="tel"],
+body .gform_wrapper.gravity-theme input[type="url"],
+body .gform_wrapper.gravity-theme input[type="password"],
+body
+  .gform_wrapper.gravity-theme
+  input:not([type="radio"]):not([type="checkbox"]):not([type="submit"]) {
   @extend .input-base;
+  border: 3px solid $neutral-200;
+  border-radius: $border-radius-full;
+  box-shadow: none;
+}
+
+.gfield {
+  margin-bottom: map.get($spacings, "component-sm");
+}
+
+.gfield_label {
+  font-size: $font-size-sm;
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: 0.04375rem;
+  margin-bottom: map.get($spacings, "component-xs");
+  display: block;
 }
 
 // Select
@@ -390,7 +426,8 @@ selectedcontent {
   gap: map.get($spacings, "component-xs");
   border-radius: $border-radius-lg;
   background: $primary-100;
-
+  margin-right: map.get($spacings, "component-xs");
+  margin-bottom: map.get($spacings, "component-xs");
   &-primary {
     background: $color-primary;
     color: $white-100;
