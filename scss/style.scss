@@ -16,7 +16,17 @@
 @use "layout/layout";
 
 // 4. Components - Composants réutilisables
-@use "components/components";
+@use "components/job-card";
+@use "components/grid";
+@use "components/gravity-forms";
+@use "components/cards";
+@use "components/buttons";
+@use "components/inputs";
+@use "components/selects";
+@use "components/badges";
+@use "components/tags";
+@use "components/alerts";
+@use "components/spinners";
 
 // 5. Pages - Styles spécifiques aux pages
 @use "pages/pages";

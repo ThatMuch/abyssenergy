@@ -145,56 +145,48 @@ $jobs_query = new WP_Query($job_args);
 	<section class="jobs-filters">
 		<div class="container">
 			<form class="jobs-filter-form" method="GET" action="">
-				<div class="row align-items-center gap-2">
-					<div class="col-md-2 ">
-						<select id="job-sector" name="job_sector">
-							<option value="">All sectors</option>
-							<?php
-							$sectors = get_terms('job-sector', array('hide_empty' => true));
-							if (!is_wp_error($sectors) && !empty($sectors)) :
-								foreach ($sectors as $sector) : ?>
-									<option value="<?php echo esc_attr($sector->slug); ?>"
-										<?php selected(get_query_var('job_sector'), $sector->slug); ?>>
-										<?php echo esc_html($sector->name); ?>
-									</option>
-							<?php endforeach;
-							endif; ?>
-						</select>
-					</div>
-					<div class="col-md-2 ">
-						<select id="job-location" name="job_location">
-							<option value="">All cities</option>
-							<?php
-							// get all the job cities from the job posts
-							if (!is_wp_error($job_cities) && !empty($job_cities)) :
-								foreach ($job_cities as $city) : ?>
-									<option value="<?php echo esc_attr($city); ?>"
-										<?php selected(get_query_var('job_location'), $city); ?>>
-										<?php echo esc_html($city); ?>
-									</option>
-							<?php endforeach;
-							endif; ?>
-						</select>
-					</div>
-					<div class="col-md-2 ">
-						<select id="job-country" name="job_country">
-							<option value="">All countries</option>
-							<?php
-							if (!is_wp_error($job_countries) && !empty($job_countries)) :
-								foreach ($job_countries as $country) : ?>
-									<option value="<?php echo esc_attr($country); ?>"
-										<?php selected(get_query_var('job_country'), $country); ?>>
-										<?php echo esc_html($country); ?>
-									</option>
-							<?php endforeach;
-							endif; ?>
-						</select>
-					</div>
-					<div class="col-md-2 ">
-						<button type="submit" class="btn btn--primary">
-							Apply filters
-						</button>
-					</div>
+				<div class="d-flex gap-2 flex-wrap">
+					<select id="job-sector" name="job_sector">
+						<option value="">All sectors</option>
+						<?php
+						$sectors = get_terms('job-sector', array('hide_empty' => true));
+						if (!is_wp_error($sectors) && !empty($sectors)) :
+							foreach ($sectors as $sector) : ?>
+								<option value="<?php echo esc_attr($sector->slug); ?>"
+									<?php selected(get_query_var('job_sector'), $sector->slug); ?>>
+									<?php echo esc_html($sector->name); ?>
+								</option>
+						<?php endforeach;
+						endif; ?>
+					</select>
+					<select id="job-location" name="job_location">
+						<option value="">All cities</option>
+						<?php
+						// get all the job cities from the job posts
+						if (!is_wp_error($job_cities) && !empty($job_cities)) :
+							foreach ($job_cities as $city) : ?>
+								<option value="<?php echo esc_attr($city); ?>"
+									<?php selected(get_query_var('job_location'), $city); ?>>
+									<?php echo esc_html($city); ?>
+								</option>
+						<?php endforeach;
+						endif; ?>
+					</select>
+					<select id="job-country" name="job_country">
+						<option value="">All countries</option>
+						<?php
+						if (!is_wp_error($job_countries) && !empty($job_countries)) :
+							foreach ($job_countries as $country) : ?>
+								<option value="<?php echo esc_attr($country); ?>"
+									<?php selected(get_query_var('job_country'), $country); ?>>
+									<?php echo esc_html($country); ?>
+								</option>
+						<?php endforeach;
+						endif; ?>
+					</select>
+					<button type="submit" class="btn btn--primary">
+						Apply filters
+					</button>
 					<?php if (get_query_var('job_search') || get_query_var('job_sector') || get_query_var('job_location') || get_query_var('job_country')) : ?>
 						<div class="col-md-2">
 							<a href="<?php echo esc_url(get_permalink()); ?>" class="btn btn--outline btn--small">

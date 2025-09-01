@@ -24,6 +24,7 @@ show_help() {
     echo -e "  ${GREEN}fix${NC}     - Corrige automatiquement les erreurs de style"
     echo -e "  ${GREEN}clean${NC}   - Supprime les fichiers CSS générés"
     echo -e "  ${GREEN}install${NC} - Installe les dépendances npm"
+    echo -e "  ${GREEN}start${NC}   - Lance la compilation SCSS et BrowserSync pour un rechargement automatique"
     echo -e "  ${GREEN}help${NC}    - Affiche cette aide"
     echo ""
     echo "Exemples:"
@@ -108,6 +109,14 @@ case "${1:-help}" in
         check_npm
         npm install
         echo -e "${GREEN}✅ Dépendances installées !${NC}"
+        ;;
+
+    "start")
+        echo -e "${BLUE}🚀 Démarrage de l'environnement de développement avec rechargement automatique...${NC}"
+        check_npm
+        check_dependencies
+        echo -e "${YELLOW}👀 Surveillance active avec BrowserSync. Ctrl+C pour arrêter.${NC}"
+        npm run start
         ;;
 
     "help"|*)
