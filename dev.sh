@@ -116,7 +116,7 @@ case "${1:-help}" in
         check_npm
         check_dependencies
         echo -e "${YELLOW}👀 Surveillance active avec BrowserSync. Ctrl+C pour arrêter.${NC}"
-        npm run start
+        npm run dev-server
         ;;
 
     "help"|*)

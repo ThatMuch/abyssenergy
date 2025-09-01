@@ -19,15 +19,16 @@ browserSync.init(
     files: [
       // Surveille les fichiers CSS compilés
       './*.css',
+      './*.css.map',
       // Surveille les fichiers PHP du thème
       './**/*.php',
       // Surveille les fichiers JavaScript
       './js/**/*.js',
       // Surveille les images
       './images/**/*',
-      // Exclut les fichiers SCSS car ils déclenchent la compilation
-      // qui à son tour mettra à jour les fichiers CSS que nous surveillons déjà
-      '!./scss/**/*.scss'
+      // Surveille également les fichiers SCSS pour déclencher un rechargement
+      // lorsqu'ils sont modifiés (après la compilation CSS)
+      './scss/**/*.scss'
     ],
     // Ouvre automatiquement le navigateur
     open: true,
@@ -36,7 +37,19 @@ browserSync.init(
     // Permet l'injection CSS sans rechargement complet (quand possible)
     injectChanges: true,
     // Retarde le rechargement pour s'assurer que la compilation SCSS est terminée
-    reloadDelay: 500,
+    reloadDelay: 300,
+    // Debounce pour éviter les rechargements multiples
+    reloadDebounce: 500,
+    // Surveille les changements toutes les 100ms
+    watchOptions: {
+      ignoreInitial: true,
+      ignored: '.git',
+      interval: 100,
+      awaitWriteFinish: {
+        stabilityThreshold: 200,
+        pollInterval: 100
+      }
+    },
     // Utilise HTTPS si votre site local utilise SSL
     // https: true,
   },
