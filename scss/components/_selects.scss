@@ -215,7 +215,7 @@ selectedcontent {
       }
 
       &.selected {
-        background: rgba($color-primary, 0.1);
+        background: $primary-100;
         font-weight: 500;
       }
 
@@ -242,7 +242,7 @@ selectedcontent {
 
   &__search {
     padding: 0.5rem;
-    border-bottom: 1px solid rgba($color-primary, 0.1);
+    border-bottom: 1px solid $primary-100;
 
     input {
       width: 100%;
@@ -271,7 +271,7 @@ selectedcontent {
     border-radius: $border-radius-sm;
 
     &:checked {
-      background-color: rgba($color-primary, 0.1);
+      background-color: $primary-100;
       color: $color-primary;
       font-weight: 500;
     }

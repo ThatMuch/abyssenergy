@@ -60,9 +60,14 @@
     }
   }
 
-  .jobs-filter-form .row {
+  .jobs-filter-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-md;
+    align-items: center;
     @include respond-to(xs) {
-      justify-content: center;
+      flex-direction: column;
+      align-items: stretch;
     }
   }
 

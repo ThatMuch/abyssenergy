@@ -102,13 +102,20 @@
             dropdown.append(searchContainer);
         }
 
+        // Stocke le placeholder (première option avec valeur vide)
+        let placeholderText = "Sélectionner"; // Texte par défaut
+        const firstOption = selectElement.find('option:first');
+        if (firstOption.length && firstOption.val() === '') {
+            placeholderText = firstOption.text() || placeholderText;
+        }
+
         // Ajoute les options au dropdown
         selectElement.find('option').each(function() {
             const value = $(this).val();
             const text = $(this).text();
 
-            // Ne pas inclure les options vides souvent utilisées comme placeholders
-            if (value === '' && text === '') return;
+            // Ne pas inclure les options vides souvent utilisées comme placeholders dans le dropdown
+            if (value === '' && $(this).is(':first-child')) return;
 
             const option = $('<div>', {
                 'class': 'multiselect__dropdown-option',
@@ -186,6 +193,11 @@
         // Remplace le select original par notre multiselect personnalisé
         selectElement.hide().after(multiselectContainer);
 
+        // Stocke le placeholder pour référence future
+        if (placeholderText) {
+            multiselectContainer.data('placeholder-text', placeholderText);
+        }
+
         // Vérifie si des options sont déjà sélectionnées et ajoute un placeholder si nécessaire
         updatePlaceholder(selectedOptionsContainer);
     }
@@ -262,9 +274,14 @@
      */
     function updatePlaceholder(container) {
         if (container.children().length === 0) {
+            const multiselect = container.closest('.multiselect');
+
+            // Utilise le texte du placeholder stocké ou une valeur par défaut
+            let placeholderText = multiselect.data('placeholder-text') || "Sélectionner";
+
             const placeholder = $('<div>', {
                 'class': 'placeholder',
-                'text': 'Sélectionnez des options'
+                'text': placeholderText
             });
             container.append(placeholder);
         }
