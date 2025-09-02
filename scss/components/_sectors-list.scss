@@ -1,0 +1,63 @@
+/* Styles pour la liste des secteurs */
+.sectors-list {
+  margin: 2rem 0;
+
+  &__items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  &__item {
+    border-bottom: 1px solid #eaeaea;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  &__item-inner {
+    padding: 1.5rem 0;
+  }
+
+  &__item-title {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+  }
+
+  &__link {
+    color: var(--primary-color, #0056b3);
+    text-decoration: none;
+    font-weight: 600;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__excerpt {
+    margin-top: 0.5rem;
+    color: #666;
+    font-size: 0.95rem;
+  }
+
+  &__empty {
+    padding: 2rem 0;
+    text-align: center;
+    color: #666;
+  }
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .sectors-list {
+    &__item-inner {
+      padding: 1rem 0;
+    }
+
+    &__item-title {
+      font-size: 1.1rem;
+    }
+  }
+}

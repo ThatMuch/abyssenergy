@@ -958,3 +958,74 @@ function abyssenergy_flush_rewrite_rules()
 add_action('init', 'abyssenergy_flush_rewrite_rules', 20); // Priorité plus basse pour s'assurer que le CPT est déjà enregistré
 
 add_filter('gform_disable_css', '__return_true');
+
+/**
+ * Enregistrer les blocs Gutenberg personnalisés
+ */
+function abyssenergy_register_blocks()
+{
+	// Vérifier si ACF est actif
+	if (!function_exists('acf_register_block_type')) {
+		return;
+	}
+
+	// Bloc Sectors List (anciennement Grid)
+	acf_register_block_type(array(
+		'name'              => 'sectors-list',
+		'title'             => __('Liste de secteurs', 'abyssenergy'),
+		'description'       => __('Affiche les secteurs dans une liste verticale', 'abyssenergy'),
+		'render_template'   => 'template-parts/block-sectors-grid.php', // On garde le même nom de fichier pour la rétrocompatibilité
+		'category'          => 'abyss-blocks',
+		'icon'              => 'list-view',
+		'keywords'          => array('secteurs', 'sectors', 'list', 'liste'),
+		'supports'          => array(
+			'align'         => array('wide', 'full'),
+			'mode'          => true,
+			'jsx'           => true,
+		),
+		'example'           => array(
+			'attributes' => array(
+				'mode' => 'preview',
+				'data' => array(
+					'title'         => 'Nos secteurs d\'activité',
+					'is_preview'    => true
+				)
+			)
+		),
+	));
+
+	// Pour rétrocompatibilité, gardons également l'ancien bloc mais en le redirigeant vers le même template
+	acf_register_block_type(array(
+		'name'              => 'sectors-grid',
+		'title'             => __('Grille de secteurs (Déprécié)', 'abyssenergy'),
+		'description'       => __('Version dépréciée - Utilisez plutôt la Liste de secteurs', 'abyssenergy'),
+		'render_template'   => 'template-parts/block-sectors-grid.php',
+		'category'          => 'abyss-blocks',
+		'icon'              => 'grid-view',
+		'keywords'          => array('secteurs', 'sectors', 'grid', 'grille', 'déprécié'),
+		'supports'          => array(
+			'align'         => array('wide', 'full'),
+			'mode'          => true,
+			'jsx'           => true,
+		),
+	));
+}
+add_action('acf/init', 'abyssenergy_register_blocks');
+
+/**
+ * Ajouter une catégorie de blocs personnalisée
+ */
+function abyssenergy_block_categories($categories, $post)
+{
+	return array_merge(
+		$categories,
+		array(
+			array(
+				'slug' => 'abyss-blocks',
+				'title' => __('Abyss Energy', 'abyssenergy'),
+				'icon'  => 'admin-site',
+			),
+		)
+	);
+}
+add_filter('block_categories_all', 'abyssenergy_block_categories', 10, 2);
