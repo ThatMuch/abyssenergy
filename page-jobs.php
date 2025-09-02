@@ -353,8 +353,8 @@ $jobs_query = new WP_Query($job_args);
 								'total' => $jobs_query->max_num_pages,
 								'current' => $paged,
 								'mid_size' => 2,
-								'prev_text' => '←',
-								'next_text' => '→',
+								'prev_text' => '<i class="fa fa-chevron-left"></i>',
+								'next_text' => '<i class="fa fa-chevron-right"></i>',
 								'type' => 'list'
 							);
 							echo paginate_links($pagination_args);
