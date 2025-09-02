@@ -35,7 +35,7 @@ $is_new = get_the_time('U') > strtotime('-5 days');
 
 			<!-- Badge "Nouveau" si le job a moins de 5 jours -->
 			<?php if ($is_new) : ?>
-				<span class="new">New</span>
+				<span class="tag tag-secondary">New</span>
 			<?php endif; ?>
 
 			<!-- Titre du job -->
