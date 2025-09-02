@@ -14,9 +14,12 @@
 		"clean:css": "node clean_css.py",
 		"browser-sync": "node browsersync.js",
 		"start": "concurrently --names \"SCSS,BS\" --prefix-colors \"blue.bold,green.bold\" --kill-others \"npm run watch\" \"npm run browser-sync\"",
-		"dev-server": "node dev-server.js"
+		"dev-server": "node dev-server.js",
+		"zip": "node build-zip.js",
+		"zip:simple": "npm run build && bestzip abyssenergy.zip *.php *.png *.css *.css.map acf-json/ css/ images/ js/ template-parts/ style.css style.min.css style.min.css.map"
 	},
 	"devDependencies": {
+		"bestzip": "^2.2.1",
 		"browser-sync": "^3.0.4",
 		"concurrently": "^9.2.1",
 		"sass": "^1.91.0",
