@@ -974,7 +974,7 @@ function abyssenergy_register_blocks()
 		'name'              => 'sectors-list',
 		'title'             => __('Liste de secteurs', 'abyssenergy'),
 		'description'       => __('Affiche les secteurs dans une liste verticale', 'abyssenergy'),
-		'render_template'   => 'template-parts/block-sectors-grid.php', // On garde le même nom de fichier pour la rétrocompatibilité
+		'render_template'   => 'blocks/sectors/block-sectors.php', // On garde le même nom de fichier pour la rétrocompatibilité
 		'category'          => 'abyss-blocks',
 		'icon'              => 'list-view',
 		'keywords'          => array('secteurs', 'sectors', 'list', 'liste'),
@@ -991,22 +991,6 @@ function abyssenergy_register_blocks()
 					'is_preview'    => true
 				)
 			)
-		),
-	));
-
-	// Pour rétrocompatibilité, gardons également l'ancien bloc mais en le redirigeant vers le même template
-	acf_register_block_type(array(
-		'name'              => 'sectors-grid',
-		'title'             => __('Grille de secteurs (Déprécié)', 'abyssenergy'),
-		'description'       => __('Version dépréciée - Utilisez plutôt la Liste de secteurs', 'abyssenergy'),
-		'render_template'   => 'template-parts/block-sectors-grid.php',
-		'category'          => 'abyss-blocks',
-		'icon'              => 'grid-view',
-		'keywords'          => array('secteurs', 'sectors', 'grid', 'grille', 'déprécié'),
-		'supports'          => array(
-			'align'         => array('wide', 'full'),
-			'mode'          => true,
-			'jsx'           => true,
 		),
 	));
 }
