@@ -996,6 +996,12 @@ function abyssenergy_register_blocks()
 }
 add_action('acf/init', 'abyssenergy_register_blocks');
 
+add_action('enqueue_block_editor_assets', 'add_block_editor_assets', 10, 0);
+function add_block_editor_assets()
+{
+	wp_enqueue_style('block_editor_css', get_template_directory_uri() . '/blocks/sectors/block-sector-style.css');
+}
+
 /**
  * Ajouter une catégorie de blocs personnalisée
  */

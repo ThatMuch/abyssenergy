@@ -1,0 +1,15 @@
+ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.sectors-list__item {
+	display: flex;
+	align-items: center;
+	padding: 12px 16px;
+	border-bottom: 1px solid #eee;
+	gap: 1.5rem;
+	width: 100%;
+	max-width: inherit;
+}
