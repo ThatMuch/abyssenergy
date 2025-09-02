@@ -9,7 +9,6 @@
 $title = get_field('title');
 $selection_type = get_field('selection_type') ?: 'all';
 $specific_sectors = get_field('specific_sectors');
-
 // Classes du bloc
 $classes = 'sectors-grid'; // On garde le nom de classe pour la compatibilité CSS
 if (!empty($block['className'])) {
@@ -49,13 +48,14 @@ $sectors_query = new WP_Query($args);
 						$sector_id = get_the_ID();
 						$permalink = get_permalink($sector_id);
 						$excerpt = get_the_excerpt();
+						$category = get_the_terms($sector_id, 'sector-category')[0]->name;
+						$image = get_field('image', $sector_id);
+
 					?>
-						<li class="sectors-list__item">
+						<li class="sectors-list__item card <?php echo $category ?>">
 							<div class="sectors-list__item-inner">
 								<h3 class="sectors-list__item-title">
-									<a href="<?php echo esc_url($permalink); ?>" class="sectors-list__link">
-										<?php the_title(); ?>
-									</a>
+									<?php the_title(); ?>
 								</h3>
 								<?php if ($excerpt) : ?>
 									<div class="sectors-list__excerpt">
@@ -67,6 +67,11 @@ $sectors_query = new WP_Query($args);
 									Learn more about <?php the_title(); ?>
 								</a>
 							</div>
+							<?php if ($image) : ?>
+								<div class="sectors-list__item__image">
+									<img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt'] ?: get_the_title()); ?>">
+								</div>
+							<?php endif; ?>
 						</li>
 					<?php endwhile; ?>
 				</ul>
