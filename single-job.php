@@ -18,7 +18,7 @@
                     </span>
                     <?php
                     if (get_the_time('U') > strtotime('-5 days')) {
-                        echo '<span class="new">New</span>';
+                        echo '<span class="tag tag-secondary">New</span>';
                     }
                     ?>
                     <h1 class="job-detail-title"><?php the_title(); ?></h1>

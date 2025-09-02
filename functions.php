@@ -393,11 +393,13 @@ function abyssenergy_add_job_query_vars()
 	$wp->add_query_var('job_location'); // Reste au singulier pour compatibilité
 	$wp->add_query_var('job_country'); // Reste au singulier pour compatibilité
 	$wp->add_query_var('job_type');
+	$wp->add_query_var('job_skill');
 
 	// Ajout des variables pour les multisélects
 	$wp->add_query_var('job_sector_multi');
 	$wp->add_query_var('job_location_multi');
 	$wp->add_query_var('job_country_multi');
+	$wp->add_query_var('job_skill_multi');
 
 	// Hook pour transformer les paramètres des tableaux en variables de requête
 	add_action('parse_request', 'abyssenergy_parse_multiselect_query');
@@ -432,6 +434,14 @@ function abyssenergy_parse_multiselect_query($wp)
 		$countries = array_filter($_GET['job_country']);
 		if (!empty($countries)) {
 			$wp->query_vars['job_country_multi'] = $countries;
+		}
+	}
+
+	if (isset($_GET['job_skill']) && is_array($_GET['job_skill'])) {
+		// Filtrer les valeurs vides
+		$skills = array_filter($_GET['job_skill']);
+		if (!empty($skills)) {
+			$wp->query_vars['job_skill_multi'] = $skills;
 		}
 	}
 }

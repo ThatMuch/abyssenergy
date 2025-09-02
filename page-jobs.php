@@ -20,11 +20,17 @@ $all_jobs_query = new WP_Query(array(
 
 $job_cities = array();
 $job_countries = array();
+$job_skills = array();
 
 if ($all_jobs_query->have_posts()) {
 	foreach ($all_jobs_query->posts as $job_id) {
 		$job_city = get_field('job_city', $job_id);
 		$job_country = get_field('job_country', $job_id);
+		$job_skill =  get_the_terms($job_id, 'job-skill');
+		$skill = '';
+		if ($job_skill && !is_wp_error($job_skill)) {
+			$skill = join(', ', wp_list_pluck($job_skill, 'name'));
+		}
 		if ($job_city) {
 			// Le texte "Nearby" ne doit pas être pris en compte dans le filtre.
 			$job_city = trim(str_ireplace('Nearby', '', $job_city));
@@ -37,10 +43,16 @@ if ($all_jobs_query->have_posts()) {
 				$job_countries[] = $job_country;
 			}
 		}
+
+		if ($skill) {
+			$job_skills[] = $skill;
+		}
 	}
 }
+
 sort($job_cities);
 sort($job_countries);
+sort($job_skills);
 wp_reset_postdata();
 
 // Configuration de la requête personnalisée pour l'affichage
@@ -132,6 +144,23 @@ if (get_query_var('job_country_multi')) {
 	);
 }
 
+// Filter par skill - Support multiselect
+if (get_query_var('job_skill_multi')) {
+	$skills = get_query_var('job_skill_multi');
+	$tax_query[] = array(
+		'taxonomy' => 'job-skill',
+		'field'    => 'slug',
+		'terms'    => $skills,
+		'operator' => 'IN',
+	);
+} elseif (get_query_var('job_skill')) { // Compatibilité avec l'ancien format
+	$tax_query[] = array(
+		'taxonomy' => 'job-skill',
+		'field'    => 'slug',
+		'terms'    => get_query_var('job_skill'),
+	);
+}
+
 if (count($tax_query) > 1) {
 	$job_args['tax_query'] = $tax_query;
 }
@@ -211,6 +240,25 @@ $jobs_query = new WP_Query($job_args);
 					<?php endforeach;
 					endif; ?>
 				</select>
+				<select name="job_skill[]" id="job-skill" class="abyss-multiselect" multiple data-search="true">
+					<option value="">All positions</option>
+					<?php
+					$skills = get_terms('job-skill', array('hide_empty' => true));
+					$selected_skills = get_query_var('job_skill_multi') ? get_query_var('job_skill_multi') : array();
+					// Compatibilité avec l'ancien format
+					if (empty($selected_skills) && get_query_var('job_skill')) {
+						$selected_skills = array(get_query_var('job_skill'));
+					}
+
+					if (!is_wp_error($skills) && !empty($skills)) :
+						foreach ($skills as $skill) : ?>
+							<option value="<?php echo esc_attr($skill->slug); ?>"
+								<?php echo in_array($skill->slug, $selected_skills) ? 'selected' : ''; ?>>
+								<?php echo esc_html($skill->name); ?>
+							</option>
+					<?php endforeach;
+					endif; ?>
+				</select>
 				<select id="job-location" name="job_location[]" class="abyss-multiselect" multiple data-search="true">
 					<option value="">All cities</option>
 					<?php
@@ -258,7 +306,9 @@ $jobs_query = new WP_Query($job_args);
 					get_query_var('job_country') ||
 					get_query_var('job_sector_multi') ||
 					get_query_var('job_location_multi') ||
-					get_query_var('job_country_multi')
+					get_query_var('job_country_multi') ||
+					get_query_var('job_skill_multi') ||
+					get_query_var('job_type_multi')
 				) : ?>
 
 					<a href="<?php echo esc_url(get_permalink()); ?>" class="btn btn--outline btn--small">
