@@ -25,18 +25,17 @@ define('ABYSSENERGY_URI', get_template_directory_uri());
 function abyssenergy_load_theme_modules()
 {
 	$modules = [
-		'inc/setup.php',      // Configuration principale du thème
-		'inc/utils.php',      // Fonctions utilitaires
-		'inc/enqueue.php',    // Enregistrement des scripts et styles
-		'inc/admin.php',      // Personnalisation de l'interface d'administration
-		'inc/blocks.php',     // Blocs Gutenberg personnalisés
-		'inc/acf.php',        // Intégration avec Advanced Custom Fields
-		'inc/jobs.php',       // Fonctionnalités liées aux offres d'emploi
-		'inc/widgets.php',    // Widgets personnalisés
-		'inc/shortcodes.php', // Shortcodes personnalisés
-		'inc/scss.php',       // Compilation SCSS (si présent)
-		'inc/customizer.php', // Personnalisations du Customizer WordPress
-		'blocks/map/map-init.php' // Initialisation de la carte SVG
+		'inc/setup.php',       // Configuration principale du thème
+		'inc/utils.php',       // Fonctions utilitaires
+		'inc/enqueue.php',     // Enregistrement des scripts et styles
+		'inc/admin.php',       // Personnalisation de l'interface d'administration
+		'inc/blocks.php',      // Blocs Gutenberg personnalisés
+		'inc/acf.php',         // Intégration avec Advanced Custom Fields
+		'inc/jobs.php',        // Fonctionnalités liées aux offres d'emploi
+		'inc/widgets.php',     // Widgets personnalisés
+		'inc/shortcodes.php',  // Shortcodes personnalisés
+		'inc/scss.php',        // Compilation SCSS (si présent)
+		'inc/customizer.php',  // Personnalisations du Customizer WordPress
 	];
 
 	foreach ($modules as $module) {

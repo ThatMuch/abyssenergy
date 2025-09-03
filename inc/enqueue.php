@@ -128,3 +128,50 @@ function abyssenergy_add_editor_styles()
 	add_editor_style('css/admin-theme-abyssenergy.css');
 }
 add_action('admin_init', 'abyssenergy_add_editor_styles');
+
+/**
+ * Enregistrer et charger les bibliothèques Leaflet
+ * pour la carte interactive globale
+ */
+function abyssenergy_enqueue_leaflet()
+{
+	// Vérifions si au moins un bloc 'global-map' est présent dans le contenu
+	global $post;
+	$enqueue_leaflet = false;
+
+	// Dans l'éditeur admin, toujours charger Leaflet
+	if (is_admin()) {
+		$enqueue_leaflet = true;
+	} elseif (is_singular() && has_blocks($post->post_content)) {
+		// Pour le front-end, vérifier si le bloc est utilisé
+		$blocks = parse_blocks($post->post_content);
+		foreach ($blocks as $block) {
+			if ($block['blockName'] === 'acf/global-map') {
+				$enqueue_leaflet = true;
+				break;
+			}
+		}
+	}
+
+	// Si on a besoin de Leaflet, on charge les fichiers
+	if ($enqueue_leaflet) {
+		// CSS Leaflet (depuis CDN)
+		wp_enqueue_style(
+			'leaflet-css',
+			'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css',
+			array(),
+			'1.9.4'
+		);
+
+		// JavaScript Leaflet (depuis CDN)
+		wp_enqueue_script(
+			'leaflet-js',
+			'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js',
+			array(),
+			'1.9.4',
+			true
+		);
+	}
+}
+add_action('wp_enqueue_scripts', 'abyssenergy_enqueue_leaflet');
+add_action('enqueue_block_editor_assets', 'abyssenergy_enqueue_leaflet');

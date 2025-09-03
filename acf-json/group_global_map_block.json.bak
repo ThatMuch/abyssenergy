@@ -1,0 +1,289 @@
+{
+	"key": "group_global_map_block",
+	"title": "Bloc Carte Globale",
+	"fields": [
+		{
+			"key": "field_global_map_title",
+			"label": "Titre de la carte",
+			"name": "global_map_title",
+			"type": "text",
+			"instructions": "Entrez le titre principal qui apparaîtra au-dessus de la carte",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "Nos opérations à travers le monde",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		{
+			"key": "field_global_map_description",
+			"label": "Description",
+			"name": "global_map_description",
+			"type": "textarea",
+			"instructions": "Une brève description optionnelle qui apparaîtra sous le titre",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "Découvrez l'étendue mondiale de nos projets et opérations",
+			"placeholder": "",
+			"maxlength": "",
+			"rows": 3,
+			"new_lines": "br"
+		},
+		{
+			"key": "field_global_map_countries_style",
+			"label": "Style des pays",
+			"name": "global_map_countries_style",
+			"type": "group",
+			"instructions": "Personnalisez l'apparence des pays sur la carte",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"layout": "block",
+			"sub_fields": [
+				{
+					"key": "field_countries_color",
+					"label": "Couleur des pays",
+					"name": "countries_color",
+					"type": "color_picker",
+					"instructions": "Choisissez la couleur de remplissage des pays",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "33",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "#e6f2ff"
+				},
+				{
+					"key": "field_borders_color",
+					"label": "Couleur des frontières",
+					"name": "borders_color",
+					"type": "color_picker",
+					"instructions": "Choisissez la couleur des frontières entre les pays",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "33",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "#ddedfb"
+				},
+				{
+					"key": "field_countries_opacity",
+					"label": "Opacité",
+					"name": "countries_opacity",
+					"type": "range",
+					"instructions": "Réglez l'opacité des couleurs des pays",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "33",
+						"class": "",
+						"id": ""
+					},
+					"default_value": 40,
+					"min": 0,
+					"max": 100,
+					"step": 5,
+					"prepend": "",
+					"append": "%"
+				}
+			]
+		},
+		{
+			"key": "field_global_map_markers",
+			"label": "Marqueurs sur la carte",
+			"name": "global_map_markers",
+			"type": "repeater",
+			"instructions": "Ajoutez des marqueurs pour indiquer les emplacements des projets",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"collapsed": "field_marker_title",
+			"min": 0,
+			"max": 0,
+			"layout": "block",
+			"button_label": "Ajouter un marqueur",
+			"sub_fields": [
+				{
+					"key": "field_marker_title",
+					"label": "Titre",
+					"name": "title",
+					"type": "text",
+					"instructions": "Nom du projet ou de l'installation",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "50",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "ex: Plateforme offshore Alpha",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_marker_country",
+					"label": "Pays",
+					"name": "country",
+					"type": "text",
+					"instructions": "Pays où se situe le projet",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "50",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "ex: France",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_marker_lat",
+					"label": "Latitude",
+					"name": "lat",
+					"type": "number",
+					"instructions": "Coordonnée de latitude",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "33",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "ex: 48.8566",
+					"prepend": "",
+					"append": "",
+					"min": -90,
+					"max": 90,
+					"step": 0.0001
+				},
+				{
+					"key": "field_marker_lng",
+					"label": "Longitude",
+					"name": "lng",
+					"type": "number",
+					"instructions": "Coordonnée de longitude",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "33",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "ex: 2.3522",
+					"prepend": "",
+					"append": "",
+					"min": -180,
+					"max": 180,
+					"step": 0.0001
+				},
+				{
+					"key": "field_marker_image",
+					"label": "Image",
+					"name": "image",
+					"type": "image",
+					"instructions": "Image représentative du projet (optionnelle)",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "33",
+						"class": "",
+						"id": ""
+					},
+					"return_format": "array",
+					"preview_size": "medium",
+					"library": "all",
+					"min_width": "",
+					"min_height": "",
+					"min_size": "",
+					"max_width": "",
+					"max_height": "",
+					"max_size": "",
+					"mime_types": ""
+				},
+				{
+					"key": "field_marker_description",
+					"label": "Description",
+					"name": "description",
+					"type": "textarea",
+					"instructions": "Description du projet ou de l'installation",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "67",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"maxlength": "",
+					"rows": 3,
+					"new_lines": "br"
+				},
+				{
+					"key": "field_marker_link",
+					"label": "Lien",
+					"name": "link",
+					"type": "link",
+					"instructions": "Lien optionnel vers une page détaillée",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"return_format": "array"
+				}
+			]
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "block",
+				"operator": "==",
+				"value": "acf/global-map"
+			}
+		]
+	],
+	"menu_order": 0,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": true,
+	"description": "Champs pour le bloc de carte globale interactive",
+	"show_in_rest": 0,
+	"modified": 1713791991
+}

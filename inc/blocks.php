@@ -64,6 +64,31 @@ function abyssenergy_register_blocks()
 			'jsx'           => true,
 		),
 	));
+
+	// Bloc carte globale avec Leaflet
+	acf_register_block_type(array(
+		'name'              => 'global-map',
+		'title'             => __('Carte Globale', 'abyssenergy'),
+		'description'       => __('Affichez une carte interactive des projets Abyss Energy à travers le monde', 'abyssenergy'),
+		'render_template'   => 'blocks/map/block-global-map.php',
+		'category'          => 'abyss-blocks',
+		'icon'              => 'location-alt',
+		'keywords'          => array('carte', 'map', 'global', 'projects', 'leaflet'),
+		'supports'          => array(
+			'align' => array('wide', 'full'),
+			'mode' => true,
+			'jsx' => true
+		),
+		'example'           => array(
+			'attributes' => array(
+				'mode' => 'preview',
+				'data' => array(
+					'is_preview'    => true
+				)
+			)
+		),
+		// On retire l'enqueue ici car nous le faisons dans map-init.php
+	));
 }
 add_action('acf/init', 'abyssenergy_register_blocks');
 
