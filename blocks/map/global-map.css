@@ -64,12 +64,8 @@
 
 	path {
 	mix-blend-mode: multiply;
+	transition: fill-opacity 0.3s ease;
 	}
-}
-
-/* Style pour les pays */
-.global-map svg path {
-    transition: fill-opacity 0.3s ease;
 }
 
 /* Style des marqueurs */

@@ -76,28 +76,50 @@
 
         // Fonction pour convertir les coordonnées géographiques en coordonnées SVG
         function geoToSvgCoords(lat, lng) {
-            // Cette formule considère que la carte est une projection Mercator simple
-            // Ajustée spécifiquement pour le SVG de la carte du monde fournie
+            // Cette fonction utilise maintenant l'équateur comme référence pour un meilleur placement
 
-            // Coefficients d'ajustement pour cette carte SVG particulière
-            const centerX = svgWidth / 2;
-            const centerY = svgHeight / 2;
-            const scale = svgWidth / 360; // échelle horizontale approximative
+            // Coordonnées du centre de la carte (le méridien de Greenwich à l'équateur)
+            // Ces valeurs sont basées sur l'analyse du SVG avec la ligne d'équateur
+            const equatorY = svgHeight * 0.62; // Position Y de l'équateur dans le SVG (60% de la hauteur depuis le haut)
+            const centerX = svgWidth / 2; // Le méridien de Greenwich est au centre horizontal
 
-            // Facteurs de correction basés sur les retours d'utilisation
-            // Décalage vers la gauche (-) pour corriger le déplacement vers la droite
-            const offsetX = -15;
-            // Décalage vers le bas (+) pour corriger le déplacement vers le haut
-            const offsetY = +20;
+            // Facteurs d'échelle pour la conversion (ajustés selon les proportions du SVG)
+            const horizontalScale = svgWidth / 360; // Une unité de longitude = x pixels horizontalement
 
-            // Correction supplémentaire pour améliorer la précision aux différentes latitudes
-            // La projection Mercator déforme les latitudes élevées
-            const latFactor = 0.95; // Réduction légère de l'impact de la latitude
+            // Calcul des échelles verticales en tenant compte de la position asymétrique de l'équateur
+            // L'hémisphère nord dispose de 60% de la hauteur du SVG, l'hémisphère sud de 40%
+            const northVerticalScale = (equatorY) / 90; // Échelle pour les latitudes nord (de l'équateur au pôle nord)
+            const southVerticalScale = (svgHeight - equatorY) / 90; // Échelle pour les latitudes sud (de l'équateur au pôle sud)
 
-            // Conversion en coordonnées SVG avec ajustements
-            let x = centerX + (lng * scale) + offsetX;
-            // Pour y, nous inversons car les coordonnées SVG ont y=0 en haut
-            let y = centerY - ((lat / 90) * (svgHeight / 2) * latFactor) + offsetY;
+            // Facteurs de correction pour mieux correspondre à la projection du SVG
+            const offsetX = -13; // Ajustement horizontal global
+            const offsetY = 0; // Pas d'ajustement vertical depuis que nous utilisons l'équateur comme référence
+
+            // Correction pour la déformation de la projection Mercator aux latitudes élevées
+            // Plus on s'éloigne de l'équateur, plus la déformation augmente
+            const northLatFactor = 0.95; // Facteur de correction pour les hautes latitudes nord
+            const southLatFactor = 0.120; // Facteur de correction pour les hautes latitudes sud
+
+            // Conversion de la longitude en position X
+            let x = centerX + (lng * horizontalScale) + offsetX;
+
+            // Conversion de la latitude en position Y en utilisant des échelles et facteurs différents selon l'hémisphère
+            let y;
+            if (lat >= 0) {
+                // Hémisphère nord (latitudes positives)
+                // Utilise l'échelle nord et applique une correction progressive avec la latitude
+                // (plus on s'approche du pôle nord, plus la correction est importante)
+                const correctionFactor = 1 - ((1 - northLatFactor) * (lat / 90));
+                y = equatorY - (lat * northVerticalScale * correctionFactor);
+            } else {
+                // Hémisphère sud (latitudes négatives)
+                // Utilise l'échelle sud et applique une correction progressive avec la latitude
+                // (plus on s'approche du pôle sud, plus la correction est importante)
+                const absLat = Math.abs(lat);
+				const correctionFactor = 1 - ((1 - southLatFactor) * (absLat / 90));
+				console.log(equatorY)
+                y = equatorY + (absLat * southVerticalScale * correctionFactor);
+            }
 
             // Garder le marqueur dans les limites de la carte
             x = Math.max(20, Math.min(svgWidth - 20, x));
