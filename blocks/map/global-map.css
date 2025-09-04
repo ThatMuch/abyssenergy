@@ -13,6 +13,10 @@
 		background-position-y:  155px;
 		background-size: 110%;
 
+		@media screen and (width <= 527px) {
+			background-position-y:  220px;
+		}
+
 		@media screen and (width >= 1980px) {
 			background-size: 105%;
 		}
