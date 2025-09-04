@@ -46,7 +46,7 @@ if ($markers) {
 				'lng' => $marker['lng'],
 				'country' => $marker['country'] ?: '',
 				'project_name' => $marker['title'] ?: 'Projet Abyss Energy',
-				'description' => $marker['description'] ?: ''
+				'sector' => $marker['sector'] ?: ''
 			);
 
 			$map_data['markers'][] = $marker_data;

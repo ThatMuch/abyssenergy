@@ -4,41 +4,34 @@
         // Si l'élément DOM n'existe pas, sortir
         const mapContainer = document.getElementById(mapContainerId);
         if (!mapContainer) {
-            console.error('Conteneur de carte non trouvé:', mapContainerId);
             return;
         }
 
-        console.log('Initialisation de la carte:', mapContainerId);
-        console.log('Chemin SVG:', mapData.svgPath);
+
 
         // Vérifier que abyss_map_params est défini
         if (typeof abyss_map_params === 'undefined') {
-            console.error('abyss_map_params n\'est pas défini. Le script wp_localize_script n\'a pas été exécuté correctement.');
             mapContainer.innerHTML = '<p>Erreur: Configuration de la carte non chargée</p>';
             return;
         }
 
         const svgPath = mapData.svgPath || `${abyss_map_params.theme_url}/blocks/map/svg/world-map.svg`;
-        console.log('Chemin SVG complet:', svgPath);
 
         // Charger la carte SVG dans le conteneur
         fetch(svgPath)
             .then(response => {
-                console.log('Réponse SVG status:', response.status);
                 if (!response.ok) {
                     throw new Error(`Erreur HTTP: ${response.status}`);
                 }
                 return response.text();
             })
             .then(svgContent => {
-                console.log('SVG chargé, longueur:', svgContent.length);
                 // Injecter le SVG dans le conteneur
                 mapContainer.innerHTML = svgContent;
 
                 // Obtenir l'élément SVG
                 const svgElement = mapContainer.querySelector('svg');
                 if (!svgElement) {
-                    console.error('Carte SVG non trouvée dans le contenu chargé');
                     mapContainer.innerHTML = `<p>Erreur: Le fichier SVG ne contient pas d'élément SVG valide</p>`;
                     return;
                 }
@@ -59,20 +52,15 @@
                 }
             })
             .catch(error => {
-                console.error('Erreur lors du chargement de la carte SVG:', error);
                 mapContainer.innerHTML = `<p>Erreur lors du chargement de la carte: ${error.message}</p>`;
             });
     }
 
     // Fonction pour ajouter les marqueurs à la carte SVG
     function addMarkers(svgElement, markers, popupId) {
-        console.log('Ajout des marqueurs, nombre:', markers.length);
-
         // Obtenir les dimensions du SVG
         const svgWidth = svgElement.viewBox?.baseVal?.width || 1026; // Largeur du SVG actuel
         const svgHeight = svgElement.viewBox?.baseVal?.height || 505; // Hauteur du SVG actuel
-
-        console.log('Dimensions SVG:', svgWidth, 'x', svgHeight);
 
         // Fonction pour convertir les coordonnées géographiques en coordonnées SVG
         function geoToSvgCoords(lat, lng) {
@@ -117,7 +105,6 @@
                 // (plus on s'approche du pôle sud, plus la correction est importante)
                 const absLat = Math.abs(lat);
 				const correctionFactor = 1 - ((1 - southLatFactor) * (absLat / 90));
-				console.log(equatorY)
                 y = equatorY + (absLat * southVerticalScale * correctionFactor);
             }
 
@@ -154,31 +141,31 @@
                 }
             }
         }
-
         // Parcourir les marqueurs à afficher
         markers.forEach((marker, index) => {
-            console.log(`Traitement du marqueur ${index}:`, marker.project_name);
-
             // Vérifier si les coordonnées sont valides
             if (!marker.lat || !marker.lng) {
-                console.warn(`Marqueur ${index} sans coordonnées valides:`, marker);
                 return; // Passer au marqueur suivant
             }
 
             // Convertir les coordonnées géographiques en coordonnées SVG
             const svgCoords = geoToSvgCoords(parseFloat(marker.lat), parseFloat(marker.lng));
-            console.log(`Coordonnées du marqueur ${index}:`, marker.lat, marker.lng, '->', svgCoords.x, svgCoords.y);
-
+			// Couleurs pour chaque secteur
+			const sectorColors = {
+        process: "#06508bff",
+        renewables: "#008e99ff",
+        conventional: "#F70",
+      };
             // Créer un cercle pour le marqueur
             const pinElement = document.createElementNS("http://www.w3.org/2000/svg", "circle");
             pinElement.setAttribute('cx', svgCoords.x);
             pinElement.setAttribute('cy', svgCoords.y);
             pinElement.setAttribute('r', '8');
-                pinElement.setAttribute('fill', '#F70');
-                pinElement.setAttribute('stroke', '#fff');
-                pinElement.setAttribute('stroke-width', '2');
-                pinElement.setAttribute('class', 'map-marker');
-                pinElement.style.cursor = 'pointer';
+            pinElement.setAttribute('fill', sectorColors[marker.sector.value] || '#F70');
+            pinElement.setAttribute('stroke', '#fff');
+            pinElement.setAttribute('stroke-width', '2');
+            pinElement.setAttribute('class','map-marker');
+            pinElement.style.cursor = 'pointer';
 
                 // Afficher le popup au clic
                 pinElement.addEventListener('click', () => {
@@ -189,11 +176,11 @@
                             <p class="map-popup-country">${marker.country}</p>
                         </div>
                     `;
+					if (marker.sector) {
 
-                    if (marker.description) {
                         popupContent += `
-                            <div class="map-popup-description">
-                                ${marker.description}
+                            <div class="map-popup-sector">
+                                Secteur: ${marker.sector.label}
                             </div>
                         `;
                     }
