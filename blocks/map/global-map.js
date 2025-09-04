@@ -168,26 +168,10 @@
                         </div>
                     `;
 
-                    if (marker.image) {
-                        popupContent += `
-                            <div class="map-popup-image">
-                                <img src="${marker.image}" alt="${marker.project_name}">
-                            </div>
-                        `;
-                    }
-
                     if (marker.description) {
                         popupContent += `
                             <div class="map-popup-description">
                                 ${marker.description}
-                            </div>
-                        `;
-                    }
-
-                    if (marker.link) {
-                        popupContent += `
-                            <div class="map-popup-link">
-                                <a href="${marker.link}" target="${marker.link_target || '_self'}" class="btn-primary">${marker.link_title || 'En savoir plus'}</a>
                             </div>
                         `;
                     }

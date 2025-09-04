@@ -1,12 +1,39 @@
+.section--map {
+		position: relative;
+
+	&::before {
+		position: absolute;
+		content: "";
+		bottom: 0;
+		width: 100%;
+		height: 100%;
+		background-image: url("./map-bcg.svg");
+		background-repeat: no-repeat;
+		background-position-x: center;
+		background-position-y:  155px;
+		background-size: 110%;
+
+		@media screen and (width >= 1980px) {
+			background-size: 105%;
+		}
+	}
+}
+
 .abyss-global-map {
     margin: 40px 0;
+	position: relative;
 }
 
 .global-map-title {
-    margin-bottom: 20px;
+    margin-bottom: 100px;
+	margin-top: 0;
     font-size: 2rem;
     text-align: center;
-    color: #06508b; /* Couleur primaire-700 */
+    color: #06508b;
+
+	@media screen and (width >= 1024px) {
+			margin-bottom: 155px;
+		}
 }
 
 .global-map-description {
@@ -24,7 +51,6 @@
 
 .global-map {
     width: 100%;
-    min-height: 500px;
     z-index: 1;
     background-color: transparent;
 }
@@ -35,6 +61,10 @@
     height: auto;
     max-width: 100%;
     display: block;
+
+	path {
+	mix-blend-mode: multiply;
+	}
 }
 
 /* Style pour les pays */
@@ -160,9 +190,9 @@
 
 /* Responsive */
 @media (width <= 768px) {
-    .global-map {
+    /* .global-map {
         min-height: 400px;
-    }
+    } */
 
     .global-map-popup-inner {
         padding: 20px;

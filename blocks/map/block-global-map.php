@@ -46,22 +46,8 @@ if ($markers) {
 				'lng' => $marker['lng'],
 				'country' => $marker['country'] ?: '',
 				'project_name' => $marker['title'] ?: 'Projet Abyss Energy',
-				'description' => $marker['description'] ?: '',
-				'image' => '',
-				'link' => ''
+				'description' => $marker['description'] ?: ''
 			);
-
-			// Ajouter l'image si disponible
-			if (!empty($marker['image']) && is_array($marker['image'])) {
-				$marker_data['image'] = $marker['image']['url'];
-			}
-
-			// Ajouter le lien si disponible
-			if (!empty($marker['link']) && is_array($marker['link'])) {
-				$marker_data['link'] = $marker['link']['url'];
-				$marker_data['link_title'] = $marker['link']['title'] ?: 'En savoir plus';
-				$marker_data['link_target'] = $marker['link']['target'] ?: '_self';
-			}
 
 			$map_data['markers'][] = $marker_data;
 		}
@@ -81,33 +67,36 @@ if ($markers) {
 		</div>
 	</div>
 <?php else : ?>
-	<div class="container">
-		<div id="<?php echo esc_attr($id); ?>" class="<?php echo esc_attr($className); ?>">
-			<div class="global-map-container">
-				<?php if ($title) : ?>
-					<h2 class="global-map-title"><?php echo esc_html($title); ?></h2>
-				<?php endif; ?>
 
-				<?php if ($description) : ?>
-					<div class="global-map-description">
-						<?php echo wp_kses_post($description); ?>
+	<section class="section section--map">
+		<div class="container">
+			<div id="<?php echo esc_attr($id); ?>" class="<?php echo esc_attr($className); ?>">
+				<div class="global-map-container">
+					<?php if ($title) : ?>
+						<h2 class="global-map-title"><?php echo esc_html($title); ?></h2>
+					<?php endif; ?>
+
+					<?php if ($description) : ?>
+						<div class="global-map-description">
+							<?php echo wp_kses_post($description); ?>
+						</div>
+					<?php endif; ?>
+
+					<div class="global-map-wrapper">
+						<div id="<?php echo esc_attr($id); ?>-map" class="global-map"></div>
 					</div>
-				<?php endif; ?>
 
-				<div class="global-map-wrapper">
-					<div id="<?php echo esc_attr($id); ?>-map" class="global-map"></div>
-				</div>
-
-				<div id="<?php echo esc_attr($id); ?>-popup" class="global-map-popup">
-					<div class="global-map-popup-inner">
-						<span class="global-map-popup-close">&times;</span>
-						<div class="global-map-popup-content"></div>
+					<div id="<?php echo esc_attr($id); ?>-popup" class="global-map-popup">
+						<div class="global-map-popup-inner">
+							<span class="global-map-popup-close">&times;</span>
+							<div class="global-map-popup-content"></div>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 
-	</div>
+		</div>
+	</section>
 
 	<script>
 		// Transmettre les données à JavaScript
