@@ -1,4 +1,55 @@
-<?php get_header(); ?>
+<?php get_header();
+
+// get sector
+$sector_meta = get_the_terms($post->ID, 'job-sector');
+$sector = '';
+$sector_slug = '';
+if ($sector_meta && !is_wp_error($sector_meta)) {
+    $sector = join(', ', wp_list_pluck($sector_meta, 'name'));
+    $sector_slug = join(', ', wp_list_pluck($sector_meta, 'slug'));
+}
+
+// Get the current post's categories
+$current_post_id = get_the_ID();
+
+// Define query arguments
+$args = [
+    'post_type' => 'job',
+    'posts_per_page' => 6,
+    'post__not_in' => [$current_post_id], // Exclude current post
+    'orderby' => 'date',
+    'order' => 'DESC'
+];
+
+// Filtrer par secteur si des secteurs sont sélectionnés
+if (!empty($sector)) {
+    $args['tax_query'] = array(
+        array(
+            'taxonomy' => 'job-sector',
+            'field'    => 'slug',
+            'terms'    => $sector_slug,
+        ),
+    );
+}
+
+
+// Query the jobs
+$query = new WP_Query($args);
+
+// If no jobs found in the same category, fetch the latest 5 posts
+if (!$query->have_posts()) {
+    $args = [
+        'post_type' => 'job',
+        'posts_per_page' => 6,
+        'post__not_in' => [$current_post_id],
+        'orderby' => 'date',
+        'order' => 'DESC'
+    ];
+    $query = new WP_Query($args);
+}
+
+
+?>
 <section class='content job-detail'>
     <div class="container">
         <a href="<?php // go back to previous page
@@ -8,13 +59,7 @@
             <?php while (have_posts()) : the_post(); ?>
                 <section class="job-detail-header">
                     <span class="job-sector">
-                        <?php
-                        $sector_meta = get_the_terms($post->ID, 'job-sector');
-                        $sector = '';
-                        if ($sector_meta && !is_wp_error($sector_meta)) {
-                            $sector = join(', ', wp_list_pluck($sector_meta, 'name'));
-                        }
-                        echo $sector; ?>
+                        <?php echo $sector; ?>
                     </span>
                     <?php
                     if (get_the_time('U') > strtotime('-5 days')) {
@@ -136,7 +181,12 @@
 
             <?php endwhile; ?>
         <?php endif; ?>
-        <?php get_template_part('template-parts/section-similar-jobs'); ?>
+        <?php
+        // Passer tous les paramètres nécessaires au template
+        get_template_part('template-parts/section-jobs', null, [
+            'query' => $query
+        ]);
+        ?>
     </div>
 </section>
 

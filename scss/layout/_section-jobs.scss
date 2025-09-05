@@ -1,0 +1,29 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+@use "sass:map";
+
+.similar-jobs {
+  overflow-x: auto;
+  // hide the scroll bar
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  &-wrapper {
+    display: flex;
+    gap: map.get($spacings, "component-md");
+    padding: 1rem 0 map.get($spacings, "component-lg") 0;
+    .card.job-card {
+      width: 28.75rem;
+      flex: none;
+    }
+  }
+}
+.similar-jobs-nav-buttons {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: map.get($spacings, "component-xs");
+  margin-bottom: map.get($spacings, "component-lg");
+}

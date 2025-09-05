@@ -14,6 +14,7 @@
 
 // 3. Layout - Structure générale du site
 @use "layout/layout";
+@use "layout/section-jobs";
 
 // 4. Components - Composants réutilisables
 @use "components/job-card";

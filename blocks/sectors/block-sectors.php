@@ -36,9 +36,7 @@ $sectors_query = new WP_Query($args);
 <section class="<?php echo esc_attr($classes); ?>">
 	<div class="container">
 		<?php if ($title) : ?>
-			<div class="sectors-grid__header">
-				<h2 class="sectors-grid__title"><?php echo esc_html($title); ?></h2>
-			</div>
+			<h2 class="text-center"><?php echo esc_html($title); ?></h2>
 		<?php endif; ?>
 
 		<?php if ($sectors_query->have_posts()) : ?>
