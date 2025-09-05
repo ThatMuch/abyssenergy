@@ -19,6 +19,7 @@ body {
   color: $color-text-primary;
   padding: 0;
   margin: map.get($spacings, "section-xs") 0 0 0;
+  overflow-x: hidden;
   background: linear-gradient(
     180deg,
     $interface-color-background-primary 0%,

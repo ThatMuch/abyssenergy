@@ -1,0 +1,35 @@
+.clients-block {
+	.clients-slider{
+		 width:100vw;
+  overflow:hidden;
+	}
+
+	.section-title {
+	flex: none;
+	}
+
+	.clients-slider-inner {
+		 display:grid;
+		   animation: move 10s linear infinite;
+	}
+
+	.client-logo {
+		 width:12vw;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 0 1rem;
+
+		 img {
+			 width:100%;
+			 height:auto;
+			 object-fit:contain;
+		 }
+	}
+
+}
+
+@keyframes move{
+0% { transform: translateX(0); }
+100% { transform: translateX(calc(-12vw * 9))}
+}
