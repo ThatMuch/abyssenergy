@@ -139,4 +139,22 @@
       transition-delay: 0.2s;
     }
   }
+
+  .gform_required_legend {
+    display: none;
+  }
+
+  .gform_fields {
+    display: flex;
+    gap: map.get($spacings, "component-sm");
+    flex-wrap: wrap;
+  }
+  .gfield--width-half {
+    width: calc(50% - map.get($spacings, "component-sm") / 2);
+  }
+
+  .gfield--width-full,
+  .gfield:not(.gfield--width-half) {
+    width: 100%;
+  }
 }
