@@ -36,7 +36,8 @@ function abyssenergy_load_theme_modules()
 		'inc/shortcodes.php', // Shortcodes personnalisés
 		'inc/scss.php',       // Compilation SCSS (si présent)
 		'inc/customizer.php', // Personnalisations du Customizer WordPress
-		'blocks/map/map-init.php' // Initialisation de la carte SVG
+		'blocks/map/map-init.php', // Initialisation de la carte SVG
+		'blocks/testimonials-slider/testimonials-slider-init.php' // Initialisation du slider de témoignages
 	];
 
 	foreach ($modules as $module) {
