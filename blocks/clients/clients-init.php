@@ -43,15 +43,15 @@ function register_clients_block()
 }
 
 /**
- * Création des champs ACF pour le bloc Testimonials Slider
+ * Création des champs ACF pour le bloc clients Slider
  */
 if (function_exists('acf_add_local_field_group')) {
 	acf_add_local_field_group(array(
-		'key' => 'group_testimonials_slider',
-		'title' => 'Testimonials Slider Settings',
+		'key' => 'group_clients_slider',
+		'title' => 'clients Slider Settings',
 		'fields' => array(
 			array(
-				'key' => 'field_testimonials_slider_title',
+				'key' => 'field_clients_slider_title',
 				'label' => 'Titre de la section',
 				'name' => 'title',
 				'type' => 'text',
@@ -63,14 +63,23 @@ if (function_exists('acf_add_local_field_group')) {
 				'maxlength' => '',
 			),
 			array(
-				'key' => 'field_testimonials_slider_show_title',
+				'key' => 'field_clients_slider_show_title',
 				'label' => 'Afficher le titre',
 				'name' => 'show_title',
 				'type' => 'true_false',
 				'instructions' => 'Cochez pour afficher le titre de la section.',
 				'default_value' => 1,
 				'ui' => 1,
-			)
+			),
+			array(
+				'key' => 'field_clients_slider_gallery',
+				'label' => 'Galerie',
+				'name' => 'gallery',
+				'type' => 'gallery',
+				'instructions' => 'Ajoutez des images à la galerie.',
+				'preview_size' => 'medium',
+				'library' => 'all',
+			),
 		),
 		'location' => array(
 			array(

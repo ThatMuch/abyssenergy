@@ -31,5 +31,5 @@
 
 @keyframes move{
 0% { transform: translateX(0); }
-100% { transform: translateX(calc(-12vw * 9))}
+100% { transform: translateX(calc(-12vw * 5))}
 }

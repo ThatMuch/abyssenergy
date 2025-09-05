@@ -30,6 +30,7 @@ if (!empty($block['align'])) {
 // Récupération des paramètres du bloc
 $title = get_field('title') ?: 'Our clients';
 $show_title = get_field('show_title') !== false;
+$gallery = get_field('gallery') ?: array();
 
 $args = array(
 	'post_type' => 'testimonials',
@@ -41,7 +42,7 @@ $args = array(
 $clients = new WP_Query($args);
 ?>
 
-<?php if ($clients->have_posts()) : ?>
+<?php if ($gallery) : ?>
 	<!-- Clients Slider Block -->
 
 	<section <?php echo $anchor; ?>class="section <?php echo esc_attr($class_name); ?>">
@@ -50,21 +51,17 @@ $clients = new WP_Query($args);
 				<h2 class="section-title"><?php echo esc_html($title); ?></h2>
 				<div class="clients-slider">
 					<div id="clients-slider-inner" class="clients-slider-inner">
-						<?php while ($clients->have_posts()) : $clients->the_post(); ?>
-							<?php if (has_post_thumbnail()) : ?>
-								<div class="client-logo">
-									<?php the_post_thumbnail('medium', array('class' => 'img-fluid')); ?>
-								</div>
-							<?php endif; ?>
-						<?php endwhile; ?>
+						<?php foreach ($gallery as $image) : ?>
+							<div class="client-logo">
+								<img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" class="img-fluid">
+							</div>
+						<?php endforeach; ?>
 
-						<?php while ($clients->have_posts()) : $clients->the_post(); ?>
-							<?php if (has_post_thumbnail()) : ?>
-								<div class="client-logo">
-									<?php the_post_thumbnail('medium', array('class' => 'img-fluid')); ?>
-								</div>
-							<?php endif; ?>
-						<?php endwhile; ?>
+						<?php foreach ($gallery as $image) : ?>
+							<div class="client-logo">
+								<img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" class="img-fluid">
+							</div>
+						<?php endforeach; ?>
 					</div>
 				</div>
 			</div>
