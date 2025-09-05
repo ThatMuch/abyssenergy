@@ -38,7 +38,9 @@ function abyssenergy_load_theme_modules()
 		'inc/customizer.php', // Personnalisations du Customizer WordPress
 		'blocks/map/map-init.php', // Initialisation de la carte SVG
 		'blocks/testimonials-slider/testimonials-slider-init.php', // Initialisation du slider de témoignages
-		'blocks/jobs-listing/jobs-listing-init.php' // Initialisation du bloc des offres d'emploi
+		'blocks/jobs-listing/jobs-listing-init.php', // Initialisation du bloc des offres d'emploi
+		'blocks/clients/clients-init.php', // Initialisation du bloc des clients
+
 	];
 
 	foreach ($modules as $module) {
