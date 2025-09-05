@@ -46,8 +46,10 @@ $is_preview = isset($block['data']['is_preview']) && $block['data']['is_preview'
 
 	<section <?php echo $anchor; ?>class="section <?php echo esc_attr($class_name); ?>">
 		<div class="container">
-			<div class="d-flex gap-4 align-items-center">
-				<h2 class="section-title"><?php echo esc_html($title); ?></h2>
+			<div class="d-flex gap-4 align-items-center mb-4">
+				<?php if ($show_title) : ?>
+					<h2 class="section-title"><?php echo esc_html($title); ?></h2>
+				<?php endif; ?>
 				<div class="clients-slider">
 					<div id="clients-slider-inner" class="clients-slider-inner">
 						<?php foreach ($gallery as $image) : ?>
@@ -65,6 +67,7 @@ $is_preview = isset($block['data']['is_preview']) && $block['data']['is_preview'
 				</div>
 			</div>
 		</div>
+		</div>
 	</section>
 <?php else : ?>
 	<div class="alert alert-warning">
@@ -73,10 +76,29 @@ $is_preview = isset($block['data']['is_preview']) && $block['data']['is_preview'
 <?php endif; ?>
 
 <script>
-	// make an infinite loop banner
-	const inner = document.getElementById('clients-slider-inner');
-	const logosCount = inner.children.length;
-	console.log(logosCount);
-	// add the style grid-template columns to the inner div
-	inner.style.gridTemplateColumns = `1fr repeat(${logosCount}, 1fr)`;
+	// Configuration de l'animation du slider infini
+	document.addEventListener('DOMContentLoaded', function() {
+		const inner = document.getElementById('clients-slider-inner');
+		if (!inner) return;
+
+		// Nombre total de logos (inclut les doublons)
+		const totalLogos = inner.children.length;
+		// Nombre réel de logos uniques (la moitié du total puisqu'on les duplique)
+		const uniqueLogos = totalLogos / 2;
+
+		// Calcul de la largeur totale à déplacer (la largeur d'un ensemble de logos uniques)
+		const logoWidth = 200; // largeur en pixels de chaque logo (définie dans le CSS)
+		const slideDistance = -(logoWidth * uniqueLogos);
+
+		// Définir la variable CSS pour la distance d'animation
+		document.documentElement.style.setProperty('--slider-width', `${slideDistance}px`);
+
+		// Configuration de la vitesse d'animation basée sur le nombre de logos
+		// Plus il y a de logos, plus l'animation doit être lente
+		const animationDuration = Math.max(20, uniqueLogos * 3); // 3 secondes par logo, minimum 20s
+		inner.style.animationDuration = `${animationDuration}s`;
+
+		// Configuration du grid pour assurer un affichage correct
+		inner.style.gridTemplateColumns = `repeat(${totalLogos}, ${logoWidth}px)`;
+	});
 </script>
