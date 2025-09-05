@@ -1,0 +1,49 @@
+<?php
+/**
+ * Functions et hooks pour le thème Abyss Energy
+ *
+ * Thème WordPress autonome et moderne pour Abyss Energy
+ * Architecture modulaire avec fichiers séparés pour une meilleure maintenabilité
+ *
+ * @package AbyssEnergy
+ */
+
+// Empêcher l'accès direct au fichier
+if (!defined('ABSPATH')) {
+    exit;
+}
+
+// Définir les constantes du thème
+define('ABYSSENERGY_VERSION', '1.0.0');
+define('ABYSSENERGY_DIR', get_template_directory());
+define('ABYSSENERGY_URL', get_template_directory_uri());
+
+/**
+ * Charger tous les fichiers de fonctions modulaires
+ */
+$abyssenergy_includes = array(
+    '/inc/setup.php',       // Configuration de base du thème
+    '/inc/enqueue.php',     // Styles et scripts
+    '/inc/scss.php',        // Compilation SCSS
+    '/inc/acf.php',         // Fonctions ACF
+    '/inc/blocks.php',      // Blocs Gutenberg
+    '/inc/admin.php',       // Fonctionnalités admin
+    '/inc/widgets.php',     // Widgets et sidebars
+    '/inc/shortcodes.php',  // Shortcodes
+    '/inc/utils.php',       // Fonctions utilitaires
+);
+
+// Inclure tous les fichiers
+foreach ($abyssenergy_includes as $file) {
+    if (file_exists(ABYSSENERGY_DIR . $file)) {
+        require_once ABYSSENERGY_DIR . $file;
+    }
+}
+
+/**
+ * Définir si nous sommes en environnement de développement
+ * Utilisé pour la compilation SCSS automatique
+ */
+if (!defined('WP_ENV')) {
+    define('WP_ENV', 'development'); // Valeurs possibles: development, staging, production
+}

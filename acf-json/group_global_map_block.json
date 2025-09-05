@@ -1,0 +1,204 @@
+{
+    "key": "group_global_map_block",
+    "title": "Bloc Carte Globale",
+    "fields": [
+        {
+            "key": "field_global_map_title",
+            "label": "Titre de la carte",
+            "name": "global_map_title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Entrez le titre principal qui apparaîtra au-dessus de la carte",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Nos opérations à travers le monde",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_global_map_description",
+            "label": "Description",
+            "name": "global_map_description",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "Une brève description optionnelle qui apparaîtra sous le titre",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Découvrez l'étendue mondiale de nos projets et opérations",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": 3,
+            "new_lines": "br"
+        },
+        {
+            "key": "field_global_map_markers",
+            "label": "Marqueurs sur la carte",
+            "name": "global_map_markers",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Ajoutez des marqueurs pour indiquer les emplacements des projets",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "field_marker_title",
+            "min": 0,
+            "max": 0,
+            "layout": "block",
+            "button_label": "Ajouter un marqueur",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_marker_title",
+                    "label": "Titre",
+                    "name": "title",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Nom du projet ou de l'installation",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "ex: Plateforme offshore Alpha",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "parent_repeater": "field_global_map_markers"
+                },
+                {
+                    "key": "field_marker_country",
+                    "label": "Pays",
+                    "name": "country",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Pays où se situe le projet",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "ex: France",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "parent_repeater": "field_global_map_markers"
+                },
+                {
+                    "key": "field_marker_lat",
+                    "label": "Latitude",
+                    "name": "lat",
+                    "aria-label": "",
+                    "type": "number",
+                    "instructions": "Coordonnée de latitude",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "ex: 48.8566",
+                    "prepend": "",
+                    "append": "",
+                    "min": -90,
+                    "max": 90,
+                    "step": 0.0001,
+                    "parent_repeater": "field_global_map_markers"
+                },
+                {
+                    "key": "field_marker_lng",
+                    "label": "Longitude",
+                    "name": "lng",
+                    "aria-label": "",
+                    "type": "number",
+                    "instructions": "Coordonnée de longitude",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "ex: 2.3522",
+                    "prepend": "",
+                    "append": "",
+                    "min": -180,
+                    "max": 180,
+                    "step": 0.0001,
+                    "parent_repeater": "field_global_map_markers"
+                },
+                {
+                    "key": "field_68b9a2fb03d95",
+                    "label": "Sector",
+                    "name": "sector",
+                    "aria-label": "",
+                    "type": "radio",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "conventional": "Conventional Energy",
+                        "renewables": "Renewable Energy",
+                        "process": "Process Industry"
+                    },
+                    "default_value": "",
+                    "return_format": "array",
+                    "allow_null": 0,
+                    "other_choice": 0,
+                    "allow_in_bindings": 0,
+                    "layout": "vertical",
+                    "save_other_choice": 0,
+                    "parent_repeater": "field_global_map_markers"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/global-map"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Champs pour le bloc de carte globale interactive",
+    "show_in_rest": 0,
+    "modified": 1756996926
+}

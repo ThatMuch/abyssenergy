@@ -8,7 +8,7 @@
  */
 
 get_header();
-
+$subtitle = get_field('subtitle');
 $email = get_field('email');
 $phone = get_field('phone');
 $linkedin = get_field('linkedin');
@@ -26,7 +26,22 @@ $consultants = get_posts(array(
 <div class="page page_contact">
 	<div class="page-header">
 		<div class="container">
-			<h1><?php the_title(); ?></h1>
+			<div class="row">
+				<div class="col col-md-8">
+					<h1><?php the_title(); ?></h1>
+					<?php if ($subtitle): ?>
+						<?php echo $subtitle; ?>
+					<?php endif; ?>
+				</div>
+				<div class="col col-md-4">
+					<?php if (has_post_thumbnail()): ?>
+						<div class="page-thumbnail">
+							<?php the_post_thumbnail('medium'); ?>
+						</div>
+					<?php endif; ?>
+				</div>
+			</div>
+
 		</div>
 	</div>
 	<div class="container">
