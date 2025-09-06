@@ -147,42 +147,6 @@ $is_preview = isset($block['data']['is_preview']) && $block['data']['is_preview'
 									</div>
 								</div>
 							<?php endforeach; ?>
-							<?php foreach ($reviews_data['reviews'] as $review) : ?>
-								<div class="swiper-slide">
-									<div class="review-card card">
-										<div class="review-header">
-											<div class="review-author">
-												<h4 class="author-name"><?php echo esc_html($review['author']); ?></h4>
-											</div>
-										</div>
-										<div class="review-text">
-											<?php
-											$text = esc_html($review['text']);
-											echo strlen($text) > 200 ? substr($text, 0, 200) . '...' : $text;
-											?>
-										</div>
-										<div class="review-rating">
-											<span class="rating-google"><i class="fa-brands fa-google"></i></span>
-											<div>
-												<?php for ($i = 1; $i <= 5; $i++) : ?>
-													<?php if ($i <= $review['rating']) : ?>
-														<i class="fas fa-star"></i>
-													<?php else : ?>
-														<i class="far fa-star"></i>
-													<?php endif; ?>
-												<?php endfor; ?>
-											</div>
-										</div>
-
-										<div class="review-footer">
-											Posted
-											<div class="review-date">
-												<?php echo esc_html($review['relative_time']); ?>
-											</div>
-										</div>
-									</div>
-								</div>
-							<?php endforeach; ?>
 						</div>
 						<!-- Navigation -->
 						<div class="d-flex justify-content-center align-items-center mt-4 gap-3">
