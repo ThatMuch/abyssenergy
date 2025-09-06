@@ -141,6 +141,17 @@ function register_google_reviews_block()
 					'step' => 1,
 				),
 				array(
+					'key' => 'field_google_reviews_image',
+					'label' => 'Image de la section',
+					'name' => 'image',
+					'type' => 'image',
+					'instructions' => 'Téléchargez une image pour la section des avis Google (optionnel).',
+					'required' => 0,
+					'return_format' => 'id',
+					'preview_size' => 'medium',
+					'library' => 'all',
+				),
+				array(
 					'key' => 'field_google_reviews_style',
 					'label' => 'Style d\'affichage',
 					'name' => 'display_style',

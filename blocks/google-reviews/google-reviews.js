@@ -31,8 +31,8 @@
                     clickable: true,
                 },
                 navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
+                    nextEl: '.right',
+                    prevEl: '.left',
                 },
                 breakpoints: {
                     // Quand la largeur de la fenêtre est >= 768px

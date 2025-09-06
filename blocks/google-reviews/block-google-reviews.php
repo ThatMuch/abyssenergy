@@ -37,6 +37,7 @@ $reviews_count = get_field('reviews_count') ?: 5;
 $min_rating = get_field('min_rating') ?: 1;
 $cache_time = get_field('cache_time') ?: 24;
 $display_style = get_field('display_style') ?: 'slider';
+$image = get_field('image');
 
 // Ajouter la classe de style d'affichage
 $class_name .= ' display-' . $display_style;
@@ -59,24 +60,31 @@ $is_preview = isset($block['data']['is_preview']) && $block['data']['is_preview'
 <?php else : ?>
 
 	<!-- Google Reviews Block -->
-	<section <?php echo $anchor; ?>class="<?php echo esc_attr($class_name); ?> section">
+	<section <?php echo $anchor; ?>class="<?php echo esc_attr($class_name); ?> section section-reviews">
+		<img src="<?php echo get_stylesheet_directory_uri(); ?>/blocks/google-reviews/trees.svg" alt="trees" class="trees-svg">
 		<div class="container">
-			<?php if ($show_title) : ?>
-				<div class="row mb-5 text-center">
-					<div class="col">
-						<?php if ($subtitle) : ?>
-							<span class="section--subtitle"><?php echo esc_html($subtitle); ?></span>
+			<div class="row justify-content-between">
+				<div class="col col-md-7">
+					<div class="d-flex gap-4">
+						<?php if ($image) : ?>
+							<div class="section--image">
+								<?php echo wp_get_attachment_image($image, 'medium'); ?>
+							</div>
 						<?php endif; ?>
-						<?php if ($title) : ?>
-							<h2 class="section--title"><?php echo esc_html($title); ?></h2>
-						<?php endif; ?>
+						<div>
+							<?php if ($show_title) : ?>
+								<?php if ($subtitle) : ?>
+									<span class="section--subtitle"><?php echo esc_html($subtitle); ?></span>
+								<?php endif; ?>
+								<?php if ($title) : ?>
+									<h2 class="section--title"><?php echo esc_html($title); ?></h2>
+								<?php endif; ?>
+							<?php endif; ?>
+						</div>
 					</div>
 				</div>
-			<?php endif; ?>
-
-			<?php if (!empty($reviews_data) && !$reviews_data['error']) : ?>
-				<div class="google-reviews-summary">
-					<div class="rating-summary">
+				<?php if (!empty($reviews_data) && !$reviews_data['error']) : ?>
+					<div class="rating-summary col col-md-2">
 						<div class="average-rating">
 							<span class="rating-value"><?php echo number_format($reviews_data['rating'], 1); ?></span>
 							<div class="rating-stars">
@@ -95,34 +103,31 @@ $is_preview = isset($block['data']['is_preview']) && $block['data']['is_preview'
 							</div>
 							<p class="based-on"><?php echo sprintf(__('Basé sur %d avis', 'abyssenergy'), count($reviews_data['reviews'])); ?></p>
 						</div>
-						<div class="google-link">
-							<a href="<?php echo esc_url($reviews_data['url']); ?>" target="_blank" rel="noopener noreferrer">
-								<img src="<?php echo esc_url(get_template_directory_uri() . '/blocks/google-reviews/google-reviews-logo.png'); ?>"
-									alt="Google Reviews" class="google-logo">
-								<?php _e('Voir sur Google', 'abyssenergy'); ?>
-							</a>
-						</div>
 					</div>
+				<?php endif; ?>
+			</div>
 
-					<?php if ($display_style === 'slider') : ?>
-						<!-- Affichage en carrousel -->
-						<div class="google-reviews-slider swiper-container">
-							<div class="swiper-wrapper">
-								<?php foreach ($reviews_data['reviews'] as $review) : ?>
-									<div class="swiper-slide">
-										<div class="review-card">
-											<div class="review-header">
-												<div class="review-author">
-													<?php if (!empty($review['avatar'])) : ?>
-														<img src="<?php echo esc_url($review['avatar']); ?>" alt="<?php echo esc_attr($review['author']); ?>" class="author-avatar">
-													<?php endif; ?>
-													<span class="author-name"><?php echo esc_html($review['author']); ?></span>
-												</div>
-												<div class="review-date">
-													<?php echo esc_html($review['relative_time']); ?>
-												</div>
+			<?php if (!empty($reviews_data) && !$reviews_data['error']) : ?>
+				<div class="google-reviews-summary">
+					<div class="google-reviews-slider swiper-container">
+						<div class="swiper-wrapper">
+							<?php foreach ($reviews_data['reviews'] as $review) : ?>
+								<div class="swiper-slide">
+									<div class="review-card card">
+										<div class="review-header">
+											<div class="review-author">
+												<h4 class="author-name"><?php echo esc_html($review['author']); ?></h4>
 											</div>
-											<div class="review-rating">
+										</div>
+										<div class="review-text">
+											<?php
+											$text = esc_html($review['text']);
+											echo strlen($text) > 200 ? substr($text, 0, 200) . '...' : $text;
+											?>
+										</div>
+										<div class="review-rating">
+											<span class="rating-google"><i class="fa-brands fa-google"></i></span>
+											<div>
 												<?php for ($i = 1; $i <= 5; $i++) : ?>
 													<?php if ($i <= $review['rating']) : ?>
 														<i class="fas fa-star"></i>
@@ -131,91 +136,60 @@ $is_preview = isset($block['data']['is_preview']) && $block['data']['is_preview'
 													<?php endif; ?>
 												<?php endfor; ?>
 											</div>
-											<div class="review-text">
-												<?php
-												$text = esc_html($review['text']);
-												echo strlen($text) > 200 ? substr($text, 0, 200) . '...' : $text;
-												?>
+										</div>
+
+										<div class="review-footer">
+											Posted
+											<div class="review-date">
+												<?php echo esc_html($review['relative_time']); ?>
 											</div>
 										</div>
 									</div>
-								<?php endforeach; ?>
-							</div>
-							<!-- Navigation -->
-							<div class="swiper-button-next"></div>
-							<div class="swiper-button-prev"></div>
-							<!-- Pagination -->
-							<div class="swiper-pagination"></div>
-						</div>
-
-					<?php elseif ($display_style === 'grid') : ?>
-						<!-- Affichage en grille -->
-						<div class="google-reviews-grid">
+								</div>
+							<?php endforeach; ?>
 							<?php foreach ($reviews_data['reviews'] as $review) : ?>
-								<div class="review-card">
-									<div class="review-header">
-										<div class="review-author">
-											<?php if (!empty($review['avatar'])) : ?>
-												<img src="<?php echo esc_url($review['avatar']); ?>" alt="<?php echo esc_attr($review['author']); ?>" class="author-avatar">
-											<?php endif; ?>
-											<span class="author-name"><?php echo esc_html($review['author']); ?></span>
+								<div class="swiper-slide">
+									<div class="review-card card">
+										<div class="review-header">
+											<div class="review-author">
+												<h4 class="author-name"><?php echo esc_html($review['author']); ?></h4>
+											</div>
 										</div>
-										<div class="review-date">
-											<?php echo esc_html($review['relative_time']); ?>
+										<div class="review-text">
+											<?php
+											$text = esc_html($review['text']);
+											echo strlen($text) > 200 ? substr($text, 0, 200) . '...' : $text;
+											?>
 										</div>
-									</div>
-									<div class="review-rating">
-										<?php for ($i = 1; $i <= 5; $i++) : ?>
-											<?php if ($i <= $review['rating']) : ?>
-												<i class="fas fa-star"></i>
-											<?php else : ?>
-												<i class="far fa-star"></i>
-											<?php endif; ?>
-										<?php endfor; ?>
-									</div>
-									<div class="review-text">
-										<?php
-										$text = esc_html($review['text']);
-										echo strlen($text) > 150 ? substr($text, 0, 150) . '...' : $text;
-										?>
+										<div class="review-rating">
+											<span class="rating-google"><i class="fa-brands fa-google"></i></span>
+											<div>
+												<?php for ($i = 1; $i <= 5; $i++) : ?>
+													<?php if ($i <= $review['rating']) : ?>
+														<i class="fas fa-star"></i>
+													<?php else : ?>
+														<i class="far fa-star"></i>
+													<?php endif; ?>
+												<?php endfor; ?>
+											</div>
+										</div>
+
+										<div class="review-footer">
+											Posted
+											<div class="review-date">
+												<?php echo esc_html($review['relative_time']); ?>
+											</div>
+										</div>
 									</div>
 								</div>
 							<?php endforeach; ?>
 						</div>
-
-					<?php else : ?>
-						<!-- Affichage en mosaïque -->
-						<div class="google-reviews-masonry">
-							<?php foreach ($reviews_data['reviews'] as $review) : ?>
-								<div class="review-card">
-									<div class="review-header">
-										<div class="review-author">
-											<?php if (!empty($review['avatar'])) : ?>
-												<img src="<?php echo esc_url($review['avatar']); ?>" alt="<?php echo esc_attr($review['author']); ?>" class="author-avatar">
-											<?php endif; ?>
-											<span class="author-name"><?php echo esc_html($review['author']); ?></span>
-										</div>
-										<div class="review-date">
-											<?php echo esc_html($review['relative_time']); ?>
-										</div>
-									</div>
-									<div class="review-rating">
-										<?php for ($i = 1; $i <= 5; $i++) : ?>
-											<?php if ($i <= $review['rating']) : ?>
-												<i class="fas fa-star"></i>
-											<?php else : ?>
-												<i class="far fa-star"></i>
-											<?php endif; ?>
-										<?php endfor; ?>
-									</div>
-									<div class="review-text">
-										<?php echo esc_html($review['text']); ?>
-									</div>
-								</div>
-							<?php endforeach; ?>
+						<!-- Navigation -->
+						<div class="d-flex justify-content-center align-items-center mt-4 gap-3">
+							<div class="left btn btn--outline btn--icon"><i class="fa fa-chevron-left"></i></div>
+							<div class="right btn btn--outline btn--icon"><i class="fa fa-chevron-right"></i></div>
 						</div>
-					<?php endif; ?>
-
+					</div>
 				</div>
 			<?php elseif (!empty($reviews_data) && $reviews_data['error']) : ?>
 				<div class="alert alert-warning">
