@@ -8,9 +8,9 @@
 
 // Récupère les termes de taxonomie pour le secteur
 $sectors = get_the_terms(get_the_ID(), 'job-sector');
-$city = get_field('job_city');
-$state = get_field('job_state');
-$country = get_field('job_country');
+$city = get_field('job_city', $post->ID);
+$state = get_field('job_state', $post->ID);
+$country = get_field('job_country', $post->ID);
 
 // Détermine la classe CSS basée sur le secteur (si disponible)
 $sector_class = '';
