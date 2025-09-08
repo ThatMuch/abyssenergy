@@ -39,7 +39,7 @@ $is_preview = isset($block['data']['is_preview']) && $block['data']['is_preview'
 <section <?php echo $anchor; ?>class="section <?php echo esc_attr($class_name); ?>">
 	<div class="container">
 		<?php if ($title || $subtitle) : ?>
-			<div class="section-header text-center mb-5">
+			<div class="section-header mb-5">
 				<?php if ($subtitle) : ?>
 					<p class="section-subtitle"><?php echo esc_html($subtitle); ?></p>
 				<?php endif; ?>
@@ -50,20 +50,22 @@ $is_preview = isset($block['data']['is_preview']) && $block['data']['is_preview'
 		<?php endif; ?>
 
 		<?php if ($features) : ?>
-			<div class="row g-4">
+			<div class="row">
 				<?php foreach ($features as $feature) : ?>
-					<div class="col-md-6 col-lg-4">
-						<div class="feature-card card h-100 text-center p-4">
+					<div class="col col-lg-6 ">
+						<div class="feature-card h-100">
+							<div>
+								<?php if (!empty($feature['title'])) : ?>
+									<h3 class="feature-title"><?php echo esc_html($feature['title']); ?></h3>
+								<?php endif; ?>
+								<?php if (!empty($feature['description'])) : ?>
+									<p class="feature-description"><?php echo esc_html($feature['description']); ?></p>
+								<?php endif; ?>
+							</div>
 							<?php if (!empty($feature['icon'])) : ?>
-								<div class="feature-icon mb-3">
+								<div class="feature-icon">
 									<img src="<?php echo esc_url(wp_get_attachment_image_url($feature['icon'], 'full')); ?>" alt="<?php echo esc_attr(get_post_meta($feature['icon'], '_wp_attachment_image_alt', true)); ?>" class="img-fluid" />
 								</div>
-							<?php endif; ?>
-							<?php if (!empty($feature['title'])) : ?>
-								<h3 class="feature-title"><?php echo esc_html($feature['title']); ?></h3>
-							<?php endif; ?>
-							<?php if (!empty($feature['description'])) : ?>
-								<p class="feature-description"><?php echo esc_html($feature['description']); ?></p>
 							<?php endif; ?>
 						</div>
 					</div>

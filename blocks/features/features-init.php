@@ -103,7 +103,7 @@ function register_features_block()
 					'collapsed' => '',
 					'min' => 1,
 					'max' => 0,
-					'layout' => 'row',
+					'layout' => 'block',
 					'hide_empty_message' => 0,
 					'sub_fields' => array(
 						array(

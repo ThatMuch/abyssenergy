@@ -1,6 +1,130 @@
-.features-block{
-	position: relative;
-	padding: 100px 0 50px;
-	background-color: #f9faff;
-	overflow: hidden;
+.feature-card {
+  position: relative;
+  background: linear-gradient(180deg, #eef7fe -6.96%, #fff 100%);
+  box-shadow: 0 6px 16px rgb(44 93 133 / 15%);
+  padding: 1.5rem;
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+  height: 272px;
+  margin-bottom: 4rem;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 98%;
+    top: 0;
+    width: 117px;
+    height: 100%;
+    background-image: url("./arrow.svg");
+    background-repeat: no-repeat;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    right: 100%;
+    top: 0;
+    height: 100%;
+    background: linear-gradient(180deg, #eef7fe -6.96%, #fff 100%);
+    width: 1000px;
+    box-shadow: -11px 6px 16px rgb(44 93 133 / 15%);
+  }
+
+  .feature-icon {
+    flex-shrink: 0;
+    margin-bottom: 0;
+    width: 64px;
+  }
+
+  .feature-description {
+    margin: 0;
+  }
+
+  .feature-title {
+    margin-top: 0;
+  }
+}
+
+.features-block {
+  margin-top: 272px;
+
+  .col:nth-child(even) {
+    transform: translate(20%, -50%);
+
+    .feature-card {
+      flex-direction: row-reverse;
+      padding-right: 117px;
+
+      &::after {
+        right: 98%;
+        left: inherit;
+        background-image: url("./arrow-left.svg");
+      }
+
+      &::before {
+        left: 100%;
+        top: 0;
+        box-shadow: 13px 6px 16px rgb(44 93 133 / 15%);
+      }
+    }
+  }
+}
+
+@media screen and (width <= 1024px) {
+  .features-block {
+    margin-top: 0;
+  }
+}
+
+@media screen and (width <= 768px) {
+  .features-block {
+    margin-top: 0;
+
+    .col {
+      transform: translate(-117px, 0);
+
+      .feature-card {
+        padding-left: 117px;
+      }
+    }
+
+    .col:nth-child(even) {
+      transform: translate(117px, 0);
+
+      .feature-card {
+        padding-left: 1.5rem;
+      }
+    }
+  }
+}
+
+@media screen and (width <= 576px) {
+  .features-block {
+    margin-top: 0;
+
+    .feature-card {
+      padding: 1.5rem !important;
+      height: auto;
+    flex-direction: column-reverse !important;
+	align-items: center;
+	text-align: center;
+	gap: 1rem;
+	border-radius: 1rem;
+	margin-bottom: 1.5rem;
+
+      &::before,
+      &::after {
+        display: none;
+      }
+    }
+
+    .col {
+      transform: translate(0, 0);
+    }
+
+    .col:nth-child(even) {
+      transform: translate(0, 0);
+    }
+  }
 }
