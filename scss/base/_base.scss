@@ -10,6 +10,11 @@
   box-sizing: border-box;
 }
 
+html {
+  width: 100vw;
+  overflow-x: hidden;
+}
+
 // Typographie de base
 body {
   font-family: $font-main;

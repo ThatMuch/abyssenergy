@@ -18,7 +18,7 @@ browserSync.init(
     proxy: localDomain,
     files: [
       // Surveille les fichiers CSS compilés
-      './*.css',
+      './**/*.css',
       './*.css.map',
       // Surveille les fichiers PHP du thème
       './**/*.php',
