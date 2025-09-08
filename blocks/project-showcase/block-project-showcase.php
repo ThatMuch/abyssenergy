@@ -33,15 +33,10 @@ $subtitle = get_field('subtitle');
 $show_title = get_field('show_title') !== false;
 $selected_sectors = get_field('project_sectors');
 $projects_count = get_field('projects_count') ?: 3;
-$layout = get_field('layout') ?: 'horizontal';
 $show_excerpt = get_field('show_excerpt') !== false;
-$show_sector = get_field('show_sector') !== false;
-$show_button = get_field('show_button') !== false;
-$button_text = get_field('button_text') ?: 'Voir tous nos projets';
-$button_url = get_field('button_url');
 
-// Ajouter la classe de layout
-$class_name .= ' layout-' . $layout;
+// Toujours utiliser le layout horizontal
+$class_name .= ' layout-horizontal';
 
 // Limiter le nombre de projets à 3 maximum
 $projects_count = min($projects_count, 3);
@@ -96,32 +91,18 @@ $is_preview = isset($block['data']['is_preview']) && $block['data']['is_preview'
 
 			<?php if ($query->have_posts()) : ?>
 				<div class="projects-grid">
-					<?php $project_index = 0; ?>
 					<?php while ($query->have_posts()) : $query->the_post(); ?>
 						<?php
-						$project_index++;
-						$is_featured = ($layout === 'featured' && $project_index === 1);
-						$excerpt_limit = $is_featured ? 150 : 100;
-
 						// Utiliser le template part pour afficher la carte
 						get_template_part('template-parts/project-card', null, [
 							'show_excerpt' => $show_excerpt,
-							'show_sector' => $show_sector,
-							'is_featured' => $is_featured,
-							'excerpt_limit' => $excerpt_limit
+							'show_sector' => false, // Ne pas afficher le secteur par défaut
+							'excerpt_limit' => 100
 						]);
 						?>
 					<?php endwhile; ?>
 					<?php wp_reset_postdata(); ?>
 				</div>
-
-				<?php if ($show_button && $button_url) : ?>
-					<div class="text-center mt-4">
-						<a href="<?php echo esc_url($button_url); ?>" class="btn btn-primary">
-							<?php echo esc_html($button_text); ?>
-						</a>
-					</div>
-				<?php endif; ?>
 
 			<?php else : ?>
 				<div class="alert alert-info">
