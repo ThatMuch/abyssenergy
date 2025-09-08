@@ -38,12 +38,12 @@
                     // Quand la largeur de la fenêtre est >= 768px
                     768: {
                         slidesPerView: 2,
-                        spaceBetween: 30
+                        spaceBetween: 24
                     },
                     // Quand la largeur de la fenêtre est >= 992px
                     992: {
                         slidesPerView: 3,
-                        spaceBetween: 40
+                        spaceBetween: 24
                     }
                 }
             });
@@ -113,30 +113,6 @@
             document.body.appendChild(swiperJs);
         } else {
             initGoogleReviewsSlider();
-        }
-
-        // Charger imagesLoaded et Masonry si nécessaire
-        if (document.querySelector('.google-reviews-masonry')) {
-            if (typeof imagesLoaded === 'undefined') {
-                const imagesLoadedJs = document.createElement('script');
-                imagesLoadedJs.src = 'https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js';
-                document.body.appendChild(imagesLoadedJs);
-            }
-
-            if (typeof Masonry === 'undefined') {
-                const masonryJs = document.createElement('script');
-                masonryJs.src = 'https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js';
-                masonryJs.onload = function() {
-                    if (typeof imagesLoaded !== 'undefined') {
-                        initMasonryLayout();
-                    } else {
-                        document.addEventListener('DOMContentLoaded', initMasonryLayout);
-                    }
-                };
-                document.body.appendChild(masonryJs);
-            } else {
-                initMasonryLayout();
-            }
         }
     });
 
