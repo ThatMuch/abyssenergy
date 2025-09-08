@@ -58,9 +58,9 @@
   .page-header {
     margin-bottom: $spacing-2xl;
     .page-description {
-      font-size: $h3-size;
-      @include respond-to(md) {
-        font-size: $h3-size-mobile;
+      font-size: $b1-size;
+      @include respond-to(xs) {
+        font-size: $b1-size-mobile;
       }
     }
     .page-thumbnail img {

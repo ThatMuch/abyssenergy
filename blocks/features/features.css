@@ -116,7 +116,7 @@
 /* Desktop styles (1024px and above) */
 @media screen and (width >= 1024px) {
   .features-block {
-    margin-top: 272px;
+    margin-top: 100px;
   }
 
   .features-block .col {
