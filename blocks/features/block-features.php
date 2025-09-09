@@ -41,10 +41,10 @@ $is_preview = isset($block['data']['is_preview']) && $block['data']['is_preview'
 		<?php if ($title || $subtitle) : ?>
 			<div class="section-header mb-5">
 				<?php if ($subtitle) : ?>
-					<p class="section-subtitle"><?php echo esc_html($subtitle); ?></p>
+					<p class="section--subtitle"><?php echo esc_html($subtitle); ?></p>
 				<?php endif; ?>
 				<?php if ($title) : ?>
-					<h2 class="section-title"><?php echo esc_html($title); ?></h2>
+					<h2 class="section--title"><?php echo esc_html($title); ?></h2>
 				<?php endif; ?>
 			</div>
 		<?php endif; ?>
