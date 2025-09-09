@@ -52,7 +52,7 @@ $is_preview = isset($block['data']['is_preview']) && $block['data']['is_preview'
 		<?php if ($features) : ?>
 			<div class="row">
 				<?php foreach ($features as $feature) : ?>
-					<div class="col col-lg-6 ">
+					<div class="col col-lg-5 ">
 						<div class="feature-card h-100">
 							<div>
 								<?php if (!empty($feature['title'])) : ?>

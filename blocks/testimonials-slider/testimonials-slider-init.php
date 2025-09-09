@@ -72,6 +72,18 @@ if (function_exists('acf_add_local_field_group')) {
 				'ui' => 1,
 			),
 			array(
+				'key' => 'field_testimonials_slider_limit',
+				'label' => 'Nombre de témoignages à afficher',
+				'name' => 'testimonials_limit',
+				'type' => 'number',
+				'instructions' => 'Entrez le nombre de témoignages à afficher. Laissez vide ou 0 pour afficher tous les témoignages.',
+				'default_value' => '',
+				'placeholder' => 'Tous les témoignages',
+				'min' => 1,
+				'max' => 50,
+				'step' => 1,
+			),
+			array(
 				'key' => 'field_testimonials_slider_image',
 				'label' => 'Image de la section témoignage',
 				'name' => 'image',

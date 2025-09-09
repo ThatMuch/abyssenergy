@@ -31,19 +31,46 @@ if (!empty($block['align'])) {
 $title = get_field('title') ?: 'Témoignages de nos clients';
 $show_title = get_field('show_title') !== false;
 $image = get_field('image');
+$testimonials_limit = get_field('testimonials_limit');
+
+// Déterminer le nombre de posts à récupérer
+$posts_per_page = -1; // Par défaut, tous les témoignages
+if (!empty($testimonials_limit) && is_numeric($testimonials_limit) && $testimonials_limit > 0) {
+	$posts_per_page = intval($testimonials_limit);
+}
 
 // Récupération des témoignages
 $args = array(
 	'post_type' => 'testimonials',
-	'posts_per_page' => -1,
+	'posts_per_page' => $posts_per_page,
 	'orderby' => 'date',
 	'order' => 'DESC',
 );
 
 $testimonials = new WP_Query($args);
+
+// Message informatif pour l'admin en cas de limitation
+$is_preview = isset($block['data']['is_preview']) && $block['data']['is_preview'];
+$admin_info = '';
+if ($is_preview && !empty($testimonials_limit) && $testimonials_limit > 0) {
+	$total_testimonials = wp_count_posts('testimonials')->publish;
+	if ($total_testimonials > $testimonials_limit) {
+		$admin_info = sprintf(
+			__('Affichage limité à %d témoignages sur %d disponibles.', 'abyssenergy'),
+			$testimonials_limit,
+			$total_testimonials
+		);
+	}
+}
 ?>
 
 <?php if ($testimonials->have_posts()) : ?>
+	<?php if ($admin_info) : ?>
+		<div class="block-preview-info alert alert-info">
+			<small><?php echo esc_html($admin_info); ?></small>
+		</div>
+	<?php endif; ?>
+
 	<!-- Testimonials Slider Block -->
 	<section <?php echo $anchor; ?>class="section <?php echo esc_attr($class_name); ?>">
 		<div class="container">

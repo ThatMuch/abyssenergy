@@ -112,10 +112,11 @@ function register_google_reviews_block()
 					'label' => 'Nombre d\'avis à afficher',
 					'name' => 'reviews_count',
 					'type' => 'number',
-					'instructions' => 'Choisissez combien d\'avis afficher.',
-					'default_value' => 5,
+					'instructions' => 'Entrez le nombre d\'avis à afficher. Laissez vide ou 0 pour afficher tous les avis disponibles.<br><strong>Note:</strong> L\'API Google Places ne retourne que 5 avis maximum, même si votre entreprise en a plus.',
+					'default_value' => '',
+					'placeholder' => 'Tous les avis (max 5)',
 					'min' => 1,
-					'max' => 10,
+					'max' => 5,
 					'step' => 1,
 				),
 				array(
@@ -151,22 +152,6 @@ function register_google_reviews_block()
 					'preview_size' => 'medium',
 					'library' => 'all',
 				),
-				array(
-					'key' => 'field_google_reviews_style',
-					'label' => 'Style d\'affichage',
-					'name' => 'display_style',
-					'type' => 'select',
-					'instructions' => 'Choisissez comment afficher les avis.',
-					'choices' => array(
-						'grid' => 'Grille',
-						'slider' => 'Carrousel',
-						'masonry' => 'Mosaïque',
-					),
-					'default_value' => 'slider',
-					'return_format' => 'value',
-					'multiple' => 0,
-					'allow_null' => 0,
-				),
 			),
 			'location' => array(
 				array(
@@ -193,24 +178,34 @@ function register_google_reviews_block()
 /**
  * Fonction pour récupérer et mettre en cache les avis Google
  */
-function abyssenergy_get_google_reviews($place_id, $api_key, $count = 5, $min_rating = 1, $cache_time = 24)
+function abyssenergy_get_google_reviews($place_id, $api_key, $count = null, $min_rating = 1, $cache_time = 24)
 {
+	// Si count est vide, null ou 0, récupérer tous les avis
+	$limit_reviews = (!empty($count) && is_numeric($count) && $count > 0);
+	$max_reviews = $limit_reviews ? intval($count) : 50; // Google API limite à ~5 avis par défaut, mais on peut demander plus
+
 	// Clé de cache unique pour ces paramètres
-	$cache_key = 'abyssenergy_google_reviews_' . md5($place_id . $api_key . $count . $min_rating);
+	$cache_key = 'abyssenergy_google_reviews_' . md5($place_id . $api_key . $max_reviews . $min_rating);
 
 	// Vérifier si les données sont en cache
 	$cached_reviews = get_transient($cache_key);
 
 	if (false !== $cached_reviews) {
+		// Si on a des données en cache et qu'on veut limiter, appliquer la limite
+		if ($limit_reviews && isset($cached_reviews['all_reviews'])) {
+			$cached_reviews['reviews'] = array_slice($cached_reviews['all_reviews'], 0, $count);
+		}
 		return $cached_reviews;
 	}
 
 	// Si pas en cache, faire la requête API
+	// IMPORTANT: L'API Google Places ne retourne que 5 avis maximum
+	// même si votre entreprise en a plus. C'est une limitation de Google.
 	$url = 'https://maps.googleapis.com/maps/api/place/details/json';
 	$args = array(
 		'place_id' => $place_id,
-		'fields' => 'name,rating,reviews,url',
-		'reviews_sort' => 'newest',
+		'fields' => 'name,rating,reviews,url,user_ratings_total',
+		'reviews_sort' => 'newest', // Trier par les plus récents
 		'key' => $api_key
 	);
 
@@ -235,20 +230,28 @@ function abyssenergy_get_google_reviews($place_id, $api_key, $count = 5, $min_ra
 		);
 	}
 
+	// Debug temporaire pour voir les champs disponibles
+	if (is_admin()) {
+		error_log('Google API Response fields: ' . print_r(array_keys($data['result']), true));
+		error_log('user_ratings_total raw value: ' . var_export($data['result']['user_ratings_total'] ?? 'NOT_PRESENT', true));
+	}
+
 	// Préparer les données à retourner
 	$place_data = array(
 		'error' => false,
 		'name' => $data['result']['name'],
 		'rating' => isset($data['result']['rating']) ? $data['result']['rating'] : 0,
 		'url' => isset($data['result']['url']) ? $data['result']['url'] : '',
+		'user_ratings_total' => isset($data['result']['user_ratings_total']) ? intval($data['result']['user_ratings_total']) : null,
+		'all_reviews' => array(),
 		'reviews' => array()
 	);
 
-	// Filtrer et limiter les avis
+	// Collecter tous les avis qui respectent la note minimum
 	if (isset($data['result']['reviews'])) {
 		foreach ($data['result']['reviews'] as $review) {
-			if ($review['rating'] >= $min_rating && count($place_data['reviews']) < $count) {
-				$place_data['reviews'][] = array(
+			if ($review['rating'] >= $min_rating) {
+				$review_data = array(
 					'author' => $review['author_name'],
 					'avatar' => isset($review['profile_photo_url']) ? $review['profile_photo_url'] : '',
 					'rating' => $review['rating'],
@@ -256,7 +259,33 @@ function abyssenergy_get_google_reviews($place_id, $api_key, $count = 5, $min_ra
 					'time' => $review['time'],
 					'relative_time' => $review['relative_time_description']
 				);
+				$place_data['all_reviews'][] = $review_data;
 			}
+		}
+	}
+
+
+	// Appliquer la limite pour l'affichage
+	if ($limit_reviews) {
+		$place_data['reviews'] = array_slice($place_data['all_reviews'], 0, $count);
+	} else {
+		$place_data['reviews'] = $place_data['all_reviews'];
+	}
+
+	// Si user_ratings_total n'est pas disponible, utiliser le nombre d'avis récupérés comme fallback
+	if ($place_data['user_ratings_total'] === null || $place_data['user_ratings_total'] === 0) {
+		$place_data['user_ratings_total'] = count($place_data['all_reviews']);
+		// Si on n'a pas non plus d'avis récupérés, essayer un fallback basé sur les données existantes
+		if ($place_data['user_ratings_total'] === 0 && !empty($place_data['rating'])) {
+			// Estimation basée sur le fait qu'il faut au moins quelques avis pour avoir une note
+			$place_data['user_ratings_total'] = max(5, count($place_data['all_reviews']));
+		}
+		if (is_admin()) {
+			error_log('Used fallback for user_ratings_total: ' . $place_data['user_ratings_total']);
+		}
+	} else {
+		if (is_admin()) {
+			error_log('Using API user_ratings_total: ' . $place_data['user_ratings_total']);
 		}
 	}
 
@@ -312,11 +341,14 @@ function abyssenergy_update_all_google_reviews()
 						if (isset($block['attrs']['data'])) {
 							$place_id = isset($block['attrs']['data']['place_id']) ? $block['attrs']['data']['place_id'] : '';
 							$api_key = isset($block['attrs']['data']['api_key']) ? $block['attrs']['data']['api_key'] : '';
-							$count = isset($block['attrs']['data']['reviews_count']) ? $block['attrs']['data']['reviews_count'] : 5;
+							$reviews_count = isset($block['attrs']['data']['reviews_count']) ? $block['attrs']['data']['reviews_count'] : '';
 							$min_rating = isset($block['attrs']['data']['min_rating']) ? $block['attrs']['data']['min_rating'] : 1;
 
 							if ($place_id && $api_key) {
-								$cache_key = 'abyssenergy_google_reviews_' . md5($place_id . $api_key . $count . $min_rating);
+								// Générer la clé de cache avec la logique de limitation
+								$limit_reviews = (!empty($reviews_count) && is_numeric($reviews_count) && $reviews_count > 0);
+								$max_reviews = $limit_reviews ? intval($reviews_count) : 50;
+								$cache_key = 'abyssenergy_google_reviews_' . md5($place_id . $api_key . $max_reviews . $min_rating);
 								delete_transient($cache_key);
 							}
 						}
