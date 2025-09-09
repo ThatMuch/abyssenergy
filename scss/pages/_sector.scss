@@ -1,0 +1,26 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.page-renewable {
+  background: linear-gradient(180deg, $tertiary-200 0%, #fff 19.33%);
+
+  .page-header {
+    color: $tertiary-900;
+  }
+}
+
+.page-process {
+  background: linear-gradient(180deg, $primary-200 0%, #fff 19.33%);
+
+  .page-header {
+    color: $primary-900;
+  }
+}
+
+.page-conventional {
+  background: linear-gradient(180deg, $secondary-200 0%, #fff 19.33%);
+
+  .page-header {
+    color: $secondary-900;
+  }
+}

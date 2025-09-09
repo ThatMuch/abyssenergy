@@ -31,7 +31,18 @@
     </script>
 </head>
 
-<body <?php body_class(); ?>>
+<?php
+$sector = get_the_terms(get_the_ID(), 'sector-category');
+
+
+if ($sector && !is_wp_error($sector)) {
+    $sector = $sector[0]->slug;
+} else {
+    $sector = '';
+}
+?>
+
+<body <?php body_class('page-' . esc_attr($sector)); ?>>
 
     <header class="header">
         <div class="header__logo">
