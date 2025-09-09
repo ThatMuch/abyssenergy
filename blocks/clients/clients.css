@@ -41,7 +41,7 @@ position: relative;
       max-height: 80px;
 
       /* Filtre plus subtil - conserve plus l'apparence originale */
-      filter: brightness(0.4) saturate(50%) invert(15%) sepia(23%) saturate(4488%) hue-rotate(183deg) brightness(95%) contrast(89%);
+      filter: brightness(0.3) saturate(50%) invert(15%) sepia(23%) saturate(4488%) hue-rotate(183deg) brightness(95%) contrast(100%);
     }
   }
 }
