@@ -29,7 +29,7 @@ function register_features_block()
 		'keywords'          => array('features', 'list', 'liste'),
 		'supports'          => array(
 			'align' => true,
-			'mode' => false,
+			'mode' => true,
 			'jsx' => true
 		),
 		'example'           => array(

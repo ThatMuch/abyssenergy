@@ -31,7 +31,7 @@ function register_google_reviews_block()
 		'keywords'          => array('google', 'reviews', 'avis', 'témoignages', 'rating'),
 		'supports'          => array(
 			'align' => true,
-			'mode' => false,
+			'mode' => true,
 			'jsx' => true
 		),
 		'example'           => array(

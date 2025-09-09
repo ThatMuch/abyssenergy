@@ -1,0 +1,84 @@
+.metrics-grid {
+  display: flex;
+  gap: 2rem;
+}
+
+.metric-card {
+  border-radius: 1rem;
+  box-shadow: 0 6px 16px 0 color-mix(in srgb, rgb(44 93 133) 15%, transparent);
+  position: relative;
+  height: 100%;
+  	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	flex: 1 0 0;
+}
+
+.metric-card-header,
+.metric-card-content {
+  padding: 1.5rem;
+}
+
+.metric-card-header {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	gap: 1rem;
+}
+
+.metric-card-content {
+  background-color: #eef7fe;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.625rem;
+  flex: 1 0 0;
+}
+
+.metric-icon {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.metric-value {
+  font-size: 5rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 100%; /* 5rem */
+  letter-spacing: -0.2rem;
+  margin: 0;
+}
+
+.metric-label {
+ color:  #FF8E38;
+font-size: 0.875rem;
+font-style: normal;
+font-weight: 600;
+line-height: 150%;
+letter-spacing: 0.245rem;
+text-transform: uppercase;
+margin: 0;
+}
+
+
+.metric-button {
+	margin-left: auto;
+	border: none;
+	background-color: transparent;
+cursor: pointer;
+
+	i {
+		color: #FF8E38;
+		font-size: 2rem;
+	}
+}
+
+.metric-content {
+	display: none;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}

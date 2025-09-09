@@ -21,7 +21,7 @@ function register_jobs_listing_block()
 		'keywords'          => array('jobs', 'emplois', 'offres', 'carrières', 'sectors'),
 		'supports'          => array(
 			'align' => true,
-			'mode' => false,
+			'mode' => true,
 			'jsx' => true
 		),
 		'example'           => array(

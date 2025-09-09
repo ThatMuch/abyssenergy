@@ -43,6 +43,7 @@ function abyssenergy_load_theme_modules()
 		'blocks/google-reviews/google-reviews-init.php', // Initialisation du bloc d'avis Google
 		'blocks/project-showcase/project-showcase-init.php', // Initialisation du bloc des projets showcase
 		'blocks/features/features-init.php', // Initialisation du bloc des fonctionnalités
+		'blocks/metrics/metrics-init.php', // Initialisation du bloc des métriques
 
 	];
 
