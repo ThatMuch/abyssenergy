@@ -1,1 +1,7 @@
-/* Styles générés automatiquement pour l'éditeur de blocs */
+.block-preview-message {
+  background-color: #eef7feff;
+  border: 1px dashed #cce4ff;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 1rem;
+}

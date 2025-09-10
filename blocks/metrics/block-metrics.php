@@ -26,7 +26,7 @@ $metrics = get_field('metrics') ?: array();
 $content = get_field('content');
 $icon = get_field('icon');
 $excerpt = get_field('excerpt');
-$is_preview = isset($block['data']['is_preview']) && $block['data']['is_preview'];
+
 ?>
 
 <?php if ($is_preview) : ?>
@@ -53,9 +53,9 @@ $is_preview = isset($block['data']['is_preview']) && $block['data']['is_preview'
 			</div>
 		<?php endif; ?>
 		<?php if ($metrics) : ?>
-			<div class="row metrics-grid">
+			<div class="metrics-grid">
 				<?php foreach ($metrics as $metric) : ?>
-					<div class="metric-card">
+					<div class="metric-card <?php echo count($metrics) === 1 ? 'unic-metric' : ''; ?>">
 						<div class="metric-card-header">
 							<?php if (!empty($metric['icon'])) :  ?>
 								<div class="metric-icon">

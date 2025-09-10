@@ -42,6 +42,7 @@ function register_metrics_block()
 			)
 		),
 		'enqueue_style'     => get_template_directory_uri() . '/blocks/metrics/metrics.css',
+		'enqueue_script'    => get_template_directory_uri() . '/blocks/metrics/metrics.js',
 	));
 
 	if (function_exists('acf_add_local_field_group')) {
