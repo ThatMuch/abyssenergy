@@ -124,7 +124,7 @@ function register_metrics_block()
 							'name' => 'content',
 							'type' => 'wysiwyg',
 							'instructions' => 'Entrez le contenu de la métrique.',
-							'required' => 1,
+							'required' => 0,
 							'wrapper' => array(
 								'class' => 'metric-content-field'
 							),

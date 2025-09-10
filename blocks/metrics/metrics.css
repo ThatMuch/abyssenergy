@@ -8,7 +8,6 @@
 .metric-card {
   border-radius: 1rem;
   box-shadow: 0 6px 16px 0 color-mix(in srgb, rgb(44 93 133) 15%, transparent);
-  position: relative;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -19,10 +18,20 @@
   opacity: 1;
 }
 
+.metric-card.unic-metric {
+	flex-direction: row;
+	flex: 0 0 688px;
+	margin: 0 auto;
+}
+
 /* État étendu de la carte */
 .metric-card.expanded {
   flex: 1 1 100%;
   z-index: 10;
+
+  .metric-excerpt {
+	display: none;
+  }
 }
 
 .metric-card-header,
@@ -36,6 +45,7 @@
   flex-direction: column;
   justify-content: space-between;
   gap: 1rem;
+    position: relative;
 }
 
 .metric-card-content {
@@ -137,9 +147,9 @@ margin: 0;
 /* Contenu visible quand la carte est étendue */
 .metric-card.expanded .metric-content {
   opacity: 1;
-  max-height: 300px;
+  max-height: fit-content;
   transform: translateY(0);
-  margin-top: 1rem;
+
 }
 
 /* Styles responsifs */
