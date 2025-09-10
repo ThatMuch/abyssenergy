@@ -31,7 +31,7 @@ if (!empty($block['align'])) {
 $title = get_field('title') ?: 'Our clients';
 $show_title = get_field('show_title') !== false;
 $gallery = get_field('gallery') ?: array();
-$is_preview = isset($block['data']['is_preview']) && $block['data']['is_preview'];
+
 ?>
 
 <?php if ($is_preview) : ?>
@@ -39,41 +39,43 @@ $is_preview = isset($block['data']['is_preview']) && $block['data']['is_preview'
 		<h3><?php echo esc_html($title); ?></h3>
 		<p><?php _e('Aperçu du slider des clients. Les logos des clients ne seront pas affichés dans l\'éditeur.', 'abyssenergy'); ?></p>
 	</div>
-<?php endif; ?>
+<?php else : ?>
+	<?php if ($gallery) : ?>
+		<!-- Clients Slider Block -->
 
-<?php if ($gallery) : ?>
-	<!-- Clients Slider Block -->
+		<section <?php echo $anchor; ?>class="section <?php echo esc_attr($class_name); ?>">
+			<div class="container">
+				<div class="d-flex gap-4 align-items-center mb-4">
+					<?php if ($show_title) : ?>
+						<h2 class="section-title"><?php echo esc_html($title); ?></h2>
+					<?php endif; ?>
+					<div class="clients-slider">
+						<div id="clients-slider-inner" class="clients-slider-inner">
+							<?php foreach ($gallery as $image) : ?>
+								<div class="client-logo">
+									<img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" class="img-fluid">
+								</div>
+							<?php endforeach; ?>
 
-	<section <?php echo $anchor; ?>class="section <?php echo esc_attr($class_name); ?>">
-		<div class="container">
-			<div class="d-flex gap-4 align-items-center mb-4">
-				<?php if ($show_title) : ?>
-					<h2 class="section-title"><?php echo esc_html($title); ?></h2>
-				<?php endif; ?>
-				<div class="clients-slider">
-					<div id="clients-slider-inner" class="clients-slider-inner">
-						<?php foreach ($gallery as $image) : ?>
-							<div class="client-logo">
-								<img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" class="img-fluid">
-							</div>
-						<?php endforeach; ?>
-
-						<?php foreach ($gallery as $image) : ?>
-							<div class="client-logo">
-								<img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" class="img-fluid">
-							</div>
-						<?php endforeach; ?>
+							<?php foreach ($gallery as $image) : ?>
+								<div class="client-logo">
+									<img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" class="img-fluid">
+								</div>
+							<?php endforeach; ?>
+						</div>
 					</div>
 				</div>
 			</div>
+			</div>
+		</section>
+	<?php else : ?>
+		<div class="alert alert-warning">
+			<?php _e('Aucun client trouvé.', 'abyssenergy'); ?>
 		</div>
-		</div>
-	</section>
-<?php else : ?>
-	<div class="alert alert-warning">
-		<?php _e('Aucun client trouvé.', 'abyssenergy'); ?>
-	</div>
+	<?php endif; ?>
 <?php endif; ?>
+
+
 
 <script>
 	// Configuration de l'animation du slider infini

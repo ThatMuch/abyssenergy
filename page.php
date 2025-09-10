@@ -1,5 +1,6 @@
 	<?php get_header();
 	$subtitle = get_field('subtitle');
+	$description = get_field('description');
 	?>
 	<div class="page-header">
 		<div class="container">
@@ -8,6 +9,11 @@
 					<h1><?php the_title(); ?></h1>
 					<?php if ($subtitle): ?>
 						<?php echo $subtitle; ?>
+					<?php endif; ?>
+					<?php if ($description): ?>
+						<div class="page-description">
+							<?php echo $description; ?>
+						</div>
 					<?php endif; ?>
 				</div>
 				<div class="col col-md-5">

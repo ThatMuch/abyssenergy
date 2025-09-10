@@ -64,8 +64,6 @@ if (!empty($selected_sectors)) {
 // Exécuter la requête
 $query = new WP_Query($args);
 
-// Vérifier si on est en mode aperçu
-$is_preview = isset($block['data']['is_preview']) && $block['data']['is_preview'];
 ?>
 
 <?php if ($is_preview) : ?>

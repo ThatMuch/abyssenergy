@@ -22,7 +22,6 @@ if (! empty($block['align'])) {
 $title = get_field('title');
 $subtitle = get_field('subtitle');
 $features = get_field('features') ?: array();
-$is_preview = isset($block['data']['is_preview']) && $block['data']['is_preview'];
 ?>
 
 <?php if ($is_preview) : ?>
@@ -33,48 +32,48 @@ $is_preview = isset($block['data']['is_preview']) && $block['data']['is_preview'
 			<p><em><?php _e('Aucune fonctionnalité ajoutée. Cliquez sur "Ajouter un élément" pour commencer.', 'abyssenergy'); ?></em></p>
 		<?php endif; ?>
 	</div>
-<?php endif; ?>
+<?php else :  ?>
+	<!-- Features Block -->
+	<section <?php echo $anchor; ?>class="section <?php echo esc_attr($class_name); ?>">
+		<div class="container">
+			<?php if ($title || $subtitle) : ?>
+				<div class="section-header mb-5">
+					<?php if ($subtitle) : ?>
+						<p class="section--subtitle"><?php echo esc_html($subtitle); ?></p>
+					<?php endif; ?>
+					<?php if ($title) : ?>
+						<h2 class="section--title"><?php echo esc_html($title); ?></h2>
+					<?php endif; ?>
+				</div>
+			<?php endif; ?>
 
-<!-- Features Block -->
-<section <?php echo $anchor; ?>class="section <?php echo esc_attr($class_name); ?>">
-	<div class="container">
-		<?php if ($title || $subtitle) : ?>
-			<div class="section-header mb-5">
-				<?php if ($subtitle) : ?>
-					<p class="section-subtitle"><?php echo esc_html($subtitle); ?></p>
-				<?php endif; ?>
-				<?php if ($title) : ?>
-					<h2 class="section-title"><?php echo esc_html($title); ?></h2>
-				<?php endif; ?>
-			</div>
-		<?php endif; ?>
-
-		<?php if ($features) : ?>
-			<div class="row">
-				<?php foreach ($features as $feature) : ?>
-					<div class="col col-lg-5 ">
-						<div class="feature-card h-100">
-							<div>
-								<?php if (!empty($feature['title'])) : ?>
-									<h3 class="feature-title"><?php echo esc_html($feature['title']); ?></h3>
-								<?php endif; ?>
-								<?php if (!empty($feature['description'])) : ?>
-									<p class="feature-description"><?php echo esc_html($feature['description']); ?></p>
+			<?php if ($features) : ?>
+				<div class="row">
+					<?php foreach ($features as $feature) : ?>
+						<div class="col col-lg-5 ">
+							<div class="feature-card h-100">
+								<div>
+									<?php if (!empty($feature['title'])) : ?>
+										<h3 class="feature-title"><?php echo esc_html($feature['title']); ?></h3>
+									<?php endif; ?>
+									<?php if (!empty($feature['description'])) : ?>
+										<p class="feature-description"><?php echo esc_html($feature['description']); ?></p>
+									<?php endif; ?>
+								</div>
+								<?php if (!empty($feature['icon'])) : ?>
+									<div class="feature-icon">
+										<img src="<?php echo esc_url(wp_get_attachment_image_url($feature['icon'], 'full')); ?>" alt="<?php echo esc_attr(get_post_meta($feature['icon'], '_wp_attachment_image_alt', true)); ?>" class="img-fluid" />
+									</div>
 								<?php endif; ?>
 							</div>
-							<?php if (!empty($feature['icon'])) : ?>
-								<div class="feature-icon">
-									<img src="<?php echo esc_url(wp_get_attachment_image_url($feature['icon'], 'full')); ?>" alt="<?php echo esc_attr(get_post_meta($feature['icon'], '_wp_attachment_image_alt', true)); ?>" class="img-fluid" />
-								</div>
-							<?php endif; ?>
 						</div>
-					</div>
-				<?php endforeach; ?>
-			</div>
-		<?php else : ?>
-			<div class="no-features-message text-center">
-				<p class="text-muted"><?php _e('Aucune fonctionnalité à afficher. Ajoutez des éléments dans les paramètres du bloc.', 'abyssenergy'); ?></p>
-			</div>
-		<?php endif; ?>
-	</div>
-</section>
+					<?php endforeach; ?>
+				</div>
+			<?php else : ?>
+				<div class="no-features-message text-center">
+					<p class="text-muted"><?php _e('Aucune fonctionnalité à afficher. Ajoutez des éléments dans les paramètres du bloc.', 'abyssenergy'); ?></p>
+				</div>
+			<?php endif; ?>
+		</div>
+	</section>
+<?php endif; ?>

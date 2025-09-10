@@ -47,9 +47,6 @@ if ($place_id && $api_key) {
 	$reviews_data = abyssenergy_get_google_reviews($place_id, $api_key, $limit_count, $min_rating, $cache_time);
 }
 
-// Vérifier si on est en mode aperçu
-$is_preview = isset($block['data']['is_preview']) && $block['data']['is_preview'];
-
 // The total number of reviews ever fetched from Google (not just the displayed ones)
 $allReviewsCount = 0;
 if (!empty($reviews_data) && !$reviews_data['error']) {

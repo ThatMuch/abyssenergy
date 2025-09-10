@@ -23,11 +23,8 @@ if (!empty($block['align'])) {
 	$className .= ' align' . $block['align'];
 }
 
-// Mode aperçu dans l'éditeur
-$is_preview = isset($block['data']['is_preview']) && $block['data']['is_preview'];
-
 // Variables ACF
-$title = get_field('global_map_title') ?: 'Nos opérations à travers le monde';
+$title = get_field('global_map_title');
 $description = get_field('global_map_description');
 $markers = get_field('global_map_markers');
 
@@ -75,7 +72,6 @@ if ($markers) {
 					<?php if ($title) : ?>
 						<h2 class="global-map-title"><?php echo esc_html($title); ?></h2>
 					<?php endif; ?>
-
 					<?php if ($description) : ?>
 						<div class="global-map-description">
 							<?php echo wp_kses_post($description); ?>

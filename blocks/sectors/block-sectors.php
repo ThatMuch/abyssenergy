@@ -32,53 +32,59 @@ if ($selection_type === 'specific' && !empty($specific_sectors)) {
 
 $sectors_query = new WP_Query($args);
 ?>
+<?php if ($is_preview) : ?>
+	<div class="block-preview-message">
+		<h3><?php echo esc_html($title); ?></h3>
+		<p><?php _e('Aperçu du bloc Sectors. Les secteurs réels s\'afficheront sur le site.', 'abyssenergy'); ?></p>
+	</div>
+<?php else : ?>
+	<section class="<?php echo esc_attr($classes); ?>">
+		<div class="container">
+			<?php if ($title) : ?>
+				<h2 class="text-center"><?php echo esc_html($title); ?></h2>
+			<?php endif; ?>
 
-<section class="<?php echo esc_attr($classes); ?>">
-	<div class="container">
-		<?php if ($title) : ?>
-			<h2 class="text-center"><?php echo esc_html($title); ?></h2>
-		<?php endif; ?>
+			<?php if ($sectors_query->have_posts()) : ?>
+				<div class="sectors-list">
+					<ul class="sectors-list__items">
+						<?php while ($sectors_query->have_posts()) : $sectors_query->the_post();
+							$sector_id = get_the_ID();
+							$permalink = get_permalink($sector_id);
+							$excerpt = get_the_excerpt();
+							$category = get_the_terms($sector_id, 'sector-category')[0]->name;
+							$image = get_field('image', $sector_id);
 
-		<?php if ($sectors_query->have_posts()) : ?>
-			<div class="sectors-list">
-				<ul class="sectors-list__items">
-					<?php while ($sectors_query->have_posts()) : $sectors_query->the_post();
-						$sector_id = get_the_ID();
-						$permalink = get_permalink($sector_id);
-						$excerpt = get_the_excerpt();
-						$category = get_the_terms($sector_id, 'sector-category')[0]->name;
-						$image = get_field('image', $sector_id);
+						?>
+							<li class="sectors-list__item card <?php echo $category ?>">
+								<div class="sectors-list__item-inner">
+									<h3 class="sectors-list__item-title">
+										<?php the_title(); ?>
+									</h3>
+									<?php if ($excerpt) : ?>
+										<div class="sectors-list__excerpt">
+											<?php echo wp_kses_post($excerpt); ?>
+										</div>
+									<?php endif; ?>
 
-					?>
-						<li class="sectors-list__item card <?php echo $category ?>">
-							<div class="sectors-list__item-inner">
-								<h3 class="sectors-list__item-title">
-									<?php the_title(); ?>
-								</h3>
-								<?php if ($excerpt) : ?>
-									<div class="sectors-list__excerpt">
-										<?php echo wp_kses_post($excerpt); ?>
+									<a href="<?php echo esc_url($permalink); ?>" class="btn btn--primary">
+										Learn more about <?php the_title(); ?>
+									</a>
+								</div>
+								<?php if ($image) : ?>
+									<div class="sectors-list__item__image">
+										<img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt'] ?: get_the_title()); ?>">
 									</div>
 								<?php endif; ?>
-
-								<a href="<?php echo esc_url($permalink); ?>" class="btn btn--primary">
-									Learn more about <?php the_title(); ?>
-								</a>
-							</div>
-							<?php if ($image) : ?>
-								<div class="sectors-list__item__image">
-									<img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt'] ?: get_the_title()); ?>">
-								</div>
-							<?php endif; ?>
-						</li>
-					<?php endwhile; ?>
-				</ul>
-			</div>
-		<?php else : ?>
-			<div class="sectors-list__empty">
-				<p>Aucun secteur trouvé.</p>
-			</div>
-		<?php endif; ?>
-		<?php wp_reset_postdata(); ?>
-	</div>
-</section>
+							</li>
+						<?php endwhile; ?>
+					</ul>
+				</div>
+			<?php else : ?>
+				<div class="sectors-list__empty">
+					<p>Aucun secteur trouvé.</p>
+				</div>
+			<?php endif; ?>
+			<?php wp_reset_postdata(); ?>
+		</div>
+	</section>
+<?php endif; ?>

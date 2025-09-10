@@ -31,7 +31,7 @@ function register_project_showcase_block()
 		'keywords'          => array('projects', 'showcase', 'projets', 'portfolio', 'sectors'),
 		'supports'          => array(
 			'align' => true,
-			'mode' => false,
+			'mode' => true,
 			'jsx' => true
 		),
 		'example'           => array(
