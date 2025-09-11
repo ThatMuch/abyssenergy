@@ -1,5 +1,5 @@
-body.login { 
-  background: #ffffff url(../images/background.jpg) no-repeat center center fixed; 
+body.login {
+  background: #fff url(../images/background.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -22,9 +22,9 @@ margin-left:auto;
 margin-right:auto;
 padding:30px;
 border: 1px solid #99061a;
+background: rgba(255 255 255, 90%);
 background-clip: padding-box;
-background: rgba(255, 255, 255, 0.9);
-box-shadow: 0 0 13px 3px rgba(0,0,0,.5);
+box-shadow: 0 0 13px 3px rgba(0 0 0,50%);
 overflow: hidden;
 }
 
@@ -40,6 +40,7 @@ width: 120px;
 float:right;
 color: #fff;
 }
+
 .login .button-primary:hover {
 background-color:#99061a !important;
 color: #fff;
