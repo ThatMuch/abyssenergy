@@ -17,11 +17,13 @@ if (!empty($block['align'])) {
 // Récupérer les champs
 $title = get_field('timeline_title');
 $steps = get_field('steps');
+$timeline_files = get_field('timeline_files');
 ?>
 
 <?php if ($is_preview) : ?>
-	<div class="block-preview-info alert alert-info">
-		<small><?php esc_html_e('Aperçu du bloc Timeline', 'abyssenergy'); ?></small>
+	<div class="block-preview-message">
+		<h3><?php echo esc_html($title); ?></h3>
+		<p><?php esc_html_e('Aperçu du bloc Timeline', 'abyssenergy'); ?></p>
 	</div>
 <?php else : ?>
 	<?php if ($steps) : ?>
@@ -54,6 +56,22 @@ $steps = get_field('steps');
 							<span class="timeline-count"><?php echo $count; ?></span>
 						</div>
 					<?php endforeach; ?>
+				</div>
+				<div class="timeline-files">
+					<?php if ($timeline_files) : ?>
+						<?php
+						$count = 0;
+						foreach ($timeline_files as $file) :
+						?>
+							<div class="timeline-file">
+								<img src="<?php echo esc_url(get_template_directory_uri() . "/blocks/timeline/file-arrow-down.svg"); ?>" alt="Dowlnload icon" class="file-icon">
+								<a href="<?php echo esc_url($file['url']); ?>" class="btn  <?php echo ($count % 2 === 0) ? 'btn--primary' : 'btn--secondary'; ?>" target="_blank" rel="noopener">
+									<?php echo esc_html($file['title'] ?: basename($file['url'])); ?>
+								</a>
+							</div>
+						<?php $count++;
+						endforeach; ?>
+					<?php endif; ?>
 				</div>
 			</div>
 		</div>

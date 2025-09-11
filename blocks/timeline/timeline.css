@@ -1,9 +1,10 @@
 .timeline-block {
-  margin-bottom: 300px;
+  margin-bottom: 150px;
 
   .timeline-steps {
     display: grid;
     grid-template-rows: repeat(5, 200px);
+    margin-bottom: 100px;
   }
 
   .item-1 {
@@ -84,11 +85,15 @@
         right: -33.5%;
       }
     }
+
+    &:last-child .timeline-count::after {
+      height: 200px;
+    }
   }
 
   .timeline-step {
     border-radius: 1rem;
-    box-shadow:  0 6px 16px 0 rgb(44 93 133 / 15%);
+    box-shadow: 0 6px 16px 0 rgb(44 93 133 / 15%);
     min-height: 270px;
     display: flex;
     flex-direction: column;
@@ -119,6 +124,37 @@
     flex: 1;
     background-color: #eef7fe;
   }
+
+  .timeline-files {
+    margin: 0 auto;
+    border-radius: 1rem;
+    border: 4px solid #ff8e38;
+    background: #fff;
+    box-shadow: 0 6px 16px 0 rgb(44 93 133 / 15%);
+    display: flex;
+    width: 21.5rem;
+    padding: 1rem 0.5rem 0.5rem;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+
+    .timeline-file {
+      flex: 1 1 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      flex-direction: column;
+
+      img {
+        width: 48px;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+  }
 }
 
 @media (width <= 1023px) {
@@ -143,31 +179,39 @@
           height: 400px;
         }
       }
+
+      &:last-child .timeline-count::after {
+        height: 465px;
+      }
     }
   }
 }
 
 @media (width >= 1024px) {
   .timeline-block {
+    .timeline-steps {
+      margin-bottom: 150px;
+    }
+
     .item {
       &:nth-child(odd) {
         justify-self: start;
         margin-left: 50px;
 
-		 .timeline-count {
-        top: 50%;
-        left: -19.5%;
-      }
+        .timeline-count {
+          top: 50%;
+          left: -19.5%;
+        }
       }
 
       &:nth-child(even) {
         justify-self: end;
         margin-right: 50px;
 
-		 .timeline-count {
-        top: 50%;
-        right: -19.5%;
-      }
+        .timeline-count {
+          top: 50%;
+          right: -19.5%;
+        }
       }
     }
   }
@@ -180,20 +224,20 @@
         justify-self: start;
         margin-left: 106px;
 
-		 .timeline-count {
-        top: 50%;
-        left: -33.5%;
-      }
+        .timeline-count {
+          top: 50%;
+          left: -33.5%;
+        }
       }
 
       &:nth-child(even) {
         justify-self: end;
         margin-right: 106px;
 
-		 .timeline-count {
-        top: 50%;
-        right: -33.5%;
-      }
+        .timeline-count {
+          top: 50%;
+          right: -33.5%;
+        }
       }
     }
   }
