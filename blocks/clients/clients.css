@@ -1,4 +1,11 @@
 .clients-block {
+	.clients-block-wrapper {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	margin-bottom: 2rem;
+}
+
   .clients-slider {
     width: 100%;
     overflow: hidden;
@@ -53,5 +60,14 @@ position: relative;
 
   100% {
     transform: translateX(var(--slider-width, -50%));
+  }
+}
+
+@media (width <= 768px) {
+  .clients-block-wrapper {
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 1rem;
+	margin-bottom: 1.5rem;
   }
 }

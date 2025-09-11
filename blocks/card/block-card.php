@@ -1,0 +1,65 @@
+<?php
+
+/**
+ * Block Name: Card
+ * Description: Carte simple avec image, titre et description
+ */
+
+// Créer un id unique pour ce bloc
+$id = 'card-' . $block['id'];
+if (!empty($block['anchor'])) {
+	$id = $block['anchor'];
+}
+
+// Créer le nom de classe
+$className = 'card-block';
+if (!empty($block['className'])) {
+	$className .= ' ' . $block['className'];
+}
+
+if (!empty($block['align'])) {
+	$className .= ' align' . $block['align'];
+}
+
+// Récupérer les champs
+$image = get_field('image');
+$title = get_field('title');
+$description = get_field('description');
+
+// Mode preview avec données factices
+$is_preview = isset($is_preview) && $is_preview;
+if ($is_preview && empty($title)) {
+	$title = 'Titre de la carte';
+	$description = 'Description de la carte avec du contenu d\'exemple pour montrer le rendu final.';
+	$image = array(
+		'alt' => 'Image d\'exemple',
+		'url' => get_template_directory_uri() . '/images/abyss-energy-logo.webp'
+	);
+}
+?>
+
+<div id="<?php echo esc_attr($id); ?>" class="<?php echo esc_attr($className); ?>">
+	<div class="card-wrapper">
+		<div class="card-header">
+			<?php if ($image): ?>
+				<div class="card-image">
+					<img src="<?php echo esc_url($image['url']); ?>"
+						alt="<?php echo esc_attr($image['alt']); ?>"
+						loading="lazy">
+				</div>
+			<?php endif; ?>
+			<?php if ($title): ?>
+				<h4 class="card-title"><?php echo wp_kses_post($title); ?></h4>
+			<?php endif; ?>
+		</div>
+
+		<div class="card-content">
+			<?php if ($description): ?>
+				<div class="card-description">
+					<?php echo wp_kses_post($description); ?>
+				</div>
+			<?php endif; ?>
+		</div>
+
+	</div>
+</div>

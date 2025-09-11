@@ -45,7 +45,7 @@ $gallery = get_field('gallery') ?: array();
 
 		<section <?php echo $anchor; ?>class="section <?php echo esc_attr($class_name); ?>">
 			<div class="container">
-				<div class="d-flex gap-4 align-items-center mb-4">
+				<div class="clients-block-wrapper">
 					<?php if ($show_title) : ?>
 						<h2 class="section-title"><?php echo esc_html($title); ?></h2>
 					<?php endif; ?>
