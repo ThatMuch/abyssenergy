@@ -60,19 +60,27 @@ if (!empty($selected_sectors)) {
 $query = new WP_Query($args);
 ?>
 
-<!-- Jobs Listing Block -->
-<section <?php echo $anchor; ?>class="<?php echo esc_attr($class_name); ?>">
-	<div class="container">
-		<?php
-		// Passer tous les paramètres nécessaires au template
-		get_template_part('template-parts/section-jobs', null, [
-			'query' => $query,
-			'button_text' => $button_text,
-			'button_url' => $button_url,
-			'show_button' => $show_button,
-			'title' => $title,
-			'subtitle' => $subtitle
-		]);
-		?>
+<?php if ($is_preview) : ?>
+	<div class="block-preview-message">
+		<h3><?php echo esc_html($title); ?></h3>
+		<p><?php esc_html_e('Aperçu du bloc Jobs Listing', 'abyssenergy'); ?></p>
 	</div>
-</section>
+<?php else : ?>
+
+	<!-- Jobs Listing Block -->
+	<section <?php echo $anchor; ?>class="<?php echo esc_attr($class_name); ?>">
+		<div class="container">
+			<?php
+			// Passer tous les paramètres nécessaires au template
+			get_template_part('template-parts/section-jobs', null, [
+				'query' => $query,
+				'button_text' => $button_text,
+				'button_url' => $button_url,
+				'show_button' => $show_button,
+				'title' => $title,
+				'subtitle' => $subtitle
+			]);
+			?>
+		</div>
+	</section>
+<?php endif; ?>
