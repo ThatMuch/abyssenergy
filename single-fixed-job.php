@@ -65,11 +65,11 @@ if ($job_category && !is_wp_error($job_category)) {
 
                 if (!empty($job_categories) && !is_wp_error($job_categories)) :
                     foreach ($job_categories as $category) :
-                        // Récupérer les 5 premiers postes de cette catégorie
-                        $category_jobs = get_posts(array(
+                        // Récupérer TOUS les postes de cette catégorie pour avoir le bon compte
+                        $all_category_jobs = get_posts(array(
                             'post_type' => 'fixed-job',
                             'post_status' => 'publish',
-                            'numberposts' => 5,
+                            'numberposts' => -1,
                             'tax_query' => array(
                                 array(
                                     'taxonomy' => 'job-category',
@@ -79,12 +79,16 @@ if ($job_category && !is_wp_error($job_category)) {
                             ),
                         ));
 
+                        // Récupérer seulement les 5 premiers pour l'affichage initial
+                        $category_jobs = array_slice($all_category_jobs, 0, 5);
+                        $total_jobs_count = count($all_category_jobs);
+
                         if (!empty($category_jobs)) :
                 ?>
                             <div class="job-category-card" data-category="<?php echo esc_attr($category->slug); ?>">
                                 <div class="category-header">
                                     <h4 class="category-title"><?php echo esc_html($category->name); ?></h4>
-                                    <span class="category-count"><?php echo $category->count; ?> positions</span>
+                                    <span class="category-count"><?php echo $total_jobs_count; ?> positions</span>
                                 </div>
 
                                 <div class="category-jobs">
@@ -102,10 +106,10 @@ if ($job_category && !is_wp_error($job_category)) {
                                     <?php endforeach; ?>
                                 </div>
 
-                                <?php if ($category->count > 5) : ?>
+                                <?php if ($total_jobs_count > 5) : ?>
                                     <div class="category-actions">
                                         <button class="btn btn--outline btn-show-more" data-category="<?php echo esc_attr($category->slug); ?>" data-loaded="5">
-                                            Show More
+                                            Show More (<?php echo ($total_jobs_count - 5); ?> more)
                                         </button>
                                     </div>
                                 <?php endif; ?>

@@ -282,12 +282,11 @@ function load_more_category_jobs_ajax()
 		wp_send_json_error('Catégorie non trouvée');
 	}
 
-	// Récupérer tous les postes de cette catégorie à partir de l'offset
+	// Récupérer TOUS les postes de cette catégorie pour éviter les doublons
 	$args = array(
 		'post_type' => 'fixed-job',
 		'post_status' => 'publish',
-		'numberposts' => -1, // Récupérer tous les restants
-		'offset' => $loaded,
+		'numberposts' => -1,
 		'tax_query' => array(
 			array(
 				'taxonomy' => 'job-category',
@@ -297,7 +296,11 @@ function load_more_category_jobs_ajax()
 		),
 	);
 
-	$remaining_jobs = get_posts($args);
+	$all_jobs = get_posts($args);
+	$total_jobs = count($all_jobs);
+
+	// Récupérer seulement les postes à partir de l'offset pour éviter les doublons
+	$remaining_jobs = array_slice($all_jobs, $loaded);
 
 	if (!empty($remaining_jobs)) {
 		ob_start();
@@ -322,14 +325,14 @@ function load_more_category_jobs_ajax()
 		wp_send_json_success(array(
 			'html' => $html,
 			'has_more' => false, // Tous les éléments restants ont été chargés
-			'total' => $term->count,
+			'total' => $total_jobs,
 			'loaded' => $loaded + count($remaining_jobs)
 		));
 	} else {
 		wp_send_json_success(array(
 			'html' => '',
 			'has_more' => false,
-			'total' => $term->count,
+			'total' => $total_jobs,
 			'loaded' => $loaded
 		));
 	}
