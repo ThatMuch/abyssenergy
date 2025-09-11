@@ -28,12 +28,17 @@
 	position: relative;
 }
 
-.global-map-title {
+.title {
+    height: 100px;
     margin-bottom: 100px;
+}
+
+.global-map-title {
 	margin-top: 0;
     font-size: 2rem;
     text-align: center;
     color: #06508b;
+
 
 	@media screen and (width >= 1024px) {
 			margin-bottom: 155px;

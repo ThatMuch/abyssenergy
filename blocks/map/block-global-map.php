@@ -69,9 +69,11 @@ if ($markers) {
 		<div class="container">
 			<div id="<?php echo esc_attr($id); ?>" class="<?php echo esc_attr($className); ?>">
 				<div class="global-map-container">
-					<?php if ($title) : ?>
-						<h2 class="global-map-title"><?php echo esc_html($title); ?></h2>
-					<?php endif; ?>
+					<div class="title">
+						<?php if ($title) : ?>
+							<h2 class="global-map-title"><?php echo esc_html($title); ?></h2>
+						<?php endif; ?>
+					</div>
 					<?php if ($description) : ?>
 						<div class="global-map-description">
 							<?php echo wp_kses_post($description); ?>
