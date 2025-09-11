@@ -109,7 +109,7 @@ if ($job_category && !is_wp_error($job_category)) {
                                 <?php if ($total_jobs_count > 5) : ?>
                                     <div class="category-actions">
                                         <button class="btn btn--outline btn-show-more" data-category="<?php echo esc_attr($category->slug); ?>" data-loaded="5">
-                                            Show More (<?php echo ($total_jobs_count - 5); ?> more)
+                                            Show More
                                         </button>
                                     </div>
                                 <?php endif; ?>

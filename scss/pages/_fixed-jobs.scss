@@ -54,7 +54,7 @@
   }
 
   .category-jobs {
-    padding: 1rem 1.25rem 0;
+    padding: 0 1.25rem;
   }
 
   .job-item {
@@ -67,15 +67,14 @@
     }
 
     &:hover {
-      transform: translateX(4px);
-      background-color: #f8fafc;
+      background-color: $primary-50;
       margin: 0 -1.25rem;
       padding-left: 1.25rem;
       padding-right: 1.25rem;
     }
 
     &.current-job {
-      background-color: #fef3e7;
+      background-color: $secondary-50;
       border-left: 3px solid $color-secondary;
       padding-left: 0.75rem;
       margin: 0 -1.25rem;
