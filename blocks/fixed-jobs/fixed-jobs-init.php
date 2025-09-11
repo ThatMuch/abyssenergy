@@ -294,6 +294,8 @@ function load_more_category_jobs_ajax()
 				'terms' => $category,
 			),
 		),
+		'orderby' => 'title',
+		'order' => 'ASC',
 	);
 
 	$all_jobs = get_posts($args);

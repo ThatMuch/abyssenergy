@@ -77,6 +77,8 @@ if ($job_category && !is_wp_error($job_category)) {
                                     'terms' => $category->term_id,
                                 ),
                             ),
+                            'orderby' => 'title',
+                            'order' => 'ASC',
                         ));
 
                         // Récupérer seulement les 5 premiers pour l'affichage initial

@@ -109,6 +109,8 @@ $all_fixed_jobs = get_posts(array(
 										'terms' => $category->term_id,
 									),
 								),
+								'orderby' => 'title',
+								'order' => 'ASC',
 							));
 							?>
 							<?php if (!empty($category_jobs)) : ?>
