@@ -1,6 +1,13 @@
 <?php get_header();
 $subtitle = get_field('subtitle');
 $description = get_field('description');
+// the job category
+$job_category = get_the_terms($post->ID, 'job-category');
+if ($job_category && !is_wp_error($job_category)) {
+    $job_category = join(', ', wp_list_pluck($job_category, 'name'));
+} else {
+    $job_category = '';
+}
 ?>
 
 
@@ -8,10 +15,10 @@ $description = get_field('description');
     <div class="container">
         <div class="row">
             <div class="col col-md-7">
-                <h1><?php the_title(); ?></h1>
-                <?php if ($subtitle): ?>
-                    <?php echo $subtitle; ?>
+                <?php if ($job_category): ?>
+                    <span class="section--subtitle"><?php echo $job_category; ?></span>
                 <?php endif; ?>
+                <h1 class="mt-0"><?php the_title(); ?></h1>
                 <?php if ($description): ?>
                     <div class="page-description">
                         <?php echo $description; ?>
