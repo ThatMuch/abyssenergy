@@ -38,14 +38,86 @@ if ($job_category && !is_wp_error($job_category)) {
 </div>
 
 <div class='container'>
-    <?php if (have_posts()) : ?>
-        <?php while (have_posts()) : the_post(); ?>
-            <div>
-                <h2 style='margin-top: 28px;padding-bottom: 0'>Job Description</h2>
-                <?php the_content(); ?>
-            </div>
-        <?php endwhile; ?>
-    <?php endif; ?>
+    <div class="row">
+        <div class="col-lg-8">
+            <?php if (have_posts()) : ?>
+                <?php while (have_posts()) : the_post(); ?>
+                    <div class="job-content">
+                        <h2 class="job-content-title">Job Description</h2>
+                        <div class="job-content-body">
+                            <?php the_content(); ?>
+                        </div>
+                    </div>
+                <?php endwhile; ?>
+            <?php endif; ?>
+        </div>
+
+        <div class="col-lg-4">
+            <aside class="job-sidebar">
+                <h3 class="sidebar-title">Other Job Categories</h3>
+
+                <?php
+                // Récupérer toutes les catégories d'emploi
+                $job_categories = get_terms(array(
+                    'taxonomy' => 'job-category',
+                    'hide_empty' => true,
+                ));
+
+                if (!empty($job_categories) && !is_wp_error($job_categories)) :
+                    foreach ($job_categories as $category) :
+                        // Récupérer les 5 premiers postes de cette catégorie
+                        $category_jobs = get_posts(array(
+                            'post_type' => 'fixed-job',
+                            'post_status' => 'publish',
+                            'numberposts' => 5,
+                            'tax_query' => array(
+                                array(
+                                    'taxonomy' => 'job-category',
+                                    'field' => 'term_id',
+                                    'terms' => $category->term_id,
+                                ),
+                            ),
+                        ));
+
+                        if (!empty($category_jobs)) :
+                ?>
+                            <div class="job-category-card" data-category="<?php echo esc_attr($category->slug); ?>">
+                                <div class="category-header">
+                                    <h4 class="category-title"><?php echo esc_html($category->name); ?></h4>
+                                    <span class="category-count"><?php echo $category->count; ?> positions</span>
+                                </div>
+
+                                <div class="category-jobs">
+                                    <?php foreach ($category_jobs as $job) : ?>
+                                        <div class="job-item <?php echo ($job->ID === get_the_ID()) ? 'current-job' : ''; ?>">
+                                            <h5 class="job-item-title">
+                                                <a href="<?php echo get_permalink($job->ID); ?>">
+                                                    <?php echo esc_html($job->post_title); ?>
+                                                </a>
+                                            </h5>
+                                            <?php if (!empty($job->post_excerpt)) : ?>
+                                                <p class="job-item-excerpt"><?php echo wp_trim_words($job->post_excerpt, 15); ?></p>
+                                            <?php endif; ?>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+
+                                <?php if ($category->count > 5) : ?>
+                                    <div class="category-actions">
+                                        <button class="btn btn--outline" data-category="<?php echo esc_attr($category->slug); ?>" data-loaded="5">
+                                            Show More
+                                        </button>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                <?php
+                        endif;
+                    endforeach;
+                endif;
+                ?>
+            </aside>
+        </div>
+    </div>
 </div>
 
 <?php get_footer(); ?>

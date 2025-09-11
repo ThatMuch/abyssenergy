@@ -216,7 +216,7 @@ function load_more_fixed_jobs_ajax()
 					<?php endif; ?>
 				</div>
 			</div>
-<?php
+		<?php
 		endwhile;
 
 		$html = ob_get_clean();
@@ -229,6 +229,108 @@ function load_more_fixed_jobs_ajax()
 		wp_send_json_success(array(
 			'html' => '',
 			'has_more' => false
+		));
+	}
+
+	wp_reset_postdata();
+	wp_die();
+}
+
+/**
+ * Enqueue scripts et styles pour les pages single fixed-job
+ */
+function enqueue_single_fixed_job_assets()
+{
+	if (is_singular('fixed-job')) {
+		// Enqueue JavaScript
+		wp_enqueue_script(
+			'single-fixed-job-script',
+			get_template_directory_uri() . '/js/single-fixed-job.js',
+			array('jquery'),
+			filemtime(get_template_directory() . '/js/single-fixed-job.js'),
+			true
+		);
+
+		// Localiser le script avec les variables AJAX
+		wp_localize_script('single-fixed-job-script', 'fixedJobsSidebar', array(
+			'ajaxurl' => admin_url('admin-ajax.php'),
+			'nonce' => wp_create_nonce('fixed_jobs_sidebar_nonce')
+		));
+	}
+}
+add_action('wp_enqueue_scripts', 'enqueue_single_fixed_job_assets');
+
+/**
+ * Handler AJAX pour charger plus de postes dans la sidebar
+ */
+add_action('wp_ajax_load_more_category_jobs', 'load_more_category_jobs_ajax');
+add_action('wp_ajax_nopriv_load_more_category_jobs', 'load_more_category_jobs_ajax');
+
+function load_more_category_jobs_ajax()
+{
+	// Vérifier le nonce pour la sécurité
+	if (!wp_verify_nonce($_POST['nonce'], 'fixed_jobs_sidebar_nonce')) {
+		wp_die('Nonce invalide');
+	}
+
+	$category = sanitize_text_field($_POST['category']);
+	$loaded = intval($_POST['loaded']);
+
+	// Récupérer la taxonomie pour obtenir le nombre total
+	$term = get_term_by('slug', $category, 'job-category');
+	if (!$term) {
+		wp_send_json_error('Catégorie non trouvée');
+	}
+
+	// Récupérer tous les postes de cette catégorie à partir de l'offset
+	$args = array(
+		'post_type' => 'fixed-job',
+		'post_status' => 'publish',
+		'numberposts' => -1, // Récupérer tous les restants
+		'offset' => $loaded,
+		'tax_query' => array(
+			array(
+				'taxonomy' => 'job-category',
+				'field' => 'slug',
+				'terms' => $category,
+			),
+		),
+	);
+
+	$remaining_jobs = get_posts($args);
+
+	if (!empty($remaining_jobs)) {
+		ob_start();
+
+		foreach ($remaining_jobs as $job) :
+		?>
+			<div class="job-item">
+				<h5 class="job-item-title">
+					<a href="<?php echo get_permalink($job->ID); ?>">
+						<?php echo esc_html($job->post_title); ?>
+					</a>
+				</h5>
+				<?php if (!empty($job->post_excerpt)) : ?>
+					<p class="job-item-excerpt"><?php echo wp_trim_words($job->post_excerpt, 15); ?></p>
+				<?php endif; ?>
+			</div>
+<?php
+		endforeach;
+
+		$html = ob_get_clean();
+
+		wp_send_json_success(array(
+			'html' => $html,
+			'has_more' => false, // Tous les éléments restants ont été chargés
+			'total' => $term->count,
+			'loaded' => $loaded + count($remaining_jobs)
+		));
+	} else {
+		wp_send_json_success(array(
+			'html' => '',
+			'has_more' => false,
+			'total' => $term->count,
+			'loaded' => $loaded
 		));
 	}
 
