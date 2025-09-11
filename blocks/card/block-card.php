@@ -27,7 +27,6 @@ $title = get_field('title');
 $description = get_field('description');
 
 // Mode preview avec données factices
-$is_preview = isset($is_preview) && $is_preview;
 if ($is_preview && empty($title)) {
 	$title = 'Titre de la carte';
 	$description = 'Description de la carte avec du contenu d\'exemple pour montrer le rendu final.';
