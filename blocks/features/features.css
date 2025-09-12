@@ -120,7 +120,9 @@
 /* Desktop styles (1024px and above) */
 @media screen and (width >= 1024px) {
   .features-block {
-    margin-bottom: -200px;
+  .row {
+	margin-top: 250px;
+  }
   }
 
   .features-block .col {

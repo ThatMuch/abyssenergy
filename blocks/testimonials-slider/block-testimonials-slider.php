@@ -48,76 +48,64 @@ $args = array(
 );
 
 $testimonials = new WP_Query($args);
-
-// Message informatif pour l'admin en cas de limitation
-$is_preview = isset($block['data']['is_preview']) && $block['data']['is_preview'];
-$admin_info = '';
-if ($is_preview && !empty($testimonials_limit) && $testimonials_limit > 0) {
-	$total_testimonials = wp_count_posts('testimonials')->publish;
-	if ($total_testimonials > $testimonials_limit) {
-		$admin_info = sprintf(
-			__('Affichage limité à %d témoignages sur %d disponibles.', 'abyssenergy'),
-			$testimonials_limit,
-			$total_testimonials
-		);
-	}
-}
 ?>
 
-<?php if ($testimonials->have_posts()) : ?>
-	<?php if ($admin_info) : ?>
-		<div class="block-preview-info alert alert-info">
-			<small><?php echo esc_html($admin_info); ?></small>
+<?php if ($is_preview) : ?>
+	<div class="block-preview-message">
+		<h3><?php echo esc_html($title); ?></h3>
+		<p><?php esc_html_e('Aperçu du bloc Témoignages', 'abyssenergy'); ?></p>
+	</div>
+<?php else : ?>
+
+	<?php if ($testimonials->have_posts()) : ?>
+		<!-- Testimonials Slider Block -->
+		<section <?php echo $anchor; ?>class="section <?php echo esc_attr($class_name); ?>">
+			<div class="container">
+				<div class="testimonials-slider-block-header">
+					<?php if ($show_title && $title) : ?>
+						<h2 class="section-title"><?php echo esc_html($title); ?></h2>
+					<?php endif; ?>
+					<?php if ($image) : ?>
+						<img src="<?php echo esc_url(wp_get_attachment_image_url($image, 'full')); ?>" alt="<?php echo esc_attr(get_post_meta($image, '_wp_attachment_image_alt', true)); ?>" class="img-fluid testimonial-section-image" />
+					<?php endif; ?>
+				</div>
+			</div>
+			<div class="testimonials-slider swiper">
+				<div class="swiper-wrapper">
+					<?php while ($testimonials->have_posts()) : $testimonials->the_post(); ?>
+						<div class="swiper-slide">
+							<div class="testimonial-card card">
+								<div class="testimonial-header">
+									<h4 class="testimonial-title">
+										<?php the_title(); ?>
+									</h4>
+									<?php if (has_post_thumbnail()) : ?>
+										<div class="testimonial-logo">
+											<?php the_post_thumbnail('medium'); ?>
+										</div>
+									<?php endif; ?>
+								</div>
+
+								<div class="testimonial-content">
+									<?php the_content(); ?>
+								</div>
+
+
+							</div>
+						</div>
+					<?php endwhile; ?>
+					<?php wp_reset_postdata(); ?>
+				</div>
+				<!-- Navigation -->
+				<div class="d-flex justify-content-center align-items-center mt-4 gap-3">
+					<div class="left btn btn--outline  btn--icon"><i class="fa fa-chevron-left"></i></div>
+					<div class="right btn btn--outline  btn--icon"><i class="fa fa-chevron-right"></i></div>
+				</div>
+			</div>
+		</section>
+	<?php else : ?>
+		<div class="alert alert-warning">
+			<?php _e('Aucun témoignage trouvé.', 'abyssenergy'); ?>
 		</div>
 	<?php endif; ?>
-
-	<!-- Testimonials Slider Block -->
-	<section <?php echo $anchor; ?>class="section <?php echo esc_attr($class_name); ?>">
-		<div class="container">
-			<div class="testimonials-slider-block-header">
-				<?php if ($show_title && $title) : ?>
-					<h2 class="section-title"><?php echo esc_html($title); ?></h2>
-				<?php endif; ?>
-				<?php if ($image) : ?>
-					<img src="<?php echo esc_url(wp_get_attachment_image_url($image, 'full')); ?>" alt="<?php echo esc_attr(get_post_meta($image, '_wp_attachment_image_alt', true)); ?>" class="img-fluid testimonial-section-image" />
-				<?php endif; ?>
-			</div>
-		</div>
-		<div class="testimonials-slider swiper">
-			<div class="swiper-wrapper">
-				<?php while ($testimonials->have_posts()) : $testimonials->the_post(); ?>
-					<div class="swiper-slide">
-						<div class="testimonial-card card">
-							<div class="testimonial-header">
-								<h4 class="testimonial-title">
-									<?php the_title(); ?>
-								</h4>
-								<?php if (has_post_thumbnail()) : ?>
-									<div class="testimonial-logo">
-										<?php the_post_thumbnail('medium'); ?>
-									</div>
-								<?php endif; ?>
-							</div>
-
-							<div class="testimonial-content">
-								<?php the_content(); ?>
-							</div>
-
-
-						</div>
-					</div>
-				<?php endwhile; ?>
-				<?php wp_reset_postdata(); ?>
-			</div>
-			<!-- Navigation -->
-			<div class="d-flex justify-content-center align-items-center mt-4 gap-3">
-				<div class="left btn btn--outline  btn--icon"><i class="fa fa-chevron-left"></i></div>
-				<div class="right btn btn--outline  btn--icon"><i class="fa fa-chevron-right"></i></div>
-			</div>
-		</div>
-	</section>
-<?php else : ?>
-	<div class="alert alert-warning">
-		<?php _e('Aucun témoignage trouvé.', 'abyssenergy'); ?>
-	</div>
 <?php endif; ?>
