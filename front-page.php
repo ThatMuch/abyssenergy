@@ -5,7 +5,7 @@ get_header();
 <div class="page-header">
 	<div class="container">
 		<h1 class="page-title"><?php the_title(); ?></h1>
-		<form action="" method="GET" class="job-search-form d-flex gap-2">
+		<form action="<?php echo esc_url(home_url('/search-jobs/')); ?>" method="GET" class="job-search-form d-flex gap-2">
 			<input
 				type="text"
 				id="job-search"

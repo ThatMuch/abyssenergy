@@ -89,6 +89,26 @@ function abyssenergy_enqueue_scripts()
 		);
 	}
 
+	// Scripts et styles pour la page de recherche d'emplois
+	if (is_page_template('page-search-jobs.php') || is_page('search-jobs')) {
+		// JavaScript pour la page de recherche
+		wp_enqueue_script(
+			'abyssenergy-search-jobs-js',
+			get_stylesheet_directory_uri() . '/js/search-jobs.js',
+			array('jquery'),
+			abyssenergy_get_file_version('/js/search-jobs.js'),
+			true
+		);
+
+		// Ajouter Font Awesome pour les icônes
+		wp_enqueue_style(
+			'font-awesome',
+			'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css',
+			array(),
+			'6.0.0'
+		);
+	}
+
 	// Scripts personnalisés
 	if (is_singular() && comments_open() && get_option('thread_comments')) {
 		wp_enqueue_script('comment-reply');
