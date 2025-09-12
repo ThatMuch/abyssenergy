@@ -56,7 +56,7 @@ if ($markers) {
 	<div class="block-preview-message">
 		<h3><?php echo esc_html($title); ?></h3>
 		<p>Aperçu du bloc Carte Globale. La carte interactive s'affichera en mode front-end.</p>
-		<div class="preview-map-placeholder" style="background-color: #ddedfb; height: 300px; display: flex; align-items: center; justify-content: center; border-radius: 8px; border: 2px solid #F70;">
+		<div class="preview-map-placeholder">
 			<div style="text-align: center;">
 				<span class="dashicons dashicons-location" style="font-size: 48px; width: auto; height: auto; color: #F70;"></span>
 				<p style="margin-top: 10px;">Carte interactive avec <?php echo count($map_data['markers']); ?> marqueur(s)</p>
@@ -65,7 +65,8 @@ if ($markers) {
 	</div>
 <?php else : ?>
 
-	<section class="section section--map">
+	<section class="section section--map <?php if (!$title) : echo 'no-title';
+											endif; ?>">
 		<div class="container">
 			<div id="<?php echo esc_attr($id); ?>" class="<?php echo esc_attr($className); ?>">
 				<div class="global-map-container">
