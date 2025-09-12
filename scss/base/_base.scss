@@ -30,6 +30,20 @@ body {
     $interface-color-background-primary 0%,
     #fff 31.37%
   );
+  position: relative;
+  &:before {
+    content: "";
+    position: absolute;
+    top: -125px;
+    right: -85px;
+    width: 745px;
+    height: 745px;
+    background-image: url("./images/vibrations.webp");
+
+    background-repeat: no-repeat;
+    background-size: contain;
+    z-index: -1;
+  }
 }
 
 // Titres

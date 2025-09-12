@@ -28,8 +28,8 @@
 		</div>
 	</div>
 
-	<div class="">
+	<main>
 		<?php the_content(); ?>
-	</div>
+	</main>
 
 	<?php get_footer(); ?>
