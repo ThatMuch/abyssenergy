@@ -152,6 +152,20 @@
                 }
             }
         }
+
+        // Fonction utilitaire pour supprimer toutes les classes qui commencent par "sector"
+        function removeSectorClasses(element) {
+            const classesToRemove = [];
+            element.classList.forEach(className => {
+                if (className.startsWith('sector-')) {
+                    classesToRemove.push(className);
+                }
+            });
+            classesToRemove.forEach(className => {
+                element.classList.remove(className);
+            });
+        }
+
         // Parcourir les marqueurs à afficher
         markers.forEach((marker, index) => {
             // Vérifier si les coordonnées sont valides
@@ -188,6 +202,9 @@
             const tooltip = document.getElementById(tooltipId);
             if (!tooltip) return;
 
+            // Ajouter un attribut data pour lier le tooltip à son marqueur
+            tooltip.setAttribute('data-marker-index', index);
+
             const tooltipContent = tooltip.querySelector('.tooltip-content');
             const tooltipArrow = tooltip.querySelector('.tooltip-arrow');
 
@@ -202,11 +219,12 @@
                 e.stopPropagation(); // Empêcher la propagation du clic
                 e.preventDefault(); // Empêcher le comportement par défaut
 				//add the class to the .global-map-tooltip
-				tooltip.classList.add(marker.sector.value);
                 // Fermer tous les autres tooltips ouverts et supprimer classe active des marqueurs
-                document.querySelectorAll('.global-map-tooltip.active').forEach(t => {
+                document.querySelectorAll('.global-map-tooltip.active').forEach((t) => {
                     if (t !== tooltip) {
                         t.classList.remove('active');
+                        // Supprimer toutes les classes de secteur
+                        removeSectorClasses(t);
                     }
                 });
                 document.querySelectorAll('.map-marker.active').forEach(m => {
@@ -218,6 +236,8 @@
                 // Si le tooltip est déjà ouvert, le fermer
                 if (tooltip.classList.contains('active')) {
                     tooltip.classList.remove('active');
+                    // Supprimer toutes les classes de secteur
+                    removeSectorClasses(tooltip);
                     pinElement.classList.remove('active');
                     return;
                 }
@@ -248,6 +268,9 @@
 
                 // Afficher le tooltip et marquer le marqueur comme actif
                 tooltip.classList.add('active');
+                if (marker.sector && marker.sector.value) {
+                    tooltip.classList.add(`sector-${marker.sector.value}`);
+                }
                 pinElement.classList.add('active');
 
                 // Gérer le bouton de fermeture
@@ -256,6 +279,8 @@
                     closeBtn.onclick = (e) => {
                         e.stopPropagation();
                         tooltip.classList.remove('active');
+                        // Supprimer toutes les classes de secteur
+                        removeSectorClasses(tooltip);
                         pinElement.classList.remove('active');
                     };
                 }
@@ -269,8 +294,10 @@
         // Fermer les tooltips quand on clique ailleurs
         document.addEventListener('click', (e) => {
             if (!e.target.closest('.global-map-tooltip') && !e.target.classList.contains('map-marker')) {
-                document.querySelectorAll('.global-map-tooltip.active').forEach(tooltip => {
+                document.querySelectorAll('.global-map-tooltip.active').forEach((tooltip) => {
                     tooltip.classList.remove('active');
+                    // Supprimer toutes les classes de secteur
+                    removeSectorClasses(tooltip);
                 });
                 document.querySelectorAll('.map-marker.active').forEach(marker => {
                     marker.classList.remove('active');
