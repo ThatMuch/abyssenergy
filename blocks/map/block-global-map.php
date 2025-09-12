@@ -83,12 +83,11 @@ if ($markers) {
 
 					<div class="global-map-wrapper">
 						<div id="<?php echo esc_attr($id); ?>-map" class="global-map"></div>
-					</div>
-
-					<div id="<?php echo esc_attr($id); ?>-popup" class="global-map-popup">
-						<div class="global-map-popup-inner">
-							<span class="global-map-popup-close">&times;</span>
-							<div class="global-map-popup-content"></div>
+						<div id="<?php echo esc_attr($id); ?>-tooltip" class="global-map-tooltip">
+							<div class="border"></div>
+							<div class="tooltip-arrow"></div>
+							<div class="tooltip-close">&times;</div>
+							<div class="tooltip-content"></div>
 						</div>
 					</div>
 				</div>
@@ -101,6 +100,6 @@ if ($markers) {
 		// Transmettre les données à JavaScript
 		var mapData_<?php echo str_replace('-', '_', $id); ?> = <?php echo json_encode($map_data); ?>;
 		var mapId_<?php echo str_replace('-', '_', $id); ?> = '<?php echo esc_attr($id); ?>-map';
-		var popupId_<?php echo str_replace('-', '_', $id); ?> = '<?php echo esc_attr($id); ?>-popup';
+		var tooltipId_<?php echo str_replace('-', '_', $id); ?> = '<?php echo esc_attr($id); ?>-tooltip';
 	</script>
 <?php endif; ?>
