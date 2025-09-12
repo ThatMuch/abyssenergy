@@ -12,16 +12,23 @@
     background-size: contain;
     background-repeat: no-repeat;
     background-position: 0 25%;
+
+    @include respond-to(xs) {
+      min-height: inherit;
+    }
     .container {
       max-width: 52rem;
     }
     .page-title {
       text-align: center;
-      font-size: 4rem;
+      font-size: $d1-size;
       font-weight: 800;
       line-height: 120%;
       letter-spacing: 0.08rem;
       margin-bottom: 3.9375rem;
+      @include respond-to(xs) {
+        font-size: $d1-size-mobile;
+      }
     }
 
     .job-search-form {
@@ -32,6 +39,10 @@
     img {
       max-width: 1000px;
       margin: 0 auto;
+
+      @include respond-to(xs) {
+        width: 100%;
+      }
     }
   }
 }

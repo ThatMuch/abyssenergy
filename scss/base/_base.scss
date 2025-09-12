@@ -39,10 +39,16 @@ body {
     width: 745px;
     height: 745px;
     background-image: url("./images/vibrations.webp");
-
     background-repeat: no-repeat;
     background-size: contain;
     z-index: -1;
+
+    @include respond-to(xs) {
+      width: 500px;
+      height: 500px;
+      top: -200px;
+      right: -200px;
+    }
   }
 }
 
