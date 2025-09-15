@@ -76,9 +76,9 @@ $testimonials = new WP_Query($args);
 						<div class="swiper-slide">
 							<div class="testimonial-card card">
 								<div class="testimonial-header">
-									<h4 class="testimonial-title">
+									<h3 class="testimonial-title h4">
 										<?php the_title(); ?>
-									</h4>
+									</h3>
 									<?php if (has_post_thumbnail()) : ?>
 										<div class="testimonial-logo">
 											<?php the_post_thumbnail('medium'); ?>

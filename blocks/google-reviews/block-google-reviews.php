@@ -180,7 +180,7 @@ if ($is_preview && !empty($reviews_data) && !$reviews_data['error']) {
 									<div class="review-card card">
 										<div class="review-header">
 											<div class="review-author">
-												<h4 class="author-name"><?php echo esc_html($review['author']); ?></h4>
+												<h3 class="author-name h4"><?php echo esc_html($review['author']); ?></h3>
 												<span class="rating-google"><img src="<?php echo get_stylesheet_directory_uri(); ?>/blocks/google-reviews/icon-google.svg" alt="Logo Google"></span>
 											</div>
 										</div>
