@@ -27,8 +27,29 @@ $timeline_files = get_field('timeline_files');
 	</div>
 <?php else : ?>
 	<?php if ($steps) : ?>
+		<?php
+		// Créer un ID unique pour ce bloc
+		$block_id = 'timeline_' . (isset($block['id']) ? $block['id'] : uniqid());
+
+		// Préparer les données des étapes pour JavaScript
+		$steps_data = array();
+		foreach ($steps as $step) {
+			$steps_data[] = array(
+				'title' => $step['title'],
+				'excerpt' => $step['excerpt'],
+				'description' => $step['description'],
+				'image' => $step['image']
+			);
+		}
+		?>
+		<script>
+			window.timelineData_<?php echo esc_js($block_id); ?> = {
+				steps: <?php echo wp_json_encode($steps_data); ?>
+			};
+		</script>
+
 		<!-- Timeline Block -->
-		<div class="<?php echo esc_attr($className); ?>">
+		<div class="<?php echo esc_attr($className); ?>" data-block-id="<?php echo esc_attr($block_id); ?>">
 			<div class="container">
 				<h2 class="timeline-title"><?php echo wp_kses_post($title); ?></h2>
 				<div class="timeline-steps" style="<?php echo 'grid-template-rows: repeat(' . count($steps) . ', 200px);'; ?>">

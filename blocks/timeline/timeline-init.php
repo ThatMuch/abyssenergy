@@ -42,6 +42,7 @@ function register_timeline_block()
 			)
 		),
 		'enqueue_style'     => get_template_directory_uri() . '/blocks/timeline/timeline.css',
+		'enqueue_script'    => get_template_directory_uri() . '/blocks/timeline/timeline.js',
 	));
 
 	if (function_exists('acf_add_local_field_group')) {
