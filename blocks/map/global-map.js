@@ -178,7 +178,7 @@
 			// Couleurs pour chaque secteur
 			const sectorColors = {
         process: "#06508bff",
-        renewables: "#008e99ff",
+        renewable: "#008e99ff",
         conventional: "#F70",
       };
             // Créer un cercle pour le marqueur

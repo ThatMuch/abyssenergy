@@ -91,12 +91,16 @@ function register_global_map_block()
 							'key' => 'field_marker_sector',
 							'label' => 'Secteur',
 							'name' => 'sector',
-							'type' => 'select',
+							'type' => 'radio',
 							'choices' => array(
-								'conventional' => 'Conventionnel',
-								'renewable' => 'Renouvelable',
-								'process' => 'Processus'
+								'conventional' => 'Conventional',
+								'renewable' => 'Renewable',
+								'process' => 'Process'
 							),
+							'layout' => 'vertical',
+							'required' => 1,
+							'default_value' => 'conventional',
+							'return_format' => 'value',
 						),
 						array(
 							'key' => 'field_marker_lat',
@@ -113,14 +117,7 @@ function register_global_map_block()
 							'type' => 'number',
 							'step' => 0.000001,
 							'required' => 1,
-						),
-						array(
-							'key' => 'field_marker_description',
-							'label' => 'Description',
-							'name' => 'description',
-							'type' => 'textarea',
-							'rows' => 3,
-						),
+						)
 					),
 				),
 			),

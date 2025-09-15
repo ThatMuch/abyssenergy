@@ -38,12 +38,23 @@ $map_data = array(
 if ($markers) {
 	foreach ($markers as $marker) {
 		if (!empty($marker['lat']) && !empty($marker['lng'])) {
+			// Préparer les données du secteur avec les labels
+			$sector_value = $marker['sector'] ?: 'conventional';
+			$sector_labels = array(
+				'conventional' => 'Conventional Energy',
+				'renewable' => 'Renewable Energy',
+				'process' => 'Process Industry'
+			);
+
 			$marker_data = array(
 				'lat' => $marker['lat'],
 				'lng' => $marker['lng'],
 				'country' => $marker['country'] ?: '',
 				'project_name' => $marker['title'] ?: 'Projet Abyss Energy',
-				'sector' => $marker['sector'] ?: ''
+				'sector' => array(
+					'value' => $sector_value,
+					'label' => $sector_labels[$sector_value] ?: 'Conventional Energy'
+				)
 			);
 
 			$map_data['markers'][] = $marker_data;
