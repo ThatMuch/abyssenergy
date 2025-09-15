@@ -1,6 +1,6 @@
 (function($) {
     // Fonction d'initialisation de la carte SVG personnalisée
-    function initGlobalMap(mapContainerId, popupId, mapData) {
+    function initGlobalMap(mapContainerId, tooltipId, mapData) {
         // Si l'élément DOM n'existe pas, sortir
         const mapContainer = document.getElementById(mapContainerId);
         if (!mapContainer) {
@@ -46,9 +46,20 @@
                     svgElement.style.background = 'transparent';
                 }
 
+                // Désactiver le drag et le sélection sur le SVG
+                svgElement.style.userSelect = 'none';
+                svgElement.style.webkitUserSelect = 'none';
+                svgElement.style.msUserSelect = 'none';
+                svgElement.setAttribute('draggable', 'false');
+
+                // Empêcher les événements de drag sur l'ensemble du SVG
+                svgElement.addEventListener('dragstart', (e) => e.preventDefault());
+                svgElement.addEventListener('drag', (e) => e.preventDefault());
+                svgElement.addEventListener('dragend', (e) => e.preventDefault());
+
                 // Ajouter les marqueurs
                 if (mapData.markers && mapData.markers.length > 0) {
-                    addMarkers(svgElement, mapData.markers, popupId);
+                    addMarkers(svgElement, mapData.markers, tooltipId);
                 }
             })
             .catch(error => {
@@ -57,7 +68,7 @@
     }
 
     // Fonction pour ajouter les marqueurs à la carte SVG
-    function addMarkers(svgElement, markers, popupId) {
+    function addMarkers(svgElement, markers, tooltipId) {
         // Obtenir les dimensions du SVG
         const svgWidth = svgElement.viewBox?.baseVal?.width || 1026; // Largeur du SVG actuel
         const svgHeight = svgElement.viewBox?.baseVal?.height || 505; // Hauteur du SVG actuel
@@ -141,6 +152,20 @@
                 }
             }
         }
+
+        // Fonction utilitaire pour supprimer toutes les classes qui commencent par "sector"
+        function removeSectorClasses(element) {
+            const classesToRemove = [];
+            element.classList.forEach(className => {
+                if (className.startsWith('sector-')) {
+                    classesToRemove.push(className);
+                }
+            });
+            classesToRemove.forEach(className => {
+                element.classList.remove(className);
+            });
+        }
+
         // Parcourir les marqueurs à afficher
         markers.forEach((marker, index) => {
             // Vérifier si les coordonnées sont valides
@@ -153,7 +178,7 @@
 			// Couleurs pour chaque secteur
 			const sectorColors = {
         process: "#06508bff",
-        renewables: "#008e99ff",
+        renewable: "#008e99ff",
         conventional: "#F70",
       };
             // Créer un cercle pour le marqueur
@@ -165,47 +190,168 @@
             pinElement.setAttribute('stroke', '#fff');
             pinElement.setAttribute('stroke-width', '2');
             pinElement.setAttribute('class','map-marker');
+            pinElement.setAttribute('pointer-events', 'all');
             pinElement.style.cursor = 'pointer';
+            pinElement.style.position = 'static';
 
-                // Afficher le popup au clic
-                pinElement.addEventListener('click', () => {
-                    // Construire le contenu du popup
-                    let popupContent = `
-                        <div class="map-popup-header">
-                            <h3>${marker.project_name}</h3>
-                            <p class="map-popup-country">${marker.country}</p>
-                        </div>
-                    `;
-					if (marker.sector) {
+            // S'assurer que le marqueur ne bouge pas
+            pinElement.style.transform = 'none';
+            pinElement.style.transition = 'transform 0.3s ease, filter 0.3s ease';
 
-                        popupContent += `
-                            <div class="map-popup-sector">
-                                Secteur: ${marker.sector.label}
-                            </div>
-                        `;
-                    }
+            // Obtenir l'élément tooltip
+            const tooltip = document.getElementById(tooltipId);
+            if (!tooltip) return;
 
-                    // Afficher le popup personnalisé
-                    const popup = document.getElementById(popupId);
-                    if (popup) {
-                        const popupContentDiv = popup.querySelector('.global-map-popup-content');
-                        popupContentDiv.innerHTML = popupContent;
-                        popup.classList.add('active');
+            // Ajouter un attribut data pour lier le tooltip à son marqueur
+            tooltip.setAttribute('data-marker-index', index);
 
-                        // Gérer la fermeture du popup
-                        const closeBtn = popup.querySelector('.global-map-popup-close');
-                        if (closeBtn) {
-                            closeBtn.addEventListener('click', function() {
-                                popup.classList.remove('active');
-                            });
-                        }
+            const tooltipContent = tooltip.querySelector('.tooltip-content');
+            const tooltipArrow = tooltip.querySelector('.tooltip-arrow');
+
+            // Empêcher tout comportement de suivi du curseur
+            pinElement.addEventListener('mousemove', (e) => {
+                e.stopPropagation();
+                e.preventDefault();
+            });
+
+            // Gérer l'affichage du tooltip au clic
+            pinElement.addEventListener('click', (e) => {
+                e.stopPropagation(); // Empêcher la propagation du clic
+                e.preventDefault(); // Empêcher le comportement par défaut
+				//add the class to the .global-map-tooltip
+                // Fermer tous les autres tooltips ouverts et supprimer classe active des marqueurs
+                document.querySelectorAll('.global-map-tooltip.active').forEach((t) => {
+                    if (t !== tooltip) {
+                        t.classList.remove('active');
+                        // Supprimer toutes les classes de secteur
+                        removeSectorClasses(t);
                     }
                 });
+                document.querySelectorAll('.map-marker.active').forEach(m => {
+                    if (m !== pinElement) {
+                        m.classList.remove('active');
+                    }
+                });
+
+                // Si le tooltip est déjà ouvert, le fermer
+                if (tooltip.classList.contains('active')) {
+                    tooltip.classList.remove('active');
+                    // Supprimer toutes les classes de secteur
+                    removeSectorClasses(tooltip);
+                    pinElement.classList.remove('active');
+                    return;
+                }
+
+                // Construire le contenu du tooltip
+                let content = `
+                    <div class="tooltip-header">
+                        <h4 class="tooltip-sector">${marker.sector.label}</h4>
+                    </div>
+					<div class="tooltip-body">
+					<p class="tooltip-title">Projet</p>
+					        ${marker.project_name}
+					</div>
+                `;
+
+                if (marker.country) {
+                  content += `
+                        <div class="tooltip-country">
+                            <i class="fa fa-map-marker-alt mr-2"></i> ${marker.country}
+                        </div>
+                    `;
+                }
+
+                tooltipContent.innerHTML = content;
+
+                // Positionner le tooltip
+                positionTooltip(e.target, tooltip, tooltipArrow);
+
+                // Afficher le tooltip et marquer le marqueur comme actif
+                tooltip.classList.add('active');
+                if (marker.sector && marker.sector.value) {
+                    tooltip.classList.add(`sector-${marker.sector.value}`);
+                }
+                pinElement.classList.add('active');
+
+                // Gérer le bouton de fermeture
+                const closeBtn = tooltip.querySelector('.tooltip-close');
+                if (closeBtn) {
+                    closeBtn.onclick = (e) => {
+                        e.stopPropagation();
+                        tooltip.classList.remove('active');
+                        // Supprimer toutes les classes de secteur
+                        removeSectorClasses(tooltip);
+                        pinElement.classList.remove('active');
+                    };
+                }
+            });
 
                 // Ajouter le marqueur à la carte
                 svgElement.appendChild(pinElement);
             }
         );
+
+        // Fermer les tooltips quand on clique ailleurs
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.global-map-tooltip') && !e.target.classList.contains('map-marker')) {
+                document.querySelectorAll('.global-map-tooltip.active').forEach((tooltip) => {
+                    tooltip.classList.remove('active');
+                    // Supprimer toutes les classes de secteur
+                    removeSectorClasses(tooltip);
+                });
+                document.querySelectorAll('.map-marker.active').forEach(marker => {
+                    marker.classList.remove('active');
+                });
+            }
+        });
+    }
+
+    // Fonction pour positionner intelligemment le tooltip
+    function positionTooltip(markerElement, tooltip, arrow) {
+        const markerRect = markerElement.getBoundingClientRect();
+        const mapContainer = markerElement.closest('.global-map-wrapper');
+        const mapRect = mapContainer.getBoundingClientRect();
+
+        // Position par défaut : AU-DESSUS du marqueur
+        let tooltipX = markerRect.left - mapRect.left + (markerRect.width / 2);
+        let tooltipY = markerRect.top - mapRect.top - tooltip.offsetHeight - 10;
+
+        // Réinitialiser les classes de flèche
+        arrow.className = 'tooltip-arrow';
+
+        // Positionner le tooltip au-dessus par défaut
+        tooltip.style.left = tooltipX + 'px';
+        tooltip.style.top = tooltipY + 'px';
+        tooltip.style.transform = 'translateX(-50%)';
+
+        // Vérifier si le tooltip dépasse à droite
+        const tooltipRect = tooltip.getBoundingClientRect();
+        const mapRightEdge = mapRect.right;
+        const tooltipRightEdge = tooltipRect.right;
+
+        // Vérifier si le tooltip dépasse vers le haut
+        if (tooltipRect.top < mapRect.top) {
+            // Repositionner EN BAS du marqueur si pas de place au-dessus
+            tooltipY = markerRect.top - mapRect.top + markerRect.height + 10;
+            tooltip.style.top = tooltipY + 'px';
+            arrow.classList.add('arrow-top'); // Flèche vers le haut quand tooltip en bas
+        } else if (tooltipRightEdge > mapRightEdge) {
+            // Positionner à gauche du marqueur
+            tooltipX = markerRect.left - mapRect.left - tooltip.offsetWidth - 10;
+            tooltipY = markerRect.top - mapRect.top + (markerRect.height / 2);
+            tooltip.style.left = tooltipX + 'px';
+            tooltip.style.top = tooltipY + 'px';
+            tooltip.style.transform = 'translateY(-50%)';
+            arrow.classList.add('arrow-right');
+        } else if (tooltipRect.left < mapRect.left) {
+            // Positionner à droite du marqueur
+            tooltipX = markerRect.left - mapRect.left + markerRect.width + 10;
+            tooltipY = markerRect.top - mapRect.top + (markerRect.height / 2);
+            tooltip.style.left = tooltipX + 'px';
+            tooltip.style.top = tooltipY + 'px';
+            tooltip.style.transform = 'translateY(-50%)';
+            arrow.classList.add('arrow-left');
+        }
     }
 
     // Initialiser toutes les cartes sur la page
@@ -221,10 +367,10 @@
             idParts.shift(); // Enlever "mapData_"
 
             const mapVarName = 'mapId_' + idParts.join('_');
-            const popupVarName = 'popupId_' + idParts.join('_');
+            const tooltipVarName = 'tooltipId_' + idParts.join('_');
 
-            if (window[mapVarName] && window[popupVarName] && window[varName]) {
-                initGlobalMap(window[mapVarName], window[popupVarName], window[varName]);
+            if (window[mapVarName] && window[tooltipVarName] && window[varName]) {
+                initGlobalMap(window[mapVarName], window[tooltipVarName], window[varName]);
             }
         });
     });
