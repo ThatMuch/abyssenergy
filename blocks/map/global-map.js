@@ -73,6 +73,9 @@
         const svgWidth = svgElement.viewBox?.baseVal?.width || 1026; // Largeur du SVG actuel
         const svgHeight = svgElement.viewBox?.baseVal?.height || 505; // Hauteur du SVG actuel
 
+        // Variable pour suivre si l'animation a été déclenchée
+        let animationTriggered = false;
+
         // Fonction pour convertir les coordonnées géographiques en coordonnées SVG
         function geoToSvgCoords(lat, lng) {
             // Cette fonction utilise maintenant l'équateur comme référence pour un meilleur placement
@@ -166,6 +169,9 @@
             });
         }
 
+        // Tableau pour stocker les éléments marqueurs
+        const markerElements = [];
+
         // Parcourir les marqueurs à afficher
         markers.forEach((marker, index) => {
             // Vérifier si les coordonnées sont valides
@@ -194,9 +200,12 @@
             pinElement.style.cursor = 'pointer';
             pinElement.style.position = 'static';
 
-            // S'assurer que le marqueur ne bouge pas
+            // S'assurer que le marqueur ne bouge pas et ajouter l'animation fade
             pinElement.style.transform = 'none';
-            pinElement.style.transition = 'transform 0.3s ease, filter 0.3s ease';
+            pinElement.style.transition = 'transform 0.3s ease, filter 0.3s ease, opacity 0.6s ease';
+
+            // Commencer invisible pour l'animation fade-in
+            pinElement.style.opacity = '0';
 
             // Obtenir l'élément tooltip
             const tooltip = document.getElementById(tooltipId);
@@ -288,8 +297,43 @@
 
                 // Ajouter le marqueur à la carte
                 svgElement.appendChild(pinElement);
+
+                // Stocker le marqueur pour l'animation
+                markerElements.push(pinElement);
             }
         );
+
+        /**
+         * Animation des marqueurs en fade-in séquentiel
+         */
+        function animateMarkers() {
+            if (animationTriggered || markerElements.length === 0) return;
+            animationTriggered = true;
+
+            markerElements.forEach((marker, index) => {
+                setTimeout(() => {
+                    marker.style.opacity = '1';
+                }, index * 50); // Délai de 150ms entre chaque marqueur
+            });
+        }
+
+        /**
+         * Observer d'intersection pour déclencher l'animation quand la carte est visible
+         */
+        const mapContainer = svgElement.closest('.global-map-wrapper') || svgElement.closest('.abyss-global-map');
+        if (mapContainer) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !animationTriggered) {
+                        animateMarkers();
+                    }
+                });
+            }, {
+                threshold: 0.2 // Déclencher quand 20% du bloc est visible
+            });
+
+            observer.observe(mapContainer);
+        }
 
         // Fermer les tooltips quand on clique ailleurs
         document.addEventListener('click', (e) => {
