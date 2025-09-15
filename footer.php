@@ -17,7 +17,7 @@
 
 <div class='footer-bottom'>
     <div class='container d-flex justify-content-center align-items-center'>
-        <p>Copyright &copy; All Rights Reserved Abyss-Energy <?php echo date("Y"); ?> | <a href='/privacy-policy/'>Privacy Policy</a> | <a href='/general-conditions/'>General Conditions</a> | <a href='https://www.linkedin.com/company/abyss-energy' target='_blank'><i class="fab fa-linkedin-in"></i></a></p>
+        <p>Copyright &copy; All Rights Reserved Abyss-Energy <?php echo date("Y"); ?> | <a href='/privacy-policy/'>Privacy Policy</a> | <a href='/general-conditions/'>General Conditions</a> | <a href='https://www.linkedin.com/company/abyss-energy' target='_blank' aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a></p>
 
     </div>
 </div>

@@ -160,8 +160,8 @@ $total_jobs = $jobs_query->found_posts;
 				</div>
 
 				<div class="filter-group">
-					<button type="submit" class="btn btn--primary">
-						<i class="fas fa-search"></i> Rechercher
+					<button type="submit" class="btn btn--primary" aria-label="Search">
+						<i class="fas fa-search"></i> Search
 					</button>
 				</div>
 			</div>

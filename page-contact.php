@@ -96,8 +96,8 @@ $consultants = get_posts(array(
 				</div>
 			</div>
 			<div class="nav-buttons">
-				<button class="scroll-left btn btn--outline  btn--icon"><i class="fa fa-chevron-left"></i></button>
-				<button class="scroll-right btn btn--outline btn--icon"><i class="fa fa-chevron-right"></i></button>
+				<button class="scroll-left btn btn--outline  btn--icon" aria-label="Scroll left"><i class="fa fa-chevron-left"></i></button>
+				<button class="scroll-right btn btn--outline btn--icon" aria-label="Scroll right"><i class="fa fa-chevron-right"></i></button>
 			</div>
 		</section>
 	</div>

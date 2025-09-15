@@ -201,7 +201,7 @@ $jobs_query = new WP_Query($job_args);
 						name="job_search"
 						placeholder="Find your next position"
 						value="<?php echo esc_attr(get_query_var('job_search')); ?>">
-					<button type="submit" class="btn btn--primary btn--icon"><i class="fas fa-search"></i></button>
+					<button type="submit" class="btn btn--primary btn--icon" aria-label="Search"><i class="fas fa-search"></i></button>
 				</form>
 				</div>
 				<div class="col-md-3">
