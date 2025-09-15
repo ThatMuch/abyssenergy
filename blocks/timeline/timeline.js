@@ -39,10 +39,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Fermer le modal en cliquant sur le backdrop ou le bouton fermer
         modal.addEventListener('click', function(e) {
-            if (e.target === modal || e.target.classList.contains('modal-close')) {
+            if (e.target === modal) {
                 hideModal(modal);
             }
         });
+
+        // Événement spécifique pour le bouton de fermeture
+        const closeButton = modal.querySelector('.modal-close');
+        if (closeButton) {
+            closeButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                hideModal(modal);
+            });
+        }
 
         // Fermer avec la touche Escape
         document.addEventListener('keydown', function(e) {
@@ -65,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <img src="" alt="" loading="lazy">
                         </div>
                         <h3 class="timeline-step-title h4"></h3>
-                <button class="modal-close" aria-label="Fermer">
+                <button class="modal-close" aria-label="Close">
                     <i class="fa fa-times"></i>
                 </button>
 				</div>
