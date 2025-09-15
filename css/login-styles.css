@@ -1,16 +1,24 @@
+@import "https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Sora:wght@100..800&display=swap";
+
+:root {
+  --title-font: "Sora", sans-serif;
+  --main-font: "Manrope", sans-serif;
+  --color-orange: #ff6b01; /* titles and highlights */
+  --color-darkblue: #0d4a77; /* logo blue, main text color */
+  --color-main: #0d4a77; /* duplicate as we often refer to main */
+}
+
 body.login {
-  background: #fff url(../images/background.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+  background-color: #fff;
+  font-family: var(--main-font);
+  font-weight: 600;
+  color: var(--color-darkblue);
 }
 
 .login h1 a {
-background-image: url('../images/login-logo.png');
-background-size: 300px 46px;
-width: 300px;
-height: 46px;
+background-image: url('../images/logo.svg');
+background-size: contain;
+width: 100%;
 }
 
 #login {
@@ -20,34 +28,31 @@ padding: 30px 0 0;
 .login form {
 margin-left:auto;
 margin-right:auto;
-padding:30px;
-border: 1px solid #99061a;
-background: rgba(255 255 255, 90%);
-background-clip: padding-box;
+padding:24px;
+background-color: #eef7feff;
 box-shadow: 0 0 13px 3px rgba(0 0 0,50%);
 overflow: hidden;
 }
 
 .login label {
-color: #333;
 line-height: 26px;
 }
 
 .login .button-primary {
-background-color:#fb0d2e !important;
-border-color: #fb0d2e !important;
+background-color:var(--color-main) !important;
+border-color: var(--color-main) !important;
 width: 120px;
 float:right;
 color: #fff;
 }
 
 .login .button-primary:hover {
-background-color:#99061a !important;
+background-color:var(--color-main) !important;
 color: #fff;
 }
 
 .login .button-primary:active {
-background-color:#fb0d2e !important;
+background-color:var(--color-main) !important;
 color: #fff;
 }
 
