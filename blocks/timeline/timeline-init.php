@@ -96,10 +96,17 @@ function register_timeline_block()
 							'required' => 1,
 						),
 						array(
+							'key' => 'field_step_excerpt',
+							'label' => 'Extrait',
+							'name' => 'excerpt',
+							'type' => 'textarea',
+							'required' => 0,
+						),
+						array(
 							'key' => 'field_step_description',
 							'label' => 'Description',
 							'name' => 'description',
-							'type' => 'textarea',
+							'type' => 'wysiwyg',
 							'required' => 0,
 						),
 						array(

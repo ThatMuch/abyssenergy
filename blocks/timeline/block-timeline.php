@@ -48,9 +48,12 @@ $timeline_files = get_field('timeline_files');
 										</div>
 									<?php endif; ?>
 									<h3 class="timeline-step-title h4"><?php echo wp_kses_post($step['title']); ?></h3>
+									<?php if (!empty($step['description'])) : ?>
+										<button class="timeline-button" aria-label="Open content"><i class="fa fa-plus"></i></button>
+									<?php endif; ?>
 								</div>
 								<div class="timeline-step-content">
-									<p class="timeline-step-description"><?php echo wp_kses_post($step['description']); ?></p>
+									<p class="timeline-step-description"><?php echo wp_kses_post($step['excerpt']); ?></p>
 								</div>
 							</div>
 							<span class="timeline-count"><?php echo $count; ?></span>
