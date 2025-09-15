@@ -239,13 +239,25 @@
 
 // Footer
 .footer {
-  background: $color-primary;
+  background: linear-gradient(180deg, #0a3f6a -2.34%, #06508b 100%);
   color: $white-100;
   display: flex;
   padding: map.get($spacings, "section-sm");
   flex-direction: column;
   align-items: center;
   gap: map.get($spacings, "section-sm");
+  position: relative;
+  margin-top: 42px;
+  &::before {
+    content: "";
+    position: absolute;
+    top: -100px;
+    left: 0;
+    width: 100%;
+    height: 144px;
+    background-image: url("./images/waves-footer.svg");
+    z-index: 0;
+  }
   &-links {
     background-color: initial;
     padding: 0;
