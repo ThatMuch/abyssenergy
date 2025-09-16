@@ -7,6 +7,10 @@
 .single {
   .page-header {
     margin-bottom: $spacing-2xl;
+    margin-top: $spacing-3xl;
+    min-height: 376px;
+    display: grid;
+    place-items: center;
     .page-description {
       font-size: $b1-size;
       @include respond-to(xs) {
@@ -16,6 +20,7 @@
     .page-thumbnail img {
       margin: 0 auto;
       display: block;
+      width: 463px;
     }
   }
 
