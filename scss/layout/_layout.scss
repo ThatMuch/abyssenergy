@@ -77,7 +77,7 @@
         position: relative;
         margin-left: 20px;
         &:hover > ul {
-          display: block;
+          display: flex;
         }
         &:last-of-type {
           border-bottom: 0;
@@ -102,10 +102,16 @@
         top: 100%;
         left: 0;
         background: $white-100;
-        padding: 7px 0 7px 0;
+        gap: 1rem;
+        flex-direction: column;
+        padding: 1rem;
         z-index: 9999999999;
         border-radius: 10px;
-        border: 2px solid $primary-950;
+        box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
+        width: max-content;
+        li {
+          margin: 0;
+        }
         ul {
           top: 0;
           left: 100%;
@@ -247,7 +253,7 @@
   align-items: center;
   gap: map.get($spacings, "section-sm");
   position: relative;
-  margin-top: 82px;
+  margin-top: 182px;
   &::before {
     content: "";
     position: absolute;
