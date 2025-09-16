@@ -75,10 +75,6 @@
   pointer-events: none;
 }
 
-.global-map .map-marker {
-  pointer-events: all;
-}
-
 /* Styles pour la carte SVG */
 .global-map svg {
   width: 100%;
@@ -109,55 +105,6 @@
   background: transparent;
 }
 
-/* Style des marqueurs SVG */
-.map-marker {
-  transition: transform 0.3s ease, filter 0.3s ease;
-  filter: drop-shadow(0 2px 4px rgb(0 0 0 / 30%));
-  cursor: pointer;
-  pointer-events: all;
-  position: static !important;
-  transform-origin: center center;
-  transform-box: fill-box;
-}
-
-.map-marker:hover {
-  transform: scale(1.1);
-  filter: drop-shadow(0 4px 8px color-mix(in srgb, black 40%, transparent));
-}
-
-.map-marker:active {
-  transform: scale(1.05);
-}
-
-.map-marker.active {
-  transform: scale(1.15);
-  filter: drop-shadow(0 6px 12px color-mix(in srgb, black 50%, transparent));
-}
-
-.marker-pin {
-  width: 30px;
-  height: 30px;
-  border-radius: 50% 50% 50% 0;
-  background: #f70; /* Couleur orange pour les marqueurs */
-  position: absolute;
-  transform: rotate(-45deg);
-  left: 50%;
-  top: 50%;
-  margin: -20px 0 0 -15px;
-
-  /* Pas d'animation */
-  box-shadow: 0 2px 4px rgb(0 0 0 / 30%);
-}
-
-.marker-pin::after {
-  content: "";
-  width: 20px;
-  height: 20px;
-  margin: 5px 0 0 5px;
-  background: white;
-  position: absolute;
-  border-radius: 50%;
-}
 
 /* Aucune animation pour les marqueurs */
 

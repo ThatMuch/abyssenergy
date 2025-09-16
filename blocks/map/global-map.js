@@ -94,8 +94,7 @@
             const southVerticalScale = (svgHeight - equatorY) / 90; // Échelle pour les latitudes sud (de l'équateur au pôle sud)
 
             // Facteurs de correction pour mieux correspondre à la projection du SVG
-            const offsetX = -13; // Ajustement horizontal global
-            const offsetY = 0; // Pas d'ajustement vertical depuis que nous utilisons l'équateur comme référence
+			const offsetX = -13; // Ajustement horizontal global
 
             // Correction pour la déformation de la projection Mercator aux latitudes élevées
             // Plus on s'éloigne de l'équateur, plus la déformation augmente
