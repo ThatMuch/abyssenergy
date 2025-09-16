@@ -3,63 +3,9 @@
 @use "../abstracts/mixins" as *;
 @use "sass:map";
 .jobs-listing-page {
-  overflow-x: hidden;
-  .page-header {
-    position: relative;
-    padding-bottom: $spacing-3xl;
-    .row {
-      flex-direction: row-reverse;
-      align-items: center;
-      justify-content: flex-end;
-      gap: $spacing-lg;
-
-      @include respond-to(xs) {
-        flex-direction: column;
-        text-align: center;
-        gap: $spacing-md;
-      }
-    }
-
-    &-image {
-      max-width: 300px;
-      margin-left: auto;
-      margin-right: auto;
-      img {
-        margin: 0 auto;
-        @include respond-to(xs) {
-          width: 200px;
-        }
-      }
-    }
-
-    &-background {
-      position: absolute;
-      z-index: -1;
-      &:first-of-type {
-        top: 55%;
-        right: -50%;
-
-        @include respond-to(md) {
-          top: 30%;
-          right: -10%;
-        }
-      }
-      &:last-of-type {
-        bottom: 0;
-        left: -28%;
-
-        @include respond-to(md) {
-          bottom: 0;
-          left: -5%;
-        }
-      }
-    }
-
-    input {
-      max-width: 25rem;
-    }
+  .job-search-form {
+    max-width: 500px;
   }
-
   .jobs-filter-form {
     display: flex;
     flex-wrap: wrap;

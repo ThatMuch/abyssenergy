@@ -175,47 +175,46 @@ if (get_query_var('job_search')) {
 }
 
 $jobs_query = new WP_Query($job_args);
+
+$subtitle = get_field('subtitle');
+$description = get_field('description');
 ?>
 
 <div class="jobs-listing-page">
 	<!-- En-tête de la page -->
-	<section class="page-header">
+	<div class="page-header">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-6">
-					<div>
-						<h1 class=" mb-3"><?php the_title(); ?></h1>
-						<?php if (get_the_content()) : ?>
-							<h2 class="page-description">
-								<?php the_content(); ?>
-					</div>
-				<?php else : ?>
-					<h2 class="page-description">
-						Connecting <span class="text-orange">skilled professionals</span> with global projects
-					</h2>
-				<?php endif; ?>
-				<form action="" method="GET" class="job-search-form d-flex gap-2">
-					<input
-						type="text"
-						id="job-search"
-						name="job_search"
-						placeholder="Find your next position"
-						value="<?php echo esc_attr(get_query_var('job_search')); ?>">
-					<button type="submit" class="btn btn--primary btn--icon" aria-label="Search"><i class="fas fa-search"></i></button>
-				</form>
+				<div class="col col-md-6">
+					<h1><?php the_title(); ?></h1>
+					<?php if ($subtitle): ?>
+						<?php echo $subtitle; ?>
+					<?php endif; ?>
+					<?php if ($description): ?>
+						<div class="page-description">
+							<?php echo $description; ?>
+						</div>
+					<?php endif; ?>
+					<form action="" method="GET" class="job-search-form d-flex gap-2">
+						<input
+							type="text"
+							id="job-search"
+							name="job_search"
+							placeholder="Find your next position"
+							value="<?php echo esc_attr(get_query_var('job_search')); ?>">
+						<button type="submit" class="btn btn--primary btn--icon" aria-label="Search"><i class="fas fa-search"></i></button>
+					</form>
 				</div>
-				<div class="col-md-3">
+				<div class="col col-md-6">
 					<?php if (has_post_thumbnail()) : ?>
-						<div class="page-header-image">
+						<div class="page-thumbnail">
 							<?php the_post_thumbnail('medium_large', array('class' => 'img-fluid')); ?>
 						</div>
 					<?php endif; ?>
 				</div>
 			</div>
 		</div>
-		<img src="<?php echo get_template_directory_uri(); ?>/images/Cloud-2.svg" alt="Cloud" class="page-header-background">
-		<img src="<?php echo get_template_directory_uri(); ?>/images/Cloud-1.svg" alt="Cloud" class="page-header-background">
-	</section>
+	</div>
 	<!-- Filtres et recherche -->
 	<section class="jobs-filters">
 		<div class="container">
