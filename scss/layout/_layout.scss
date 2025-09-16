@@ -54,6 +54,7 @@
         }
       }
     }
+
     &:checked ~ .hamb .hamb-line {
       background: transparent;
       &::before {
@@ -136,6 +137,51 @@
           margin-bottom: map.get($spacings, "component-md");
         }
       }
+
+      // Sur mobile, afficher les sous-menus par défaut
+      ul > li {
+        margin-left: 0;
+
+        // Réinitialiser le hover behavior sur mobile
+        &:hover > ul {
+          display: flex; // Garde la même règle mais elle ne s'appliquera pas sur mobile
+        }
+
+        ul {
+          // Forcer l'affichage des sous-menus sur mobile
+          display: flex !important;
+          position: static;
+          background: transparent;
+          box-shadow: none;
+          border-radius: 0;
+          padding: 0;
+          padding-left: map.get($spacings, "component-sm");
+          margin-top: map.get($spacings, "component-md");
+          width: 100%;
+
+          li {
+            margin: 0;
+            margin-bottom: map.get($spacings, "component-xs");
+
+            a {
+              font-size: $font-size-sm;
+              opacity: 0.6;
+              padding-left: map.get($spacings, "component-xs");
+            }
+          }
+
+          // Sous-sous-menus
+          ul {
+            padding-left: map.get($spacings, "component-md");
+            margin-top: map.get($spacings, "component-xs");
+
+            li a {
+              font-size: $font-size-xs;
+              opacity: 0.6;
+            }
+          }
+        }
+      }
     }
 
     .menu {
@@ -151,6 +197,16 @@
 
         &:hover {
           color: $color-secondary;
+        }
+
+        @include respond-to(xs) {
+          display: block;
+          padding: 0 map.get($spacings, "component-md");
+          //  border-bottom: 1px solid rgba($color-primary, 0.1);
+
+          &:hover {
+            color: $color-secondary;
+          }
         }
       }
     }
@@ -358,4 +414,22 @@
     grid-template-columns: 1fr;
     gap: $spacing-xl;
   }
+}
+
+// Empêcher le scroll quand le menu mobile est ouvert
+body.mobile-menu-open {
+  @include respond-to(xs) {
+    overflow: hidden;
+    height: 100vh;
+    position: fixed;
+    width: 100%;
+  }
+}
+
+// Empêcher le scroll quand une modale est ouverte (tous écrans)
+body.modal-open {
+  overflow: hidden;
+  height: 100vh;
+  position: fixed;
+  width: 100%;
 }

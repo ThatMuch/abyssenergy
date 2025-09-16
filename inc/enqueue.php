@@ -89,6 +89,17 @@ function abyssenergy_enqueue_scripts()
 		);
 	}
 
+	// Script pour le menu mobile
+	if (file_exists(get_stylesheet_directory() . '/js/mobile-menu.js')) {
+		wp_enqueue_script(
+			'abyssenergy-mobile-menu',
+			get_stylesheet_directory_uri() . '/js/mobile-menu.js',
+			array(),
+			abyssenergy_get_file_version('/js/mobile-menu.js'),
+			true
+		);
+	}
+
 	// Scripts et styles pour la page de recherche d'emplois
 	if (is_page_template('page-search-jobs.php') || is_page('search-jobs')) {
 		// JavaScript pour la page de recherche
