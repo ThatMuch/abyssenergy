@@ -47,6 +47,15 @@ if ($place_id && $api_key) {
 	$reviews_data = abyssenergy_get_google_reviews($place_id, $api_key, $limit_count, $min_rating, $cache_time);
 }
 
+// Filtrer les avis pour ne garder que ceux qui ont du texte
+if (!empty($reviews_data) && !$reviews_data['error'] && !empty($reviews_data['reviews'])) {
+	$reviews_data['reviews'] = array_filter($reviews_data['reviews'], function ($review) {
+		return !empty($review['text']) && trim($review['text']) !== '';
+	});
+	// Réindexer le tableau pour éviter les problèmes
+	$reviews_data['reviews'] = array_values($reviews_data['reviews']);
+}
+
 // The total number of reviews ever fetched from Google (not just the displayed ones)
 $allReviewsCount = 0;
 if (!empty($reviews_data) && !$reviews_data['error']) {
