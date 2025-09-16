@@ -62,6 +62,16 @@ function register_timeline_block()
 					'placeholder' => 'Notre parcours',
 				),
 				array(
+					'key' => 'field_timeline_description',
+					'label' => 'Description de la timeline',
+					'name' => 'timeline_description',
+					'type' => 'wysiwyg',
+					'instructions' => 'Entrez la description de la timeline.',
+					'required' => 0,
+					'default_value' => '',
+					'placeholder' => 'Un aperçu de notre parcours',
+				),
+				array(
 					'key' => 'field_timeline_files',
 					'label' => 'Fichiers associés',
 					'name' => 'timeline_files',
@@ -120,6 +130,14 @@ function register_timeline_block()
 							'preview_size' => 'medium',
 							'library' => 'all',
 						),
+						array(
+							'key' => 'field_step_cta',
+							'label' => 'Appel à l\'action (CTA)',
+							'name' => 'cta',
+							'type' => 'link',
+							'required' => 0,
+							'return_format' => 'array'
+						)
 					),
 					'min' => 1,
 					'layout' => 'block',

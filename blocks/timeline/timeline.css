@@ -1,6 +1,12 @@
 .timeline-block {
   margin-bottom: 150px;
 
+.timeline-description {
+	text-align: center;
+	max-width: 600px;
+	margin: 0 auto 2rem;
+}
+
   .timeline-button {
 	position: absolute;
 	top: 1rem;
@@ -379,6 +385,15 @@
 
 .timeline-modal-step .timeline-step-description p:last-child {
   margin-bottom: 0;
+}
+
+.timeline-modal-step .timeline-step-cta {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.timeline-modal-step .timeline-step-cta .btn {
+  display: inline-block;
 }
 
 /* Empêcher le scroll du body quand le modal est ouvert */

@@ -18,6 +18,7 @@ if (!empty($block['align'])) {
 $title = get_field('timeline_title');
 $steps = get_field('steps');
 $timeline_files = get_field('timeline_files');
+$timeline_description = get_field('timeline_description');
 ?>
 
 <?php if ($is_preview) : ?>
@@ -38,7 +39,8 @@ $timeline_files = get_field('timeline_files');
 				'title' => $step['title'],
 				'excerpt' => $step['excerpt'],
 				'description' => $step['description'],
-				'image' => $step['image']
+				'image' => $step['image'],
+				'cta' => $step['cta']
 			);
 		}
 		?>
@@ -51,7 +53,10 @@ $timeline_files = get_field('timeline_files');
 		<!-- Timeline Block -->
 		<div class="<?php echo esc_attr($className); ?>" data-block-id="<?php echo esc_attr($block_id); ?>">
 			<div class="container">
-				<h2 class="timeline-title"><?php echo wp_kses_post($title); ?></h2>
+				<h2 class="timeline-title text-center"><?php echo wp_kses_post($title); ?></h2>
+				<?php if (!empty($timeline_description)) : ?>
+					<div class="timeline-description text-center"><?php echo wp_kses_post($timeline_description); ?></div>
+				<?php endif; ?>
 				<div class="timeline-steps" style="<?php echo 'grid-template-rows: repeat(' . count($steps) . ', 200px);'; ?>">
 					<?php
 					$count = 0;
