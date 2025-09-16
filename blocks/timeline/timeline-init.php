@@ -42,6 +42,7 @@ function register_timeline_block()
 			)
 		),
 		'enqueue_style'     => get_template_directory_uri() . '/blocks/timeline/timeline.css',
+		'enqueue_script'    => get_template_directory_uri() . '/blocks/timeline/timeline.js',
 	));
 
 	if (function_exists('acf_add_local_field_group')) {
@@ -59,6 +60,16 @@ function register_timeline_block()
 					'required' => 0,
 					'default_value' => '',
 					'placeholder' => 'Notre parcours',
+				),
+				array(
+					'key' => 'field_timeline_description',
+					'label' => 'Description de la timeline',
+					'name' => 'timeline_description',
+					'type' => 'wysiwyg',
+					'instructions' => 'Entrez la description de la timeline.',
+					'required' => 0,
+					'default_value' => '',
+					'placeholder' => 'Un aperçu de notre parcours',
 				),
 				array(
 					'key' => 'field_timeline_files',
@@ -96,10 +107,17 @@ function register_timeline_block()
 							'required' => 1,
 						),
 						array(
+							'key' => 'field_step_excerpt',
+							'label' => 'Extrait',
+							'name' => 'excerpt',
+							'type' => 'textarea',
+							'required' => 0,
+						),
+						array(
 							'key' => 'field_step_description',
 							'label' => 'Description',
 							'name' => 'description',
-							'type' => 'textarea',
+							'type' => 'wysiwyg',
 							'required' => 0,
 						),
 						array(
@@ -112,6 +130,14 @@ function register_timeline_block()
 							'preview_size' => 'medium',
 							'library' => 'all',
 						),
+						array(
+							'key' => 'field_step_cta',
+							'label' => 'Appel à l\'action (CTA)',
+							'name' => 'cta',
+							'type' => 'link',
+							'required' => 0,
+							'return_format' => 'array'
+						)
 					),
 					'min' => 1,
 					'layout' => 'block',

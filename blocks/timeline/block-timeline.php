@@ -18,6 +18,7 @@ if (!empty($block['align'])) {
 $title = get_field('timeline_title');
 $steps = get_field('steps');
 $timeline_files = get_field('timeline_files');
+$timeline_description = get_field('timeline_description');
 ?>
 
 <?php if ($is_preview) : ?>
@@ -27,10 +28,35 @@ $timeline_files = get_field('timeline_files');
 	</div>
 <?php else : ?>
 	<?php if ($steps) : ?>
+		<?php
+		// Créer un ID unique pour ce bloc
+		$block_id = 'timeline_' . (isset($block['id']) ? $block['id'] : uniqid());
+
+		// Préparer les données des étapes pour JavaScript
+		$steps_data = array();
+		foreach ($steps as $step) {
+			$steps_data[] = array(
+				'title' => $step['title'],
+				'excerpt' => $step['excerpt'],
+				'description' => $step['description'],
+				'image' => $step['image'],
+				'cta' => $step['cta']
+			);
+		}
+		?>
+		<script>
+			window.timelineData_<?php echo esc_js($block_id); ?> = {
+				steps: <?php echo wp_json_encode($steps_data); ?>
+			};
+		</script>
+
 		<!-- Timeline Block -->
-		<div class="<?php echo esc_attr($className); ?>">
+		<div class="<?php echo esc_attr($className); ?>" data-block-id="<?php echo esc_attr($block_id); ?>">
 			<div class="container">
-				<h2 class="timeline-title"><?php echo wp_kses_post($title); ?></h2>
+				<h2 class="timeline-title text-center"><?php echo wp_kses_post($title); ?></h2>
+				<?php if (!empty($timeline_description)) : ?>
+					<div class="timeline-description text-center"><?php echo wp_kses_post($timeline_description); ?></div>
+				<?php endif; ?>
 				<div class="timeline-steps" style="<?php echo 'grid-template-rows: repeat(' . count($steps) . ', 200px);'; ?>">
 					<?php
 					$count = 0;
@@ -48,9 +74,12 @@ $timeline_files = get_field('timeline_files');
 										</div>
 									<?php endif; ?>
 									<h3 class="timeline-step-title h4"><?php echo wp_kses_post($step['title']); ?></h3>
+									<?php if (!empty($step['description'])) : ?>
+										<button class="timeline-button" aria-label="Open content"><i class="fa fa-plus"></i></button>
+									<?php endif; ?>
 								</div>
 								<div class="timeline-step-content">
-									<p class="timeline-step-description"><?php echo wp_kses_post($step['description']); ?></p>
+									<p class="timeline-step-description"><?php echo wp_kses_post($step['excerpt']); ?></p>
 								</div>
 							</div>
 							<span class="timeline-count"><?php echo $count; ?></span>
