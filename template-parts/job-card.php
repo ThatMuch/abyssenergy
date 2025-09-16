@@ -24,6 +24,7 @@ $is_new = get_the_time('U') > strtotime('-5 days');
 
 <article class="job-card card <?php echo $sector_class; ?>">
 	<a href="<?php the_permalink(); ?>" class="job-card-link">
+		<div class="border"></div>
 		<div class="card__content">
 			<!-- Badges des secteurs -->
 			<?php if ($sectors && !is_wp_error($sectors) && !empty($sectors)) : ?>

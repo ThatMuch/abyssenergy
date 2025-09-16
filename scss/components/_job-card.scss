@@ -17,25 +17,22 @@ $card-hover-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
   padding: 0;
   overflow: hidden;
   flex: 1;
-  // Animation de chargement
   @include fade-in(0.6s);
-
-  // Élément décoratif
-  &::before {
-    content: "";
-    position: absolute;
-    bottom: -36px;
-    right: -100px;
-    width: 80%;
-    height: 100%;
-    z-index: -1;
-    opacity: 0.25;
-  }
-
   // Animation au survol
   &:hover {
     transform: $card-hover-transform;
     box-shadow: $card-hover-shadow;
+  }
+
+  .border {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 8px;
+    border-radius: 8px 0 0 8px;
+    pointer-events: none;
+    z-index: 2;
   }
 
   // Lien englobant toute la carte
@@ -67,6 +64,7 @@ $card-hover-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
       display: flex;
       align-items: center;
       background-color: #fff;
+      border-top: 1px solid #d0d3ef;
     }
   }
 
@@ -142,43 +140,14 @@ $card-hover-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
   }
 }
 
-// Cartes spécialisées par secteur
-// Mixin pour les styles communs des cartes par secteur
-@mixin sector-card($background-color, $image-path, $sector-color: null) {
-  background: linear-gradient(180deg, $background-color 0%, #fff 110.25%);
-
-  &::before {
-    background: url($image-path) no-repeat center/cover;
-  }
-
-  @if $sector-color {
-    .job-sector {
-      color: $sector-color;
-    }
-  }
+.card.conventional-energy-card .border {
+  background: linear-gradient(180deg, #ff8e38 0%, #ffb86f 100%);
 }
 
-// Application des styles par secteur
-.card.conventional-energy-card {
-  position: relative;
-  @include sector-card(
-    $interface-color-background-secondary,
-    "./images/sector-conventional.webp",
-    $secondary-800
-  );
+.card.process-industry-card .border {
+  background: linear-gradient(180deg, #0a3f6a 0%, #0083d5 100%);
 }
 
-.card.process-industry-card {
-  @include sector-card(
-    $interface-color-background-primary,
-    "./images/sector-process.webp"
-  );
-}
-
-.card.renewables-card {
-  @include sector-card(
-    $interface-color-background-tertiary,
-    "./images/sector-renewable.webp",
-    $tertiary-800
-  );
+.card.renewables-card .border {
+  background: linear-gradient(180deg, #008e99 0%, #2ab0ba 100%);
 }
