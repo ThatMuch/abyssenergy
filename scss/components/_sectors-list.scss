@@ -17,8 +17,7 @@
     display: flex;
     align-items: center;
     gap: map.get($spacings, "component-md");
-    padding: map.get($spacings, "component-lg") map.get($spacings, "section-sm")
-      map.get($spacings, "component-lg");
+    padding: map.get($spacings, "component-md");
     margin-bottom: map.get($spacings, "section-md");
     background-repeat: no-repeat;
     background-size: 100%;
@@ -44,11 +43,18 @@
       }
 
       @include respond-to("xs") {
+        flex-direction: column-reverse;
+        max-height: none;
+
         .sectors-list__item-inner {
           margin-left: 0;
         }
 
         .sectors-list__item__image {
+          width: 50%;
+          img {
+            margin: 0;
+          }
         }
       }
       @include respond-to("sm") {
@@ -58,9 +64,9 @@
     }
 
     @include respond-to("xs") {
-      padding: map.get($spacings, "component-lg")
-        map.get($spacings, "component-lg") map.get($spacings, "section-lg")
-        map.get($spacings, "component-lg");
+      flex-direction: column-reverse;
+      max-height: none;
+      align-items: start;
     }
     @include respond-to("lg") {
       padding: map.get($spacings, "component-md");
@@ -68,6 +74,9 @@
 
     &__image {
       flex: 1 1 20%;
+      @include respond-to("xs") {
+        width: 50%;
+      }
       @include respond-to("lg") {
         transform: translate(3rem, 2.2rem);
       }
