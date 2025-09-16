@@ -70,9 +70,9 @@ $sectors_query = new WP_Query($args);
 										Learn more about <?php the_title(); ?>
 									</a>
 								</div>
-								<?php if ($image) : ?>
+								<?php if (has_post_thumbnail()) : ?>
 									<div class="sectors-list__item__image">
-										<img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt'] ?: get_the_title()); ?>">
+										<img src="<?php echo the_post_thumbnail_url('full'); ?>" alt="<?php echo esc_attr(get_the_title()); ?>">
 									</div>
 								<?php endif; ?>
 							</li>
