@@ -15,11 +15,26 @@ get_header();
 			<button type="submit" class="btn btn--primary btn--icon" aria-label="Search"><i class="fas fa-search"></i></button>
 		</form>
 	</div>
-	<img src="<?php echo esc_url(get_template_directory_uri() . '/images/ilots.webp'); ?>" alt="Abyss energy">
+	<div class="animation-wrapper">
+		<dotlottie-wc
+			src="https://lottie.host/5e7b71b8-c2cc-484d-a146-e1591728a60f/oE4g6fX5ZY.lottie"
+			class="animation"
+			autoplay
+			speed="1"
+			loop></dotlottie-wc>
+		<dotlottie-wc
+			src="https://lottie.host/de0fcd03-4596-4745-9419-9ab3b2b52051/kvXmER9NpT.lottie"
+			class="animation animation-pales"
+			autoplay
+			loop></dotlottie-wc>
+	</div>
 </div>
 <main>
 	<?php the_content(); ?>
 </main>
+<script
+	src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.1/dist/dotlottie-wc.js"
+	type="module"></script>
 <?php
 get_footer()
 ?>

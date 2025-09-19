@@ -45,4 +45,21 @@
       }
     }
   }
+  .animation-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 1140px;
+    @include respond-to(md) {
+      transform: translateY(-5rem);
+      z-index: -1;
+    }
+  }
+  .animation {
+    width: 100%;
+    margin: 0 auto;
+  }
+  .animation-pales {
+    position: absolute;
+    top: 0;
+  }
 }
