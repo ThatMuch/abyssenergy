@@ -404,3 +404,7 @@
 .sr-only {
   @include sr-only();
 }
+
+.uppercase {
+  text-transform: uppercase !important;
+}

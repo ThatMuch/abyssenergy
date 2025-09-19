@@ -56,6 +56,13 @@ input[type="number"],
   @extend .input-base;
 }
 
+textarea {
+  @extend .input-base;
+  border-radius: $border-radius-lg;
+  min-height: 6rem;
+  resize: vertical;
+}
+
 // États d'erreur et désactivé
 .input--error {
   border-color: $color-danger;
