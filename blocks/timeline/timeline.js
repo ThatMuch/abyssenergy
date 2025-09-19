@@ -6,6 +6,21 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Sélectionner tous les blocs timeline sur la page
     const timelineBlocks = document.querySelectorAll('.timeline-block');
+    let scrollPosition = 0;
+
+    /**
+     * Sauvegarde la position de scroll actuelle
+     */
+    function saveScrollPosition() {
+        scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+    }
+
+    /**
+     * Restaure la position de scroll sauvegardée
+     */
+    function restoreScrollPosition() {
+        window.scrollTo(0, scrollPosition);
+    }
 
     timelineBlocks.forEach(block => {
         const buttons = block.querySelectorAll('.timeline-button');
@@ -143,6 +158,10 @@ document.addEventListener('DOMContentLoaded', function() {
      * Affiche le modal
      */
     function showModal(modal) {
+        // Sauvegarder la position avant d'ouvrir le modal
+        saveScrollPosition();
+        document.body.style.top = `-${scrollPosition}px`;
+
         modal.classList.add('active');
         document.body.classList.add('modal-open');
 
@@ -159,5 +178,9 @@ document.addEventListener('DOMContentLoaded', function() {
     function hideModal(modal) {
         modal.classList.remove('active');
         document.body.classList.remove('modal-open');
+
+        // Restaurer la position après avoir fermé le modal
+        document.body.style.top = '';
+        restoreScrollPosition();
     }
 });

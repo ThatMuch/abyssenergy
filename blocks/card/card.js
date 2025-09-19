@@ -2,8 +2,22 @@ document.addEventListener('DOMContentLoaded',function () {
   const buttons = document.body.querySelectorAll(".card-button");
   if (!buttons.length) return;
   const modal = document.body.querySelector(".card-modal");
-  if (!modal) return;
-  document.body.appendChild(modal);
+	if (!modal) return;
+
+	    /**
+     * Sauvegarde la position de scroll actuelle
+     */
+    function saveScrollPosition() {
+        scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+    }
+
+	    /**
+     * Restaure la position de scroll sauvegardée
+     */
+    function restoreScrollPosition() {
+        window.scrollTo(0, scrollPosition);
+    }
+
   buttons.forEach((button) => {
     button.addEventListener("click", (e) => {
       e.preventDefault();
@@ -41,7 +55,10 @@ document.addEventListener('DOMContentLoaded',function () {
 	  /**
 	   * Affiche le modal
 	   */
-	  function showModal(modal) {
+	function showModal(modal) {
+		saveScrollPosition();
+		document.body.style.top = `-${scrollPosition}px`;
+		console.log(scrollPosition);
 		  modal.classList.add('active');
 		  document.body.classList.add('modal-open');
 
@@ -59,5 +76,10 @@ document.addEventListener('DOMContentLoaded',function () {
 	  function hideModal(modal) {
 		  modal.classList.remove('active');
 		  document.body.classList.remove('modal-open');
+		   document.body.classList.remove('modal-open');
+
+        // Restaurer la position après avoir fermé le modal
+        document.body.style.top = '';
+        restoreScrollPosition();
 	  }
 });
