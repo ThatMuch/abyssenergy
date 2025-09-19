@@ -396,10 +396,7 @@
   display: inline-block;
 }
 
-/* Empêcher le scroll du body quand le modal est ouvert */
-body.modal-open {
-  overflow: hidden;
-}
+/* Empêcher le scroll du body quand le modal est ouvert - géré dans _layout.scss */
 
 /* Responsive */
 @media (max-width: 768px) {

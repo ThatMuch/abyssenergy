@@ -42,6 +42,7 @@ function register_card_block()
 			)
 		),
 		'enqueue_style'     => get_template_directory_uri() . '/blocks/card/card.css',
+		'enqueue_script'    => get_template_directory_uri() . '/blocks/card/card.js',
 	));
 
 	if (function_exists('acf_add_local_field_group')) {
@@ -50,6 +51,19 @@ function register_card_block()
 			'key' => 'group_card_block',
 			'title' => 'Card Block',
 			'fields' => array(
+				array(
+					'key' => 'field_card_style',
+					'label' => 'Style',
+					'name' => 'style',
+					'type' => 'select',
+					'choices' => array(
+						'simple' => 'Simple',
+						'showmore' => 'Show more',
+					),
+					'default_value' => 'simple',
+					'ui' => 1,
+					'return_format' => 'value',
+				),
 				array(
 					'key' => 'field_card_image',
 					'label' => 'Image',
@@ -69,13 +83,29 @@ function register_card_block()
 					'default_value' => 'Titre de la carte',
 				),
 				array(
-					'key' => 'field_card_description',
-					'label' => 'Description',
-					'name' => 'description',
+					'key' => 'field_card_excerpt',
+					'label' => 'Extrait',
+					'name' => 'excerpt',
 					'type' => 'textarea',
 					'required' => 0,
 					'rows' => 4,
 					'new_lines' => 'br',
+					'conditional_logic' => array(
+						array(
+							array(
+								'field' => 'field_card_style',
+								'operator' => '==',
+								'value' => 'showmore',
+							),
+						),
+					),
+				),
+				array(
+					'key' => 'field_card_description',
+					'label' => 'Description',
+					'name' => 'description',
+					'type' => 'wysiwyg',
+					'required' => 0
 				),
 			),
 			'location' => array(

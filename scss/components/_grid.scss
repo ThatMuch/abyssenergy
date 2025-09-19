@@ -41,6 +41,27 @@ $grid-gutter-half: math.div($grid-gutter-width, 2);
   }
 }
 
+.container-lg {
+  width: 100%;
+  padding-right: $grid-gutter-half;
+  padding-left: $grid-gutter-half;
+  margin-right: auto;
+  margin-left: auto;
+  box-sizing: border-box;
+
+  @include respond-to(sm) {
+    max-width: 540px;
+  }
+
+  @include respond-to(md) {
+    max-width: 720px;
+  }
+
+  @include respond-to(lg) {
+    max-width: 960px;
+  }
+}
+
 .container-fluid {
   width: 100%;
   padding-right: $grid-gutter-half;
