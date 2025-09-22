@@ -134,21 +134,7 @@ function abyssenergy_add_jobs_search_block_fields()
 					'return_format' => 'id',
 					'preview_size' => 'medium',
 					'library' => 'all',
-				),
-				array(
-					'key' => 'field_jobs_search_background_color',
-					'label' => 'Couleur de fond',
-					'name' => 'background_color',
-					'type' => 'select',
-					'instructions' => 'Couleur de fond du bloc',
-					'choices' => array(
-						'none' => 'Aucune',
-						'light' => 'Claire',
-						'primary' => 'Primaire',
-						'secondary' => 'Secondaire',
-					),
-					'default_value' => 'light',
-				),
+				)
 			),
 			'location' => array(
 				array(
