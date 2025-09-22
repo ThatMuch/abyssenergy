@@ -113,7 +113,7 @@ function register_metrics_block()
 							'name' => 'icon',
 							'type' => 'image',
 							'instructions' => 'Téléchargez une icône pour la métrique.',
-							'required' => 1,
+							'required' => 0,
 							'return_format' => 'array',
 							'preview_size' => 'medium',
 							'library' => 'all',

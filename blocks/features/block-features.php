@@ -37,7 +37,7 @@ $features = get_field('features') ?: array();
 	<section <?php echo $anchor; ?>class="section <?php echo esc_attr($class_name); ?>">
 		<div class="container">
 			<?php if ($title || $subtitle) : ?>
-				<div class="section-header mb-5">
+				<div class="section-header col-md-6">
 					<?php if ($subtitle) : ?>
 						<p class="section--subtitle"><?php echo esc_html($subtitle); ?></p>
 					<?php endif; ?>
