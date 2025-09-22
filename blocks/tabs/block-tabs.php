@@ -52,7 +52,7 @@ $block_id = 'tabs-' . uniqid();
 			<?php if (!empty($tabs)) : ?>
 				<div class="tabs-container row gap-6 justify-content-between">
 					<!-- Navigation des onglets (verticale à gauche) -->
-					<div class="tabs-navigation col-md-4">
+					<div class="tabs-navigation col-lg-4">
 						<?php if ($title) : ?>
 							<div class="section-header mb-5">
 								<h2 class="section--title"><?php echo esc_html($title); ?></h2>
@@ -77,7 +77,7 @@ $block_id = 'tabs-' . uniqid();
 					</div>
 
 					<!-- Contenu des onglets (à droite) -->
-					<div class="tabs-content col-md-6">
+					<div class="tabs-content col-lg-6">
 						<?php foreach ($tabs as $index => $tab) : ?>
 							<div
 								class="tabs-panel <?php echo $index === 0 ? 'active' : ''; ?>"
