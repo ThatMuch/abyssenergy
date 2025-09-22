@@ -1,0 +1,250 @@
+/* Tabs Block Styles */
+.tabs-block {
+  margin-bottom: 3rem;
+}
+
+/* Navigation des onglets (verticale à gauche) */
+.tabs-navigation {
+  flex: 0 0 40%;
+  min-width: 40%;
+}
+
+.tabs-nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tabs-nav-item {
+  margin: 0;
+}
+
+.tabs-nav-link {
+	color: #0A3F6A;
+  display: block;
+  width: 100%;
+  padding-bottom: 1.5rem;
+  background:none;
+  border-bottom: 1px solid  #D0D3EF;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  font-family: Manrope, sans-serif;
+  font-weight: 500;
+  font-size: 1.75rem;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.tabs-nav-link.active, .tabs-nav-link:hover  {
+   border-bottom: 1px solid  #FF8E38;
+     font-weight: 700;
+}
+
+/* Contenu des onglets (à droite) */
+.tabs-content {
+  min-height: 400px;
+}
+
+.tabs-panel {
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.tabs-panel.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.tabs-panel.animated {
+  animation: slideInRight 0.3s ease-out;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.tabs-panel-content {
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.tabs-panel-image {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+
+.tabs-panel-image img {
+ display: block;margin: 0 auto;
+  transition: transform 0.5s ease;
+  height: 7.75rem;
+  object-fit: contain;
+}
+
+.tabs-panel-content:hover .tabs-panel-image img {
+  transform: scale(1.05);
+}
+
+.tabs-panel-text {
+  padding: 2rem;
+  background-color: #EEF7FE;
+}
+
+.tabs-panel-title {
+text-align: center;
+font-family: Manrope, sans-serif;
+font-size: 0.875rem;
+font-style: normal;
+font-weight: 600;
+line-height: 150%; /* 1.3125rem */
+letter-spacing: 0.245rem;
+text-transform: uppercase;
+color: #FF8E38;
+margin-bottom: 0;
+}
+
+.tabs-panel-description p {
+  margin-bottom: 1rem;
+}
+
+.tabs-panel-description p:last-child {
+  margin-bottom: 0;
+}
+
+.tabs-panel-description ul,
+.tabs-panel-description ol {
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.tabs-panel-description li {
+  margin-bottom: 0.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .tabs-container {
+    gap: 1.5rem;
+  }
+
+  .tabs-nav-link {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .tabs-container {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .tabs-navigation {
+    flex: none;
+    min-width: auto;
+    width: 100%;
+  }
+
+  .tabs-nav {
+    gap: 0.75rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .tabs-nav-item {
+    flex: 0 0 auto;
+  }
+
+  .tabs-nav-link {
+    white-space: nowrap;
+    padding: 0.75rem 1rem;
+    min-width: 120px;
+    text-align: center;
+	margin-bottom: .5rem;
+  }
+
+  .tabs-nav-link.active::after {
+    display: none;
+  }
+
+  .tabs-content {
+    min-height: auto;
+  }
+
+  .tabs-panel-image {
+    height: 200px;
+  }
+
+  .tabs-panel-text {
+    padding: 1.5rem;
+  }
+
+  .tabs-panel-title {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .tabs-nav {
+    gap: 0.5rem;
+  }
+
+  .tabs-nav-link {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+    min-width: 100px;
+  }
+
+  .tabs-panel-text {
+    padding: 1rem;
+  }
+
+  .tabs-panel-title {
+    font-size: 1.125rem;
+  }
+}
+
+/* États d'accessibilité */
+.tabs-nav-link:focus-visible {
+  outline: 2px solid #ff8e38;
+  outline-offset: 2px;
+}
+
+/* Animation pour le mode préféré de mouvement réduit */
+@media (prefers-reduced-motion: reduce) {
+  .tabs-panel,
+  .tabs-panel-image img {
+    transition: none;
+  }
+
+  .tabs-panel.animated {
+    animation: none;
+  }
+
+  @keyframes slideInRight {
+    from, to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}
