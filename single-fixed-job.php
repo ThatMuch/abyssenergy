@@ -13,7 +13,7 @@ if ($job_category && !is_wp_error($job_category)) {
 
 <div class="page-header">
     <div class="container">
-        <div class="row">
+        <div class="row align-items-center">
             <div class="col col-md-7">
                 <?php if ($job_category): ?>
                     <span class="section--subtitle"><?php echo $job_category; ?></span>
@@ -26,11 +26,9 @@ if ($job_category && !is_wp_error($job_category)) {
                 <?php endif; ?>
             </div>
             <div class="col col-md-5">
-                <?php if (has_post_thumbnail()): ?>
-                    <div class="page-thumbnail">
-                        <?php the_post_thumbnail('medium'); ?>
-                    </div>
-                <?php endif; ?>
+                <div class="page-thumbnail">
+                    <img src="<?php echo get_template_directory_uri(); ?>/images/Sectors.webp" alt="<?php the_title(); ?>">
+                </div>
             </div>
         </div>
 
