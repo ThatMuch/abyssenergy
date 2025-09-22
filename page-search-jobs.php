@@ -106,7 +106,7 @@ $jobs_query = new WP_Query($jobs_args);
 $total_jobs = $jobs_query->found_posts;
 ?>
 
-<div class="page-header">
+<div class="page-header <?php if (has_post_thumbnail()): ?>has-thumbnail<?php endif; ?>">
 	<div class="container">
 		<h1 class="page-title">
 			<?php if (!empty($search_query)): ?>

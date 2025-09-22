@@ -24,7 +24,7 @@ $consultants = get_posts(array(
 ?>
 
 <div class="page page_contact">
-	<div class="page-header">
+	<div class="page-header <?php if (has_post_thumbnail()): ?>has-thumbnail<?php endif; ?>">
 		<div class="container">
 			<div class="row">
 				<div class="col col-md-8">

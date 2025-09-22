@@ -8,7 +8,7 @@
   .page-header {
     margin-bottom: $spacing-2xl;
     margin-top: $spacing-3xl;
-    min-height: 376px;
+
     display: grid;
     place-items: center;
     .page-description {
@@ -21,6 +21,10 @@
       margin: 0 auto;
       display: block;
       width: 463px;
+    }
+
+    &.has-thumbnail {
+      min-height: 376px;
     }
   }
 

@@ -182,7 +182,7 @@ $description = get_field('description');
 
 <div class="jobs-listing-page">
 	<!-- En-tête de la page -->
-	<div class="page-header">
+	<div class="page-header <?php if (has_post_thumbnail()): ?>has-thumbnail<?php endif; ?>">
 		<div class="container">
 			<div class="row">
 				<div class="col col-md-6">

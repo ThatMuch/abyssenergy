@@ -11,7 +11,7 @@ $subtitle = get_field('subtitle');
 $description = get_field('description');
 ?>
 
-<div class="page-header">
+<div class="page-header <?php if (has_post_thumbnail()): ?>has-thumbnail<?php endif; ?>">
 	<div class="container">
 		<div class="row align-items-center">
 			<div class="col col-md-7">

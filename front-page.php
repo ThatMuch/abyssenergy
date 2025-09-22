@@ -2,7 +2,7 @@
 get_header();
 ?>
 
-<div class="page-header">
+<div class="page-header <?php if (has_post_thumbnail()): ?>has-thumbnail<?php endif; ?>">
 	<div class="container">
 		<h1 class="page-title"><?php the_title(); ?></h1>
 		<form action="<?php echo esc_url(home_url('/search-jobs/')); ?>" method="GET" class="job-search-form d-flex gap-2">
