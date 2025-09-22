@@ -62,24 +62,10 @@ position: relative;
     box-shadow: 0 8px 24px rgb(0 0 0 / 12%);
 }
 
-.testimonial-logo {
-    height: 56px;
-	width: 56px;
-	border-radius: 56px;
-background-color: #e3e5ffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-	overflow: hidden;
-	padding: 5px;
-	flex: 0 0 auto;
-}
-
 .testimonial-logo img {
-    max-height: 100%;
-    max-width: 100%;
-    object-fit: contain;
     mix-blend-mode: multiply;
+	height: 50px;
+	width: auto;
 }
 
 .testimonial-content {
