@@ -48,6 +48,7 @@ function abyssenergy_load_theme_modules()
 		'blocks/fixed-jobs/fixed-jobs-init.php', // Initialisation du bloc des postes fixes
 		'blocks/card/card-init.php', // Initialisation du bloc carte simple
 		'blocks/timeline/timeline-init.php', // Initialisation du bloc timeline
+		'blocks/tabs/tabs-init.php', // Initialisation du bloc tabs
 
 	];
 
