@@ -39,7 +39,7 @@ add_action('admin_head', 'abyssenergy_hide_update_notice', 1);
  */
 function abyssenergy_change_footer_admin()
 {
-	echo '<span id="footer-thankyou">Développé par <a href="https://squarechilli.com" target="_blank">Square Chilli</a></span>';
+	echo '<span id="thatmuch">Développé par <a href="https://thatmuch.fr" target="_blank">THATMUCH</a></span>';
 }
 add_filter('admin_footer_text', 'abyssenergy_change_footer_admin');
 

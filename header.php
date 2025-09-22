@@ -40,9 +40,12 @@ if ($sector && !is_wp_error($sector)) {
 } else {
     $sector = '';
 }
+
+// the page slug
+$page_slug = get_post_field('post_name', get_post());
 ?>
 
-<body <?php body_class('page-' . esc_attr($sector)); ?>>
+<body <?php body_class(['page-' . esc_attr($sector), 'page-' . $page_slug]); ?>>
 
     <header class="header">
         <div class="header__logo">

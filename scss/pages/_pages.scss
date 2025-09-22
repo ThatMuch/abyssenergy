@@ -35,6 +35,24 @@
   }
 }
 
+.page-for-candidates,
+.page-for-clients {
+  position: relative;
+  &:after {
+    content: "";
+    position: absolute;
+    top: 30%;
+    height: 3200px;
+    width: 100%;
+    background-image: url("./images/BGPage.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 38% 0;
+    z-index: -3;
+    display: block;
+  }
+}
+
 // Page d'archive
 .archive {
   .archive-header {
