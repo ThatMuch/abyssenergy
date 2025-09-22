@@ -1,0 +1,179 @@
+/* Jobs Search Block Styles */
+.jobs-search-block {
+  padding: 4rem 0;
+  background: linear-gradient(180deg,  #EEF7FE 0%,  #FFF 100%);
+}
+
+/* Layout principal */
+.jobs-search-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  min-height: 400px;
+}
+
+/* Contenu texte (gauche) */
+.jobs-search-text-content {
+  display: flex;
+  align-items: center;
+}
+
+.jobs-search-content-wrapper {
+  width: 100%;
+  max-width: 500px;
+}
+
+.jobs-search-title {
+  font-family: Sora, sans-serif;
+  font-weight: 700;
+  font-size: 2.5rem;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  color: inherit;
+}
+
+.jobs-search-description {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  color: inherit;
+  opacity: 0.9;
+}
+
+/* Formulaire de recherche */
+.jobs-search-form-wrapper {
+  margin-top: 2rem;
+}
+
+.jobs-search-form {
+  width: 100%;
+}
+
+.jobs-search-input {
+  flex: 1;
+  padding: 1.25rem 1.5rem;
+  border: none;
+  background: transparent;
+  font-size: 1rem;
+  color: #333;
+  outline: none;
+}
+
+.jobs-search-input::placeholder {
+  color: #999;
+}
+
+.jobs-search-input.error {
+  background-color: #fef2f2;
+  border-left: 3px solid #ef4444;
+}
+
+/* Messages d'erreur */
+.jobs-search-error {
+  position: absolute;
+  bottom: -2rem;
+  left: 0;
+  color: #ef4444;
+  font-size: 0.875rem;
+  font-weight: 500;
+  animation: slideIn 0.3s ease-out;
+  background: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Image (droite) */
+.jobs-search-image-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.jobs-search-image {
+	width: 26rem;
+}
+
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .jobs-search-content {
+    gap: 3rem;
+  }
+
+  .jobs-search-title {
+    font-size: 2.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .jobs-search-block {
+    padding: 3rem 0;
+  }
+
+  .jobs-search-content {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    text-align: center;
+  }
+
+  .jobs-search-content-wrapper {
+    max-width: none;
+  }
+
+  .jobs-search-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .jobs-search-description {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .jobs-search-button {
+    border-radius: 0 0 0.75rem 0.75rem;
+    min-height: 50px;
+  }
+
+}
+
+@media (max-width: 480px) {
+  .jobs-search-block {
+    padding: 2rem 0;
+  }
+
+  .jobs-search-title {
+    font-size: 1.75rem;
+  }
+
+  .jobs-search-input,
+  .jobs-search-button {
+    padding: 1rem 1.25rem;
+  }
+
+  .jobs-search-error {
+    position: static;
+    margin-top: 0.5rem;
+    text-align: left;
+  }
+}
+
+/* États d'accessibilité */
+.jobs-search-input:focus {
+  outline: 2px solid #ff8e38;
+  outline-offset: -2px;
+}
