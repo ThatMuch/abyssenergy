@@ -20,7 +20,7 @@
         reviewsSliders.forEach(slider => {
             new Swiper(slider, {
                 slidesPerView: 1,
-                spaceBetween: 20,
+                spaceBetween: 24,
                 loop: false,
                 autoplay: {
                     delay: 5000,
