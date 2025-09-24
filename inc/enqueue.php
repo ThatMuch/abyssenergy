@@ -100,6 +100,20 @@ function abyssenergy_enqueue_scripts()
 		);
 	}
 
+	// Script Lottie pour les animations (seulement sur la front-page)
+	if (is_front_page()) {
+		wp_enqueue_script(
+			'dotlottie-wc',
+			'https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.1/dist/dotlottie-wc.js',
+			array(),
+			'0.8.1',
+			true
+		);
+
+		// Ajouter l'attribut type="module" au script Lottie
+		add_filter('script_loader_tag', 'abyssenergy_add_module_to_lottie_script', 10, 2);
+	}
+
 	// Scripts et styles pour la page de recherche d'emplois
 	if (is_page_template('page-search-jobs.php') || is_page('search-jobs')) {
 		// JavaScript pour la page de recherche
@@ -206,3 +220,14 @@ function abyssenergy_enqueue_leaflet()
 }
 add_action('wp_enqueue_scripts', 'abyssenergy_enqueue_leaflet');
 add_action('enqueue_block_editor_assets', 'abyssenergy_enqueue_leaflet');
+
+/**
+ * Ajouter l'attribut type="module" au script Lottie
+ */
+function abyssenergy_add_module_to_lottie_script($tag, $handle)
+{
+	if ('dotlottie-wc' === $handle) {
+		$tag = str_replace('<script ', '<script type="module" ', $tag);
+	}
+	return $tag;
+}

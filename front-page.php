@@ -32,9 +32,6 @@ get_header();
 <main>
 	<?php the_content(); ?>
 </main>
-<script
-	src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.1/dist/dotlottie-wc.js"
-	type="module"></script>
 <?php
 get_footer()
 ?>
