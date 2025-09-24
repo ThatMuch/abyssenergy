@@ -8,9 +8,10 @@
   }
   .jobs-filter-form {
     display: flex;
-    flex-wrap: wrap;
     gap: $spacing-md;
     align-items: center;
+    width: 100%;
+    flex-wrap: wrap;
     @include respond-to(xs) {
       flex-direction: column;
       align-items: stretch;
