@@ -39,8 +39,8 @@ position: relative;
 	}
 }
 
-.testimonials-slider .swiper-slide {
-    height: 200px;
+.testimonials-slider {
+	padding: 0 1rem;
 }
 
 .testimonial-card {

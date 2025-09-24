@@ -7,31 +7,30 @@
             const slider = this;
 
             new Swiper(slider, {
-                slidesPerView: 1,
-                spaceBetween: 24,
-                loop: true,
-                autoplay: {
-                    delay: 5000,
-                    disableOnInteraction: false,
-                },
-                navigation: {
-                    nextEl: '.right',
-                    prevEl: '.left',
-                },
+              slidesPerView: 1,
+              spaceBetween: 24,
+              loop: true,
+              autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+              },
+              navigation: {
+                nextEl: ".right",
+                prevEl: ".left",
+              },
 
-
-                breakpoints: {
-                    // Quand la largeur de la fenêtre est >= 768px
-                    768: {
-                        slidesPerView: 2,
-                        spaceBetween: 24
-                    },
-                    // Quand la largeur de la fenêtre est >= 992px
-                    992: {
-                        slidesPerView: 3,
-                        spaceBetween: 24
-                    }
-                }
+              breakpoints: {
+                // Quand la largeur de la fenêtre est >= 768px
+                768: {
+                  slidesPerView: 2,
+                  spaceBetween: 24,
+                },
+                // Quand la largeur de la fenêtre est >= 992px
+                992: {
+                  slidesPerView: 3,
+                  spaceBetween: 24,
+                },
+              },
             });
         });
     }

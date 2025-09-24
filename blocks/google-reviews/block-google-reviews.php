@@ -179,66 +179,65 @@ if ($is_preview && !empty($reviews_data) && !$reviews_data['error']) {
 					</div>
 				<?php endif; ?>
 			</div>
+		</div>
+		<?php if (!empty($reviews_data) && !$reviews_data['error']) : ?>
+			<div class="google-reviews-summary">
+				<div class="google-reviews-slider swiper-container">
+					<div class="swiper-wrapper">
+						<?php foreach ($reviews_data['reviews'] as $review) : ?>
+							<div class="swiper-slide">
+								<div class="review-card card">
+									<div class="review-header">
+										<div class="review-author">
+											<h3 class="author-name h4"><?php echo esc_html($review['author']); ?></h3>
+											<span class="rating-google"><img src="<?php echo get_stylesheet_directory_uri(); ?>/blocks/google-reviews/icon-google.svg" alt="Logo Google"></span>
+										</div>
+									</div>
+									<div class="review-text">
+										<?php
+										$text = esc_html($review['text']);
+										echo strlen($text) > 200 ? substr($text, 0, 200) . '...' : $text;
+										?>
+									</div>
+									<div class="review-rating">
+										<div>
+											<?php for ($i = 1; $i <= 5; $i++) : ?>
+												<?php if ($i <= $review['rating']) : ?>
+													<i class="fas fa-star"></i>
+												<?php else : ?>
+													<i class="far fa-star"></i>
+												<?php endif; ?>
+											<?php endfor; ?>
+										</div>
+										<span class="icon-verified"></span>
+									</div>
 
-			<?php if (!empty($reviews_data) && !$reviews_data['error']) : ?>
-				<div class="google-reviews-summary">
-					<div class="google-reviews-slider swiper-container">
-						<div class="swiper-wrapper">
-							<?php foreach ($reviews_data['reviews'] as $review) : ?>
-								<div class="swiper-slide">
-									<div class="review-card card">
-										<div class="review-header">
-											<div class="review-author">
-												<h3 class="author-name h4"><?php echo esc_html($review['author']); ?></h3>
-												<span class="rating-google"><img src="<?php echo get_stylesheet_directory_uri(); ?>/blocks/google-reviews/icon-google.svg" alt="Logo Google"></span>
-											</div>
-										</div>
-										<div class="review-text">
-											<?php
-											$text = esc_html($review['text']);
-											echo strlen($text) > 200 ? substr($text, 0, 200) . '...' : $text;
-											?>
-										</div>
-										<div class="review-rating">
-											<div>
-												<?php for ($i = 1; $i <= 5; $i++) : ?>
-													<?php if ($i <= $review['rating']) : ?>
-														<i class="fas fa-star"></i>
-													<?php else : ?>
-														<i class="far fa-star"></i>
-													<?php endif; ?>
-												<?php endfor; ?>
-											</div>
-											<span class="icon-verified"></span>
-										</div>
-
-										<div class="review-footer">
-											Posted
-											<div class="review-date">
-												<?php echo esc_html($review['relative_time']); ?>
-											</div>
+									<div class="review-footer">
+										Posted
+										<div class="review-date">
+											<?php echo esc_html($review['relative_time']); ?>
 										</div>
 									</div>
 								</div>
-							<?php endforeach; ?>
-						</div>
-						<!-- Navigation -->
-						<div class="d-flex justify-content-center align-items-center mt-4 gap-3">
-							<div class="left btn btn--outline btn--icon"><i class="fa fa-chevron-left"></i></div>
-							<div class="right btn btn--outline btn--icon"><i class="fa fa-chevron-right"></i></div>
-						</div>
+							</div>
+						<?php endforeach; ?>
+					</div>
+					<!-- Navigation -->
+					<div class="d-flex justify-content-center align-items-center mt-4 gap-3">
+						<div class="left btn btn--outline btn--icon"><i class="fa fa-chevron-left"></i></div>
+						<div class="right btn btn--outline btn--icon"><i class="fa fa-chevron-right"></i></div>
 					</div>
 				</div>
-			<?php elseif (!empty($reviews_data) && $reviews_data['error']) : ?>
-				<div class="alert alert-warning">
-					<p><?php _e('Erreur lors de la récupération des avis Google:', 'abyssenergy'); ?> <?php echo esc_html($reviews_data['message']); ?></p>
-				</div>
-			<?php else : ?>
-				<div class="alert alert-info">
-					<p><?php _e('Veuillez configurer votre ID de lieu Google et votre clé API pour afficher les avis.', 'abyssenergy'); ?></p>
-				</div>
-			<?php endif; ?>
-		</div>
+			</div>
+		<?php elseif (!empty($reviews_data) && $reviews_data['error']) : ?>
+			<div class="alert alert-warning">
+				<p><?php _e('Erreur lors de la récupération des avis Google:', 'abyssenergy'); ?> <?php echo esc_html($reviews_data['message']); ?></p>
+			</div>
+		<?php else : ?>
+			<div class="alert alert-info">
+				<p><?php _e('Veuillez configurer votre ID de lieu Google et votre clé API pour afficher les avis.', 'abyssenergy'); ?></p>
+			</div>
+		<?php endif; ?>
 	</section>
 
 <?php endif; ?>

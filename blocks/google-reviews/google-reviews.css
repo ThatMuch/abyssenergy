@@ -181,6 +181,10 @@ padding: 1rem 1.5rem;
 
 }
 
+.google-reviews-slider {
+      padding: 0 1rem;
+}
+
 /* Slider Style */
 .google-reviews-block.display-slider .google-reviews-slider {
   margin: 0 auto;
