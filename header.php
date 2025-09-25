@@ -6,7 +6,6 @@
     <meta name="author" content="THATMUCH website and graphic design">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
     <link rel="apple-touch-icon"
         href="/wp-content/themes/abyssenergy/images/Home+screen+icon.png" />
     <link rel="icon" type="image/x-icon" href="/wp-content/themes/abyssenergy/images/site_favicon_16_1713442626756.ico" />
@@ -14,18 +13,6 @@
     <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
     <?php wp_head(); ?>
-    <script type="text/javascript">
-        window.hfAccountId = "f2f9a176-d230-44d6-8344-1974943ba44f";
-        window.hfDomain = "https://api.herefish.com";
-        (function() {
-            var hf = document.createElement('script');
-            hf.type = 'text/javascript';
-            hf.async = true;
-            hf.src = window.hfDomain + '/scripts/hf.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(hf, s);
-        })();
-    </script>
 </head>
 
 <?php

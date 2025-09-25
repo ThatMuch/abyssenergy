@@ -36,6 +36,14 @@ function abyssenergy_enqueue_scripts()
 		abyssenergy_get_file_version('/style.min.css')
 	);
 
+	// Ajouter Font Awesome pour les icônes
+	wp_enqueue_style(
+		'font-awesome',
+		'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css',
+		array(),
+		'6.7.2'
+	);
+
 	// Scripts
 	wp_enqueue_script(
 		'abyssenergy-general',
@@ -112,14 +120,6 @@ function abyssenergy_enqueue_scripts()
 			array('jquery'),
 			abyssenergy_get_file_version('/js/search-jobs.js'),
 			true
-		);
-
-		// Ajouter Font Awesome pour les icônes
-		wp_enqueue_style(
-			'font-awesome',
-			'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css',
-			array(),
-			'6.0.0'
 		);
 	}
 
