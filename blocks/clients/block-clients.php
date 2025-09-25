@@ -53,13 +53,13 @@ $gallery = get_field('gallery') ?: array();
 						<div id="clients-slider-inner" class="clients-slider-inner">
 							<?php foreach ($gallery as $image) : ?>
 								<div class="client-logo">
-									<img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" class="img-fluid">
+									<img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" class="img-fluid" loading="lazy">
 								</div>
 							<?php endforeach; ?>
 
 							<?php foreach ($gallery as $image) : ?>
 								<div class="client-logo">
-									<img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" class="img-fluid">
+									<img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" class="img-fluid" loading="lazy">
 								</div>
 							<?php endforeach; ?>
 						</div>

@@ -62,7 +62,7 @@ $features = get_field('features') ?: array();
 								</div>
 								<?php if (!empty($feature['icon'])) : ?>
 									<div class="feature-icon">
-										<img src="<?php echo esc_url(wp_get_attachment_image_url($feature['icon'], 'full')); ?>" alt="<?php echo esc_attr(get_post_meta($feature['icon'], '_wp_attachment_image_alt', true)); ?>" class="img-fluid" />
+										<img src="<?php echo esc_url(wp_get_attachment_image_url($feature['icon'], 'full')); ?>" alt="<?php echo esc_attr(get_post_meta($feature['icon'], '_wp_attachment_image_alt', true)); ?>" class="img-fluid" loading="lazy" />
 									</div>
 								<?php endif; ?>
 							</div>

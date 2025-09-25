@@ -24,7 +24,8 @@ $card_class = 'project-card ' . $sectors[0]->slug;
 			<div class="project-image">
 				<img src="<?php echo esc_url($project_image); ?>"
 					alt="<?php echo esc_attr(get_the_title()); ?>"
-					class="img-fluid">
+					class="img-fluid"
+					loading="lazy">
 				<div class="project-overlay">
 					<span class="view-project"><?php _e('See the project', 'abyssenergy'); ?></span>
 				</div>

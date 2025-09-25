@@ -66,7 +66,7 @@ $testimonials = new WP_Query($args);
 						<h2 class="section-title"><?php echo esc_html($title); ?></h2>
 					<?php endif; ?>
 					<?php if ($image) : ?>
-						<img src="<?php echo esc_url(wp_get_attachment_image_url($image, 'full')); ?>" alt="<?php echo esc_attr(get_post_meta($image, '_wp_attachment_image_alt', true)); ?>" class="img-fluid testimonial-section-image" />
+						<img src="<?php echo esc_url(wp_get_attachment_image_url($image, 'full')); ?>" alt="<?php echo esc_attr(get_post_meta($image, '_wp_attachment_image_alt', true)); ?>" class="img-fluid testimonial-section-image" loading="lazy" />
 					<?php endif; ?>
 				</div>
 			</div>

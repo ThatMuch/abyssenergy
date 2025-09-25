@@ -121,3 +121,52 @@ function abyssenergy_flush_rewrite_rules()
 	}
 }
 add_action('init', 'abyssenergy_flush_rewrite_rules', 20);
+
+/**
+ * Ajouter automatiquement loading="lazy" aux images dans wp_get_attachment_image
+ */
+function abyssenergy_add_lazy_loading_to_images($attr, $attachment, $size)
+{
+	// Ne pas ajouter loading="lazy" si déjà présent ou si c'est le logo dans le header
+	if (isset($attr['loading']) || (isset($attr['class']) && strpos($attr['class'], 'header__logo-image') !== false)) {
+		return $attr;
+	}
+
+	// Ajouter loading="lazy" par défaut
+	$attr['loading'] = 'lazy';
+
+	return $attr;
+}
+add_filter('wp_get_attachment_image_attributes', 'abyssenergy_add_lazy_loading_to_images', 10, 3);
+
+/**
+ * Ajouter loading="lazy" aux images dans le contenu des posts
+ */
+function abyssenergy_add_lazy_loading_to_content_images($content)
+{
+	// Utiliser une regex pour ajouter loading="lazy" aux images qui ne l'ont pas déjà
+	$content = preg_replace_callback(
+		'/<img([^>]*)>/i',
+		function ($matches) {
+			$img_tag = $matches[0];
+
+			// Si loading= est déjà présent, ne pas modifier
+			if (strpos($img_tag, 'loading=') !== false) {
+				return $img_tag;
+			}
+
+			// Si c'est le logo du header, ne pas ajouter loading="lazy"
+			if (strpos($img_tag, 'header__logo-image') !== false) {
+				return $img_tag;
+			}
+
+			// Ajouter loading="lazy" avant la fermeture du tag
+			return str_replace('>', ' loading="lazy">', $img_tag);
+		},
+		$content
+	);
+
+	return $content;
+}
+add_filter('the_content', 'abyssenergy_add_lazy_loading_to_content_images');
+add_filter('widget_text_content', 'abyssenergy_add_lazy_loading_to_content_images');

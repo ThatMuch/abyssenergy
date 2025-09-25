@@ -93,7 +93,7 @@ $timeline_description = get_field('timeline_description');
 						foreach ($timeline_files as $file) :
 						?>
 							<div class="timeline-file">
-								<img src="<?php echo esc_url(get_template_directory_uri() . "/blocks/timeline/file-arrow-down.svg"); ?>" alt="Dowlnload icon" class="file-icon">
+								<img src="<?php echo esc_url(get_template_directory_uri() . "/blocks/timeline/file-arrow-down.svg"); ?>" alt="Dowlnload icon" class="file-icon" loading="lazy">
 								<a href="<?php echo esc_url($file['url']); ?>" class="btn  <?php echo ($count % 2 === 0) ? 'btn--primary' : 'btn--secondary'; ?>" target="_blank" rel="noopener">
 									<?php echo esc_html($file['title'] ?: basename($file['url'])); ?>
 								</a>

@@ -27,7 +27,7 @@ if ($job_category && !is_wp_error($job_category)) {
             </div>
             <div class="col col-md-5">
                 <div class="page-thumbnail">
-                    <img src="<?php echo get_template_directory_uri(); ?>/images/Sectors.webp" alt="<?php the_title(); ?>">
+                    <img src="<?php echo get_template_directory_uri(); ?>/images/Sectors.webp" alt="<?php the_title(); ?>" loading="lazy">
                 </div>
             </div>
         </div>

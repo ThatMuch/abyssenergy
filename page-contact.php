@@ -82,7 +82,7 @@ $consultants = get_posts(array(
 						<div class="card card--consultant">
 							<div class="card--consultant_img">
 								<a href="<?php echo esc_html(get_field('linkedin', $consultant->ID)); ?>" class="card--consultant_link" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin mr-2"></i> </a>
-								<img src="<?php echo esc_url(get_the_post_thumbnail_url($consultant->ID, 'full')); ?>" alt="<?php echo esc_attr($consultant->post_title); ?>" />
+								<img src="<?php echo esc_url(get_the_post_thumbnail_url($consultant->ID, 'full')); ?>" alt="<?php echo esc_attr($consultant->post_title); ?>" loading="lazy" />
 							</div>
 							<div class="card--consultant_footer">
 								<h3 class="mt-0 b1"><?php echo esc_html($consultant->post_title); ?></h3>

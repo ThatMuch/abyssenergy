@@ -113,14 +113,14 @@ if ($is_preview && !empty($reviews_data) && !$reviews_data['error']) {
 
 	<!-- Google Reviews Block -->
 	<section <?php echo $anchor; ?>class="<?php echo esc_attr($class_name); ?> section section-reviews">
-		<img src="<?php echo get_stylesheet_directory_uri(); ?>/blocks/google-reviews/trees.svg" alt="trees" class="trees-svg">
+		<img src="<?php echo get_stylesheet_directory_uri(); ?>/blocks/google-reviews/trees.svg" alt="trees" class="trees-svg" loading="lazy">
 		<div class="container">
 			<div class="row justify-content-between mb-4">
 				<div class="col col-md-7">
 					<div class="d-flex gap-4">
 						<?php if ($image) : ?>
 							<div class="section--image">
-								<?php echo wp_get_attachment_image($image, 'medium'); ?>
+								<?php echo wp_get_attachment_image($image, 'medium', false, array('loading' => 'lazy')); ?>
 							</div>
 						<?php endif; ?>
 						<div>
@@ -190,7 +190,7 @@ if ($is_preview && !empty($reviews_data) && !$reviews_data['error']) {
 									<div class="review-header">
 										<div class="review-author">
 											<h3 class="author-name h4"><?php echo esc_html($review['author']); ?></h3>
-											<span class="rating-google"><img src="<?php echo get_stylesheet_directory_uri(); ?>/blocks/google-reviews/icon-google.svg" alt="Logo Google"></span>
+											<span class="rating-google"><img src="<?php echo get_stylesheet_directory_uri(); ?>/blocks/google-reviews/icon-google.svg" alt="Logo Google" loading="lazy"></span>
 										</div>
 									</div>
 									<div class="review-text">

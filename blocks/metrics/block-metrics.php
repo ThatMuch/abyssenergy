@@ -59,7 +59,7 @@ $excerpt = get_field('excerpt');
 						<div class="metric-card-header">
 							<?php if (!empty($metric['icon'])) :  ?>
 								<div class="metric-icon">
-									<img src="<?php echo esc_url($metric['icon']['url']); ?>" alt="<?php echo esc_attr($metric['icon']['alt']); ?>" class="img-fluid">
+									<img src="<?php echo esc_url($metric['icon']['url']); ?>" alt="<?php echo esc_attr($metric['icon']['alt']); ?>" class="img-fluid" loading="lazy">
 								</div>
 							<?php endif; ?>
 							<?php if (!empty($metric['value'])) : ?>
