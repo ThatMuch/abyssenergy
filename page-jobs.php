@@ -388,8 +388,8 @@ $description = get_field('description');
 	<section class="jobs-cta">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-8">
-					<h4 class="h1">You didn't find the ideal position?</h4>
+				<div class="col-md-8 jobs-cta-content">
+					<h2>You didn't find the ideal position?</h2>
 					<p>Send us your CV for an unsolicited application.</p>
 					<a href="/contact-us/?position=Unsolicited%20Application" class="btn btn--primary">
 						Send my CV

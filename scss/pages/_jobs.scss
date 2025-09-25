@@ -111,6 +111,17 @@
   position: relative;
   padding: 4rem 0;
   margin-top: 120px;
+
+  @include respond-to(xs) {
+    padding: 0;
+  }
+
+  .jobs-cta-content {
+    @include respond-to(xs) {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+  }
   &::after {
     content: "";
     position: absolute;
