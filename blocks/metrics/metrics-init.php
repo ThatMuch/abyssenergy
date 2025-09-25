@@ -65,6 +65,19 @@ function register_metrics_block()
 					),
 				),
 				array(
+					'key' => 'field_metrics_subtitle',
+					'label' => 'Sous-titre de la section',
+					'name' => 'subtitle',
+					'type' => 'text',
+					'instructions' => 'Entrez le sous-titre de la section des métriques.',
+					'default_value' => 'Analyse des performances',
+					'placeholder' => '',
+					'required' => 0,
+					'wrapper' => array(
+						'class' => 'metrics-title-field'
+					),
+				),
+				array(
 					'key' => 'field_metrics_items',
 					'label' => 'Métriques',
 					'name' => 'metrics',
