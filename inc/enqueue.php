@@ -78,17 +78,6 @@ function abyssenergy_enqueue_scripts()
 		);
 	}
 
-	// Script pour les CTA génériques
-	if (file_exists(get_stylesheet_directory() . '/js/cta.js')) {
-		wp_enqueue_script(
-			'abyssenergy-cta',
-			get_stylesheet_directory_uri() . '/js/cta.js',
-			array('jquery'),
-			abyssenergy_get_file_version('/js/cta.js'),
-			true
-		);
-	}
-
 	// Script pour le menu mobile
 	if (file_exists(get_stylesheet_directory() . '/js/mobile-menu.js')) {
 		wp_enqueue_script(
