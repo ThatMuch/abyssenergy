@@ -23,11 +23,12 @@ select {
   padding: 0.625rem 1rem 0.625rem 1rem;
   position: relative;
   max-width: 100%;
-  &:before {
+  min-width: 160px;
+  &:after {
     content: "";
     height: 12px;
+    display: block;
     width: 12px;
-    position: absolute;
     right: 1rem;
     top: 0;
     bottom: 0;
