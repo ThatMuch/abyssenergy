@@ -1,10 +1,13 @@
 <?php
 get_header();
+$subtitle = get_field('subtitle');
 ?>
 
 <div class="page-header <?php if (has_post_thumbnail()): ?>has-thumbnail<?php endif; ?>">
 	<div class="container">
-		<h1 class="page-title"><?php the_title(); ?></h1>
+		<h1 class="page-title"><?php if ($subtitle) : echo esc_html($subtitle);
+								else : the_title();
+								endif; ?></h1>
 		<form action="<?php echo esc_url(home_url('/search-jobs/')); ?>" method="GET" class="job-search-form d-flex gap-2">
 			<input
 				type="text"
