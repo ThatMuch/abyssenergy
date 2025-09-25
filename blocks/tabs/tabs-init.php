@@ -11,16 +11,15 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
+if (function_exists('acf_register_block_type')) {
+	add_action('acf/init', 'abyssenergy_register_tabs_block');
+}
+
 /**
  * Enregistrer le bloc ACF tabs
  */
 function abyssenergy_register_tabs_block()
 {
-	// Vérifier si ACF est disponible
-	if (!function_exists('acf_register_block_type')) {
-		return;
-	}
-
 	// Enregistrer le bloc
 	acf_register_block_type(array(
 		'name'              => 'tabs',
@@ -57,39 +56,10 @@ function abyssenergy_register_tabs_block()
 				),
 			),
 		),
+		'enqueue_style'     => get_template_directory_uri() . '/blocks/tabs/tabs.css',
+		'enqueue_script'    => get_template_directory_uri() . '/blocks/tabs/tabs.js',
 	));
 }
-add_action('acf/init', 'abyssenergy_register_tabs_block');
-
-/**
- * Enregistrer les styles et scripts du bloc tabs
- */
-function abyssenergy_enqueue_tabs_block_assets()
-{
-	// CSS du bloc
-	if (file_exists(get_stylesheet_directory() . '/blocks/tabs/tabs.css')) {
-		wp_enqueue_style(
-			'abyssenergy-tabs-block',
-			get_stylesheet_directory_uri() . '/blocks/tabs/tabs.css',
-			array(),
-			abyssenergy_get_file_version('/blocks/tabs/tabs.css')
-		);
-	}
-
-	// JavaScript du bloc
-	if (file_exists(get_stylesheet_directory() . '/blocks/tabs/tabs.js')) {
-		wp_enqueue_script(
-			'abyssenergy-tabs-block',
-			get_stylesheet_directory_uri() . '/blocks/tabs/tabs.js',
-			array(),
-			abyssenergy_get_file_version('/blocks/tabs/tabs.js'),
-			true
-		);
-	}
-}
-add_action('wp_enqueue_scripts', 'abyssenergy_enqueue_tabs_block_assets');
-add_action('admin_enqueue_scripts', 'abyssenergy_enqueue_tabs_block_assets');
-
 /**
  * Ajouter les champs ACF pour le bloc tabs
  */
