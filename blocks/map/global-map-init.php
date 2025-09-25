@@ -59,6 +59,13 @@ function register_global_map_block()
 					'default_value' => 'Nos Opérations Mondiales',
 				),
 				array(
+					'key' => 'field_global_map_subtitle',
+					'label' => 'Sous-titre',
+					'name' => 'global_map_subtitle',
+					'type' => 'text',
+					'default_value' => 'Explorez nos projets à travers le monde',
+				),
+				array(
 					'key' => 'field_global_map_description',
 					'label' => 'Description',
 					'name' => 'global_map_description',

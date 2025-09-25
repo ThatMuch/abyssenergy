@@ -28,7 +28,6 @@ if (!empty($block['align'])) {
 }
 
 // Récupération des paramètres du bloc
-$title = get_field('title') ?: 'Our clients';
 $show_title = get_field('show_title') !== false;
 $gallery = get_field('gallery') ?: array();
 
@@ -36,7 +35,7 @@ $gallery = get_field('gallery') ?: array();
 
 <?php if ($is_preview) : ?>
 	<div class="block-preview-message">
-		<h3><?php echo esc_html($title); ?></h3>
+		<h3>Our clients</h3>
 		<p><?php _e('Aperçu du slider des clients. Les logos des clients ne seront pas affichés dans l\'éditeur.', 'abyssenergy'); ?></p>
 	</div>
 <?php else : ?>
@@ -46,9 +45,6 @@ $gallery = get_field('gallery') ?: array();
 		<section <?php echo $anchor; ?>class="section <?php echo esc_attr($class_name); ?>">
 			<div class="container">
 				<div class="clients-block-wrapper">
-					<?php if ($show_title) : ?>
-						<h2 class="section-title"><?php echo esc_html($title); ?></h2>
-					<?php endif; ?>
 					<div class="clients-slider">
 						<div id="clients-slider-inner" class="clients-slider-inner">
 							<?php foreach ($gallery as $image) : ?>

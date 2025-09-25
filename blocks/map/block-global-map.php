@@ -25,6 +25,7 @@ if (!empty($block['align'])) {
 
 // Variables ACF
 $title = get_field('global_map_title');
+$subtitle = get_field('global_map_subtitle');
 $description = get_field('global_map_description');
 $markers = get_field('global_map_markers');
 
@@ -82,8 +83,11 @@ if ($markers) {
 			<div id="<?php echo esc_attr($id); ?>" class="<?php echo esc_attr($className); ?>">
 				<div class="global-map-container">
 					<div class="title">
+						<?php if ($subtitle) : ?>
+							<h3 class="section--subtitle"><?php echo esc_html($subtitle); ?></h3>
+						<?php endif; ?>
 						<?php if ($title) : ?>
-							<h2 class="global-map-title"><?php echo esc_html($title); ?></h2>
+							<h2 class="section--title"><?php echo esc_html($title); ?></h2>
 						<?php endif; ?>
 					</div>
 					<?php if ($description) : ?>

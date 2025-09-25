@@ -51,18 +51,6 @@ if (function_exists('acf_add_local_field_group')) {
 		'title' => 'clients Slider Settings',
 		'fields' => array(
 			array(
-				'key' => 'field_clients_slider_title',
-				'label' => 'Titre de la section',
-				'name' => 'title',
-				'type' => 'text',
-				'instructions' => 'Entrez le titre de la section des témoignages.',
-				'default_value' => 'Témoignages de nos clients',
-				'placeholder' => '',
-				'prepend' => '',
-				'append' => '',
-				'maxlength' => '',
-			),
-			array(
 				'key' => 'field_clients_slider_show_title',
 				'label' => 'Afficher le titre',
 				'name' => 'show_title',
