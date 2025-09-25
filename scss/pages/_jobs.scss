@@ -104,3 +104,57 @@
     }
   }
 }
+
+.jobs-cta {
+  margin-top: $spacing-xl;
+  background: linear-gradient(180deg, #eef7fe 0%, #fff 100%);
+  position: relative;
+  padding: 4rem 0;
+  margin-top: 120px;
+
+  @include respond-to(xs) {
+    padding: 0;
+  }
+
+  .jobs-cta-content {
+    @include respond-to(xs) {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    top: -42px;
+    left: 0;
+    width: 100%;
+    height: 84.95px;
+    background-image: url("./images/wave-light.svg");
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-image: url("./images/vibrations.webp");
+    background-position: 115% 50%;
+    background-repeat: no-repeat;
+    background-size: auto 135%;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+
+  &-img {
+    max-width: 150px;
+    margin: 0 auto;
+    display: block;
+    @include respond-to(sm) {
+      max-width: 200px;
+    }
+    @include respond-to(md) {
+      max-width: 220px;
+    }
+  }
+}

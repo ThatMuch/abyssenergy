@@ -378,24 +378,28 @@ $description = get_field('description');
 							</p>
 						<?php endif; ?>
 					</div>
-
-					<!-- CTA pour candidature spontanée -->
-					<div class="mt-4">
-						<div class="card bg-light">
-							<div class="card__content text-center">
-								<h4 class="text-blue">You didn't find the ideal position?</h4>
-								<p>Send us your CV for an unsolicited application.</p>
-								<a href="/contact-us/?position=Unsolicited%20Application" class="btn btn--outline">
-									Send my CV
-								</a>
-							</div>
-						</div>
-					</div>
 				</div>
-
 			<?php endif; ?>
 
 			<?php wp_reset_postdata(); ?>
+		</div>
+	</section>
+	<!-- CTA pour candidature spontanée -->
+	<section class="jobs-cta">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 jobs-cta-content">
+					<h2>You didn't find the ideal position?</h2>
+					<p>Send us your CV for an unsolicited application.</p>
+					<a href="/contact-us/?position=Unsolicited%20Application" class="btn btn--primary">
+						Send my CV
+					</a>
+				</div>
+
+				<div class="col-md-4">
+					<img loading="lazy" class="jobs-cta-img" src="<?php echo get_template_directory_uri(); ?>/images/tile_company.webp" alt="Company">
+				</div>
+			</div>
 		</div>
 	</section>
 </div>
