@@ -5,8 +5,8 @@ $subtitle = get_field('subtitle');
 
 <div class="page-header <?php if (has_post_thumbnail()): ?>has-thumbnail<?php endif; ?>">
 	<div class="container">
-		<?php if ($subtitle) : echo $subtitle;
-		else : '<h1 class="page-title">' . the_title() . '</h1>';
+		<?php if ($subtitle) :  echo $subtitle;
+		else :  the_title(before: '<h1 class="page-title">', after: '</h1>');
 		endif; ?>
 		<form action="<?php echo esc_url(home_url('/search-jobs/')); ?>" method="GET" class="job-search-form d-flex gap-2">
 			<input

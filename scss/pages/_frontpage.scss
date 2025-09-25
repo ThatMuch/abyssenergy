@@ -12,6 +12,7 @@
     background-size: contain;
     background-repeat: no-repeat;
     background-position: 0 25%;
+    text-align: center;
 
     @include respond-to(xs) {
       min-height: inherit;
@@ -23,7 +24,7 @@
       text-align: center;
       font-size: $d1-size;
       font-weight: 800;
-      line-height: 120%;
+      line-height: 150%;
       letter-spacing: 0.08rem;
       margin-bottom: 3.9375rem;
       @include respond-to(xs) {
