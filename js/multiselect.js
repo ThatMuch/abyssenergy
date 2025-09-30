@@ -57,7 +57,7 @@
         if (window.OptgroupHandler && typeof window.OptgroupHandler.processSelect === 'function') {
             window.OptgroupHandler.processSelect(selectElement[0]);
         }
-        
+
         // Marque le select comme initialisé
         selectElement.addClass('multiselect-initialized');
 
