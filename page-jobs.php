@@ -34,14 +34,18 @@ if ($all_jobs_query->have_posts()) {
 		if ($job_city) {
 			// Le texte "Nearby" ne doit pas être pris en compte dans le filtre.
 			$job_city = trim(str_ireplace('Nearby', '', $job_city));
-			if ($job_city && !in_array($job_city, $job_cities)) {
-				$job_cities[] = $job_city;
+			if ($job_city) {
+				if (!isset($job_cities[$job_city])) {
+					$job_cities[$job_city] = 0;
+				}
+				$job_cities[$job_city]++;
 			}
 		}
 		if ($job_country) {
-			if ($job_country && !in_array($job_country, $job_countries)) {
-				$job_countries[] = $job_country;
+			if (!isset($job_countries[$job_country])) {
+				$job_countries[$job_country] = 0;
 			}
+			$job_countries[$job_country]++;
 		}
 
 		if ($skill) {
@@ -50,8 +54,8 @@ if ($all_jobs_query->have_posts()) {
 	}
 }
 
-sort($job_cities);
-sort($job_countries);
+ksort($job_cities);
+ksort($job_countries);
 sort($job_skills);
 wp_reset_postdata();
 
@@ -234,7 +238,7 @@ $description = get_field('description');
 						foreach ($sectors as $sector) : ?>
 							<option value="<?php echo esc_attr($sector->slug); ?>"
 								<?php echo in_array($sector->slug, $selected_sectors) ? 'selected' : ''; ?>>
-								<?php echo esc_html($sector->name); ?>
+								<?php echo esc_html($sector->name); ?> (<?php echo $sector->count; ?>)
 							</option>
 					<?php endforeach;
 					endif; ?>
@@ -253,7 +257,7 @@ $description = get_field('description');
 						foreach ($skills as $skill) : ?>
 							<option value="<?php echo esc_attr($skill->slug); ?>"
 								<?php echo in_array($skill->slug, $selected_skills) ? 'selected' : ''; ?>>
-								<?php echo esc_html($skill->name); ?>
+								<?php echo esc_html($skill->name); ?> (<?php echo $skill->count; ?>)
 							</option>
 					<?php endforeach;
 					endif; ?>
@@ -269,10 +273,10 @@ $description = get_field('description');
 					}
 
 					if (!is_wp_error($job_cities) && !empty($job_cities)) :
-						foreach ($job_cities as $city) : ?>
+						foreach ($job_cities as $city => $count) : ?>
 							<option value="<?php echo esc_attr($city); ?>"
 								<?php echo in_array($city, $selected_locations) ? 'selected' : ''; ?>>
-								<?php echo esc_html($city); ?>
+								<?php echo esc_html($city); ?> (<?php echo $count; ?>)
 							</option>
 					<?php endforeach;
 					endif; ?>
@@ -287,10 +291,10 @@ $description = get_field('description');
 					}
 
 					if (!is_wp_error($job_countries) && !empty($job_countries)) :
-						foreach ($job_countries as $country) : ?>
+						foreach ($job_countries as $country => $count) : ?>
 							<option value="<?php echo esc_attr($country); ?>"
 								<?php echo in_array($country, $selected_countries) ? 'selected' : ''; ?>>
-								<?php echo esc_html($country); ?>
+								<?php echo esc_html($country); ?> (<?php echo $count; ?>)
 							</option>
 					<?php endforeach;
 					endif; ?>
