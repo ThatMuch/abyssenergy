@@ -97,6 +97,17 @@ function abyssenergy_enqueue_scripts()
 		);
 	}
 
+	// Script pour la gestion des optgroups
+	if (file_exists(get_stylesheet_directory() . '/js/optgroup-handler.js')) {
+		wp_enqueue_script(
+			'abyssenergy-optgroup-handler',
+			get_stylesheet_directory_uri() . '/js/optgroup-handler.js',
+			array(),
+			abyssenergy_get_file_version('/js/optgroup-handler.js'),
+			true
+		);
+	}
+
 	// Script Lottie pour les animations (seulement sur la front-page)
 	if (is_front_page()) {
 		wp_enqueue_script(

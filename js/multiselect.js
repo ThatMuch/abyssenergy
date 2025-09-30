@@ -109,62 +109,104 @@
             placeholderText = firstOption.text() || placeholderText;
         }
 
-        // Ajoute les options au dropdown
-        selectElement.find('option').each(function() {
-            const value = $(this).val();
-            const text = $(this).text();
+        // Ajoute les options et optgroups au dropdown
+        selectElement.children().each(function() {
+            if (this.tagName === 'OPTGROUP') {
+                // Créer un groupe d'options
+                const optgroupLabel = $('<div>', {
+                    'class': 'multiselect__dropdown-optgroup-label',
+                    'text': $(this).attr('label')
+                });
+                dropdown.append(optgroupLabel);
 
-            // Ne pas inclure les options vides souvent utilisées comme placeholders dans le dropdown
-            if (value === '' && $(this).is(':first-child')) return;
+                // Ajouter les options du groupe
+                $(this).find('option').each(function() {
+                    const value = $(this).val();
+                    const text = $(this).text();
 
-            const option = $('<div>', {
-                'class': 'multiselect__dropdown-option',
-                'data-value': value
-            });
+                    if (value === '') return;
 
-            const checkbox = $('<span>', {
-                'class': 'checkbox'
-            });
+                    const option = $('<div>', {
+                        'class': 'multiselect__dropdown-option multiselect__dropdown-option--grouped',
+                        'data-value': value
+                    });
 
-            const label = $('<span>', {
-                'text': text
-            });
+                    const checkbox = $('<span>', {
+                        'class': 'checkbox'
+                    });
 
-            option.append(checkbox).append(label);
+                    const label = $('<span>', {
+                        'text': text
+                    });
 
-            // Si l'option est présélectionnée
-            if ($(this).is(':selected')) {
-                checkbox.addClass('checked');
-                option.addClass('selected');
-                addSelectedOption(selectedOptionsContainer, value, text);
-            }
+                    option.append(checkbox).append(label);
 
-            // Gestion des clics sur les options
-            option.on('click', function(e) {
-                e.stopPropagation();
-                const optionValue = $(this).data('value');
-                const optionText = $(this).find('span:not(.checkbox)').text();
-                const isSelected = $(this).hasClass('selected');
+                    // Si l'option est présélectionnée
+                    if ($(this).is(':selected')) {
+                        checkbox.addClass('checked');
+                        option.addClass('selected');
+                        addSelectedOption(selectedOptionsContainer, value, text);
+                    }
 
-                if (isSelected) {
-                    // Désélectionne l'option
-                    $(this).removeClass('selected');
-                    $(this).find('.checkbox').removeClass('checked');
-                    removeSelectedOption(selectedOptionsContainer, optionValue);
-                    selectElement.find('option[value="' + optionValue + '"]').prop('selected', false);
-                } else {
-                    // Sélectionne l'option
-                    $(this).addClass('selected');
-                    $(this).find('.checkbox').addClass('checked');
-                    addSelectedOption(selectedOptionsContainer, optionValue, optionText);
-                    selectElement.find('option[value="' + optionValue + '"]').prop('selected', true);
+                    dropdown.append(option);
+                });
+            } else if (this.tagName === 'OPTION') {
+                // Option directe (non groupée)
+                const value = $(this).val();
+                const text = $(this).text();
+
+                // Ne pas inclure les options vides souvent utilisées comme placeholders dans le dropdown
+                if (value === '' && $(this).is(':first-child')) return;
+
+                const option = $('<div>', {
+                    'class': 'multiselect__dropdown-option',
+                    'data-value': value
+                });
+
+                const checkbox = $('<span>', {
+                    'class': 'checkbox'
+                });
+
+                const label = $('<span>', {
+                    'text': text
+                });
+
+                option.append(checkbox).append(label);
+
+                // Si l'option est présélectionnée
+                if ($(this).is(':selected')) {
+                    checkbox.addClass('checked');
+                    option.addClass('selected');
+                    addSelectedOption(selectedOptionsContainer, value, text);
                 }
 
-                // Déclenche l'événement change pour que les validations fonctionnent
-                selectElement.trigger('change');
-            });
+                dropdown.append(option);
+            }
+        });
 
-            dropdown.append(option);
+        // Gestion des clics sur les options (après création de toutes les options)
+        dropdown.find('.multiselect__dropdown-option').on('click', function(e) {
+            e.stopPropagation();
+            const optionValue = $(this).data('value');
+            const optionText = $(this).find('span:not(.checkbox)').text();
+            const isSelected = $(this).hasClass('selected');
+
+            if (isSelected) {
+                // Désélectionne l'option
+                $(this).removeClass('selected');
+                $(this).find('.checkbox').removeClass('checked');
+                removeSelectedOption(selectedOptionsContainer, optionValue);
+                selectElement.find('option[value="' + optionValue + '"]').prop('selected', false);
+            } else {
+                // Sélectionne l'option
+                $(this).addClass('selected');
+                $(this).find('.checkbox').addClass('checked');
+                addSelectedOption(selectedOptionsContainer, optionValue, optionText);
+                selectElement.find('option[value="' + optionValue + '"]').prop('selected', true);
+            }
+
+            // Déclenche l'événement change pour que les validations fonctionnent
+            selectElement.trigger('change');
         });
 
         // Gestion du clic sur le conteneur pour ouvrir/fermer le dropdown

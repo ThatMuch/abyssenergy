@@ -1,0 +1,280 @@
+<?php
+
+/**
+ * Gravity Forms Optgroup Support
+ *
+ * Ajoute le support des optgroups pour Gravity Forms
+ */
+
+// Empêcher l'accès direct au fichier
+if (!defined('ABSPATH')) {
+	exit;
+}
+
+/**
+ * Ajoute le support des optgroups pour les champs de liste déroulante Gravity Forms
+ * DÉSACTIVÉ TEMPORAIREMENT pour éviter les erreurs PHP
+ */
+function abyssenergy_gf_optgroup_support()
+{
+	// Vérifier si Gravity Forms est activé et complètement initialisé
+	if (!class_exists('GFForms') || !class_exists('GFAPI')) {
+		return;
+	}
+
+	// TOUS LES HOOKS DÉSACTIVÉS pour éviter les erreurs
+	// add_filter('gform_pre_render', 'abyssenergy_gf_process_optgroups', 20);
+	// add_filter('gform_pre_validation', 'abyssenergy_gf_process_optgroups', 20);
+	// add_filter('gform_pre_submission_filter', 'abyssenergy_gf_process_optgroups', 20);
+	// add_filter('gform_admin_pre_render', 'abyssenergy_gf_process_optgroups', 20);
+}
+// DÉSACTIVÉ: add_action('gform_loaded', 'abyssenergy_gf_optgroup_support');
+
+/**
+ * Traite les optgroups dans les formulaires Gravity Forms
+ */
+function abyssenergy_gf_process_optgroups($form)
+{
+	// Vérifier que le formulaire est valide
+	if (!is_array($form) || !isset($form['fields']) || !is_array($form['fields'])) {
+		return $form;
+	}
+
+	foreach ($form['fields'] as &$field) {
+		// Vérifier que le champ est valide et a des choix
+		if (!is_object($field) || !isset($field->type) || !isset($field->choices) || !is_array($field->choices)) {
+			continue;
+		}
+
+		// Traiter seulement les champs select et multiselect
+		if (in_array($field->type, ['select', 'multiselect'])) {
+			$field->choices = abyssenergy_gf_convert_choices_to_optgroups($field->choices);
+		}
+	}
+
+	return $form;
+}
+
+/**
+ * Convertit les choix avec des optgroups
+ */
+function abyssenergy_gf_convert_choices_to_optgroups($choices)
+{
+	// Vérifier que les choix sont valides
+	if (!is_array($choices) || empty($choices)) {
+		return $choices;
+	}
+
+	$processed_choices = array();
+	$current_optgroup = null;
+
+	foreach ($choices as $choice) {
+		// Vérifier que le choix a les clés nécessaires
+		if (!is_array($choice) || (!isset($choice['value']) && !isset($choice['text']))) {
+			continue;
+		}
+
+		// Assurer que les clés existent avec des valeurs par défaut
+		$choice_value = isset($choice['value']) ? $choice['value'] : '';
+		$choice_text = isset($choice['text']) ? $choice['text'] : '';
+
+		// Si la valeur est "optgroup" ou contient "optgroup:", c'est un en-tête de groupe
+		if (
+			$choice_value === 'optgroup' ||
+			strpos($choice_value, 'optgroup:') === 0 ||
+			isset($choice['isOptgroup']) && $choice['isOptgroup']
+		) {
+			// Fermer l'optgroup précédent s'il existe
+			if ($current_optgroup !== null) {
+				$processed_choices[] = $current_optgroup;
+			}
+
+			// Créer un nouveau groupe
+			$current_optgroup = array(
+				'type' => 'optgroup',
+				'label' => $choice_text,
+				'choices' => array()
+			);
+		} else {
+			// Option normale - s'assurer que les clés existent
+			$safe_choice = array(
+				'text' => $choice_text,
+				'value' => $choice_value
+			);
+
+			// Préserver les autres propriétés du choix si elles existent
+			foreach ($choice as $key => $val) {
+				if (!in_array($key, ['text', 'value'])) {
+					$safe_choice[$key] = $val;
+				}
+			}
+
+			if ($current_optgroup !== null) {
+				// Ajouter à l'optgroup courant
+				$current_optgroup['choices'][] = $safe_choice;
+			} else {
+				// Ajouter directement
+				$processed_choices[] = $safe_choice;
+			}
+		}
+	}
+
+	// Ajouter le dernier optgroup s'il existe
+	if ($current_optgroup !== null) {
+		$processed_choices[] = $current_optgroup;
+	}
+
+	return $processed_choices;
+}
+
+/**
+ * Filtre pour personnaliser le rendu HTML des champs select avec optgroups
+ * DÉSACTIVÉ TEMPORAIREMENT pour éviter les erreurs PHP
+ */
+function abyssenergy_gf_init_field_input_filter() {
+	// Vérifier si Gravity Forms est activé
+	if (!class_exists('GFForms')) {
+		return;
+	}
+	// DÉSACTIVÉ: add_filter('gform_field_input', 'abyssenergy_gf_custom_select_input', 10, 5);
+}
+// DÉSACTIVÉ: add_action('gform_loaded', 'abyssenergy_gf_init_field_input_filter');
+
+function abyssenergy_gf_custom_select_input($input, $field, $value, $lead_id, $form_id)
+{
+	// Vérifications de sécurité supplémentaires
+	if (!is_object($field) || !isset($field->type) || !isset($field->choices)) {
+		return $input;
+	}
+
+	// Traiter seulement les champs select et multiselect
+	if (!in_array($field->type, ['select', 'multiselect'])) {
+		return $input;
+	}
+
+	// Vérifier s'il y a des optgroups dans les choix
+	$has_optgroups = false;
+	foreach ($field->choices as $choice) {
+		if (isset($choice['type']) && $choice['type'] === 'optgroup') {
+			$has_optgroups = true;
+			break;
+		}
+	}
+
+	if (!$has_optgroups) {
+		return $input; // Pas d'optgroups, retourner le HTML par défaut
+	}
+
+	// Construire le HTML personnalisé avec optgroups
+	$css_class = isset($field->cssClass) ? $field->cssClass : '';
+	$disabled_text = (function_exists('is_form_editor') && is_form_editor()) ? 'disabled="disabled"' : '';
+	$multiple = $field->type === 'multiselect' ? 'multiple="multiple"' : '';
+
+	// Conditional logic event
+	$logic_event = '';
+	if (!is_admin() && method_exists($field, 'get_conditional_logic_event')) {
+		$logic_event = $field->get_conditional_logic_event('keyup');
+	}
+
+	$field_id = (is_admin() || $form_id == 0) ? "input_{$field->id}" : "input_{$form_id}_{$field->id}";
+
+	$input = sprintf(
+		"<div class='ginput_container ginput_container_{$field->type}'><select name='input_{$field->id}' id='{$field_id}' class='%s gfield_select' %s %s %s>",
+		esc_attr($css_class),
+		$disabled_text,
+		$multiple,
+		$logic_event
+	);
+
+	// Ajouter l'option par défaut si elle existe
+	if (!empty($field->placeholder)) {
+		$input .= sprintf('<option value="">%s</option>', esc_html($field->placeholder));
+	}
+
+	// Traiter les choix avec optgroups
+	foreach ($field->choices as $choice) {
+		if (isset($choice['type']) && $choice['type'] === 'optgroup') {
+			// C'est un optgroup
+			$optgroup_label = isset($choice['label']) ? $choice['label'] : '';
+			$input .= sprintf('<optgroup label="%s">', esc_attr($optgroup_label));
+
+			if (isset($choice['choices']) && is_array($choice['choices'])) {
+				foreach ($choice['choices'] as $group_choice) {
+					// Vérifier que les clés existent
+					if (!is_array($group_choice)) {
+						continue;
+					}
+
+					$choice_value = isset($group_choice['value']) ? $group_choice['value'] : '';
+					$choice_text = isset($group_choice['text']) ? $group_choice['text'] : '';
+
+					// Vérifier si l'option est sélectionnée
+					$selected = '';
+					if (class_exists('RGFormsModel') && method_exists('RGFormsModel', 'choice_value_match')) {
+						$selected = RGFormsModel::choice_value_match($field, $group_choice, $value) ? 'selected="selected"' : '';
+					} else {
+						// Méthode de fallback
+						$selected = ($value == $choice_value) ? 'selected="selected"' : '';
+					}
+
+					$input .= sprintf(
+						'<option value="%s" %s>%s</option>',
+						esc_attr($choice_value),
+						$selected,
+						esc_html($choice_text)
+					);
+				}
+			}
+
+			$input .= '</optgroup>';
+		} else {
+			// Option normale - vérifier que les clés existent
+			if (!is_array($choice)) {
+				continue;
+			}
+
+			$choice_value = isset($choice['value']) ? $choice['value'] : '';
+			$choice_text = isset($choice['text']) ? $choice['text'] : '';
+
+			// Vérifier si l'option est sélectionnée
+			$selected = '';
+			if (class_exists('RGFormsModel') && method_exists('RGFormsModel', 'choice_value_match')) {
+				$selected = RGFormsModel::choice_value_match($field, $choice, $value) ? 'selected="selected"' : '';
+			} else {
+				// Méthode de fallback
+				$selected = ($value == $choice_value) ? 'selected="selected"' : '';
+			}
+
+			$input .= sprintf(
+				'<option value="%s" %s>%s</option>',
+				esc_attr($choice_value),
+				$selected,
+				esc_html($choice_text)
+			);
+		}
+	}
+
+	$input .= '</select></div>';
+
+	return $input;
+}
+
+/**
+ * Ajouter des classes CSS pour les optgroups Gravity Forms
+ */
+add_filter('gform_field_css_class', 'abyssenergy_gf_optgroup_css_class', 10, 3);
+
+function abyssenergy_gf_optgroup_css_class($classes, $field, $form)
+{
+	if (in_array($field->type, ['select', 'multiselect'])) {
+		// Vérifier s'il y a des optgroups
+		foreach ($field->choices as $choice) {
+			if (isset($choice['type']) && $choice['type'] === 'optgroup') {
+				$classes .= ' gfield-has-optgroups';
+				break;
+			}
+		}
+	}
+
+	return $classes;
+}
