@@ -17,6 +17,15 @@
         $(document).on('gform_post_render', function() {
             initMultiselects();
         });
+
+        // Écouter les événements de traitement des optgroups
+        $(document).on('optgroupsProcessed', function(event) {
+            const selectElement = $(event.detail.selectElement);
+            // Si c'est un select multiple et qu'il n'est pas encore initialisé
+            if (selectElement.is('[multiple]') && !selectElement.hasClass('multiselect-initialized')) {
+                createMultiselect(selectElement);
+            }
+        });
     });
 
     /**
@@ -44,6 +53,11 @@
      * @param {jQuery} selectElement - L'élément select à transformer
      */
     function createMultiselect(selectElement) {
+        // IMPORTANT: Traiter les optgroups AVANT d'initialiser le multiselect
+        if (window.OptgroupHandler && typeof window.OptgroupHandler.processSelect === 'function') {
+            window.OptgroupHandler.processSelect(selectElement[0]);
+        }
+        
         // Marque le select comme initialisé
         selectElement.addClass('multiselect-initialized');
 

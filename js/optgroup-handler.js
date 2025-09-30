@@ -4,6 +4,119 @@
  * Fonctionne avec tous les selects du site, y compris Gravity Forms
  */
 
+/**
+ * Traite tous les selects existants sur la page
+ */
+function processAllSelects() {
+    const selects = document.querySelectorAll('select');
+    selects.forEach(processSelect);
+}
+
+/**
+ * Traite un select individuel pour convertir les options optgroup
+ */
+function processSelect(selectElement) {
+    // Éviter le double traitement
+    if (selectElement.dataset.optgroupProcessed === 'true') {
+        return;
+    }
+
+    const options = Array.from(selectElement.options);
+    let hasOptgroups = false;
+    let currentOptgroup = null;
+    const newElements = [];
+
+    // Parcourir toutes les options
+    for (let i = 0; i < options.length; i++) {
+        const option = options[i];
+
+        if (option.value === 'optgroup' || option.classList.contains('optgroup-header')) {
+            // Cette option doit devenir un optgroup
+            hasOptgroups = true;
+
+            // Fermer l'optgroup précédent s'il existe
+            if (currentOptgroup) {
+                newElements.push(currentOptgroup);
+            }
+
+            // Créer un nouveau optgroup
+            currentOptgroup = document.createElement('optgroup');
+            currentOptgroup.label = option.textContent.trim();
+
+            // Copier les attributs de l'option vers l'optgroup si nécessaire
+            if (option.hasAttribute('data-group-id')) {
+                currentOptgroup.setAttribute('data-group-id', option.getAttribute('data-group-id'));
+            }
+
+        } else if (option.value !== '') { // Ignorer les options vides (placeholder)
+            // Option normale
+            const newOption = document.createElement('option');
+            newOption.value = option.value;
+            newOption.textContent = option.textContent;
+            newOption.selected = option.selected;
+
+            // Copier les autres attributs
+            Array.from(option.attributes).forEach(attr => {
+                if (attr.name !== 'value' && attr.name !== 'selected') {
+                    newOption.setAttribute(attr.name, attr.value);
+                }
+            });
+
+            if (currentOptgroup) {
+                currentOptgroup.appendChild(newOption);
+            } else {
+                newElements.push(newOption);
+            }
+        }
+    }
+
+    // Ajouter le dernier optgroup s'il existe
+    if (currentOptgroup) {
+        newElements.push(currentOptgroup);
+    }
+
+    // Remplacer le contenu du select seulement si des optgroups ont été trouvés
+    if (hasOptgroups) {
+        // Conserver les options vides (placeholder) au début
+        const placeholderOption = selectElement.querySelector('option[value=""]');
+        
+        // Vider le select
+        selectElement.innerHTML = '';
+
+        // Remettre le placeholder en premier si il existe
+        if (placeholderOption) {
+            selectElement.appendChild(placeholderOption.cloneNode(true));
+        }
+
+        // Ajouter tous les nouveaux éléments
+        newElements.forEach(element => {
+            selectElement.appendChild(element);
+        });
+
+        // Marquer comme traité
+        selectElement.dataset.optgroupProcessed = 'true';
+
+        // Ajouter une classe CSS pour le styling
+        selectElement.classList.add('has-optgroups');
+
+        // Déclencher un événement personnalisé pour notifier les autres scripts
+        const event = new CustomEvent('optgroupsProcessed', { 
+            detail: { selectElement: selectElement },
+            bubbles: true 
+        });
+        selectElement.dispatchEvent(event);
+    }
+}
+
+// Exposer les fonctions globalement pour permettre l'intégration avec d'autres scripts
+window.OptgroupHandler = {
+    processSelect: processSelect,
+    processAllSelects: processAllSelects,
+    forceReprocess: function() {
+        processAllSelects();
+    }
+};
+
 document.addEventListener('DOMContentLoaded', function() {
     // Traiter tous les selects existants
     processAllSelects();
@@ -47,128 +160,13 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 100);
         });
     }
-});
 
-/**
- * Traite tous les selects existants sur la page
- */
-function processAllSelects() {
-    const selects = document.querySelectorAll('select');
-    selects.forEach(processSelect);
-}
-
-/**
- * Traite un select individuel pour convertir les options optgroup
- */
-function processSelect(selectElement) {
-    // Éviter le double traitement
-    if (selectElement.dataset.optgroupProcessed === 'true') {
-        return;
-    }
-
-    const options = Array.from(selectElement.options);
-    let hasOptgroups = false;
-    let currentOptgroup = null;
-    const newElements = [];
-
-    // Parcourir toutes les options
-    for (let i = 0; i < options.length; i++) {
-        const option = options[i];
-
-        if (option.value === 'optgroup' || option.classList.contains('optgroup-header')) {
-            // Cette option doit devenir un optgroup
-            hasOptgroups = true;
-
-            // Fermer l'optgroup précédent s'il existe
-            if (currentOptgroup) {
-                newElements.push(currentOptgroup);
-            }
-
-            // Créer un nouveau optgroup
-            currentOptgroup = document.createElement('optgroup');
-            currentOptgroup.label = option.textContent.trim();
-
-            // Copier les attributs de l'option vers l'optgroup si nécessaire
-            if (option.dataset.label) {
-                currentOptgroup.label = option.dataset.label;
-            }
-
-        } else {
-            // Option normale
-            const newOption = option.cloneNode(true);
-
-            if (currentOptgroup) {
-                // Ajouter à l'optgroup courant
-                currentOptgroup.appendChild(newOption);
-            } else {
-                // Ajouter directement aux nouveaux éléments
-                newElements.push(newOption);
-            }
-        }
-    }
-
-    // Ajouter le dernier optgroup s'il existe
-    if (currentOptgroup) {
-        newElements.push(currentOptgroup);
-    }
-
-    // Si on a trouvé des optgroups, reconstruire le select
-    if (hasOptgroups) {
-        // Sauvegarder la valeur sélectionnée
-        const selectedValues = Array.from(selectElement.selectedOptions).map(opt => opt.value);
-
-        // Vider le select
-        selectElement.innerHTML = '';
-
-        // Ajouter les nouveaux éléments
-        newElements.forEach(element => {
-            selectElement.appendChild(element);
-        });
-
-        // Restaurer les sélections
-        selectedValues.forEach(value => {
-            const option = selectElement.querySelector(`option[value="${CSS.escape(value)}"]`);
-            if (option) {
-                option.selected = true;
-            }
-        });
-
-        // Déclencher un événement de changement pour notifier les autres scripts
-        const changeEvent = new Event('change', { bubbles: true });
-        selectElement.dispatchEvent(changeEvent);
-    }
-
-    // Marquer comme traité
-    selectElement.dataset.optgroupProcessed = 'true';
-}
-
-/**
- * Fonction utilitaire pour créer des options avec optgroup dans PHP/JavaScript
- * Peut être utilisée pour créer dynamiquement des selects avec optgroups
- */
-function createSelectWithOptgroups(selectElement, optionsData) {
-    selectElement.innerHTML = '';
-
-    optionsData.forEach(item => {
-        if (item.type === 'optgroup') {
-            const optgroup = document.createElement('optgroup');
-            optgroup.label = item.label;
-
-            item.options.forEach(optionData => {
-                const option = document.createElement('option');
-                option.value = optionData.value;
-                option.textContent = optionData.text;
-                if (optionData.selected) option.selected = true;
-                optgroup.appendChild(option);
-            });
-
-            selectElement.appendChild(optgroup);
-        } else {
-            const option = document.createElement('option');
-            option.value = item.value;
-            option.textContent = item.text;
-            if (item.selected) option.selected = true;
-            selectElement.appendChild(option);
+    // Hook pour traiter les selects avant l'initialisation de Gravity Forms
+    document.addEventListener('gform_post_conditional_logic', function(event) {
+        const form = document.getElementById('gform_' + event.detail.formId);
+        if (form) {
+            const selects = form.querySelectorAll('select:not([data-optgroup-processed="true"])');
+            selects.forEach(processSelect);
         }
     });
-}
+});
