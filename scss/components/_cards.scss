@@ -29,4 +29,39 @@
     padding-top: $spacing-sm;
     margin-top: $spacing-md;
   }
+
+  .border {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 8px;
+    border-radius: 8px 0 0 8px;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  // Secteur d'activité
+  .job-sector {
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 150%;
+    letter-spacing: 0.0875rem;
+    text-transform: uppercase;
+    @include respond-to(xs) {
+      font-size: 0.75rem;
+    }
+  }
+}
+
+.card.conventional-energy-card .border {
+  background: linear-gradient(180deg, #ff8e38 0%, #ffb86f 100%);
+}
+
+.card.process-industry-card .border {
+  background: linear-gradient(180deg, #0a3f6a 0%, #0083d5 100%);
+}
+
+.card.renewables-card .border {
+  background: linear-gradient(180deg, #008e99 0%, #2ab0ba 100%);
 }

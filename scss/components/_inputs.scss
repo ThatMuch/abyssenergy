@@ -58,7 +58,7 @@ input[type="number"],
 
 textarea {
   @extend .input-base;
-  border-radius: $border-radius-lg;
+  border-radius: $border-radius-xl;
   min-height: 6rem;
   resize: vertical;
 }

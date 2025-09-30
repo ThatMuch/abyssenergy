@@ -32,7 +32,6 @@ $title = get_field('title') ?: 'Témoignages de nos clients';
 $show_title = get_field('show_title') !== false;
 $image = get_field('image');
 $testimonials_limit = get_field('testimonials_limit');
-
 // Déterminer le nombre de posts à récupérer
 $posts_per_page = -1; // Par défaut, tous les témoignages
 if (!empty($testimonials_limit) && is_numeric($testimonials_limit) && $testimonials_limit > 0) {
@@ -72,9 +71,29 @@ $testimonials = new WP_Query($args);
 			</div>
 			<div class="testimonials-slider swiper">
 				<div class="swiper-wrapper">
-					<?php while ($testimonials->have_posts()) : $testimonials->the_post(); ?>
+					<?php while ($testimonials->have_posts()) : $testimonials->the_post();
+						$sectors = get_the_terms(get_the_ID(), 'job-sector');
+						$sector_class = '';
+						if ($sectors && !is_wp_error($sectors) && !empty($sectors)) {
+							$sector_class = esc_html($sectors[0]->slug) . '-card';
+						}
+					?>
 						<div class="swiper-slide">
-							<div class="testimonial-card card">
+							<div class="testimonial-card card <?php echo esc_attr($sector_class); ?>">
+								<div class="border"></div>
+								<?php
+
+								if ($sectors && !is_wp_error($sectors) && !empty($sectors)) {
+									foreach ($sectors as $sector) {  ?>
+										<span class="job-sector mb-3">
+											<?php
+											echo esc_html($sector->name);
+											?></span>
+								<?php
+									}
+								} ?>
+								</span>
+
 								<div class="testimonial-header">
 									<h3 class="testimonial-title h4">
 										<?php the_title(); ?>
