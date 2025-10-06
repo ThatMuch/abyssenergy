@@ -1,5 +1,6 @@
 .section--map {
   position: relative;
+margin-top: 100px;
 
   &.no-title {
     transform: translateY(-90px);
@@ -32,29 +33,21 @@
   position: relative;
 }
 
-.title {
-  height: 100px;
-  margin-bottom: 100px;
+.global-map-header {
+  transform: translateY(-150px);
+  padding:  1.5rem;
+  border-radius: 1.5rem;
+  background: linear-gradient(180deg,  #DDEDFB 0.31%, rgb(255 255 255 / 0%) 96.31%);
 }
 
-.global-map-title {
-  margin-top: 0;
-  font-size: 2rem;
-  text-align: center;
-  color: #06508b;
+  .global-map-icon {
+text-align: right;
 
-  @media screen and (width >= 1024px) {
-    margin-bottom: 155px;
+img {
+  width: 3rem;
+}
   }
-}
 
-.global-map-description {
-  margin-bottom: 30px;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-}
 
 .global-map-wrapper {
   position: relative;

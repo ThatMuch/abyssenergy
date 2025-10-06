@@ -28,6 +28,8 @@ $title = get_field('global_map_title');
 $subtitle = get_field('global_map_subtitle');
 $description = get_field('global_map_description');
 $markers = get_field('global_map_markers');
+$content = get_field('content');
+$icon = get_field('icon');
 
 // Préparer les données de la carte pour JavaScript
 $map_data = array(
@@ -82,19 +84,35 @@ if ($markers) {
 		<div class="container">
 			<div id="<?php echo esc_attr($id); ?>" class="<?php echo esc_attr($className); ?>">
 				<div class="global-map-container">
-					<div class="title">
-						<?php if ($subtitle) : ?>
-							<h3 class="section--subtitle"><?php echo esc_html($subtitle); ?></h3>
-						<?php endif; ?>
-						<?php if ($title) : ?>
-							<h2 class="section--title"><?php echo esc_html($title); ?></h2>
-						<?php endif; ?>
-					</div>
-					<?php if ($description) : ?>
-						<div class="global-map-description">
-							<?php echo wp_kses_post($description); ?>
+					<div class="row  global-map-header">
+						<div class="col-md-6">
+							<?php if ($subtitle) : ?>
+								<h3 class="section--subtitle"><?php echo esc_html($subtitle); ?></h3>
+							<?php endif; ?>
+							<?php if ($title) : ?>
+								<h2 class="section--title"><?php echo esc_html($title); ?></h2>
+							<?php endif; ?>
+							<?php if ($description) : ?>
+								<div class="mb-4">
+									<?php echo wp_kses_post($description); ?>
+								</div>
+							<?php endif; ?>
+							<?php if ($content) : ?>
+								<button class="btn btn--primary" aria-label="Expand content">See more <i class="fa fa-plus"></i></button>
+							<?php endif; ?>
+
 						</div>
-					<?php endif; ?>
+						<div class="col-md-6">
+							<?php if ($icon) : ?>
+								<div class="global-map-icon">
+									<?php if (!empty($icon['url'])) : ?>
+										<img src="<?php echo esc_url($icon['url']); ?>" alt="<?php echo esc_attr($icon['alt']); ?>" />
+									<?php endif; ?>
+								</div>
+							<?php endif; ?>
+						</div>
+					</div>
+
 
 					<div class="global-map-wrapper">
 						<div id="<?php echo esc_attr($id); ?>-map" class="global-map"></div>

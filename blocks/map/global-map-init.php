@@ -72,6 +72,29 @@ function register_global_map_block()
 					'type' => 'textarea',
 					'rows' => 3,
 				),
+
+				array(
+					'key' => 'field_global_map_icon',
+					'label' => 'Icône',
+					'name' => 'icon',
+					'type' => 'image',
+					'instructions' => 'Téléchargez une icône pour la carte.',
+					'required' => 0,
+					'return_format' => 'array',
+					'preview_size' => 'medium',
+					'library' => 'all',
+				),
+				array(
+					'key' => 'field_global_map_content',
+					'label' => 'Contenu',
+					'name' => 'content',
+					'type' => 'wysiwyg',
+					'instructions' => 'Entrez le contenu de la carte.',
+					'required' => 0,
+					'wrapper' => array(
+						'class' => 'metric-content-field'
+					),
+				),
 				array(
 					'key' => 'field_global_map_markers',
 					'label' => 'Marqueurs de la carte',
