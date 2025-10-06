@@ -1,6 +1,7 @@
 	<?php get_header();
 	$subtitle = get_field('subtitle');
 	$description = get_field('description');
+	$buttons = get_field('buttons');
 	?>
 	<div class="page-header <?php if (has_post_thumbnail()): ?>has-thumbnail<?php endif; ?>">
 		<div class="container">
@@ -13,6 +14,17 @@
 					<?php if ($description): ?>
 						<div class="page-description">
 							<?php echo $description; ?>
+						</div>
+					<?php endif; ?>
+					<?php if ($buttons): ?>
+						<div class="page-buttons">
+							<?php foreach ($buttons as $button): ?>
+								<a href="<?php echo esc_url($button['link']['url']); ?>" class="btn <?php echo $button['style'] === 'fill' ? "btn--primary" : "btn--outline"; ?>"><?php echo esc_html($button['link']['title']); ?>
+									<?php if ($button['icon']): ?>
+										<span class="btn__icon"><?php echo $button['icon']; ?></span>
+									<?php endif; ?>
+								</a>
+							<?php endforeach; ?>
 						</div>
 					<?php endif; ?>
 				</div>
