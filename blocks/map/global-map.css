@@ -19,7 +19,7 @@ margin-top: 100px;
     background-size: 110%;
 
     @media screen and (width <= 527px) {
-      background-position-y: 220px;
+      background-position-y: 420px;
     }
 
     @media screen and (width >= 1980px) {
