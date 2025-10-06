@@ -98,7 +98,7 @@ if ($markers) {
 								</div>
 							<?php endif; ?>
 							<?php if ($content) : ?>
-								<button class="btn btn--primary" aria-label="Expand content">See more <i class="fa fa-plus"></i></button>
+								<button class="btn btn--primary global-map-button" aria-label="Expand content">See more <i class="fa fa-plus"></i></button>
 							<?php endif; ?>
 
 						</div>
@@ -128,6 +128,30 @@ if ($markers) {
 
 		</div>
 	</section>
+
+	<?php if ($content) : ?>
+		<!-- Modal pour le contenu détaillé -->
+		<div class="global-map-modal" id="<?php echo esc_attr($id); ?>-modal" role="dialog" aria-modal="true" aria-labelledby="<?php echo esc_attr($id); ?>-modal-title">
+			<div class="global-map-modal-content">
+				<div class="global-map-modal-header">
+					<?php if ($icon) : ?>
+						<div class="global-map-modal-icon">
+							<img src="<?php echo esc_url($icon['url']); ?>" alt="<?php echo esc_attr($icon['alt']); ?>" loading="lazy">
+						</div>
+					<?php endif; ?>
+					<?php if ($title) : ?>
+						<h3 id="<?php echo esc_attr($id); ?>-modal-title" class="global-map-modal-title"><?php echo esc_html($title); ?></h3>
+					<?php endif; ?>
+					<button class="modal-close" aria-label="Close content"><i class="fa fa-times"></i></button>
+				</div>
+				<div class="global-map-modal-body">
+					<div class="global-map-content">
+						<?php echo wp_kses_post($content); ?>
+					</div>
+				</div>
+			</div>
+		</div>
+	<?php endif; ?>
 
 	<script>
 		// Transmettre les données à JavaScript

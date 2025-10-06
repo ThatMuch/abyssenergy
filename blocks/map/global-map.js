@@ -397,6 +397,112 @@
         }
     }
 
+    /**
+     * Gestion des modales pour le contenu détaillé de la carte
+     */
+    function initModalHandlers() {
+        let scrollPosition = 0;
+
+        /**
+         * Sauvegarde la position de scroll actuelle
+         */
+        function saveScrollPosition() {
+            scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+        }
+
+        /**
+         * Restaure la position de scroll sauvegardée
+         */
+        function restoreScrollPosition() {
+            window.scrollTo(0, scrollPosition);
+        }
+
+        /**
+         * Affiche le modal
+         */
+        function showModal(modal) {
+            // Sauvegarder la position avant d'ouvrir le modal
+            saveScrollPosition();
+            document.body.style.top = `-${scrollPosition}px`;
+
+            modal.classList.add('active');
+            document.body.classList.add('modal-open');
+
+            // Focus sur le bouton fermer pour l'accessibilité
+            const closeButton = modal.querySelector('.modal-close');
+            if (closeButton) {
+                closeButton.focus();
+            }
+        }
+
+        /**
+         * Cache le modal
+         */
+        function hideModal(modal) {
+            modal.classList.remove('active');
+            document.body.classList.remove('modal-open');
+
+            // Restaurer la position après avoir fermé le modal
+            document.body.style.top = '';
+            restoreScrollPosition();
+        }
+
+        // Gérer tous les boutons "See more" des cartes globales
+        const mapButtons = document.querySelectorAll('.global-map-button');
+
+        mapButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                // Trouver le bloc parent pour identifier la modale correspondante
+                const mapBlock = button.closest('.abyss-global-map');
+                if (!mapBlock) return;
+
+                // Construire l'ID de la modale à partir de l'ID du bloc
+                const blockId = mapBlock.id;
+                const modalId = blockId + '-modal';
+                const modal = document.getElementById(modalId);
+
+                if (modal) {
+                    showModal(modal);
+                }
+            });
+        });
+
+        // Gérer la fermeture des modales
+        const modals = document.querySelectorAll('.global-map-modal');
+
+        modals.forEach(modal => {
+            // Fermer en cliquant sur le backdrop
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    hideModal(modal);
+                }
+            });
+
+            // Fermer avec le bouton X
+            const closeButton = modal.querySelector('.modal-close');
+            if (closeButton) {
+                closeButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    hideModal(modal);
+                });
+            }
+        });
+
+        // Fermer avec la touche Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const activeModal = document.querySelector('.global-map-modal.active');
+                if (activeModal) {
+                    hideModal(activeModal);
+                }
+            }
+        });
+    }
+
     // Initialiser toutes les cartes sur la page
     $(document).ready(function() {
         // Rechercher toutes les variables de carte injectées
@@ -416,5 +522,8 @@
                 initGlobalMap(window[mapVarName], window[tooltipVarName], window[varName]);
             }
         });
+
+        // Initialiser les gestionnaires de modale
+        initModalHandlers();
     });
 })(jQuery);
