@@ -52,9 +52,15 @@ $consultants = get_posts(array(
 			<div class="card card--contact">
 
 				<h3>Contact Information</h3>
-				<p><i class="fas fa-envelope mr-2"></i> <a href="mailto:<?php echo esc_html($email); ?>"><?php echo esc_html($email); ?></a></p>
-				<p><i class="fas fa-phone mr-2"></i> <a href="tel:<?php echo esc_html($phone); ?>"><?php echo esc_html($phone); ?></a></p>
-				<p><i class="fab fa-linkedin mr-2"></i> <a href="<?php echo esc_url($linkedin); ?>" target="_blank" rel="noopener noreferrer">Linkedin</a></p>
+				<?php if ($email) : ?>
+					<p><i class="fas fa-envelope mr-2"></i> <a href="mailto:<?php echo esc_html($email); ?>"><?php echo esc_html($email); ?></a></p>
+				<?php endif; ?>
+				<?php if ($phone) : ?>
+					<p><i class="fas fa-phone mr-2"></i> <a href="tel:<?php echo esc_html($phone); ?>"><?php echo esc_html($phone); ?></a></p>
+				<?php endif; ?>
+				<?php if ($linkedin) : ?>
+					<p><i class="fab fa-linkedin mr-2"></i> <a href="<?php echo esc_url($linkedin); ?>" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
+				<?php endif; ?>
 
 			</div>
 			<div class="card card--contact">
@@ -78,12 +84,14 @@ $consultants = get_posts(array(
 			<h2>Meet the team</h2>
 			<div class="team-members">
 				<div class="wrapper">
-					<?php foreach ($consultants as $consultant) :
-
-					?>
+					<?php foreach ($consultants as $consultant) : ?>
 						<div class="card card--consultant">
 							<div class="card--consultant_img">
-								<a href="<?php echo esc_url(get_field('linkedin')); ?>" class="card--consultant_link" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin mr-2"></i> </a>
+								<?php
+								$consultant_linkedin = get_field('linkedin_url', $consultant->ID);
+								if ($consultant_linkedin) : ?>
+									<a href="<?php echo esc_url($consultant_linkedin); ?>" class="card--consultant_link" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin mr-2"></i> </a>
+								<?php endif; ?>
 								<img src="<?php echo esc_url(get_the_post_thumbnail_url($consultant->ID, 'full')); ?>" alt="<?php echo esc_attr($consultant->post_title); ?>" loading="lazy" />
 							</div>
 							<div class="card--consultant_footer">
