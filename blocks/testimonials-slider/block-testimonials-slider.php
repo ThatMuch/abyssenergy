@@ -63,10 +63,12 @@ $testimonials = new WP_Query($args);
 			<div class="container">
 				<div class="testimonials-slider-block-header">
 					<?php if ($show_title && $title) : ?>
-						<?php if ($subtitle) : ?>
-							<span class="section--subtitle"><?php echo esc_html($subtitle); ?></span>
-						<?php endif; ?>
-						<h2 class="section-title"><?php echo esc_html($title); ?></h2>
+						<div class="section-title">
+							<?php if ($subtitle) : ?>
+								<span class="section--subtitle"><?php echo esc_html($subtitle); ?></span>
+							<?php endif; ?>
+							<h2><?php echo esc_html($title); ?></h2>
+						</div>
 					<?php endif; ?>
 					<?php if ($image) : ?>
 						<img src="<?php echo esc_url(wp_get_attachment_image_url($image, 'full')); ?>" alt="<?php echo esc_attr(get_post_meta($image, '_wp_attachment_image_alt', true)); ?>" class="img-fluid testimonial-section-image" loading="lazy" />
