@@ -399,9 +399,8 @@ $description = get_field('description');
 						Send my CV
 					</a>
 				</div>
-
 				<div class="col-md-4">
-					<img loading="lazy" class="jobs-cta-img" src="<?php echo get_template_directory_uri(); ?>/images/tile_company.webp" alt="Company">
+					<img loading="lazy" src="<?php echo get_template_directory_uri(); ?>/images/opentowork.webp" alt="Company">
 				</div>
 			</div>
 		</div>
