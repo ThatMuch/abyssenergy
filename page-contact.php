@@ -78,10 +78,12 @@ $consultants = get_posts(array(
 			<h2>Meet the team</h2>
 			<div class="team-members">
 				<div class="wrapper">
-					<?php foreach ($consultants as $consultant) : ?>
+					<?php foreach ($consultants as $consultant) :
+
+					?>
 						<div class="card card--consultant">
 							<div class="card--consultant_img">
-								<a href="<?php echo esc_html(get_field('linkedin', $consultant->ID)); ?>" class="card--consultant_link" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin mr-2"></i> </a>
+								<a href="<?php echo esc_url(get_field('linkedin')); ?>" class="card--consultant_link" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin mr-2"></i> </a>
 								<img src="<?php echo esc_url(get_the_post_thumbnail_url($consultant->ID, 'full')); ?>" alt="<?php echo esc_attr($consultant->post_title); ?>" loading="lazy" />
 							</div>
 							<div class="card--consultant_footer">
