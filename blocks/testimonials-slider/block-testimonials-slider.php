@@ -29,6 +29,7 @@ if (!empty($block['align'])) {
 
 // Récupération des paramètres du bloc
 $title = get_field('title') ?: 'Témoignages de nos clients';
+$subtitle = get_field('subtitle');
 $show_title = get_field('show_title') !== false;
 $image = get_field('image');
 $testimonials_limit = get_field('testimonials_limit');
@@ -62,6 +63,9 @@ $testimonials = new WP_Query($args);
 			<div class="container">
 				<div class="testimonials-slider-block-header">
 					<?php if ($show_title && $title) : ?>
+						<?php if ($subtitle) : ?>
+							<span class="section--subtitle"><?php echo esc_html($subtitle); ?></span>
+						<?php endif; ?>
 						<h2 class="section-title"><?php echo esc_html($title); ?></h2>
 					<?php endif; ?>
 					<?php if ($image) : ?>

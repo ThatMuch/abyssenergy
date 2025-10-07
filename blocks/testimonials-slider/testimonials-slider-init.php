@@ -63,6 +63,18 @@ if (function_exists('acf_add_local_field_group')) {
 				'maxlength' => '',
 			),
 			array(
+				'key' => 'field_testimonials_slider_subtitle',
+				'label' => 'Sous-titre de la section',
+				'name' => 'subtitle',
+				'type' => 'text',
+				'instructions' => 'Entrez le sous-titre de la section des témoignages.',
+				'default_value' => 'Ce que disent nos clients',
+				'placeholder' => '',
+				'prepend' => '',
+				'append' => '',
+				'maxlength' => '',
+			),
+			array(
 				'key' => 'field_testimonials_slider_show_title',
 				'label' => 'Afficher le titre',
 				'name' => 'show_title',
