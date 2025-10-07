@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded',function () {
   const buttons = document.body.querySelectorAll(".card-button");
   if (!buttons.length) return;
-  const modal = document.body.querySelector(".card-modal");
-	if (!modal) return;
+
+  let scrollPosition = 0;
 
 	    /**
      * Sauvegarde la position de scroll actuelle
@@ -23,32 +23,49 @@ document.addEventListener('DOMContentLoaded',function () {
       e.preventDefault();
       e.stopPropagation();
 
-      // Afficher le modal
-      showModal(modal);
+      // Trouver la carte parent et sa modale correspondante
+      const cardBlock = button.closest('.card-block');
+      if (!cardBlock) return;
+
+      const cardId = cardBlock.id;
+      const modalId = cardId + '-modal';
+      const modal = document.getElementById(modalId);
+
+      if (modal) {
+        showModal(modal);
+      }
     });
   });
 
-  // Fermer le modal en cliquant sur le backdrop ou le bouton fermer
-  modal.addEventListener("click", function (e) {
-    if (e.target === modal) {
-      hideModal(modal);
+  // Gérer toutes les modales de cartes
+  const modals = document.querySelectorAll(".card-modal");
+
+  modals.forEach((modal) => {
+    // Fermer le modal en cliquant sur le backdrop
+    modal.addEventListener("click", function (e) {
+      if (e.target === modal) {
+        hideModal(modal);
+      }
+    });
+
+    // Événement spécifique pour le bouton de fermeture
+    const closeButton = modal.querySelector(".modal-close");
+    if (closeButton) {
+      closeButton.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        hideModal(modal);
+      });
     }
   });
 
-  // Événement spécifique pour le bouton de fermeture
-  const closeButton = modal.querySelector(".modal-close");
-  if (closeButton) {
-    closeButton.addEventListener("click", function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-      hideModal(modal);
-    });
-  }
-
   // Fermer avec la touche Escape
   document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && modal.classList.contains("active")) {
-      hideModal(modal);
+    if (e.key === "Escape") {
+      const activeModal = document.querySelector(".card-modal.active");
+      if (activeModal) {
+        hideModal(activeModal);
+      }
     }
   });
 
@@ -76,7 +93,6 @@ document.addEventListener('DOMContentLoaded',function () {
 	  function hideModal(modal) {
 		  modal.classList.remove('active');
 		  document.body.classList.remove('modal-open');
-		   document.body.classList.remove('modal-open');
 
         // Restaurer la position après avoir fermé le modal
         document.body.style.top = '';
