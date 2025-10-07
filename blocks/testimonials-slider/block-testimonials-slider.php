@@ -101,9 +101,6 @@ $testimonials = new WP_Query($args);
 								</span>
 
 								<div class="testimonial-header">
-									<h3 class="testimonial-title h4">
-										<?php the_title(); ?>
-									</h3>
 									<?php if (has_post_thumbnail()) : ?>
 										<div class="testimonial-logo">
 											<?php the_post_thumbnail('medium'); ?>

@@ -63,9 +63,10 @@ position: relative;
 }
 
 .testimonial-logo img {
-    mix-blend-mode: multiply;
 	height: 50px;
 	width: auto;
+	filter: brightness(0.3) saturate(50%) invert(15%) sepia(23%) saturate(4488%) hue-rotate(183deg) brightness(95%) contrast(100%);
+
 }
 
 .testimonial-content {
