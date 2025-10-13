@@ -1,6 +1,6 @@
 <?php
 get_header();
-$subtitle = get_field('subtitle');
+$subtitle = safe_get_field_with_default('subtitle', false, '');
 ?>
 
 <div class="page-header <?php if (has_post_thumbnail()): ?>has-thumbnail<?php endif; ?>">

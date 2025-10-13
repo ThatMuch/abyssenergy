@@ -25,6 +25,7 @@ define('ABYSSENERGY_URI', get_template_directory_uri());
 function abyssenergy_load_theme_modules()
 {
 	$modules = [
+		'acf-safe-helpers.php', // Helpers sécurisés pour ACF
 		'inc/setup.php',      // Configuration principale du thème
 		'inc/utils.php',      // Fonctions utilitaires
 		'inc/enqueue.php',    // Enregistrement des scripts et styles

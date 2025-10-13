@@ -1,6 +1,6 @@
 <?php get_header();
-$subtitle = get_field('subtitle');
-$description = get_field('description');
+$subtitle = safe_get_field_with_default('subtitle', false, '');
+$description = safe_get_field_with_default('description', false, '');
 // the job category
 $job_category = get_the_terms($post->ID, 'job-category');
 if ($job_category && !is_wp_error($job_category)) {

@@ -1,7 +1,7 @@
 	<?php get_header();
-	$subtitle = get_field('subtitle');
-	$description = get_field('description');
-	$buttons = get_field('buttons');
+	$subtitle = safe_get_field_with_default('subtitle', false, '');
+	$description = safe_get_field_with_default('description', false, '');
+	$buttons = safe_get_field('buttons');
 	?>
 	<div class="page-header <?php if (has_post_thumbnail()): ?>has-thumbnail<?php endif; ?>">
 		<div class="container">

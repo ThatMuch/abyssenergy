@@ -24,8 +24,8 @@ $job_skills = array();
 
 if ($all_jobs_query->have_posts()) {
 	foreach ($all_jobs_query->posts as $job_id) {
-		$job_city = get_field('job_city', $job_id);
-		$job_country = get_field('job_country', $job_id);
+		$job_city = safe_get_field('job_city', $job_id);
+		$job_country = safe_get_field('job_country', $job_id);
 		$job_skill =  get_the_terms($job_id, 'job-skill');
 		$skill = '';
 		if ($job_skill && !is_wp_error($job_skill)) {
@@ -180,8 +180,8 @@ if (get_query_var('job_search')) {
 
 $jobs_query = new WP_Query($job_args);
 
-$subtitle = get_field('subtitle');
-$description = get_field('description');
+$subtitle = safe_get_field_with_default('subtitle', false, '');
+$description = safe_get_field_with_default('description', false, '');
 ?>
 
 <div class="jobs-listing-page">

@@ -7,8 +7,8 @@
  * Ce template peut être assigné à n'importe quelle page depuis l'administration WordPress
  */
 
-$subtitle = get_field('subtitle');
-$description = get_field('description');
+$subtitle = safe_get_field_with_default('subtitle', false, '');
+$description = safe_get_field_with_default('description', false, '');
 
 get_header()
 ?>

@@ -8,13 +8,13 @@
  */
 
 get_header();
-$subtitle = get_field('subtitle');
-$email = get_field('email');
-$phone = get_field('phone');
-$linkedin = get_field('linkedin');
+$subtitle = safe_get_field_with_default('subtitle', false, '');
+$email = safe_get_field('email');
+$phone = safe_get_field('phone');
+$linkedin = safe_get_field('linkedin');
 // get_field google map
-$location_nancy = get_field('nancy');
-$location_paris = get_field('paris');
+$location_nancy = safe_get_field('nancy');
+$location_paris = safe_get_field('paris');
 
 // get post type consultants
 $consultants = get_posts(array(
@@ -88,7 +88,7 @@ $consultants = get_posts(array(
 						<div class="card card--consultant">
 							<div class="card--consultant_img">
 								<?php
-								$consultant_linkedin = get_field('linkedin_url', $consultant->ID);
+								$consultant_linkedin = safe_get_field('linkedin_url', $consultant->ID);
 								if ($consultant_linkedin) : ?>
 									<a href="<?php echo esc_url($consultant_linkedin); ?>" class="card--consultant_link" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin mr-2"></i> </a>
 								<?php endif; ?>
@@ -96,7 +96,7 @@ $consultants = get_posts(array(
 							</div>
 							<div class="card--consultant_footer">
 								<h3 class="mt-0 b1"><?php echo esc_html($consultant->post_title); ?></h3>
-								<p class="mb-0 mt-0"><?php echo esc_html(get_field('position', $consultant->ID)); ?></p>
+								<p class="mb-0 mt-0"><?php echo esc_html(safe_get_field_with_default('position', $consultant->ID, '')); ?></p>
 							</div>
 							<div class="card--consultant_back">
 								<p><?php echo $consultant->post_content; ?></p>
