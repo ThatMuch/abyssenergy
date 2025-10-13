@@ -87,19 +87,24 @@ async function createZip() {
   console.log(`🔄 Création de l'archive ${zipName}...`);
 
   try {
+    // Créer l'archive depuis le répertoire temporaire vers le répertoire principal
+    const zipPath = path.resolve(`./${zipName}`);
+
     await bestzip({
       source: '*',
-      destination: `./${zipName}`,
+      destination: zipPath,
       cwd: tempDir
     });
     console.log(`✅ Archive créée avec succès: ${zipName}`);
 
-    // Vérifier si le fichier existe
-    const zipPath = `./${zipName}`;
+    // Vérifier si le fichier existe dans le répertoire principal
     if (fs.existsSync(zipPath)) {
+      const stats = fs.statSync(zipPath);
+      const fileSizeInMB = (stats.size / (1024 * 1024)).toFixed(2);
       console.log(`✅ L'archive est disponible à: ${zipPath}`);
+      console.log(`📏 Taille du fichier: ${fileSizeInMB} MB`);
     } else {
-      console.log(`⚠️ L'archive a été créée mais n'a pas pu être localisée.`);
+      console.log(`⚠️ L'archive a été créée mais n'a pas pu être localisée à: ${zipPath}`);
     }
 
     // Nettoyer le répertoire temporaire
@@ -108,7 +113,8 @@ async function createZip() {
     console.log(`
 📦 Thème WordPress empaqueté avec succès!
 📁 Fichier: ${zipName}
-🔢 Version: ${version}
+� Emplacement: ${path.resolve(`./${zipName}`)}
+�🔢 Version: ${version}
 
 ✅ Ce fichier peut maintenant être importé dans WordPress via l'interface d'administration.
 `);
@@ -127,11 +133,29 @@ async function createZip() {
 ⏳ Veuillez patienter...
 `);
 
-  // Nettoyage préalable
-  if (fs.existsSync(tempDir)) {
-    execSync(`rm -rf ${tempDir}`, { stdio: 'inherit' });
-  }
+  try {
+    // Nettoyage préalable
+    if (fs.existsSync(tempDir)) {
+      execSync(`rm -rf ${tempDir}`, { stdio: 'inherit' });
+    }
 
-  copyFiles();
-  await createZip();
+    // Supprimer l'ancien zip s'il existe
+    const oldZipPath = `./${zipName}`;
+    if (fs.existsSync(oldZipPath)) {
+      fs.unlinkSync(oldZipPath);
+      console.log(`🗑️ Ancien fichier ${zipName} supprimé`);
+    }
+
+    copyFiles();
+    await createZip();
+  } catch (error) {
+    console.error('❌ Erreur lors de l\'exécution du script:', error);
+
+    // Nettoyage en cas d'erreur
+    if (fs.existsSync(tempDir)) {
+      execSync(`rm -rf ${tempDir}`, { stdio: 'inherit' });
+    }
+
+    process.exit(1);
+  }
 })();
