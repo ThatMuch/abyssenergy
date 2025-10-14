@@ -1,187 +1,189 @@
-<?php get_header();
+<?php get_header(); ?>
 
-// get sector
-$sector_meta = get_the_terms($post->ID, 'job-sector');
-$sector = '';
-$sector_slug = '';
-if ($sector_meta && !is_wp_error($sector_meta)) {
-    $sector = join(', ', wp_list_pluck($sector_meta, 'name'));
-    $sector_slug = join(', ', wp_list_pluck($sector_meta, 'slug'));
-}
-
-// Get the current post's categories
-$current_post_id = get_the_ID();
-
-// Define query arguments
-$args = [
-    'post_type' => 'job',
-    'posts_per_page' => 6,
-    'post__not_in' => [$current_post_id], // Exclude current post
-    'orderby' => 'date',
-    'order' => 'DESC'
-];
-
-// Filtrer par secteur si des secteurs sont sélectionnés
-if (!empty($sector)) {
-    $args['tax_query'] = array(
-        array(
-            'taxonomy' => 'job-sector',
-            'field'    => 'slug',
-            'terms'    => $sector_slug,
-        ),
-    );
-}
-
-
-// Query the jobs
-$query = new WP_Query($args);
-
-// If no jobs found in the same category, fetch the latest 5 posts
-if (!$query->have_posts()) {
-    $args = [
-        'post_type' => 'job',
-        'posts_per_page' => 6,
-        'post__not_in' => [$current_post_id],
-        'orderby' => 'date',
-        'order' => 'DESC'
-    ];
-    $query = new WP_Query($args);
-}
-
-
-?>
 <section class='content job-detail'>
     <div class="container">
+        <?php // var_dump($post); 
+        ?>
         <a href="<?php // go back to previous page
                     echo esc_url(wp_get_referer());
                     ?>" class="btn btn--outline mb-5"><i class="fa fa-chevron-left"></i> Back</a>
-        <?php if (have_posts()) : ?>
-            <?php while (have_posts()) : the_post(); ?>
-                <section class="job-detail-header">
-                    <span class="job-sector">
-                        <?php echo $sector; ?>
-                    </span>
+        <?php if ($post) : ?>
+            <?php
+            // get sector
+            $sector_meta = get_the_terms(get_the_ID(), 'job-sector');
+            $sector = '';
+            $sector_slug = '';
+            if ($sector_meta && !is_wp_error($sector_meta)) {
+                $sector = join(', ', wp_list_pluck($sector_meta, 'name'));
+                $sector_slug = join(', ', wp_list_pluck($sector_meta, 'slug'));
+            }
+
+            ?>
+            <section class="job-detail-header">
+                <span class="job-sector">
+                    <?php echo $sector; ?>
+                </span>
+                <?php
+                if (get_the_time('U') > strtotime('-5 days')) {
+                    echo '<span class="tag tag-secondary">New</span>';
+                }
+                ?>
+                <h1 class="job-detail-title"><?php the_title(); ?></h1>
+                <span class="job-skill">
                     <?php
-                    if (get_the_time('U') > strtotime('-5 days')) {
-                        echo '<span class="tag tag-secondary">New</span>';
+                    $skill_meta = get_the_terms(get_the_ID(), 'job-skill');
+                    $skill = '';
+                    if ($skill_meta && !is_wp_error($skill_meta)) {
+                        $skill = join(', ', wp_list_pluck($skill_meta, 'name'));
                     }
+                    echo $skill;
                     ?>
-                    <h1 class="job-detail-title"><?php the_title(); ?></h1>
-                    <span class="job-skill">
-                        <?php
-                        $skill_meta = get_the_terms($post->ID, 'job-skill');
-                        $skill = '';
-                        if ($skill_meta && !is_wp_error($skill_meta)) {
-                            $skill = join(', ', wp_list_pluck($skill_meta, 'name'));
-                        }
-                        echo $skill;
-                        ?>
-                    </span>
-                </section>
-                <section class="job-detail-info">
-                    <div class="row">
-                        <div class="col col-md-3">
-                            <p class="job-label">Location</p>
-                            <?php
-                            $city = get_field('job_city');
-                            $state = get_field('job_state');
-                            ?>
-                            <p class="job-location">
-                                <i class="fas fa-map-marker-alt mr-2"></i>
-                                <?php
-                                if ($city) {
-                                    echo esc_html($city);
-                                    if ($state) {
-                                        echo ', ' . esc_html($state);
-                                    }
-                                } elseif ($state) {
-                                    echo esc_html($state);
-                                } else {
-                                    echo 'Location not specified';
-                                }
-                                ?>
-                            </p>
-                        </div>
-                        <div class="col col-md-3">
-                            <p class="job-label">Category</p>
-                            <?php
-                            $category_meta = get_the_terms($post->ID, 'job-category');
-                            $category = '';
-                            if ($category_meta && !is_wp_error($category_meta)) {
-                                $category = join(', ', wp_list_pluck($category_meta, 'name'));
-                            }
-                            ?>
-                            <span class="tag tag-primary">
-                                <?php echo esc_html($category); ?>
-                            </span>
-                        </div>
-                        <div class="col col-md-5">
-                            <p class="job-label">Work type</p>
-                            <div class="d-inline">
-                                <?php
-                                $emp_meta = get_the_terms($post->ID, 'job-type');
-
-                                // transform $emp_meta to string
-                                if ($emp_meta && !is_wp_error($emp_meta)) {
-                                    $emp_meta = wp_list_pluck($emp_meta, 'name');
-                                    $emp_meta = array_map('trim', $emp_meta);
-                                }
-                                $work_types = explode('–', implode('–', $emp_meta));
-
-                                foreach ($work_types as $type) {
-                                    echo '<span class="tag">' . esc_html($type) . '</span>';
-                                }
-                                ?>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                </span>
+            </section>
+            <section class="job-detail-info">
                 <div class="row">
-                    <div class="col col-xl-8">
-                        <h2 style='margin-top: 28px;padding-bottom: 0'>Job Description</h2>
-                        <?php the_content(); ?>
-                    </div>
-                    <div class="col col-xl-4">
-                        <div class="card">
-                            <h2>Apply</h2>
+                    <div class="col col-md-3">
+                        <p class="job-label">Location</p>
+                        <?php
+                        $city = get_field('job_city');
+                        $state = get_field('job_state');
+                        ?>
+                        <p class="job-location">
+                            <i class="fas fa-map-marker-alt mr-2"></i>
                             <?php
-                            $jobID = get_field('job_id');
-                            $owner = get_field('recruiter_email');
-                            $screeningQuestion = get_field('screening_question');
-
-                            // Vérifier si le champ est une chaîne JSON et la convertir en tableau si nécessaire
-                            if ($screeningQuestion && is_string($screeningQuestion)) {
-                                // Essayer de décoder au cas où c'est une chaîne JSON
-                                $decoded = json_decode($screeningQuestion, true);
-                                if (is_array($decoded)) {
-                                    $screeningQuestion = $decoded;
+                            if ($city) {
+                                echo esc_html($city);
+                                if ($state) {
+                                    echo ', ' . esc_html($state);
                                 }
-                            }
-
-                            // S'assurer que nous avons un tableau pour l'implode
-                            if ($screeningQuestion && is_array($screeningQuestion)) {
-                                $screeningQuestion = implode(', ', $screeningQuestion);
-                            } elseif ($screeningQuestion && !is_array($screeningQuestion)) {
-                                // Si c'est une chaîne mais pas un JSON valide, on la garde telle quelle
-                                $screeningQuestion = strval($screeningQuestion);
+                            } elseif ($state) {
+                                echo esc_html($state);
                             } else {
-                                $screeningQuestion = '';
+                                echo 'Location not specified';
                             }
+                            ?>
+                        </p>
+                    </div>
+                    <div class="col col-md-3">
+                        <p class="job-label">Category</p>
+                        <?php
+                        $category_meta = get_the_terms(get_the_ID(), 'job-category');
+                        $category = '';
+                        if ($category_meta && !is_wp_error($category_meta)) {
+                            $category = join(', ', wp_list_pluck($category_meta, 'name'));
+                        }
+                        ?>
+                        <span class="tag tag-primary">
+                            <?php echo esc_html($category); ?>
+                        </span>
+                    </div>
+                    <div class="col col-md-5">
+                        <p class="job-label">Work type</p>
+                        <div class="d-inline">
+                            <?php
+                            $emp_meta = get_the_terms(get_the_ID(), 'job-type');
 
-                            $skill_meta = get_the_terms($post->ID, 'job-skill');
-                            $skill = '';
-                            if ($skill_meta && !is_wp_error($skill_meta)) {
-                                $skill = join(', ', wp_list_pluck($skill_meta, 'name'));
+                            // transform $emp_meta to string
+                            if ($emp_meta && !is_wp_error($emp_meta)) {
+                                $emp_meta = wp_list_pluck($emp_meta, 'name');
+                                $emp_meta = array_map('trim', $emp_meta);
                             }
-                            echo do_shortcode('[gravityform id="1" title="false" ajax="true" field_values="jobID=' . $jobID . '&owner=' . $owner . '&position=' . $skill . '&screening=' . $screeningQuestion . '"]');
+                            $work_types = explode('–', implode('–', $emp_meta));
+
+                            foreach ($work_types as $type) {
+                                echo '<span class="tag">' . esc_html($type) . '</span>';
+                            }
                             ?>
                         </div>
                     </div>
                 </div>
+            </section>
+            <div class="row">
+                <div class="col col-xl-8">
+                    <h2 style='margin-top: 28px;padding-bottom: 0'>Job Description</h2>
+                    <?php the_content(); ?>
+                </div>
+                <div class="col col-xl-4">
+                    <div class="card">
+                        <h2>Apply</h2>
+                        <?php
+                        $jobID = get_field('job_id');
+                        $owner = get_field('recruiter_email');
+                        $screeningQuestion = get_field('screening_question');
 
-            <?php endwhile; ?>
+                        // Vérifier si le champ est une chaîne JSON et la convertir en tableau si nécessaire
+                        if ($screeningQuestion && is_string($screeningQuestion)) {
+                            // Essayer de décoder au cas où c'est une chaîne JSON
+                            $decoded = json_decode($screeningQuestion, true);
+                            if (is_array($decoded)) {
+                                $screeningQuestion = $decoded;
+                            }
+                        }
+
+                        // S'assurer que nous avons un tableau pour l'implode
+                        if ($screeningQuestion && is_array($screeningQuestion)) {
+                            $screeningQuestion = implode(', ', $screeningQuestion);
+                        } elseif ($screeningQuestion && !is_array($screeningQuestion)) {
+                            // Si c'est une chaîne mais pas un JSON valide, on la garde telle quelle
+                            $screeningQuestion = strval($screeningQuestion);
+                        } else {
+                            $screeningQuestion = '';
+                        }
+
+                        $skill_meta = get_the_terms(get_the_ID(), 'job-skill');
+                        $skill = '';
+                        if ($skill_meta && !is_wp_error($skill_meta)) {
+                            $skill = join(', ', wp_list_pluck($skill_meta, 'name'));
+                        }
+                        echo do_shortcode('[gravityform id="1" title="false" ajax="true" field_values="jobID=' . $jobID . '&owner=' . $owner . '&position=' . $skill . '&screening=' . $screeningQuestion . '"]');
+                        ?>
+                    </div>
+                </div>
+            </div>
+
+
         <?php endif; ?>
+
         <?php
+        // Logique pour les posts connexes
+        // Get the current post's categories
+        $current_post_id = get_the_ID();
+
+        // Define query arguments
+        $args = [
+            'post_type' => 'job',
+            'posts_per_page' => 6,
+            'post__not_in' => [$current_post_id], // Exclude current post
+            'orderby' => 'date',
+            'order' => 'DESC'
+        ];
+
+        // Filtrer par secteur si des secteurs sont sélectionnés
+        if (!empty($sector_slug)) {
+            $args['tax_query'] = array(
+                array(
+                    'taxonomy' => 'job-sector',
+                    'field' => 'slug',
+                    'terms' => $sector_slug,
+                ),
+            );
+        }
+
+        // Query the jobs
+        $query = new WP_Query($args);
+
+        // If no jobs found in the same category, fetch the latest 6 posts
+        if (!$query->have_posts()) {
+            $args = [
+                'post_type' => 'job',
+                'posts_per_page' => 6,
+                'post__not_in' => [$current_post_id],
+                'orderby' => 'date',
+                'order' => 'DESC'
+            ];
+            $query = new WP_Query($args);
+        }
+
         // Passer tous les paramètres nécessaires au template
         get_template_part('template-parts/section-jobs', null, [
             'query' => $query

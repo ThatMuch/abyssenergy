@@ -219,24 +219,33 @@ function abyssenergy_job_template_redirect()
 	$job_id = get_query_var('job_id');
 
 	if ($job_id) {
-		// Vérifier que le post existe et est du type 'job'
-		$post = get_post($job_id);
+		// Créer une nouvelle query avec le post spécifique
+		$query = new WP_Query(array(
+			'p' => $job_id,
+			'post_type' => 'job',
+			'post_status' => 'publish'
+		));
 
-		if ($post && $post->post_type === 'job' && $post->post_status === 'publish') {
-			// Charger le template single-job.php
-			global $wp_query;
+		if ($query->have_posts()) {
+			// Remplacer la query globale par notre query personnalisée
+			global $wp_query, $post;
+			$wp_query = $query;
+
+			// Configurer les flags de la query pour une page single
 			$wp_query->is_single = true;
 			$wp_query->is_singular = true;
+			$wp_query->is_home = false;
+			$wp_query->is_page = false;
 			$wp_query->is_404 = false;
-			$wp_query->queried_object = $post;
-			$wp_query->queried_object_id = $post->ID;
-			$wp_query->post = $post;
+			$wp_query->is_archive = false;
+			$wp_query->is_search = false;
 
-			// Mettre à jour le post global
-			$GLOBALS['post'] = $post;
-			setup_postdata($post);
+			// Initialiser le post courant
+			$wp_query->the_post();
+			$post = $wp_query->post;
+			$wp_query->rewind_posts();
 
-			// Inclure le template
+			// Charger le template approprié
 			if (file_exists(get_template_directory() . '/single-job.php')) {
 				include(get_template_directory() . '/single-job.php');
 			} else {

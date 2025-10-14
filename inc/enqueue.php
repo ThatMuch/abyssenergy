@@ -189,7 +189,7 @@ function abyssenergy_enqueue_leaflet()
 	// Dans l'éditeur admin, toujours charger Leaflet
 	if (is_admin()) {
 		$enqueue_leaflet = true;
-	} elseif (is_singular() && has_blocks($post->post_content)) {
+	} elseif (is_singular() && $post && has_blocks($post->post_content)) {
 		// Pour le front-end, vérifier si le bloc est utilisé
 		$blocks = parse_blocks($post->post_content);
 		foreach ($blocks as $block) {
