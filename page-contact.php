@@ -25,7 +25,7 @@ $consultants = get_posts(array(
 
 <div class="page page_contact">
 	<div class="container">
-		<div class="row mb-6">
+		<div class="row mb-6 align-items-baseline">
 			<div class="col-md-6">
 				<h1><?php the_title(); ?></h1>
 				<?php if ($subtitle): ?>
