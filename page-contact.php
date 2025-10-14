@@ -24,33 +24,27 @@ $consultants = get_posts(array(
 ?>
 
 <div class="page page_contact">
-	<div class="page-header <?php if (has_post_thumbnail()): ?>has-thumbnail<?php endif; ?>">
-		<div class="container">
-			<div class="row">
-				<div class="col col-md-8">
-					<h1><?php the_title(); ?></h1>
-					<?php if ($subtitle): ?>
-						<?php echo $subtitle; ?>
-					<?php endif; ?>
-				</div>
-				<div class="col col-md-4">
-					<?php if (has_post_thumbnail()): ?>
-						<div class="page-thumbnail">
-							<?php the_post_thumbnail('medium'); ?>
-						</div>
-					<?php endif; ?>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<h1><?php the_title(); ?></h1>
+				<?php if ($subtitle): ?>
+					<?php echo $subtitle; ?>
+				<?php endif; ?>
+				<?php if (has_post_thumbnail()): ?>
+					<div class="page-thumbnail">
+						<?php the_post_thumbnail('medium'); ?>
+					</div>
+				<?php endif; ?>
+			</div>
+			<div class="col-md-6">
+				<div class="form-wrapper">
+					<?php echo do_shortcode('[gravityform id="3" title="false" description="false"]'); ?>
 				</div>
 			</div>
-
-		</div>
-	</div>
-	<div class="container">
-		<div class="form-wrapper">
-			<?php echo do_shortcode('[gravityform id="3" title="false" description="false"]'); ?>
 		</div>
 		<div class="page_contact_cards">
 			<div class="card card--contact">
-
 				<h3>Contact Information</h3>
 				<?php if ($email) : ?>
 					<p><i class="fas fa-envelope mr-2"></i> <a href="mailto:<?php echo esc_html($email); ?>"><?php echo esc_html($email); ?></a></p>
