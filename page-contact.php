@@ -25,7 +25,7 @@ $consultants = get_posts(array(
 
 <div class="page page_contact">
 	<div class="container">
-		<div class="row">
+		<div class="row mb-6">
 			<div class="col-md-6">
 				<h1><?php the_title(); ?></h1>
 				<?php if ($subtitle): ?>
@@ -33,7 +33,7 @@ $consultants = get_posts(array(
 				<?php endif; ?>
 				<?php if (has_post_thumbnail()): ?>
 					<div class="page-thumbnail">
-						<?php the_post_thumbnail('medium'); ?>
+						<?php the_post_thumbnail('full', array('class' => 'd-block mt-6 m-auto')); ?>
 					</div>
 				<?php endif; ?>
 			</div>
