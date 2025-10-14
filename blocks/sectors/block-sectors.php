@@ -35,6 +35,9 @@ $sectors_query = new WP_Query($args);
 ?>
 <?php if ($is_preview) : ?>
 	<div class="block-preview-message">
+		<?php if ($subtitle) : ?>
+			<span class="section--subtitle"><?php echo esc_html($subtitle); ?></span>
+		<?php endif; ?>
 		<h3><?php echo esc_html($title); ?></h3>
 		<p><?php _e('Aperçu du bloc Sectors. Les secteurs réels s\'afficheront sur le site.', 'abyssenergy'); ?></p>
 	</div>
