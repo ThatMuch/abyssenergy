@@ -217,11 +217,11 @@ add_filter('query_vars', 'abyssenergy_add_job_id_query_var');
 function abyssenergy_job_template_redirect()
 {
 	$job_id = get_query_var('job_id');
-	
+
 	if ($job_id) {
 		// Vérifier que le post existe et est du type 'job'
 		$post = get_post($job_id);
-		
+
 		if ($post && $post->post_type === 'job' && $post->post_status === 'publish') {
 			// Charger le template single-job.php
 			global $wp_query;
@@ -231,11 +231,11 @@ function abyssenergy_job_template_redirect()
 			$wp_query->queried_object = $post;
 			$wp_query->queried_object_id = $post->ID;
 			$wp_query->post = $post;
-			
+
 			// Mettre à jour le post global
 			$GLOBALS['post'] = $post;
 			setup_postdata($post);
-			
+
 			// Inclure le template
 			if (file_exists(get_template_directory() . '/single-job.php')) {
 				include(get_template_directory() . '/single-job.php');
