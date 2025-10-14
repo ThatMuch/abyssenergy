@@ -22,6 +22,25 @@
 			"maxlength": ""
 		},
 		{
+			"key": "field_sectors_grid_subtitle",
+			"label": "Sous titre",
+			"name": "subtitle",
+			"type": "text",
+			"instructions": "Sous titre du bloc (optionnel)",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		{
 			"key": "field_sectors_selection_type",
 			"label": "Type de sélection",
 			"name": "selection_type",

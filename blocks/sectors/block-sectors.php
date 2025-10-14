@@ -7,6 +7,7 @@
 
 // Paramètres du bloc avec valeurs par défaut
 $title = get_field('title');
+$subtitle = get_field('subtitle');
 $selection_type = get_field('selection_type') ?: 'all';
 $specific_sectors = get_field('specific_sectors');
 // Classes du bloc
@@ -34,6 +35,7 @@ $sectors_query = new WP_Query($args);
 ?>
 <?php if ($is_preview) : ?>
 	<div class="block-preview-message">
+		<span class="section--subtitle"><?php echo esc_html($subtitle); ?></span>
 		<h3><?php echo esc_html($title); ?></h3>
 		<p><?php _e('Aperçu du bloc Sectors. Les secteurs réels s\'afficheront sur le site.', 'abyssenergy'); ?></p>
 	</div>
