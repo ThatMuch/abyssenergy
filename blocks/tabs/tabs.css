@@ -18,15 +18,11 @@
   gap: 0.5rem;
 }
 
-.tabs-nav-item {
-  margin: 0;
-}
-
 .tabs-nav-link {
 	color: #0A3F6A;
   display: block;
   width: 100%;
-  padding-bottom: 1.5rem;
+  padding: 1rem;
   background:none;
   border-bottom: 1px solid  #D0D3EF;
   border-top: none;
@@ -34,19 +30,32 @@
   border-right: none;
   font-family: Manrope, sans-serif;
   font-weight: 500;
-  font-size: 1.75rem;
+  font-size: 1.25rem;
   text-align: left;
   text-decoration: none;
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
-  margin-bottom: 1.5rem;
 }
 
 .tabs-nav-link.active, .tabs-nav-link:hover  {
-   border-bottom: 1px solid  #FF8E38;
-     font-weight: 700;
+background-color: #0A3F6A;
+color: #fff;
 }
+
+.tabs-nav-item {
+  margin: 0;
+
+    &:first-child .tabs-nav-link {
+    border-radius: 1rem  1rem 0 0;
+  }
+
+  &:last-child  .tabs-nav-link{
+    border-radius: 0 0 1rem 1rem;
+  }
+}
+
+
 
 /* Contenu des onglets (à droite) */
 .tabs-content {
