@@ -1,12 +1,17 @@
 .section--map {
   position: relative;
-margin-top: 100px;
+  margin-top: 100px;
 
   &.no-title {
     transform: translateY(-90px);
   }
+}
 
-  &::before {
+.abyss-global-map {
+  margin: 40px 0;
+  position: relative;
+
+    &::before {
     position: absolute;
     content: "";
     bottom: 0;
@@ -15,22 +20,26 @@ margin-top: 100px;
     background-image: url("./map-bcg.svg");
     background-repeat: no-repeat;
     background-position-x: center;
-    background-position-y: 155px;
-    background-size: 110%;
+    background-position-y: 420px;
+    background-size: 100%;
 
-    @media screen and (width <= 527px) {
-      background-position-y: 420px;
+    @media screen and (width >= 527px) {
+      background-position-y: 290px;
+    }
+
+    @media screen and (width >= 768px) {
+      background-position-y: 320px;
+    }
+
+    @media screen and (width >= 1024px) {
+      background-position-y: 190px;
     }
 
     @media screen and (width >= 1980px) {
       background-size: 105%;
+
     }
   }
-}
-
-.abyss-global-map {
-  margin: 40px 0;
-  position: relative;
 }
 
 .global-map-header {
@@ -38,7 +47,13 @@ margin-top: 100px;
   padding:  1.5rem;
   border-radius: 1.5rem;
   background: linear-gradient(180deg,  #DDEDFB 0.31%, rgb(255 255 255 / 0%) 96.31%);
+
+  @media screen and (width <= 768px) {
+    flex-direction: column-reverse;
+  }
 }
+
+
 
   .global-map-icon {
 text-align: right;
@@ -70,7 +85,8 @@ img {
 
 /* Styles pour la carte SVG */
 .global-map svg {
-  width: 100%;
+  width: 80%;
+  margin: 0 auto;
   height: auto;
   max-width: 100%;
   display: block;
