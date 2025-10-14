@@ -73,8 +73,9 @@
     "has_archive": true,
     "has_archive_slug": "jobs",
     "rewrite": {
-        "permalink_rewrite": "post_type_key",
-        "with_front": "1",
+        "permalink_rewrite": "slug",
+        "rewrite_slug": "job",
+        "with_front": "0",
         "feeds": "1",
         "pages": "1"
     },

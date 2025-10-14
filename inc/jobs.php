@@ -186,3 +186,36 @@ function abyssenergy_jobs_shortcode($atts)
 	return ob_get_clean();
 }
 add_shortcode('jobs_list', 'abyssenergy_jobs_shortcode');
+
+/**
+ * Configuration des URLs personnalisées pour les jobs
+ */
+function abyssenergy_job_rewrite_rules() {
+	// Ajouter la règle de réécriture pour /job/ID
+	add_rewrite_rule(
+		'^job/([0-9]+)/?$',
+		'index.php?post_type=job&p=$matches[1]',
+		'top'
+	);
+}
+add_action('init', 'abyssenergy_job_rewrite_rules');
+
+/**
+ * Modifier les permaliens pour les jobs - utiliser l'ID au lieu du slug
+ */
+function abyssenergy_job_permalink($post_link, $post) {
+	if ($post->post_type === 'job' && is_numeric($post->ID)) {
+		return home_url('/job/' . $post->ID . '/');
+	}
+	return $post_link;
+}
+add_filter('post_type_link', 'abyssenergy_job_permalink', 10, 2);
+
+/**
+ * Vider les règles de réécriture lors de l'activation du thème
+ */
+function abyssenergy_flush_job_rewrite_rules() {
+	abyssenergy_job_rewrite_rules();
+	flush_rewrite_rules();
+}
+add_action('after_switch_theme', 'abyssenergy_flush_job_rewrite_rules');
