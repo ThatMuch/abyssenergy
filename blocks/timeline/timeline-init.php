@@ -62,6 +62,16 @@ function register_timeline_block()
 					'placeholder' => 'Notre parcours',
 				),
 				array(
+					'key' => 'field_timeline_subtitle',
+					'label' => 'Sous-titre de la timeline',
+					'name' => 'timeline_subtitle',
+					'type' => 'text',
+					'instructions' => 'Entrez le sous-titre de la timeline.',
+					'required' => 0,
+					'default_value' => '',
+					'placeholder' => 'Notre parcours',
+				),
+				array(
 					'key' => 'field_timeline_description',
 					'label' => 'Description de la timeline',
 					'name' => 'timeline_description',

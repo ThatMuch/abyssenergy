@@ -16,6 +16,7 @@ if (!empty($block['align'])) {
 
 // Récupérer les champs
 $title = get_field('timeline_title');
+$subtitle = get_field('timeline_subtitle');
 $steps = get_field('steps');
 $timeline_files = get_field('timeline_files');
 $timeline_description = get_field('timeline_description');
@@ -53,7 +54,11 @@ $timeline_description = get_field('timeline_description');
 		<!-- Timeline Block -->
 		<div class="<?php echo esc_attr($className); ?>" data-block-id="<?php echo esc_attr($block_id); ?>">
 			<div class="container">
-				<h2 class="timeline-title text-center"><?php echo wp_kses_post($title); ?></h2>
+
+				<?php if ($subtitle) : ?>
+					<span class="section--subtitle text-center"><?php echo esc_html($subtitle); ?></span>
+				<?php endif; ?>
+				<h2 class=" timeline-title text-center"><?php echo wp_kses_post($title); ?></h2>
 				<?php if (!empty($timeline_description)) : ?>
 					<div class="timeline-description text-center"><?php echo wp_kses_post($timeline_description); ?></div>
 				<?php endif; ?>
