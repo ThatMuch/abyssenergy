@@ -56,7 +56,7 @@ $timeline_description = get_field('timeline_description');
 			<div class="container">
 
 				<?php if ($subtitle) : ?>
-					<span class="section--subtitle text-center"><?php echo esc_html($subtitle); ?></span>
+					<p class="section--subtitle text-center"><?php echo esc_html($subtitle); ?></p>
 				<?php endif; ?>
 				<h2 class=" timeline-title text-center"><?php echo wp_kses_post($title); ?></h2>
 				<?php if (!empty($timeline_description)) : ?>
