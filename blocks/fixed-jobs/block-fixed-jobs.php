@@ -24,6 +24,7 @@ $is_preview = isset($block['data']['is_preview']) && $block['data']['is_preview'
 
 // Récupération des paramètres du bloc
 $title = get_field('title') ?: 'Explore EPC Project Jobs';
+$subtitle = get_field('subtitle');
 
 // Récupérer toutes les catégories d'emploi
 $job_categories = get_terms(array(
@@ -43,6 +44,9 @@ $all_fixed_jobs = get_posts(array(
 
 <?php if ($is_preview) : ?>
 	<div class="block-preview-message">
+		<?php if ($subtitle) : ?>
+			<span class="section--subtitle"><?php echo esc_html($subtitle); ?></span>
+		<?php endif; ?>
 		<h3><?php echo esc_html($title); ?></h3>
 		<p><?php _e('Aperçu du bloc Fixed Jobs. Les onglets interactifs s\'afficheront en mode front-end.', 'abyssenergy'); ?></p>
 		<div class="preview-jobs-stats">
