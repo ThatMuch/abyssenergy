@@ -13,7 +13,7 @@
   background: #fff;
   box-shadow: 0 6px 16px 0 rgb(44 93 133 / 15%);
   padding-top: 0.5rem;
-  max-width: 1000px;
+  max-width: 770px;
   margin: 0 auto;
 
   .fixed-jobs-tabs {
@@ -80,7 +80,7 @@
 
   .fixed-jobs-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
     gap: 0.5rem;
   }
 }

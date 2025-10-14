@@ -20,7 +20,7 @@ $args = array(
 	'post_type'      => 'sector',
 	'posts_per_page' => -1, // Toujours afficher tous les secteurs
 	'orderby'        => 'menu_order', // Tri par défaut par ordre personnalisé
-	'order'          => 'ASC', // Toujours en ordre ascendant
+	'order'          => 'DESC', // Toujours en ordre ascendant
 	'post_status'    => 'publish',
 );
 
@@ -41,7 +41,7 @@ $sectors_query = new WP_Query($args);
 	<section class="<?php echo esc_attr($classes); ?>">
 		<div class="container">
 			<?php if ($title) : ?>
-				<h2 class="text-center"><?php echo esc_html($title); ?></h2>
+				<h2><?php echo esc_html($title); ?></h2>
 			<?php endif; ?>
 
 			<?php if ($sectors_query->have_posts()) : ?>
