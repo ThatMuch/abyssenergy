@@ -114,7 +114,7 @@
 
 .card-button {
 		position: absolute;
-	top: 1rem;
+	bottom: 1rem;
 	right: 1rem;
   border: none;
   background-color: transparent;

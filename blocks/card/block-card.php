@@ -41,6 +41,7 @@ if ($is_preview && empty($title)) {
 <?php if ($style === 'showmore'): ?>
 	<div id="<?php echo esc_attr($id); ?>" class="<?php echo esc_attr($className); ?>">
 		<div class="card-wrapper">
+			<button class="card-button" aria-label="Expand content"><i class="fa fa-plus"></i></button>
 			<div class="card-header <?php if ($image):  ?>has-image<?php endif; ?>">
 				<?php if ($image): ?>
 					<div class="card-image">
@@ -49,7 +50,6 @@ if ($is_preview && empty($title)) {
 							loading="lazy">
 					</div>
 				<?php endif; ?>
-				<button class="card-button" aria-label="Expand content"><i class="fa fa-plus"></i></button>
 				<?php if ($title): ?>
 					<h4 class="card-title"><?php echo wp_kses_post($title); ?></h4>
 				<?php endif; ?>

@@ -195,11 +195,65 @@ function abyssenergy_job_rewrite_rules()
 	// Ajouter la règle de réécriture pour /job/ID
 	add_rewrite_rule(
 		'^job/([0-9]+)/?$',
-		'index.php?post_type=job&p=$matches[1]',
+		'index.php?job_id=$matches[1]',
 		'top'
 	);
 }
 add_action('init', 'abyssenergy_job_rewrite_rules');
+
+/**
+ * Ajouter la variable de requête personnalisée pour job_id
+ */
+function abyssenergy_add_job_id_query_var($vars)
+{
+	$vars[] = 'job_id';
+	return $vars;
+}
+add_filter('query_vars', 'abyssenergy_add_job_id_query_var');
+
+/**
+ * Intercepter les requêtes pour /job/ID et rediriger vers le bon post
+ */
+function abyssenergy_job_template_redirect()
+{
+	$job_id = get_query_var('job_id');
+	
+	if ($job_id) {
+		// Vérifier que le post existe et est du type 'job'
+		$post = get_post($job_id);
+		
+		if ($post && $post->post_type === 'job' && $post->post_status === 'publish') {
+			// Charger le template single-job.php
+			global $wp_query;
+			$wp_query->is_single = true;
+			$wp_query->is_singular = true;
+			$wp_query->is_404 = false;
+			$wp_query->queried_object = $post;
+			$wp_query->queried_object_id = $post->ID;
+			$wp_query->post = $post;
+			
+			// Mettre à jour le post global
+			$GLOBALS['post'] = $post;
+			setup_postdata($post);
+			
+			// Inclure le template
+			if (file_exists(get_template_directory() . '/single-job.php')) {
+				include(get_template_directory() . '/single-job.php');
+			} else {
+				include(get_template_directory() . '/single.php');
+			}
+			exit;
+		} else {
+			// Post non trouvé, renvoyer 404
+			global $wp_query;
+			$wp_query->set_404();
+			status_header(404);
+			include(get_404_template());
+			exit;
+		}
+	}
+}
+add_action('template_redirect', 'abyssenergy_job_template_redirect');
 
 /**
  * Modifier les permaliens pour les jobs - utiliser l'ID au lieu du slug
@@ -218,7 +272,38 @@ add_filter('post_type_link', 'abyssenergy_job_permalink', 10, 2);
  */
 function abyssenergy_flush_job_rewrite_rules()
 {
+	// Forcer le rechargement des règles de réécriture
+	delete_option('abyssenergy_rewrite_rules_flushed');
 	abyssenergy_job_rewrite_rules();
 	flush_rewrite_rules();
 }
 add_action('after_switch_theme', 'abyssenergy_flush_job_rewrite_rules');
+
+/**
+ * Fonction utilitaire pour forcer le flush des règles (à utiliser si nécessaire)
+ */
+function abyssenergy_force_flush_job_rules()
+{
+	abyssenergy_job_rewrite_rules();
+	flush_rewrite_rules();
+}
+// Décommenter la ligne ci-dessous temporairement si vous avez besoin de forcer le flush
+add_action('init', 'abyssenergy_force_flush_job_rules', 999);
+
+/**
+ * Debug function - afficher les règles de réécriture actives
+ */
+function abyssenergy_debug_rewrite_rules()
+{
+	if (current_user_can('manage_options') && isset($_GET['debug_rewrite'])) {
+		global $wp_rewrite;
+		echo '<pre>';
+		echo "Règles de réécriture:\n";
+		print_r($wp_rewrite->rules);
+		echo "\nQuery vars:\n";
+		print_r($wp_rewrite->query_vars);
+		echo '</pre>';
+		exit;
+	}
+}
+add_action('init', 'abyssenergy_debug_rewrite_rules');
