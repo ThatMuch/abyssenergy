@@ -2,11 +2,11 @@
 
 <section class='content job-detail'>
     <div class="container">
-        <?php // var_dump($post); 
+        <?php // var_dump($post);
         ?>
-        <a href="<?php // go back to previous page
-                    echo esc_url(wp_get_referer());
-                    ?>" class="btn btn--outline mb-5"><i class="fa fa-chevron-left"></i> Back</a>
+        <button onclick="history.back()" class="btn btn--outline mb-5">
+            <i class="fa fa-chevron-left"></i> Back
+        </button>
         <?php if ($post) : ?>
             <?php
             // get sector
