@@ -30,10 +30,12 @@
 
   .feature-description {
     margin: 0;
+    font-size: .9375rem;
   }
 
   .feature-title {
     margin-top: 0;
+    margin-bottom: .5rem;
   }
 }
 
@@ -100,7 +102,6 @@
   .features-block .col:nth-child(even) .feature-card, .features-block .col:last-child:not(:nth-child(even)) .feature-card {
     flex-direction: row-reverse;
     padding-left: 1.5rem;
-    /* padding-right: 117px; */
 
     &::after {
       right: 98%;

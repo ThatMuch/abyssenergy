@@ -57,7 +57,7 @@ $features = get_field('features') ?: array();
 										<h3 class="feature-title"><?php echo esc_html($feature['title']); ?></h3>
 									<?php endif; ?>
 									<?php if (!empty($feature['description'])) : ?>
-										<p class="feature-description"><?php echo esc_html($feature['description']); ?></p>
+										<div class="feature-description"><?php echo $feature['description']; ?></div>
 									<?php endif; ?>
 								</div>
 								<?php if (!empty($feature['icon'])) : ?>

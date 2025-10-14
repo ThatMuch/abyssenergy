@@ -135,7 +135,7 @@ function register_features_block()
 							'key' => 'field_feature_description',
 							'label' => 'Description de la caractéristique',
 							'name' => 'description',
-							'type' => 'textarea',
+							'type' => 'wysiwyg',
 							'instructions' => 'Entrez la description de la caractéristique.',
 							'required' => 1,
 							'default_value' => '',
