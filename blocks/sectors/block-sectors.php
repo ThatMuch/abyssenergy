@@ -35,13 +35,15 @@ $sectors_query = new WP_Query($args);
 ?>
 <?php if ($is_preview) : ?>
 	<div class="block-preview-message">
-		<span class="section--subtitle"><?php echo esc_html($subtitle); ?></span>
 		<h3><?php echo esc_html($title); ?></h3>
 		<p><?php _e('Aperçu du bloc Sectors. Les secteurs réels s\'afficheront sur le site.', 'abyssenergy'); ?></p>
 	</div>
 <?php else : ?>
 	<section class="<?php echo esc_attr($classes); ?>">
 		<div class="container">
+			<?php if ($subtitle) : ?>
+				<span class="section--subtitle"><?php echo esc_html($subtitle); ?></span>
+			<?php endif; ?>
 			<?php if ($title) : ?>
 				<h2><?php echo esc_html($title); ?></h2>
 			<?php endif; ?>
