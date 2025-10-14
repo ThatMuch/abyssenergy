@@ -18,6 +18,7 @@
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
   background: #fff;
+  position: relative;
 }
 
 .card-wrapper:hover {
@@ -113,7 +114,7 @@
 }
 
 .card-button {
-		position: absolute;
+	position: absolute;
 	bottom: 1rem;
 	right: 1rem;
   border: none;
