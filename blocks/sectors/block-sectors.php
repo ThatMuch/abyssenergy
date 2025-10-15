@@ -1,20 +1,25 @@
 <?php
 
-/**
- * Block Name: Sectors List
- * Description: Affiche les secteurs dans une liste verticale.
+/** Block name: Sectors Grid
+ * Description: Affiche une grille de secteurs avec leurs informations.
  */
 
-// Paramètres du bloc avec valeurs par défaut
+// Créer le nom de la classe
+$className = 'sectors-grid';
+if (!empty($block['className'])) {
+	$className .= ' ' . $block['className'];
+}
+
+if (!empty($block['align'])) {
+	$className .= ' align' . $block['align'];
+}
+
+// Récupérer les champs
 $title = get_field('title');
 $subtitle = get_field('subtitle');
+$description = get_field('description');
 $selection_type = get_field('selection_type') ?: 'all';
 $specific_sectors = get_field('specific_sectors');
-// Classes du bloc
-$classes = 'sectors-grid'; // On garde le nom de classe pour la compatibilité CSS
-if (!empty($block['className'])) {
-	$classes .= ' ' . $block['className'];
-}
 
 // Requête pour obtenir les secteurs
 $args = array(
@@ -42,13 +47,16 @@ $sectors_query = new WP_Query($args);
 		<p><?php _e('Aperçu du bloc Sectors. Les secteurs réels s\'afficheront sur le site.', 'abyssenergy'); ?></p>
 	</div>
 <?php else : ?>
-	<section class="<?php echo esc_attr($classes); ?>">
+	<section class="<?php echo esc_attr($className); ?>">
 		<div class="container">
 			<?php if ($subtitle) : ?>
 				<span class="section--subtitle"><?php echo esc_html($subtitle); ?></span>
 			<?php endif; ?>
 			<?php if ($title) : ?>
 				<h2><?php echo esc_html($title); ?></h2>
+			<?php endif; ?>
+			<?php if ($description) : ?>
+				<p class="sectors-description"><?php echo esc_html($description); ?></p>
 			<?php endif; ?>
 
 			<?php if ($sectors_query->have_posts()) : ?>
