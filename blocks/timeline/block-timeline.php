@@ -58,9 +58,9 @@ $timeline_description = get_field('timeline_description');
 					<?php if ($subtitle) : ?>
 						<p class="section--subtitle text-center"><?php echo esc_html($subtitle); ?></p>
 					<?php endif; ?>
-					<h2 class=" timeline-title text-center"><?php echo wp_kses_post($title); ?></h2>
+					<h2 class="section--title text-center"><?php echo wp_kses_post($title); ?></h2>
 					<?php if (!empty($timeline_description)) : ?>
-						<div class="timeline-description text-center"><?php echo wp_kses_post($timeline_description); ?></div>
+						<div class="section--description text-center"><?php echo wp_kses_post($timeline_description); ?></div>
 					<?php endif; ?>
 				</div>
 				<div class="timeline-steps" style="<?php echo 'grid-template-rows: repeat(' . count($steps) . ', 200px);'; ?>">
