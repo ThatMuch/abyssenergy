@@ -25,6 +25,7 @@ $is_preview = isset($block['data']['is_preview']) && $block['data']['is_preview'
 // Récupération des paramètres du bloc
 $title = get_field('title') ?: 'Explore EPC Project Jobs';
 $subtitle = get_field('subtitle');
+$description = get_field('description');
 
 // Récupérer toutes les catégories d'emploi
 $job_categories = get_terms(array(
@@ -61,8 +62,14 @@ $all_fixed_jobs = get_posts(array(
 	<section <?php echo $anchor; ?>class="section <?php echo esc_attr($class_name); ?>">
 		<div class="container">
 			<div class="section-header">
+				<?php if ($subtitle) : ?>
+					<p class="section--subtitle text-center"><?php echo esc_html($subtitle); ?></p>
+				<?php endif; ?>
 				<?php if ($title) : ?>
 					<h2 class="section--title"><?php echo esc_html($title); ?></h2>
+				<?php endif; ?>
+				<?php if ($description) : ?>
+					<p class="section--description text-center"><?php echo esc_html($description); ?></p>
 				<?php endif; ?>
 			</div>
 
