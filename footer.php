@@ -1,9 +1,10 @@
 <?php $footer_logo = get_theme_mod('abyssenergy_footer_logo', ''); ?>
 <footer class='footer'>
-    <img src="<?php echo esc_url($footer_logo); ?>" alt="<?php bloginfo('name'); ?>" class='footer-logo' loading="lazy">
     <div class='footer-links'>
         <div class='footer-container'>
-
+            <div class='footer-logo'>
+                <img src="<?php echo esc_url($footer_logo); ?>" alt="<?php bloginfo('name'); ?>" loading="lazy">
+            </div>
             <?php wp_nav_menu(array('theme_location' => 'footer-menu1', 'container' => false, 'menu_class' => 'menu', 'menu_id' => '')); ?>
             <?php wp_nav_menu(array('theme_location' => 'footer-menu2', 'container' => false, 'menu_class' => 'menu', 'menu_id' => '')); ?>
             <?php wp_nav_menu(array('theme_location' => 'footer-menu3', 'container' => false, 'menu_class' => 'menu', 'menu_id' => '')); ?>

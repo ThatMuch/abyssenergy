@@ -320,6 +320,9 @@
     background-image: url("./images/waves-footer.svg");
     z-index: 0;
   }
+  &-logo {
+    //  align-self: center;
+  }
   &-links {
     background-color: initial;
     padding: 0;
