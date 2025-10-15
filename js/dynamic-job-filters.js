@@ -333,7 +333,7 @@ function initDynamicFilters($) {
     // Mise à jour automatique après le chargement de la page si des filtres sont actifs
     setTimeout(function() {
         const activeFilters = getActiveFilters();
-        
+
         if (hasActiveFilters(activeFilters)) {
             console.log('🔄 Mise à jour automatique des compteurs après rechargement');
             console.log('Filtres actifs détectés:', activeFilters);
