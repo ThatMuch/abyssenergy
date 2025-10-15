@@ -25,8 +25,8 @@ $specific_sectors = get_field('specific_sectors');
 $args = array(
 	'post_type'      => 'sector',
 	'posts_per_page' => -1, // Toujours afficher tous les secteurs
-	'orderby'        => 'menu_order', // Tri par défaut par ordre personnalisé
-	'order'          => 'DESC', // Toujours en ordre ascendant
+	'orderby'        => 'post_date',
+	'order'          => 'ASC', // Toujours en ordre ascendant
 	'post_status'    => 'publish',
 );
 
