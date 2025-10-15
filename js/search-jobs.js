@@ -11,18 +11,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (!searchForm) return;
 
-    // Soumission automatique du formulaire lors du changement des filtres
-    if (locationSelect) {
-        locationSelect.addEventListener('change', function() {
-            searchForm.submit();
-        });
-    }
-
-    if (skillSelect) {
-        skillSelect.addEventListener('change', function() {
-            searchForm.submit();
-        });
-    }
+    // Auto-submission désormais gérée par dynamic-job-filters.js
+    // Les sélecteurs utilisés ici sont différents de ceux du template actuel
 
     // Recherche avec délai pour éviter trop de requêtes
     let searchTimeout;

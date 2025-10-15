@@ -299,9 +299,6 @@ $description = safe_get_field_with_default('description', false, '');
 					<?php endforeach;
 					endif; ?>
 				</select>
-				<button type="submit" class="btn btn--primary">
-					Apply filters
-				</button>
 				<?php if (
 					get_query_var('job_search') ||
 					get_query_var('job_sector') ||

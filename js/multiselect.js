@@ -32,8 +32,8 @@
      * Initialise tous les multiselects dans la page
      */
     function initMultiselects() {
-        // Ciblons d'abord les selects multiples de Gravity Forms
-        $('select[multiple], .ginput_container_multiselect select').each(function() {
+        // Ciblons les selects multiples, Gravity Forms et abyss-multiselect
+        $('select[multiple], .ginput_container_multiselect select, .abyss-multiselect').each(function() {
             if (!$(this).hasClass('multiselect-initialized')) {
                 createMultiselect($(this));
             }

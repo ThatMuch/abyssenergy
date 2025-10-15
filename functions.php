@@ -53,6 +53,7 @@ function abyssenergy_load_theme_modules()
 		'blocks/sectors/sectors-init.php', // Initialisation du bloc sectors
 		'blocks/jobs-search/jobs-search-init.php', // Initialisation du bloc recherche d'emplois
 		'blocks/custom-buttons/custom-buttons-init.php', // Initialisation du bloc boutons personnalisés
+		'inc/dynamic-job-filters.php', // Filtres dynamiques pour les jobs
 		'inc/gravity-forms-optgroups.php', // Support des optgroups pour Gravity Forms
 
 	];
