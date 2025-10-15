@@ -82,7 +82,7 @@ $sectors_query = new WP_Query($args);
 									<?php endif; ?>
 
 									<a href="<?php echo esc_url($permalink); ?>" class="btn btn--primary">
-										Learn more about <?php the_title(); ?>
+										View our <?php the_title(); ?> projects
 									</a>
 								</div>
 								<?php if (has_post_thumbnail()) : ?>
