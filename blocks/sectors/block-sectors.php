@@ -53,7 +53,7 @@ $sectors_query = new WP_Query($args);
 				<span class="section--subtitle"><?php echo esc_html($subtitle); ?></span>
 			<?php endif; ?>
 			<?php if ($title) : ?>
-				<h2><?php echo esc_html($title); ?></h2>
+				<h2 class="section--title"><?php echo esc_html($title); ?></h2>
 			<?php endif; ?>
 			<?php if ($description) : ?>
 				<p class="sectors-description"><?php echo esc_html($description); ?></p>
