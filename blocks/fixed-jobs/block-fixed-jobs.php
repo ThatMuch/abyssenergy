@@ -33,6 +33,22 @@ $job_categories = get_terms(array(
 	'hide_empty' => true,
 ));
 
+$order_categories = array(
+	"engineering",
+	"procurement",
+	"construction-on-site",
+	"project-management"
+);
+
+// based on the order array, sort the categories
+usort($job_categories, function ($a, $b) use ($order_categories) {
+	$pos_a = array_search($a->slug, $order_categories);
+	$pos_b = array_search($b->slug, $order_categories);
+	if ($pos_a === false) $pos_a = PHP_INT_MAX; // Place at end
+	if ($pos_b === false) $pos_b = PHP_INT_MAX; // Place at end
+	return $pos_a - $pos_b;
+});
+
 // Récupérer tous les postes fixes
 $all_fixed_jobs = get_posts(array(
 	'post_type' => 'fixed-job',
