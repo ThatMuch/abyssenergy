@@ -250,7 +250,7 @@ function enqueue_dynamic_filters_scripts()
 	if (true) { // Simplifié pour debug
 		wp_enqueue_script(
 			'dynamic-job-filters',
-			get_template_directory_uri() . '/js/dynamic-job-filters-v2.js',
+			get_template_directory_uri() . '/js/dynamic-job-filters.js',
 			array('jquery'),
 			time() . rand(), // Force reload
 			true
