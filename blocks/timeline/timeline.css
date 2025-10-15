@@ -1,9 +1,12 @@
 .timeline-block {
   margin-bottom: 150px;
 
+.section--header {
+    max-width: 600px;
+}
+
 .timeline-description {
 	text-align: center;
-	max-width: 600px;
 	margin: 0 auto 2rem;
 }
 
