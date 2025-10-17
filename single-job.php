@@ -104,6 +104,10 @@
                 <div class="col col-xl-4">
                     <div class="card">
                         <h2>Apply</h2>
+                        <script>
+                            // Définir immédiatement le post ID pour les scripts Gravity Forms
+                            window.abyssenergy_job_post_id = <?php echo get_the_ID(); ?>;
+                        </script>
                         <?php
                         $jobID = get_field('job_id');
                         $owner = get_field('recruiter_email');
@@ -132,7 +136,7 @@
                         if ($skill_meta && !is_wp_error($skill_meta)) {
                             $skill = join(', ', wp_list_pluck($skill_meta, 'name'));
                         }
-                        echo do_shortcode('[gravityform id="1" title="false" ajax="true" field_values="jobID=' . $jobID . '&owner=' . $owner . '&screening=' . $screeningQuestion . '&position=' . $skill . '"]');
+                        echo do_shortcode('[gravityform id="1" title="false" ajax="true" field_values="jobID=' . $jobID . '&owner=' . $owner . '&screening=' . $screeningQuestion . '&position=' . $skill . '&post_id=' . get_the_ID() . '"]');
                         ?>
                     </div>
                 </div>

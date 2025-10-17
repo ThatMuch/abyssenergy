@@ -175,3 +175,191 @@ function abyssenergy_add_lazy_loading_to_content_images($content)
 }
 add_filter('the_content', 'abyssenergy_add_lazy_loading_to_content_images');
 add_filter('widget_text_content', 'abyssenergy_add_lazy_loading_to_content_images');
+
+/**
+ * Hook pour transmettre le post ID au plugin squarechilli-jobboard
+ * lors de la soumission de formulaires Gravity Forms
+ */
+function abyssenergy_set_post_context_for_gravity_forms()
+{
+	// Vérifier si nous sommes dans une requête AJAX de Gravity Forms
+	if (defined('DOING_AJAX') && DOING_AJAX && isset($_POST['action']) && $_POST['action'] === 'gf_submit') {
+		// Récupérer le post_id depuis les données du formulaire
+		$post_id = null;
+		
+		// Essayer différentes sources pour le post ID
+		if (isset($_POST['post_id']) && !empty($_POST['post_id'])) {
+			$post_id = intval($_POST['post_id']);
+		} elseif (isset($_POST['input_999']) && !empty($_POST['input_999'])) {
+			$post_id = intval($_POST['input_999']);
+		} elseif (isset($_POST['gform_fields']) && !empty($_POST['gform_fields'])) {
+			// Parser les champs pour trouver le post_id
+			$fields = json_decode(stripslashes($_POST['gform_fields']), true);
+			if (is_array($fields)) {
+				foreach ($fields as $field) {
+					if (isset($field['name']) && $field['name'] === 'post_id' && !empty($field['value'])) {
+						$post_id = intval($field['value']);
+						break;
+					}
+				}
+			}
+		}
+		
+		if ($post_id && $post_id > 0) {
+			global $post;
+			$post = get_post($post_id);
+			
+			// Définir la query globale pour que get_the_ID() fonctionne
+			if ($post) {
+				setup_postdata($post);
+				$GLOBALS['wp_query']->post = $post;
+				$GLOBALS['wp_query']->queried_object = $post;
+				$GLOBALS['wp_query']->queried_object_id = $post_id;
+				$GLOBALS['wp_query']->is_single = true;
+				$GLOBALS['wp_query']->is_singular = true;
+				
+				// Ajouter le post ID aux superglobales pour être sûr
+				$_POST['current_post_id'] = $post_id;
+				$_GET['p'] = $post_id;
+			}
+		}
+	}
+}
+add_action('wp_ajax_gf_submit', 'abyssenergy_set_post_context_for_gravity_forms', 1);
+add_action('wp_ajax_nopriv_gf_submit', 'abyssenergy_set_post_context_for_gravity_forms', 1);
+
+/**
+ * Hook pour s'assurer que le post ID est disponible durant tout le processus
+ */
+function abyssenergy_set_post_context_early() {
+	if (defined('DOING_AJAX') && DOING_AJAX && isset($_POST['action']) && $_POST['action'] === 'gf_submit') {
+		abyssenergy_set_post_context_for_gravity_forms();
+	}
+}
+add_action('init', 'abyssenergy_set_post_context_early', 1);
+
+/**
+ * Ajouter le post ID comme variable dynamique dans Gravity Forms
+ */
+function abyssenergy_populate_post_id_field($value, $field, $name) {
+    if ($name == 'post_id') {
+        global $post;
+        if ($post && $post->post_type === 'job') {
+            return $post->ID;
+        }
+        // Fallback: essayer de récupérer depuis get_the_ID()
+        $current_post_id = get_the_ID();
+        if ($current_post_id) {
+            return $current_post_id;
+        }
+    }
+    return $value;
+}
+add_filter('gform_field_value_post_id', 'abyssenergy_populate_post_id_field', 10, 3);
+
+/**
+ * Hook Gravity Forms avant traitement pour définir le contexte post
+ */
+function abyssenergy_gform_pre_submission_handler($form, $entry) {
+    if ($form['id'] == 1) { // Formulaire de candidature
+        // Debug: enregistrer les données reçues
+        error_log('GForm Pre-submission - POST data: ' . print_r($_POST, true));
+        
+        // Récupérer le post ID depuis les données du formulaire
+        $post_id = null;
+        
+        if (isset($_POST['post_id']) && !empty($_POST['post_id'])) {
+            $post_id = intval($_POST['post_id']);
+        } elseif (isset($_POST['input_999']) && !empty($_POST['input_999'])) {
+            $post_id = intval($_POST['input_999']);
+        }
+        
+        if ($post_id && $post_id > 0) {
+            error_log('Setting up WordPress context for post ID: ' . $post_id);
+            
+            global $post;
+            $post = get_post($post_id);
+            
+            if ($post) {
+                setup_postdata($post);
+                $GLOBALS['wp_query']->post = $post;
+                $GLOBALS['wp_query']->queried_object = $post;
+                $GLOBALS['wp_query']->queried_object_id = $post_id;
+                $GLOBALS['wp_query']->is_single = true;
+                $GLOBALS['wp_query']->is_singular = true;
+                
+                // Ajouter aux superglobales
+                $_GET['p'] = $post_id;
+                $_REQUEST['p'] = $post_id;
+                
+                // Debug: vérifier le job_id du post
+                $job_id = get_field('job_id', $post_id);
+                error_log('WordPress context set successfully for post ID: ' . $post_id);
+                error_log('get_the_ID() now returns: ' . get_the_ID());
+                error_log('get_queried_object_id() now returns: ' . get_queried_object_id());
+                error_log('ACF job_id field value: ' . $job_id);
+                
+                // Debug complet du JobOrder
+                abyssenergy_debug_job_order_issue($post_id, $job_id);
+            }
+        } else {
+            error_log('No post ID found in form submission data');
+        }
+    }
+}
+add_action('gform_pre_submission_1', 'abyssenergy_gform_pre_submission_handler', 5, 2);
+
+/**
+ * Debug temporaire pour diagnostiquer le problème JobOrder
+ */
+function abyssenergy_debug_job_order_issue($post_id, $job_id) {
+    if (!$post_id || !$job_id) return;
+    
+    error_log("=== DEBUG JOB ORDER ===");
+    error_log("Post ID: " . $post_id);
+    error_log("Job ID (bullhorn_id): " . $job_id);
+    
+    if (class_exists('\SquareChilli\Bullhorn\models\JobOrder')) {
+        // Chercher le job order exact
+        $jobOrder = \SquareChilli\Bullhorn\models\JobOrder::find()->where(['bullhorn_id' => $job_id])->one();
+        
+        if ($jobOrder) {
+            error_log("JobOrder trouvé - ID: " . $jobOrder->id . ", Status: " . $jobOrder->status);
+            error_log("JobOrder date_updated: " . $jobOrder->date_updated);
+            
+            // Vérifier les propriétés importantes
+            $reflection = new \ReflectionClass($jobOrder);
+            $properties = $reflection->getProperties();
+            foreach ($properties as $property) {
+                if ($property->isPublic()) {
+                    $prop_name = $property->getName();
+                    $prop_value = $jobOrder->$prop_name;
+                    if (in_array($prop_name, ['status', 'is_open', 'date_end', 'date_start'])) {
+                        error_log("JobOrder->{$prop_name}: " . $prop_value);
+                    }
+                }
+            }
+            
+            // Tester findOpen
+            $openJobOrder = \SquareChilli\Bullhorn\models\JobOrder::findOpen()->where(['bullhorn_id' => $job_id])->one();
+            if ($openJobOrder) {
+                error_log("JobOrder findOpen() trouve le job");
+            } else {
+                error_log("JobOrder findOpen() NE trouve PAS le job - status actuel: " . $jobOrder->status);
+                
+                // Vérifier la méthode findOpen
+                error_log("Critères findOpen() probablement: status = 'Open' ou similaire");
+            }
+        } else {
+            error_log("Aucun JobOrder trouvé avec bullhorn_id: " . $job_id);
+            
+            // Lister quelques jobs pour comparaison
+            $someJobs = \SquareChilli\Bullhorn\models\JobOrder::find()->limit(5)->all();
+            error_log("Exemples de JobOrders dans la DB:");
+            foreach ($someJobs as $job) {
+                error_log("- ID: " . $job->id . ", Bullhorn ID: " . $job->bullhorn_id . ", Status: " . $job->status);
+            }
+        }
+    }
+    error_log("=== FIN DEBUG JOB ORDER ===");
+}

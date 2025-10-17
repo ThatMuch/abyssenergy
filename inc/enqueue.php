@@ -128,6 +128,27 @@ function abyssenergy_enqueue_scripts()
 		);
 	}
 
+	// Script pour le contexte des formulaires Gravity Forms sur les pages de job
+	if (is_singular('job') && file_exists(get_stylesheet_directory() . '/js/gravity-forms-post-context.js')) {
+		wp_enqueue_script(
+			'abyssenergy-gravity-forms-context',
+			get_stylesheet_directory_uri() . '/js/gravity-forms-post-context.js',
+			array('jquery'),
+			abyssenergy_get_file_version('/js/gravity-forms-post-context.js'),
+			true
+		);
+		
+		// Ajouter le post ID comme variable JavaScript
+		wp_localize_script(
+			'abyssenergy-gravity-forms-context',
+			'abyssenergy_job_context',
+			array(
+				'post_id' => get_the_ID(),
+				'ajax_url' => admin_url('admin-ajax.php')
+			)
+		);
+	}
+
 	// Scripts personnalisés
 	if (is_singular() && comments_open() && get_option('thread_comments')) {
 		wp_enqueue_script('comment-reply');
