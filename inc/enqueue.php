@@ -137,7 +137,7 @@ function abyssenergy_enqueue_scripts()
 			abyssenergy_get_file_version('/js/gravity-forms-post-context.js'),
 			true
 		);
-		
+
 		// Ajouter le post ID comme variable JavaScript
 		wp_localize_script(
 			'abyssenergy-gravity-forms-context',
