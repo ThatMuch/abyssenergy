@@ -267,14 +267,14 @@ add_action('template_redirect', 'abyssenergy_job_template_redirect');
 /**
  * Modifier les permaliens pour les jobs - utiliser l'ID au lieu du slug
  */
-function abyssenergy_job_permalink($post_link, $post)
+/** function abyssenergy_job_permalink($post_link, $post)
 {
-	if ($post->post_type === 'job' && is_numeric($post->ID)) {
-		return home_url('/job/' . $post->ID . '/');
+	if ($post->post_type === 'job' && is_numeric($post->slug)) {
+		return home_url('/job/' . $post->slug . '/');
 	}
 	return $post_link;
-}
-add_filter('post_type_link', 'abyssenergy_job_permalink', 10, 2);
+} */
+// add_filter('post_type_link', 'abyssenergy_job_permalink', 10, 2);
 
 /**
  * Vider les règles de réécriture lors de l'activation du thème
