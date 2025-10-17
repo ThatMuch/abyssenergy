@@ -192,9 +192,9 @@ add_shortcode('jobs_list', 'abyssenergy_jobs_shortcode');
  */
 function abyssenergy_job_rewrite_rules()
 {
-	// Ajouter la règle de réécriture pour /job/ID
+	// Ajouter la règle de réécriture pour /job/ID (alphanumeric Bullhorn IDs)
 	add_rewrite_rule(
-		'^job/([0-9]+)/?$',
+		'^job/([a-zA-Z0-9_-]+)/?$',
 		'index.php?job_id=$matches[1]',
 		'top'
 	);
@@ -216,20 +216,43 @@ add_filter('query_vars', 'abyssenergy_add_job_id_query_var');
  */
 function abyssenergy_job_template_redirect()
 {
-	$job_id = get_query_var('job_id');
+	$bullhorn_job_id = get_query_var('job_id');
 
-	if ($job_id) {
-		// Créer une nouvelle query avec le post spécifique
+	if ($bullhorn_job_id) {
+		// Chercher le post par le champ custom 'job_id' (Bullhorn ID)
 		$query = new WP_Query(array(
-			'p' => $job_id,
 			'post_type' => 'job',
-			'post_status' => 'publish'
+			'post_status' => 'publish',
+			'meta_query' => array(
+				array(
+					'key' => 'job_id',
+					'value' => sanitize_text_field($bullhorn_job_id),
+					'compare' => '='
+				)
+			),
+			'posts_per_page' => 1,
+			'no_found_rows' => true // Optimisation pour une seule requête
 		));
 
-		if ($query->have_posts()) {
-			// Remplacer la query globale par notre query personnalisée
+		if ($query->have_posts() && !empty($query->posts)) {
+			// Configurer la query globale avec le post trouvé
 			global $wp_query, $post;
-			$wp_query = $query;
+
+			// Obtenir le post trouvé
+			$found_post = $query->posts[0];
+
+			// Vérifier que le post est valide
+			if (!$found_post || !is_object($found_post) || $found_post->post_type !== 'job') {
+				wp_redirect(home_url('/404'));
+				exit;
+			}
+
+			// Mettre à jour la query globale avec les bonnes propriétés
+			$wp_query->posts = array($found_post);
+			$wp_query->post_count = 1;
+			$wp_query->found_posts = 1;
+			$wp_query->max_num_pages = 1;
+			$wp_query->current_post = -1;
 
 			// Configurer les flags de la query pour une page single
 			$wp_query->is_single = true;
@@ -241,9 +264,10 @@ function abyssenergy_job_template_redirect()
 			$wp_query->is_search = false;
 
 			// Initialiser le post courant
-			$wp_query->the_post();
-			$post = $wp_query->post;
-			$wp_query->rewind_posts();
+			global $post;
+			$post = $found_post;
+			$wp_query->post = $found_post;
+			setup_postdata($found_post);
 
 			// Charger le template approprié
 			if (file_exists(get_template_directory() . '/single-job.php')) {
@@ -251,6 +275,9 @@ function abyssenergy_job_template_redirect()
 			} else {
 				include(get_template_directory() . '/single.php');
 			}
+
+			// Nettoyer après l'inclusion du template
+			wp_reset_postdata();
 			exit;
 		} else {
 			// Post non trouvé, renvoyer 404
@@ -265,16 +292,19 @@ function abyssenergy_job_template_redirect()
 add_action('template_redirect', 'abyssenergy_job_template_redirect');
 
 /**
- * Modifier les permaliens pour les jobs - utiliser l'ID au lieu du slug
+ * Modifier les permaliens pour les jobs - utiliser le Bullhorn ID au lieu du slug
  */
-/** function abyssenergy_job_permalink($post_link, $post)
+function abyssenergy_job_permalink($post_link, $post)
 {
-	if ($post->post_type === 'job' && is_numeric($post->slug)) {
-		return home_url('/job/' . $post->slug . '/');
+	if ($post->post_type === 'job') {
+		$bullhorn_id = get_field('job_id', $post->ID);
+		if ($bullhorn_id) {
+			return home_url('/job/' . $bullhorn_id . '/');
+		}
 	}
 	return $post_link;
-} */
-// add_filter('post_type_link', 'abyssenergy_job_permalink', 10, 2);
+}
+add_filter('post_type_link', 'abyssenergy_job_permalink', 10, 2);
 
 /**
  * Vider les règles de réécriture lors de l'activation du thème
@@ -297,7 +327,7 @@ function abyssenergy_force_flush_job_rules()
 	flush_rewrite_rules();
 }
 // Décommenter la ligne ci-dessous temporairement si vous avez besoin de forcer le flush
-add_action('init', 'abyssenergy_force_flush_job_rules', 999);
+// add_action('init', 'abyssenergy_force_flush_job_rules', 999);
 
 /**
  * Debug function - afficher les règles de réécriture actives
