@@ -2,8 +2,6 @@
 
 <section class='content job-detail'>
     <div class="container">
-        <?php // var_dump($post);
-        ?>
         <button onclick="history.back()" class="btn btn--outline mb-5">
             <i class="fa fa-chevron-left"></i> Back
         </button>
@@ -110,7 +108,6 @@
                         $jobID = get_field('job_id');
                         $owner = get_field('recruiter_email');
                         $screeningQuestion = get_field('screening_question');
-
                         // Vérifier si le champ est une chaîne JSON et la convertir en tableau si nécessaire
                         if ($screeningQuestion && is_string($screeningQuestion)) {
                             // Essayer de décoder au cas où c'est une chaîne JSON
@@ -135,7 +132,7 @@
                         if ($skill_meta && !is_wp_error($skill_meta)) {
                             $skill = join(', ', wp_list_pluck($skill_meta, 'name'));
                         }
-                        echo do_shortcode('[gravityform id="1" title="false" ajax="true" field_values="jobID=' . $jobID . '&owner=' . $owner . '&position=' . $skill . '&screening=' . $screeningQuestion . '"]');
+                        echo do_shortcode('[gravityform id="1" title="false" ajax="true" field_values="jobID=' . $jobID . '&owner=' . $owner . '&screening=' . $screeningQuestion . '&position=' . $skill . '"]');
                         ?>
                     </div>
                 </div>
