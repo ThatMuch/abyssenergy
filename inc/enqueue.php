@@ -45,14 +45,6 @@ function abyssenergy_enqueue_scripts()
 	);
 
 	// Scripts
-	wp_enqueue_script(
-		'abyssenergy-general',
-		get_stylesheet_directory_uri() . '/js-parent/general.js',
-		array('jquery'),
-		abyssenergy_get_file_version('/js-parent/general.js'),
-		true
-	);
-
 	// Script pour la gestion des téléchargements de fichiers
 	if (file_exists(get_stylesheet_directory() . '/js/file-upload.js')) {
 		wp_enqueue_script(
