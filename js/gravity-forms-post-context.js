@@ -63,6 +63,34 @@
                     $(this).append('<input type="hidden" name="input_999" value="' + postId + '">');
                 }
             }
+
+            // Gérer l'état de loading du bouton d'application
+            handleFormLoadingState($(this), true);
+        });
+
+        // Hook avant la soumission AJAX
+        $(document).on('gform_pre_submission_1', function(event, form, formData) {
+            console.log('Pre-submission - activating loading state');
+            handleFormLoadingState($('#gform_1'), true);
+        });
+
+        // Hook après la soumission AJAX (succès)
+        $(document).on('gform_confirmation_loaded_1', function(event, formId) {
+            console.log('Submission successful - deactivating loading state');
+            handleFormLoadingState($('#gform_1'), false);
+        });
+
+        // Hook en cas d'erreur de validation
+        $(document).on('gform_post_validation', function(event, data, form) {
+            if (form.id == 1) {
+                console.log('Post-validation - checking for errors');
+                // Si il y a des erreurs, désactiver le loading state
+                if (data.is_valid === false) {
+                    setTimeout(function() {
+                        handleFormLoadingState($('#gform_1'), false);
+                    }, 100);
+                }
+            }
         });
 
         // Hook avant validation
@@ -75,6 +103,60 @@
                 }
             }
         });
+
+        /**
+         * Gère l'état de loading du formulaire de candidature
+         * @param {jQuery} $form - Le formulaire jQuery
+         * @param {boolean} isLoading - Si le formulaire est en cours de soumission
+         */
+        function handleFormLoadingState($form, isLoading) {
+            if (!$form || !$form.length) return;
+
+            var $submitButton = $form.find('input[type="submit"], button[type="submit"]');
+            var $submitContainer = $submitButton.closest('.gform_footer, .ginput_container');
+
+            if (isLoading) {
+                // Désactiver le bouton
+                $submitButton.prop('disabled', true);
+                $submitButton.addClass('submitting');
+
+                // Sauvegarder le texte original s'il n'est pas déjà sauvé
+                if (!$submitButton.data('original-value')) {
+                    $submitButton.data('original-value', $submitButton.val() || $submitButton.text());
+                }
+
+                // Ajouter le spinner si pas déjà présent
+                if ($submitContainer.find('.submit-spinner').length === 0) {
+                    var spinnerHtml = '<div class="submit-spinner"><div class="spinner"></div></div>';
+                    $submitContainer.append(spinnerHtml);
+                }
+
+                // Changer le texte du bouton
+                if ($submitButton.is('input')) {
+                    $submitButton.val('Envoi en cours...');
+                } else {
+                    $submitButton.text('Envoi en cours...');
+                }
+
+            } else {
+                // Réactiver le bouton
+                $submitButton.prop('disabled', false);
+                $submitButton.removeClass('submitting');
+
+                // Restaurer le texte original
+                var originalValue = $submitButton.data('original-value');
+                if (originalValue) {
+                    if ($submitButton.is('input')) {
+                        $submitButton.val(originalValue);
+                    } else {
+                        $submitButton.text(originalValue);
+                    }
+                }
+
+                // Supprimer le spinner
+                $submitContainer.find('.submit-spinner').remove();
+            }
+        }
     });
 
 })(jQuery);
