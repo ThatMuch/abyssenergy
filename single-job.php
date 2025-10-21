@@ -95,6 +95,22 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="share-job">
+                    <p>Share this job:</p>
+                    <a href="#" onclick="navigator.clipboard.writeText('<?php echo esc_url(get_permalink()); ?>'); alert('Job link copied to clipboard!'); return false;" class="btn btn--outline">
+                        <i class="fas fa-link"></i> Copy Link
+                    </a>
+                    <a href="https://wa.me/?text=<?php echo urlencode(get_permalink()); ?>" target="_blank" class="btn btn--outline">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=<?php echo urlencode(get_permalink()); ?>" target="_blank" class="btn btn--outline">
+                        <i class="fab fa-linkedin"></i> LinkedIn
+                    </a>
+                    <a href="mailto:?subject=Check out this job&body=I found a job you might be interested in: <?php echo urlencode(get_permalink()); ?>" class="btn btn--outline">
+                        <i class="fas fa-envelope"></i> Email
+                    </a>
+                </div>
             </section>
             <div class="row">
                 <div class="col col-xl-8">
