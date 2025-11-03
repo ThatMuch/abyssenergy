@@ -27,7 +27,7 @@ $card_class = 'project-card ' . $sectors[0]->slug;
 					class="img-fluid"
 					loading="lazy">
 				<div class="project-overlay">
-					<span class="view-project"><?php _e('See the project', 'abyssenergy'); ?></span>
+					<span class="view-project"><?php _e('View the project', 'abyssenergy'); ?></span>
 				</div>
 			</div>
 		<?php endif; ?>
