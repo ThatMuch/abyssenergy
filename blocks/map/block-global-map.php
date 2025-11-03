@@ -98,7 +98,7 @@ if ($markers) {
 								</div>
 							<?php endif; ?>
 							<?php if ($content) : ?>
-								<button class="btn btn--primary global-map-button" aria-label="Expand content">See more <i class="fa fa-plus"></i></button>
+								<button class="btn btn--primary global-map-button" aria-label="Expand content">View more <i class="fa fa-plus"></i></button>
 							<?php endif; ?>
 
 						</div>

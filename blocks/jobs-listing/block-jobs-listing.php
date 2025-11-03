@@ -33,7 +33,7 @@ $subtitle = get_field('subtitle') ?: 'Jobs & offers';
 $show_title = get_field('show_title') !== false;
 $posts_per_page = get_field('posts_per_page') ?: 6;
 $show_button = get_field('show_button') !== false;
-$button_text = get_field('button_text') ?: 'See more jobs';
+$button_text = get_field('button_text') ?: 'View more jobs';
 $button_url = get_field('button_url') ?: site_url('/search-jobs');
 $selected_sectors = get_field('job_sectors');
 

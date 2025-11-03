@@ -4,7 +4,7 @@
 	$query = isset($args['query']) ? $args['query'] : null;
 
 	// Récupérer les arguments additionnels
-	$button_text = isset($args['button_text']) ? $args['button_text'] : 'See more jobs';
+	$button_text = isset($args['button_text']) ? $args['button_text'] : 'View more jobs';
 	$button_url = isset($args['button_url']) ? $args['button_url'] : site_url('search-jobs');
 	$show_button = isset($args['show_button']) ? $args['show_button'] : true;
 	$title = isset($args['title']) ? $args['title'] : 'Connecting Professionals';
