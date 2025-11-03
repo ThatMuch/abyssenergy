@@ -46,7 +46,7 @@
                         $city = get_field('job_city');
                         $state = get_field('job_state');
                         ?>
-                        <p class="job-location">
+                        <span class="job-location tag">
                             <i class="fas fa-map-marker-alt mr-2"></i>
                             <?php
                             if ($city) {
@@ -60,7 +60,7 @@
                                 echo 'Location not specified';
                             }
                             ?>
-                        </p>
+                        </span>
                     </div>
                     <div class="col col-md-3">
                         <p class="job-label">Category</p>
@@ -97,7 +97,7 @@
                 </div>
 
                 <div class="share-job">
-                    <p>Share this job:</p>
+                    <p>Share this job</p>
                     <a href="#" onclick="navigator.clipboard.writeText('<?php echo esc_url(get_permalink()); ?>'); alert('Job link copied to clipboard!'); return false;" class="btn btn--outline">
                         <i class="fas fa-link"></i> Copy Link
                     </a>
