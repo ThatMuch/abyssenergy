@@ -39,7 +39,7 @@ $consultants = get_posts(array(
 				<?php endif; ?>
 			</div>
 			<div class="col-md-6">
-				<div class="form-wrapper">
+				<div class="form-wrapper mt-6">
 					<?php echo do_shortcode('[gravityform id="3" title="false" description="false"]'); ?>
 				</div>
 			</div>
