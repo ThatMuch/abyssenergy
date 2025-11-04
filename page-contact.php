@@ -48,14 +48,13 @@ $consultants = get_posts(array(
 	<div class="container">
 		<div class="page_contact_cards">
 			<div class="card card--contact">
-
 				<h3>Contact Information</h3>
 				<p><i class="fas fa-envelope mr-2"></i> <a href="mailto:<?php echo esc_html($email); ?>"><?php echo esc_html($email); ?></a></p>
 				<p><i class="fas fa-phone mr-2"></i> <a href="tel:<?php echo esc_html($phone); ?>"><?php echo esc_html($phone); ?></a></p>
 				<p><i class="fab fa-linkedin mr-2"></i> <a href="<?php echo esc_url($linkedin); ?>" target="_blank" rel="noopener noreferrer">Linkedin</a></p>
 
 			</div>
-			<div class="card card--contact">
+			<div class="card card--contact" id="locations">
 				<h3>Locations</h3>
 				<div class="d-flex gap-4">
 					<div>
@@ -72,7 +71,7 @@ $consultants = get_posts(array(
 			</div>
 		</div>
 
-		<section class="section page_team">
+		<section class="section page_team" id="team">
 			<span class="section--subtitle"> The abyssien crew</span>
 			<h2>Meet the team</h2>
 			<div class="team-members">
