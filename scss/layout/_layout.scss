@@ -328,7 +328,7 @@
     padding: 0;
   }
   .footer-container {
-    @include flex-container();
+    @include flex-container($max-width: $breakpoint-xxl);
     @include respond-to(xs) {
       padding: 0;
     }
