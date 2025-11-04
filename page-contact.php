@@ -32,6 +32,7 @@ $consultants = get_posts(array(
 					<?php if ($subtitle): ?>
 						<?php echo $subtitle; ?>
 					<?php endif; ?>
+					<?php echo do_shortcode('[gravityform id="3" title="false" description="false"]'); ?>
 				</div>
 				<div class="col col-md-4">
 					<?php if (has_post_thumbnail()): ?>
@@ -45,9 +46,6 @@ $consultants = get_posts(array(
 		</div>
 	</div>
 	<div class="container">
-		<div class="form-wrapper">
-			<?php echo do_shortcode('[gravityform id="3" title="false" description="false"]'); ?>
-		</div>
 		<div class="page_contact_cards">
 			<div class="card card--contact">
 
