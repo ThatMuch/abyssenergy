@@ -12,11 +12,14 @@
  * @param   array $context The context provided to the block by the post or its parent block.
  */
 
-// Support custom "anchor" values.
-$anchor = '';
+// Créer un id unique pour ce bloc
+$block_id = 'testimonials-slider-' . (isset($block['id']) ? $block['id'] : uniqid());
 if (!empty($block['anchor'])) {
-	$anchor = 'id="' . esc_attr($block['anchor']) . '" ';
+	$block_id = $block['anchor'];
 }
+
+// Support custom "anchor" values.
+$anchor = 'id="' . esc_attr($block_id) . '" ';
 
 // Create class attribute allowing for custom "className" and "align" values.
 $class_name = 'testimonials-slider-block';
@@ -59,7 +62,7 @@ $testimonials = new WP_Query($args);
 
 	<?php if ($testimonials->have_posts()) : ?>
 		<!-- Testimonials Slider Block -->
-		<section <?php echo $anchor; ?>class="section <?php echo esc_attr($class_name); ?>">
+		<section <?php echo $anchor; ?>class="section <?php echo esc_attr($class_name); ?>" data-block-id="<?php echo esc_attr($block_id); ?>">
 			<div class="container">
 				<div class="testimonials-slider-block-header">
 					<?php if ($show_title && $title) : ?>

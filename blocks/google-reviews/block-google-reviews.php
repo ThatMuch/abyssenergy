@@ -12,11 +12,14 @@
  * @param   array $context The context provided to the block by the post or its parent block.
  */
 
-// Support custom "anchor" values.
-$anchor = '';
+// Créer un id unique pour ce bloc
+$block_id = 'google-reviews-' . (isset($block['id']) ? $block['id'] : uniqid());
 if (!empty($block['anchor'])) {
-	$anchor = 'id="' . esc_attr($block['anchor']) . '" ';
+	$block_id = $block['anchor'];
 }
+
+// Support custom "anchor" values.
+$anchor = 'id="' . esc_attr($block_id) . '" ';
 
 // Create class attribute allowing for custom "className" and "align" values.
 $class_name = 'google-reviews-block';
@@ -112,7 +115,7 @@ if ($is_preview && !empty($reviews_data) && !$reviews_data['error']) {
 	<?php endif; ?>
 
 	<!-- Google Reviews Block -->
-	<section <?php echo $anchor; ?>class="<?php echo esc_attr($class_name); ?> section section-reviews">
+	<section <?php echo $anchor; ?>class="<?php echo esc_attr($class_name); ?> section section-reviews" data-block-id="<?php echo esc_attr($block_id); ?>">
 		<img src="<?php echo get_stylesheet_directory_uri(); ?>/blocks/google-reviews/trees.svg" alt="trees" class="trees-svg" loading="lazy">
 		<div class="container">
 			<div class="row justify-content-between mb-4">

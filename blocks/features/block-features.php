@@ -4,10 +4,13 @@
  * Features Block Template.
  */
 
-$anchor = '';
-if (! empty($block['anchor'])) {
-	$anchor = 'id="' . esc_attr($block['anchor']) . '" ';
+// Créer un id unique pour ce bloc
+$block_id = 'features-' . (isset($block['id']) ? $block['id'] : uniqid());
+if (!empty($block['anchor'])) {
+	$block_id = $block['anchor'];
 }
+
+$anchor = 'id="' . esc_attr($block_id) . '" ';
 
 // Create class attribute allowing for custom "className" and "align" values.
 $class_name = 'features-block';
@@ -34,7 +37,7 @@ $features = get_field('features') ?: array();
 	</div>
 <?php else :  ?>
 	<!-- Features Block -->
-	<section <?php echo $anchor; ?>class="section <?php echo esc_attr($class_name); ?>">
+	<section <?php echo $anchor; ?>class="section <?php echo esc_attr($class_name); ?>" data-block-id="<?php echo esc_attr($block_id); ?>">
 		<div class="container">
 			<?php if ($title || $subtitle) : ?>
 				<div class="section-header col-md-6">

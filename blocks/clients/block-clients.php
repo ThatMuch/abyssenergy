@@ -12,11 +12,14 @@
  *
  */
 
-// Support custom "anchor" values.
-$anchor = '';
+// Créer un id unique pour ce bloc
+$block_id = 'clients-' . (isset($block['id']) ? $block['id'] : uniqid());
 if (!empty($block['anchor'])) {
-	$anchor = 'id="' . esc_attr($block['anchor']) . '" ';
+	$block_id = $block['anchor'];
 }
+
+// Support custom "anchor" values.
+$anchor = 'id="' . esc_attr($block_id) . '" ';
 
 // Create class attribute allowing for custom "className" and "align" values.
 $class_name = 'clients-block';
@@ -42,7 +45,7 @@ $gallery = get_field('gallery') ?: array();
 	<?php if ($gallery) : ?>
 		<!-- Clients Slider Block -->
 
-		<section <?php echo $anchor; ?>class="section <?php echo esc_attr($class_name); ?>">
+		<section <?php echo $anchor; ?>class="section <?php echo esc_attr($class_name); ?>" data-block-id="<?php echo esc_attr($block_id); ?>">
 			<div class="container">
 				<div class="clients-block-wrapper">
 					<div class="clients-slider">

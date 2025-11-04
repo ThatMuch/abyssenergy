@@ -4,6 +4,12 @@
  * Description: Affiche une grille de secteurs avec leurs informations.
  */
 
+// Créer un id unique pour ce bloc
+$block_id = 'sectors-' . (isset($block['id']) ? $block['id'] : uniqid());
+if (!empty($block['anchor'])) {
+	$block_id = $block['anchor'];
+}
+
 // Créer le nom de la classe
 $className = 'sectors-grid';
 if (!empty($block['className'])) {
@@ -47,7 +53,7 @@ $sectors_query = new WP_Query($args);
 		<p><?php _e('Aperçu du bloc Sectors. Les secteurs réels s\'afficheront sur le site.', 'abyssenergy'); ?></p>
 	</div>
 <?php else : ?>
-	<section class="<?php echo esc_attr($className); ?>">
+	<section class="<?php echo esc_attr($className); ?>" id="<?php echo esc_attr($block_id); ?>" data-block-id="<?php echo esc_attr($block_id); ?>">
 		<div class="container">
 			<?php if ($subtitle) : ?>
 				<span class="section--subtitle"><?php echo esc_html($subtitle); ?></span>
