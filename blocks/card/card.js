@@ -75,7 +75,6 @@ document.addEventListener('DOMContentLoaded',function () {
 	function showModal(modal) {
 		saveScrollPosition();
 		document.body.style.top = `-${scrollPosition}px`;
-		console.log(scrollPosition);
 		  modal.classList.add('active');
 		  document.body.classList.add('modal-open');
 
