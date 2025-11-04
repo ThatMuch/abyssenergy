@@ -20,24 +20,23 @@
     background-image: url("./map-bcg.svg");
     background-repeat: no-repeat;
     background-position-x: center;
-    background-position-y: 420px;
+    background-position-y: 320px;
     background-size: 100%;
 
     @media screen and (width >= 527px) {
-      background-position-y: 290px;
+      background-position-y: 190px;
     }
 
     @media screen and (width >= 768px) {
-      background-position-y: 320px;
+      background-position-y: 220px;
     }
 
     @media screen and (width >= 1024px) {
-      background-position-y: 190px;
+      background-position-y: 90px;
     }
 
     @media screen and (width >= 1980px) {
       background-size: 105%;
-
     }
   }
 }
@@ -67,6 +66,7 @@ img {
 .global-map-wrapper {
   position: relative;
   overflow: visible;
+    transform: translateY(-100px);
 }
 
 .global-map {
