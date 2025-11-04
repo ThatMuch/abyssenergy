@@ -75,7 +75,7 @@ $all_fixed_jobs = get_posts(array(
 	</div>
 <?php else : ?>
 
-	<section <?php echo $anchor; ?>class="section <?php echo esc_attr($class_name); ?>">
+	<section <?php echo $anchor; ?>class="section <?php echo esc_attr($class_name); ?>" id="fixed-jobs-<?php echo esc_attr($block['id']); ?>" data-block-id="<?php echo esc_attr($block['id']); ?>">
 		<div class="container">
 			<div class="section-header">
 				<?php if ($subtitle) : ?>
