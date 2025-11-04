@@ -52,7 +52,7 @@ $timeline_description = get_field('timeline_description');
 		</script>
 
 		<!-- Timeline Block -->
-		<div class="<?php echo esc_attr($className); ?>" data-block-id="<?php echo esc_attr($block_id); ?>">
+		<div class="<?php echo esc_attr($className); ?>" data-block-id="<?php echo esc_attr($block_id); ?>" id="<?php echo esc_attr($block_id); ?>">
 			<div class="container">
 				<div class="section-header">
 					<?php if ($subtitle) : ?>
