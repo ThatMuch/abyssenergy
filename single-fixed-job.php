@@ -13,10 +13,15 @@ if ($job_category && !is_wp_error($job_category)) {
 
 <div class="page-header <?php if (has_post_thumbnail()): ?>has-thumbnail<?php endif; ?>">
     <div class="container">
+
         <div class="row align-items-center">
+
             <div class="col col-md-7">
+                <button onclick="history.back()" class="btn btn--outline mb-5">
+                    <i class="fa fa-chevron-left"></i> Back
+                </button>
                 <?php if ($job_category): ?>
-                    <span class="section--subtitle"><?php echo $job_category; ?></span>
+                    <p class="section--subtitle"><?php echo $job_category; ?></p>
                 <?php endif; ?>
                 <h1 class="mt-0"><?php the_title(); ?></h1>
                 <?php if ($description): ?>
