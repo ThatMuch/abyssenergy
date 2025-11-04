@@ -8,13 +8,13 @@
  */
 
 get_header();
-$subtitle = safe_get_field_with_default('subtitle', false, '');
-$email = safe_get_field('email');
-$phone = safe_get_field('phone');
-$linkedin = safe_get_field('linkedin');
+$subtitle = get_field('subtitle');
+$email = get_field('email');
+$phone = get_field('phone');
+$linkedin = get_field('linkedin');
 // get_field google map
-$location_nancy = safe_get_field('nancy');
-$location_paris = safe_get_field('paris');
+$location_nancy = get_field('nancy');
+$location_paris = get_field('paris');
 
 // get post type consultants
 $consultants = get_posts(array(
@@ -24,37 +24,37 @@ $consultants = get_posts(array(
 ?>
 
 <div class="page page_contact">
-	<div class="container">
-		<div class="row mb-6 align-items-baseline">
-			<div class="col-md-6">
-				<h1><?php the_title(); ?></h1>
-				<?php if ($subtitle): ?>
-					<?php echo $subtitle; ?>
-				<?php endif; ?>
-				<?php if (has_post_thumbnail()): ?>
-					<div class="page-thumbnail">
-						<?php the_post_thumbnail('full', array('class' => 'd-block mt-6 m-auto')); ?>
-					</div>
-				<?php endif; ?>
-			</div>
-			<div class="col-md-6">
-				<div class="form-wrapper mt-6">
-					<?php echo do_shortcode('[gravityform id="3" title="false" description="false"]'); ?>
+	<div class="page-header <?php if (has_post_thumbnail()): ?>has-thumbnail<?php endif; ?>">
+		<div class="container">
+			<div class="row">
+				<div class="col col-md-8">
+					<h1><?php the_title(); ?></h1>
+					<?php if ($subtitle): ?>
+						<?php echo $subtitle; ?>
+					<?php endif; ?>
+				</div>
+				<div class="col col-md-4">
+					<?php if (has_post_thumbnail()): ?>
+						<div class="page-thumbnail">
+							<?php the_post_thumbnail('medium'); ?>
+						</div>
+					<?php endif; ?>
 				</div>
 			</div>
+
+		</div>
+	</div>
+	<div class="container">
+		<div class="form-wrapper">
+			<?php echo do_shortcode('[gravityform id="3" title="false" description="false"]'); ?>
 		</div>
 		<div class="page_contact_cards">
 			<div class="card card--contact">
+
 				<h3>Contact Information</h3>
-				<?php if ($email) : ?>
-					<p><i class="fas fa-envelope mr-2"></i> <a href="mailto:<?php echo esc_html($email); ?>"><?php echo esc_html($email); ?></a></p>
-				<?php endif; ?>
-				<?php if ($phone) : ?>
-					<p><i class="fas fa-phone mr-2"></i> <a href="tel:<?php echo esc_html($phone); ?>"><?php echo esc_html($phone); ?></a></p>
-				<?php endif; ?>
-				<?php if ($linkedin) : ?>
-					<p><i class="fab fa-linkedin mr-2"></i> <a href="<?php echo esc_url($linkedin); ?>" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
-				<?php endif; ?>
+				<p><i class="fas fa-envelope mr-2"></i> <a href="mailto:<?php echo esc_html($email); ?>"><?php echo esc_html($email); ?></a></p>
+				<p><i class="fas fa-phone mr-2"></i> <a href="tel:<?php echo esc_html($phone); ?>"><?php echo esc_html($phone); ?></a></p>
+				<p><i class="fab fa-linkedin mr-2"></i> <a href="<?php echo esc_url($linkedin); ?>" target="_blank" rel="noopener noreferrer">Linkedin</a></p>
 
 			</div>
 			<div class="card card--contact">
@@ -75,23 +75,19 @@ $consultants = get_posts(array(
 		</div>
 
 		<section class="section page_team">
-			<span class="section--subtitle">The abyssien crew</span>
+			<span class="section--subtitle"> The abyssien crew</span>
 			<h2>Meet the team</h2>
 			<div class="team-members">
 				<div class="wrapper">
 					<?php foreach ($consultants as $consultant) : ?>
 						<div class="card card--consultant">
 							<div class="card--consultant_img">
-								<?php
-								$consultant_linkedin = safe_get_field('linkedin_url', $consultant->ID);
-								if ($consultant_linkedin) : ?>
-									<a href="<?php echo esc_url($consultant_linkedin); ?>" class="card--consultant_link" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin mr-2"></i> </a>
-								<?php endif; ?>
+								<a href="<?php echo esc_html(get_field('linkedin', $consultant->ID)); ?>" class="card--consultant_link" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin mr-2"></i> </a>
 								<img src="<?php echo esc_url(get_the_post_thumbnail_url($consultant->ID, 'full')); ?>" alt="<?php echo esc_attr($consultant->post_title); ?>" loading="lazy" />
 							</div>
 							<div class="card--consultant_footer">
 								<h3 class="mt-0 b1"><?php echo esc_html($consultant->post_title); ?></h3>
-								<p class="mb-0 mt-0"><?php echo esc_html(safe_get_field_with_default('position', $consultant->ID, '')); ?></p>
+								<p class="mb-0 mt-0"><?php echo esc_html(get_field('position', $consultant->ID)); ?></p>
 							</div>
 							<div class="card--consultant_back">
 								<p><?php echo $consultant->post_content; ?></p>
