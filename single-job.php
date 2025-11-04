@@ -71,7 +71,7 @@
                             $category = join(', ', wp_list_pluck($category_meta, 'name'));
                         }
                         ?>
-                        <span class="tag tag-primary">
+                        <span class="tag">
                             <?php echo esc_html($category); ?>
                         </span>
                     </div>
