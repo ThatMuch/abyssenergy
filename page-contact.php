@@ -27,7 +27,6 @@ $consultants = get_posts(array(
 	<div class="container">
 		<div class="row mb-6 align-items-baseline">
 			<div class="col-md-6">
-				<span class="section--subtitle">Quick response</span>
 				<h1><?php the_title(); ?></h1>
 				<?php if ($subtitle): ?>
 					<?php echo $subtitle; ?>
