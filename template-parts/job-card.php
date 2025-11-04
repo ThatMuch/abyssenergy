@@ -42,7 +42,7 @@ $is_new = get_the_time('U') > strtotime('-5 days');
 			<!-- Titre du job -->
 			<div class="job-header mb-3">
 				<h3 class="job-title h4">
-					<?php echo mb_strtolower(get_the_title(), 'UTF-8'); ?>
+					<?php echo get_the_title(); ?>
 				</h3>
 			</div>
 		</div>
