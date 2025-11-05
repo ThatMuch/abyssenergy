@@ -33,22 +33,28 @@ if (!empty($block['align'])) {
 // Récupération des paramètres du bloc
 $title = get_field('title') ?: 'Témoignages de nos clients';
 $subtitle = get_field('subtitle');
-$show_title = get_field('show_title') !== false;
 $image = get_field('image');
-$testimonials_limit = get_field('testimonials_limit');
-// Déterminer le nombre de posts à récupérer
-$posts_per_page = -1; // Par défaut, tous les témoignages
-if (!empty($testimonials_limit) && is_numeric($testimonials_limit) && $testimonials_limit > 0) {
-	$posts_per_page = intval($testimonials_limit);
-}
+$selection_type = get_field('selection_type') ?: 'all';
+$specific_category = get_field('specific_category');
 
-// Récupération des témoignages
+// Arguments de base pour la requête
 $args = array(
 	'post_type' => 'testimonials',
-	'posts_per_page' => $posts_per_page,
+	'posts_per_page' => -1, // Afficher tous les témoignages
 	'orderby' => 'date',
 	'order' => 'DESC',
 );
+
+// Si on veut une catégorie spécifique
+if ($selection_type === 'specific_category' && !empty($specific_category)) {
+	$args['tax_query'] = array(
+		array(
+			'taxonomy' => 'testimonial-category',
+			'field'    => 'term_id',
+			'terms'    => $specific_category,
+		),
+	);
+}
 
 $testimonials = new WP_Query($args);
 ?>
@@ -65,7 +71,7 @@ $testimonials = new WP_Query($args);
 		<section <?php echo $anchor; ?>class="section <?php echo esc_attr($class_name); ?>" data-block-id="<?php echo esc_attr($block_id); ?>">
 			<div class="container">
 				<div class="testimonials-slider-block-header">
-					<?php if ($show_title && $title) : ?>
+					<?php if ($title) : ?>
 						<div class="section-title">
 							<?php if ($subtitle) : ?>
 								<span class="section--subtitle"><?php echo esc_html($subtitle); ?></span>
@@ -81,22 +87,22 @@ $testimonials = new WP_Query($args);
 			<div class="testimonials-slider swiper">
 				<div class="swiper-wrapper">
 					<?php while ($testimonials->have_posts()) : $testimonials->the_post();
-						$sectors = get_the_terms(get_the_ID(), 'job-sector');
-						$sector_class = '';
-						if ($sectors && !is_wp_error($sectors) && !empty($sectors)) {
-							$sector_class = esc_html($sectors[0]->slug) . '-card';
+						$categories = get_the_terms(get_the_ID(), 'testimonial-category');
+						$category_class = '';
+						if ($categories && !is_wp_error($categories) && !empty($categories)) {
+							$category_class = esc_html($categories[0]->slug) . '-card';
 						}
 					?>
 						<div class="swiper-slide">
-							<div class="testimonial-card card <?php echo esc_attr($sector_class); ?>">
+							<div class="testimonial-card card <?php echo esc_attr($category_class); ?>">
 								<div class="border"></div>
 								<?php
 
-								if ($sectors && !is_wp_error($sectors) && !empty($sectors)) {
-									foreach ($sectors as $sector) {  ?>
-										<span class="job-sector mb-3">
+								if ($categories && !is_wp_error($categories) && !empty($categories)) {
+									foreach ($categories as $category) {  ?>
+										<span class="testimonial-category mb-3">
 											<?php
-											echo esc_html($sector->name);
+											echo esc_html($category->name);
 											?></span>
 								<?php
 									}
