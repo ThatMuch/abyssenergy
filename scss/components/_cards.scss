@@ -58,10 +58,12 @@
   background: linear-gradient(180deg, #ff8e38 0%, #ffb86f 100%);
 }
 
-.card.process-industry-card .border {
+.card.process-industry-card .border,
+.card.industry-card .border {
   background: linear-gradient(180deg, #0a3f6a 0%, #0083d5 100%);
 }
 
-.card.renewables-card .border {
+.card.renewables-card .border,
+.card.renewable-energy-card .border {
   background: linear-gradient(180deg, #008e99 0%, #2ab0ba 100%);
 }
