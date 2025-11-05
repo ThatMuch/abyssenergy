@@ -77,6 +77,9 @@
       ul > li {
         position: relative;
         margin-left: 20px;
+        &.menu-item-has-children a:hover {
+          cursor: default;
+        }
         &:hover > ul {
           display: flex;
         }
