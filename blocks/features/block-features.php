@@ -25,6 +25,7 @@ if (! empty($block['align'])) {
 $title = get_field('title');
 $subtitle = get_field('subtitle');
 $features = get_field('features') ?: array();
+$button = get_field('main_button');
 ?>
 
 <?php if ($is_preview) : ?>
@@ -46,6 +47,13 @@ $features = get_field('features') ?: array();
 					<?php endif; ?>
 					<?php if ($title) : ?>
 						<h2 class="section--title"><?php echo esc_html($title); ?></h2>
+					<?php endif; ?>
+					<?php if ($button && !empty($button['url']) && !empty($button['title'])) : ?>
+						<div class="section-header-button">
+							<a href="<?php echo esc_url($button['url']); ?>" class="btn btn-primary">
+								<?php echo esc_html($button['title']); ?>
+							</a>
+						</div>
 					<?php endif; ?>
 				</div>
 			<?php endif; ?>

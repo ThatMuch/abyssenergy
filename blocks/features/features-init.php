@@ -89,6 +89,21 @@ function register_features_block()
 					'append' => '',
 				),
 				array(
+					'key' => 'field_features_button',
+					'label' => 'Bouton principal',
+					'name' => 'main_button',
+					'type' => 'link',
+					'instructions' => 'Ajouter un bouton principal pour la section des caractéristiques (optionnel).',
+					'required' => 0,
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'return_format' => 'array',
+
+				),
+				array(
 					'key' => 'field_features_items',
 					'label' => 'Caractéristiques',
 					'name' => 'features',
