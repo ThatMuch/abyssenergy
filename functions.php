@@ -301,9 +301,6 @@ function abyssenergy_gform_pre_submission_handler($form, $entry)
 				error_log('get_the_ID() now returns: ' . get_the_ID());
 				error_log('get_queried_object_id() now returns: ' . get_queried_object_id());
 				error_log('ACF job_id field value: ' . $job_id);
-
-				// Debug complet du JobOrder
-				abyssenergy_debug_job_order_issue($post_id, $job_id);
 			}
 		} else {
 			error_log('No post ID found in form submission data');
@@ -312,58 +309,21 @@ function abyssenergy_gform_pre_submission_handler($form, $entry)
 }
 add_action('gform_pre_submission_1', 'abyssenergy_gform_pre_submission_handler', 5, 2);
 
-/**
- * Debug temporaire pour diagnostiquer le problème JobOrder
- */
-function abyssenergy_debug_job_order_issue($post_id, $job_id)
+function hide_update_notice_to_all_but_admin_users()
 {
-	if (!$post_id || !$job_id) return;
-
-	error_log("=== DEBUG JOB ORDER ===");
-	error_log("Post ID: " . $post_id);
-	error_log("Job ID (bullhorn_id): " . $job_id);
-
-	if (class_exists('\SquareChilli\Bullhorn\models\JobOrder')) {
-		// Chercher le job order exact
-		$jobOrder = \SquareChilli\Bullhorn\models\JobOrder::find()->where(['bullhorn_id' => $job_id])->one();
-
-		if ($jobOrder) {
-			error_log("JobOrder trouvé - ID: " . $jobOrder->id . ", Status: " . $jobOrder->status);
-			error_log("JobOrder date_updated: " . $jobOrder->date_updated);
-
-			// Vérifier les propriétés importantes
-			$reflection = new \ReflectionClass($jobOrder);
-			$properties = $reflection->getProperties();
-			foreach ($properties as $property) {
-				if ($property->isPublic()) {
-					$prop_name = $property->getName();
-					$prop_value = $jobOrder->$prop_name;
-					if (in_array($prop_name, ['status', 'is_open', 'date_end', 'date_start'])) {
-						error_log("JobOrder->{$prop_name}: " . $prop_value);
-					}
-				}
-			}
-
-			// Tester findOpen
-			$openJobOrder = \SquareChilli\Bullhorn\models\JobOrder::findOpen()->where(['bullhorn_id' => $job_id])->one();
-			if ($openJobOrder) {
-				error_log("JobOrder findOpen() trouve le job");
-			} else {
-				error_log("JobOrder findOpen() NE trouve PAS le job - status actuel: " . $jobOrder->status);
-
-				// Vérifier la méthode findOpen
-				error_log("Critères findOpen() probablement: status = 'Open' ou similaire");
-			}
-		} else {
-			error_log("Aucun JobOrder trouvé avec bullhorn_id: " . $job_id);
-
-			// Lister quelques jobs pour comparaison
-			$someJobs = \SquareChilli\Bullhorn\models\JobOrder::find()->limit(5)->all();
-			error_log("Exemples de JobOrders dans la DB:");
-			foreach ($someJobs as $job) {
-				error_log("- ID: " . $job->id . ", Bullhorn ID: " . $job->bullhorn_id . ", Status: " . $job->status);
-			}
-		}
+	if (!current_user_can('update_core')) {
+		remove_action('admin_notices', 'update_nag', 3);
 	}
-	error_log("=== FIN DEBUG JOB ORDER ===");
+}
+add_action('init', 'hide_update_notice_to_all_but_admin_users');
+
+//ask the browser not to cache the job search page
+add_action('template_redirect', 'update_header_cache');
+function update_header_cache()
+{
+	if (is_page(36)) {
+		header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+		header('Pragma: no-cache');
+		header('Expires: Thu, 01 Dec 1990 16:00:00 GMT');
+	}
 }
