@@ -119,7 +119,7 @@
                 </div>
                 <div class="col col-xl-4">
                     <div class="card">
-                        <h2>Apply</h2>
+                        <h2 class="mt-0">Apply</h2>
                         <script>
                             // Définir immédiatement le post ID pour les scripts Gravity Forms
                             window.abyssenergy_job_post_id = <?php echo get_the_ID(); ?>;
