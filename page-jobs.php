@@ -47,15 +47,6 @@ $description = safe_get_field_with_default('description', false, '');
 							<?php echo $description; ?>
 						</div>
 					<?php endif; ?>
-					<form action="" method="GET" class="job-search-form d-flex gap-2">
-						<input
-							type="text"
-							id="job-search"
-							name="job_search"
-							placeholder="Find your next position"
-							value="<?php echo esc_attr(get_query_var('job_search')); ?>">
-						<button type="submit" class="btn btn--primary btn--icon" aria-label="Search"><i class="fas fa-search"></i></button>
-					</form>
 				</div>
 				<div class="col col-md-4">
 					<?php if (has_post_thumbnail()) : ?>
