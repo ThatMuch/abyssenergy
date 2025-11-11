@@ -128,6 +128,17 @@ function abyssenergy_enqueue_scripts()
 		);
 	}
 
+	// Script pour les filtres mobiles sur la page jobs
+	if (is_page_template('page-jobs.php') || is_page('jobs')) {
+		wp_enqueue_script(
+			'abyssenergy-jobs-filters-mobile',
+			get_stylesheet_directory_uri() . '/js/jobs-filters-mobile.js',
+			array('jquery'),
+			abyssenergy_get_file_version('/js/jobs-filters-mobile.js'),
+			true
+		);
+	}
+
 	// Script pour le contexte des formulaires Gravity Forms sur les pages de job
 	if (is_singular('job') && file_exists(get_stylesheet_directory() . '/js/gravity-forms-post-context.js')) {
 		wp_enqueue_script(

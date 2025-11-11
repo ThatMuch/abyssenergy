@@ -1,0 +1,250 @@
+/**
+ * Mobile Filters Styles for Jobs Page
+ */
+
+// Variables
+$filter-sidebar-width: 320px;
+$filter-transition: 0.3s ease-in-out;
+$overlay-bg: rgba(0, 0, 0, 0.5);
+$filter-header-height: 60px;
+
+// Bouton toggle des filtres (visible uniquement sur mobile)
+.filters-toggle {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+
+  // Caché sur desktop (≥768px)
+  @media (min-width: 768px) {
+    display: none !important;
+  }
+
+  .filter-count {
+    display: none;
+    font-size: 0.875rem;
+    opacity: 0.9;
+  }
+
+  &.has-filters {
+    .filter-count {
+      display: inline;
+    }
+  }
+
+  // Badge pour le compteur
+  .filter-count:not(:empty) {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.125rem 0.5rem;
+    border-radius: 12px;
+  }
+
+  i {
+    font-size: 1rem;
+  }
+}
+
+// Sidebar des filtres
+.jobs-filters-sidebar {
+  // Desktop: comportement normal
+  @media (min-width: 768px) {
+    display: block !important;
+  }
+
+  // Mobile: sidebar coulissante
+  @media (max-width: 767px) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: $filter-sidebar-width;
+    max-width: 90vw;
+    height: 100vh;
+    background: #fff;
+    z-index: 1000;
+    transform: translateX(-100%);
+    transition: transform $filter-transition;
+    overflow-y: auto;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+    padding-bottom: 2rem;
+
+    &.active {
+      transform: translateX(0);
+    }
+  }
+}
+
+// Header de la sidebar mobile (titre + bouton fermer)
+.filters-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #e0e0e0;
+  background: #f8f9fa;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  height: $filter-header-height;
+
+  // Caché sur desktop (≥768px)
+  @media (min-width: 768px) {
+    display: none !important;
+  }
+
+  h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  .filters-close {
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    color: #333;
+    font-size: 1.5rem;
+    line-height: 1;
+    transition: color 0.2s;
+
+    &:hover {
+      color: #000;
+    }
+  }
+}
+
+// Overlay (fond sombre derrière la sidebar)
+.filters-overlay {
+  @media (max-width: 767px) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: $overlay-bg;
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity $filter-transition, visibility $filter-transition;
+
+    &.active {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  @media (min-width: 768px) {
+    display: none !important;
+  }
+}
+
+// Empêcher le scroll du body quand les filtres sont ouverts
+body.filters-open {
+  @media (max-width: 767px) {
+    overflow: hidden;
+  }
+}
+
+// Ajustements pour le formulaire Search & Filter dans la sidebar
+.jobs-filters-sidebar {
+  .searchandfilter {
+    @media (max-width: 767px) {
+      padding: 1.5rem;
+      padding-top: 0;
+
+      > ul {
+        padding: 0;
+        margin: 0;
+
+        > li {
+          margin-bottom: 1.5rem;
+          padding-bottom: 1.5rem;
+          border-bottom: 1px solid #e0e0e0;
+
+          &:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+          }
+        }
+      }
+
+      // Labels des filtres
+      label,
+      h4 {
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+        display: block;
+        font-size: 0.95rem;
+        color: #333;
+      }
+
+      // Inputs et selects
+      input[type="text"],
+      input[type="search"],
+      select {
+        width: 100%;
+        padding: 0.625rem 0.875rem;
+        font-size: 0.95rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-bottom: 0.5rem;
+
+        &:focus {
+          outline: none;
+          border-color: var(--primary-color, #007bff);
+          box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.1);
+        }
+      }
+
+      // Boutons du formulaire
+      input[type="submit"],
+      button[type="submit"] {
+        width: 100%;
+        margin-top: 1rem;
+      }
+    }
+  }
+}
+
+// Animation d'entrée
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+// Responsive adjustments pour les résultats
+.jobs-filters {
+  .col-md-9 {
+    @media (max-width: 767px) {
+      padding-top: 0;
+    }
+  }
+}
+
+// Ajustement du container sur mobile
+@media (max-width: 767px) {
+  .jobs-filters {
+    .container-fluid {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+}

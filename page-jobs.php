@@ -70,14 +70,31 @@ $description = safe_get_field_with_default('description', false, '');
 	<!-- Filtres et recherche -->
 	<section class="jobs-filters">
 		<div class="container-fluid">
+			<!-- Bouton pour afficher les filtres sur mobile (visible uniquement < 768px) -->
+			<button class="btn btn--primary filters-toggle d-md-none mb-3" type="button" aria-expanded="false" aria-controls="jobs-filters-sidebar">
+				<i class="fas fa-filter"></i>
+				<span class="filter-text">Show Filters</span>
+				<span class="filter-count"></span>
+			</button>
+
 			<div class="row">
 				<div class="col-md-3">
-					<?php echo do_shortcode('[searchandfilter id="282"]'); ?>
+					<!-- Sidebar des filtres (coulissante sur mobile, normale sur desktop) -->
+					<div class="jobs-filters-sidebar" id="jobs-filters-sidebar">
+						<!-- Header mobile uniquement -->
+						<div class="filters-header d-md-none">
+							<h3>Filters</h3>
+							<button class="filters-close" type="button" aria-label="Close filters">
+								<i class="fas fa-times"></i>
+							</button>
+						</div>
+						<?php echo do_shortcode('[searchandfilter id="282"]'); ?>
+					</div>
+					<!-- Overlay mobile uniquement -->
+					<div class="filters-overlay d-md-none"></div>
 				</div>
 				<div class="col-md-9">
-
-					<?php echo do_shortcode('[searchandfilter id="282" show="results"]');
-					?>
+					<?php echo do_shortcode('[searchandfilter id="282" show="results"]'); ?>
 				</div>
 			</div>
 		</div>
