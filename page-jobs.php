@@ -35,7 +35,7 @@ $description = safe_get_field_with_default('description', false, '');
 <div class="jobs-listing-page">
 	<!-- En-tête de la page -->
 	<div class="page-header <?php if (has_post_thumbnail()): ?>has-thumbnail<?php endif; ?>">
-		<div class="container-fluid">
+		<div class="container">
 			<div class="row">
 				<div class="col col-md-8">
 					<h1><?php the_title(); ?></h1>
