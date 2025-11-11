@@ -1,0 +1,12 @@
+@use "./buttons";
+
+.searchandfilter {
+  ul {
+    padding: 0;
+  }
+
+  .search-filter-reset {
+    @extend .btn;
+    @extend .btn--outline;
+  }
+}

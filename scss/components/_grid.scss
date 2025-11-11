@@ -64,8 +64,8 @@ $grid-gutter-half: math.div($grid-gutter-width, 2);
 
 .container-fluid {
   width: 100%;
-  padding-right: $grid-gutter-half;
-  padding-left: $grid-gutter-half;
+  padding-right: $spacing-xl;
+  padding-left: $spacing-xl;
   margin-right: auto;
   margin-left: auto;
   box-sizing: border-box;
