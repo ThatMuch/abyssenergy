@@ -54,7 +54,7 @@ if ($query->have_posts()) : ?>
 				<?php
 				$pagination_args = array(
 					'total' => $query->max_num_pages,
-					'current' => $paged,
+
 					'mid_size' => 2,
 					'prev_text' => '<i class="fa fa-chevron-left"></i>',
 					'next_text' => '<i class="fa fa-chevron-right"></i>',
