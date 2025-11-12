@@ -9,7 +9,7 @@ $subtitle = safe_get_field_with_default('subtitle', false, '');
 		<?php
 		else :  the_title('<h1 class="page-title">', '</h1>');
 		endif; ?>
-		<?php echo  do_shortcode('[searchandfilter id="2295"]') ?>
+		<?php echo  do_shortcode('[searchandfilter id="2538"]') ?>
 
 	</div>
 	<div class="animation-wrapper">
