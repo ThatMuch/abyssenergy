@@ -9,3 +9,7 @@
     @extend .btn;
   }
 }
+
+.searchandfilter ul li li {
+  display: inline-flex;
+}
