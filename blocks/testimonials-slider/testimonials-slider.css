@@ -27,15 +27,32 @@ position: relative;
 	display: flex;
 	gap: 1.5rem;
 	margin-bottom: 2rem;
-	justify-content: end;
 
 	.section-title {
-		text-align: right;
 		max-width: 330px;
 	}
 
 	img {
 		width: 150px;
+	}
+
+	/* Alignement à droite (par défaut) */
+	&.align-right {
+		justify-content: end;
+
+		.section-title {
+			text-align: right;
+		}
+	}
+
+	/* Alignement à gauche */
+	&.align-left {
+		justify-content: start;
+		flex-direction: row-reverse;
+
+		.section-title {
+			text-align: left;
+		}
 	}
 }
 

@@ -136,6 +136,29 @@ if (function_exists('acf_add_local_field_group')) {
 				'return_format' => 'id',
 				'preview_size' => 'medium',
 				'library' => 'all',
+			),
+			array(
+				'key' => 'field_testimonials_slider_header_alignment',
+				'label' => 'Alignement du header',
+				'name' => 'header_alignment',
+				'type' => 'radio',
+				'instructions' => 'Choisir l\'alignement du titre et de l\'image',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'choices' => array(
+					'right' => 'Droite',
+					'left' => 'Gauche',
+				),
+				'allow_null' => 0,
+				'other_choice' => 0,
+				'default_value' => 'right',
+				'layout' => 'horizontal',
+				'return_format' => 'value',
 			)
 		),
 		'location' => array(

@@ -183,6 +183,7 @@ padding: 1rem 1.5rem;
 
 .google-reviews-slider {
       padding: 0 1rem;
+          overflow: hidden;
 }
 
 /* Slider Style */
