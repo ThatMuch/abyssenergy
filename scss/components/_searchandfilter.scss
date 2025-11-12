@@ -11,5 +11,6 @@
 }
 
 .searchandfilter ul li li {
-  display: inline-flex;
+  display: flex;
+  align-items: flex-start;
 }
