@@ -313,6 +313,11 @@
   gap: map.get($spacings, "section-sm");
   position: relative;
   margin-top: 182px;
+
+  @include respond-to(xs) {
+    padding: 2rem map.get($spacings, "section-sm");
+  }
+
   &::before {
     content: "";
     position: absolute;
@@ -330,6 +335,10 @@
     display: flex;
     align-items: center;
     width: 100%;
+
+    @include respond-to(xs) {
+      flex-direction: column;
+    }
   }
   .footer-container {
     @include flex-container($max-width: $breakpoint-xxl);
