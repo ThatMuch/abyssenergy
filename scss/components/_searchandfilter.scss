@@ -14,3 +14,38 @@
   display: flex;
   align-items: flex-start;
 }
+
+.home {
+  #search-filter-form-2295 ul {
+    justify-content: center;
+  }
+}
+#search-filter-form-2295 ul {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+  label {
+    min-width: 18rem;
+  }
+  .sf-field-submit {
+    position: relative;
+    &:before {
+      content: "\f002";
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      position: absolute;
+      left: 0.8rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: white;
+      display: block;
+      cursor: pointer;
+      pointer-events: none;
+    }
+    input {
+      text-indent: -9999px;
+      width: 42px;
+    }
+  }
+}

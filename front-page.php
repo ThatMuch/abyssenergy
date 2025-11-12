@@ -9,15 +9,8 @@ $subtitle = safe_get_field_with_default('subtitle', false, '');
 		<?php
 		else :  the_title('<h1 class="page-title">', '</h1>');
 		endif; ?>
-		<form action="<?php echo esc_url(home_url('/search-jobs/')); ?>" method="GET" class="job-search-form d-flex gap-2">
-			<input
-				type="text"
-				id="job-search"
-				name="job_search"
-				placeholder="Find your next position"
-				value="<?php echo esc_attr(get_query_var('job_search')); ?>">
-			<button type="submit" class="btn btn--primary btn--icon" aria-label="Search"><i class="fas fa-search"></i></button>
-		</form>
+		<?php echo  do_shortcode('[searchandfilter id="2295"]') ?>
+
 	</div>
 	<div class="animation-wrapper">
 		<dotlottie-wc
