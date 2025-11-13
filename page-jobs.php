@@ -47,7 +47,7 @@ $description = safe_get_field_with_default('description', false, '');
 							<?php echo $description; ?>
 						</div>
 					<?php endif; ?>
-					<?php echo  do_shortcode('[searchandfilter id="2538"]') ?>
+					<?php echo  do_shortcode('[searchandfilter id="2581"]') ?>
 				</div>
 				<div class="col col-md-4">
 					<?php if (has_post_thumbnail()) : ?>
