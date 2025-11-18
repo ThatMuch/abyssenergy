@@ -327,3 +327,62 @@ function update_header_cache()
 		header('Expires: Thu, 01 Dec 1990 16:00:00 GMT');
 	}
 }
+/**
+ * 1. Planifier l'événement quotidien si ce n'est pas déjà fait
+ */
+function mon_plugin_planifier_mise_a_jour()
+{
+	// Vérifie si l'événement est déjà planifié
+	if (! wp_next_scheduled('mon_action_mise_a_jour_filtre')) {
+		// Planifie l'action pour qu'elle s'exécute une fois par jour ('daily')
+		// à partir de maintenant.
+		wp_schedule_event(time(), 'daily', 'mon_action_mise_a_jour_filtre');
+	}
+}
+// Lance la planification lors de l'activation du thème/plugin
+add_action('wp', 'mon_plugin_planifier_mise_a_jour');
+
+/**
+ * Optionnel : Nettoyer l'événement si le plugin/thème est désactivé
+ */
+function mon_plugin_desactiver_mise_a_jour()
+{
+	wp_clear_scheduled_hook('mon_action_mise_a_jour_filtre');
+}
+register_deactivation_hook(__FILE__, 'mon_plugin_desactiver_mise_a_jour');
+
+
+/**
+ * 2. Fonction qui s'exécute chaque jour pour mettre à jour les posts
+ */
+function mon_plugin_executer_mise_a_jour_filtre()
+{
+	// 1. Définir les arguments de la requête
+	$args = array(
+		'post_type'      => 'jobs', // <-- REMPLACER CE SLUG
+		'post_status'    => 'publish', // Ne met à jour que les posts publiés
+		'posts_per_page' => -1,       // Récupère tous les posts
+		'fields'         => 'ids',    // Ne récupère que les IDs pour l'efficacité
+	);
+
+	$posts_a_mettre_a_jour = new WP_Query($args);
+
+	if ($posts_a_mettre_a_jour->have_posts()) {
+		// 2. Parcourir chaque ID de post
+		foreach ($posts_a_mettre_a_jour->posts as $post_id) {
+			// 3. Forcer la mise à jour
+			// wp_update_post( array( 'ID' => $post_id ) ) exécute toutes les hooks de sauvegarde
+			// comme si vous aviez cliqué sur "Mettre à jour" dans l'admin.
+			wp_update_post(array(
+				'ID' => $post_id,
+				// On peut ajouter une valeur pour s'assurer que la BDD voit un changement
+				// Même si le contenu est le même, la simple présence de l'ID suffit souvent
+			));
+		}
+	}
+
+	// Optionnel : Ajouter une entrée dans les logs pour confirmer l'exécution
+	error_log('WP-Cron : Mise à jour de l\'index Search & Filter déclenchée le ' . date('Y-m-d H:i:s'));
+}
+// Assigner la fonction à l'événement planifié
+add_action('mon_action_mise_a_jour_filtre', 'mon_plugin_executer_mise_a_jour_filtre');
