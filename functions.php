@@ -359,7 +359,7 @@ function mon_plugin_executer_mise_a_jour_filtre()
 {
 	// 1. Définir les arguments de la requête
 	$args = array(
-		'post_type'      => 'jobs', // <-- REMPLACER CE SLUG
+		'post_type'      => 'job', // <-- REMPLACER CE SLUG
 		'post_status'    => 'publish', // Ne met à jour que les posts publiés
 		'posts_per_page' => -1,       // Récupère tous les posts
 		'fields'         => 'ids',    // Ne récupère que les IDs pour l'efficacité
