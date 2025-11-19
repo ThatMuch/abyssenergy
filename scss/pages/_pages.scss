@@ -33,6 +33,11 @@
       @include vertical-spacing($spacing-xl);
     }
   }
+
+  .page-buttons {
+    display: flex;
+    gap: 0.5rem;
+  }
 }
 
 .page-for-candidates,
