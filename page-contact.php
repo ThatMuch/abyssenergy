@@ -24,27 +24,13 @@ $consultants = get_posts(array(
 ?>
 
 <div class="page page_contact">
-	<div class="page-header <?php if (has_post_thumbnail()): ?>has-thumbnail<?php endif; ?>">
-		<div class="container">
-			<div class="row">
-				<div class="col col-md-8">
-					<h1><?php the_title(); ?></h1>
-					<?php if ($subtitle): ?>
-						<?php echo $subtitle; ?>
-					<?php endif; ?>
-					<?php echo do_shortcode('[gravityform id="3" title="false" description="false"]'); ?>
-				</div>
-				<div class="col col-md-4">
-					<?php if (has_post_thumbnail()): ?>
-						<div class="page-thumbnail">
-							<?php the_post_thumbnail('medium'); ?>
-						</div>
-					<?php endif; ?>
-				</div>
-			</div>
-
-		</div>
-	</div>
+	<?php
+	get_template_part('template-parts/page-header', null, array(
+		'content_col_class' => 'col-md-8',
+		'thumbnail_col_class' => 'col-md-4',
+		'custom_content' => '<h1>' . get_the_title() . '</h1>' . ($subtitle ? $subtitle : '') . do_shortcode('[gravityform id="3" title="false" description="false"]')
+	));
+	?>
 	<div class="container">
 		<div class="page_contact_cards">
 			<div class="card card--contact">

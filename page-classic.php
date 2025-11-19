@@ -7,36 +7,9 @@
  * Ce template peut être assigné à n'importe quelle page depuis l'administration WordPress
  */
 
-$subtitle = safe_get_field_with_default('subtitle', false, '');
-$description = safe_get_field_with_default('description', false, '');
-
-get_header()
+get_header();
+get_template_part('template-parts/page-header');
 ?>
-<div class="page-header <?php if (has_post_thumbnail()): ?>has-thumbnail<?php endif; ?>">
-	<div class="container">
-		<div class="row">
-			<div class="col col-md-7">
-				<h1><?php the_title(); ?></h1>
-				<?php if ($subtitle): ?>
-					<?php echo $subtitle; ?>
-				<?php endif; ?>
-				<?php if ($description): ?>
-					<div class="page-description">
-						<?php echo $description; ?>
-					</div>
-				<?php endif; ?>
-			</div>
-			<div class="col col-md-5">
-				<?php if (has_post_thumbnail()): ?>
-					<div class="page-thumbnail">
-						<?php the_post_thumbnail('medium'); ?>
-					</div>
-				<?php endif; ?>
-			</div>
-		</div>
-
-	</div>
-</div>
 
 <main>
 	<div class="container my-5">

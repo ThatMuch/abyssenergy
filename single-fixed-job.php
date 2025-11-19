@@ -8,37 +8,26 @@ if ($job_category && !is_wp_error($job_category)) {
 } else {
     $job_category = '';
 }
+
+// Préparer le contenu personnalisé pour le header
+$custom_content = '<button onclick="history.back()" class="btn btn--outline mb-5"><i class="fa fa-chevron-left"></i> Back</button>';
+if ($job_category) {
+    $custom_content .= '<p class="section--subtitle">' . $job_category . '</p>';
+}
+$custom_content .= '<h1 class="mt-0">' . get_the_title() . '</h1>';
+if ($description) {
+    $custom_content .= '<div class="page-description">' . $description . '</div>';
+}
+
+$custom_thumbnail = '<div class="page-thumbnail"><img src="' . get_template_directory_uri() . '/images/Sectors.webp" alt="' . get_the_title() . '" loading="lazy"></div>';
+
+get_template_part('template-parts/page-header', null, array(
+    'row_classes' => 'align-items-center',
+    'custom_content' => $custom_content,
+    'custom_thumbnail' => $custom_thumbnail,
+    'show_thumbnail' => false // On utilise custom_thumbnail à la place
+));
 ?>
-
-
-<div class="page-header <?php if (has_post_thumbnail()): ?>has-thumbnail<?php endif; ?>">
-    <div class="container">
-
-        <div class="row align-items-center">
-
-            <div class="col col-md-7">
-                <button onclick="history.back()" class="btn btn--outline mb-5">
-                    <i class="fa fa-chevron-left"></i> Back
-                </button>
-                <?php if ($job_category): ?>
-                    <p class="section--subtitle"><?php echo $job_category; ?></p>
-                <?php endif; ?>
-                <h1 class="mt-0"><?php the_title(); ?></h1>
-                <?php if ($description): ?>
-                    <div class="page-description">
-                        <?php echo $description; ?>
-                    </div>
-                <?php endif; ?>
-            </div>
-            <div class="col col-md-5">
-                <div class="page-thumbnail">
-                    <img src="<?php echo get_template_directory_uri(); ?>/images/Sectors.webp" alt="<?php the_title(); ?>" loading="lazy">
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div>
 
 <div class='container'>
     <div class="row">

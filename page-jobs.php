@@ -34,31 +34,14 @@ $description = safe_get_field_with_default('description', false, '');
 
 <div class="jobs-listing-page">
 	<!-- En-tête de la page -->
-	<div class="page-header <?php if (has_post_thumbnail()): ?>has-thumbnail<?php endif; ?>">
-		<div class="container">
-			<div class="row">
-				<div class="col col-md-8">
-					<h1><?php the_title(); ?></h1>
-					<?php if ($subtitle): ?>
-						<?php echo $subtitle; ?>
-					<?php endif; ?>
-					<?php if ($description): ?>
-						<div class="page-description">
-							<?php echo $description; ?>
-						</div>
-					<?php endif; ?>
-					<?php echo  do_shortcode('[searchandfilter id="2581"]') ?>
-				</div>
-				<div class="col col-md-4">
-					<?php if (has_post_thumbnail()) : ?>
-						<div class="page-thumbnail">
-							<?php the_post_thumbnail('medium_large', array('class' => 'img-fluid')); ?>
-						</div>
-					<?php endif; ?>
-				</div>
-			</div>
-		</div>
-	</div>
+	<?php
+	get_template_part('template-parts/page-header', null, array(
+		'content_col_class' => 'col-md-8',
+		'thumbnail_col_class' => 'col-md-4',
+		'thumbnail_size' => 'medium_large',
+		'custom_content' => '<h1>' . get_the_title() . '</h1>' . ($subtitle ? $subtitle : '') . ($description ? '<div class="page-description">' . $description . '</div>' : '') . do_shortcode('[searchandfilter id="2581"]')
+	));
+	?>
 	<!-- Filtres et recherche -->
 	<section class="jobs-filters">
 		<div class="container-fluid">
