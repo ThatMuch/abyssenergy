@@ -29,6 +29,8 @@
       margin-bottom: 3.9375rem;
       @include respond-to(xs) {
         font-size: $d1-size-mobile;
+        margin-bottom: 0;
+        margin-top: 0;
       }
     }
 
@@ -48,6 +50,10 @@
     @include respond-to(md) {
       transform: translateY(-5rem);
       z-index: -1;
+    }
+
+    @include respond-to(xs) {
+      width: 125%;
     }
   }
   .animation {
