@@ -41,13 +41,46 @@
 	const wrapper = document.querySelector('.similar-jobs');
 	const jobCards = document.querySelectorAll('.job-card');
 	const jobCardCount = jobCards.length;
-	const containerWidth = jobCardCount * 450; // Assuming each card is 460px wide
-	document.querySelector('.similar-jobs-wrapper').style.width = `${containerWidth}px`;
+
+	// Fonction pour calculer et appliquer les dimensions
+	function calculateAndApplyDimensions() {
+		const containerElement = wrapper.closest('.section').querySelector('.container');
+		const containerWidth = containerElement ? containerElement.offsetWidth : wrapper.offsetWidth;
+		const gap = 24; // component-md spacing (1.5rem = 24px)
+
+		// Détecter le nombre de cartes visibles selon la taille d'écran
+		const windowWidth = window.innerWidth;
+		let cardsVisible;
+		if (windowWidth < 768) {
+			cardsVisible = 1; // Mobile
+		} else if (windowWidth < 1024) {
+			cardsVisible = 2; // Tablette
+		} else {
+			cardsVisible = 3; // Desktop
+		}
+
+		const totalGap = gap * (cardsVisible - 1);
+		const cardWidth = Math.floor((containerWidth - totalGap) / cardsVisible);
+
+		// Appliquer la largeur calculée à chaque carte
+		jobCards.forEach(card => {
+			card.style.width = `${cardWidth}px`;
+		});
+
+		// Définir la largeur totale du wrapper
+		const totalWrapperWidth = (cardWidth * jobCardCount) + (gap * (jobCardCount - 1));
+		document.querySelector('.similar-jobs-wrapper').style.width = `${totalWrapperWidth}px`;
+
+		return cardWidth + gap; // Retourne le scrollAmount
+	}
+
+	// Initialiser les dimensions
+	let scrollAmount = calculateAndApplyDimensions();
 
 	scrollLeftBtn.addEventListener('click', () => {
 		wrapper.scrollBy({
 			top: 0,
-			left: -450,
+			left: -scrollAmount,
 			behavior: 'smooth'
 		});
 	});
@@ -55,12 +88,12 @@
 	scrollRightBtn.addEventListener('click', () => {
 		wrapper.scrollBy({
 			top: 0,
-			left: 450,
+			left: scrollAmount,
 			behavior: 'smooth'
 		});
 	});
 
-	// disabled the button when reaching the end
+	// Désactiver les boutons quand on atteint les extrémités
 	const disableButtons = () => {
 		scrollLeftBtn.disabled = wrapper.scrollLeft === 0;
 		scrollRightBtn.disabled = wrapper.scrollLeft + wrapper.clientWidth >= wrapper.scrollWidth;
@@ -68,4 +101,14 @@
 
 	wrapper.addEventListener('scroll', disableButtons);
 	disableButtons();
+
+	// Recalculer au redimensionnement de la fenêtre
+	let resizeTimeout;
+	window.addEventListener('resize', () => {
+		clearTimeout(resizeTimeout);
+		resizeTimeout = setTimeout(() => {
+			scrollAmount = calculateAndApplyDimensions();
+			disableButtons();
+		}, 150);
+	});
 </script>

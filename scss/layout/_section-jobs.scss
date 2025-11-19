@@ -13,7 +13,8 @@
     gap: map.get($spacings, "component-md");
     padding: 1rem 0 map.get($spacings, "component-lg") 0;
     .card.job-card {
-      width: 28.75rem;
+      // La largeur sera calculée dynamiquement par JavaScript
+      // 1 carte sur mobile (<768px), 2 cartes sur tablette (768-1023px), 3 cartes sur desktop (≥1024px)
       flex: none;
     }
   }
