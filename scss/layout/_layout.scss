@@ -344,6 +344,10 @@
     @include flex-container($max-width: $breakpoint-xxl);
     @include respond-to(xs) {
       padding: 0;
+      .menu {
+        margin-bottom: 0;
+        margin-top: 0;
+      }
     }
   }
 
