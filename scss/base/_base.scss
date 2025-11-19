@@ -69,42 +69,42 @@ h6 {
 h1,
 .h1 {
   font-size: $h1-size;
-  @include respond-to(md) {
+  @include respond-to(xs) {
     font-size: $h1-size-mobile;
   }
 }
 h2,
 .h2 {
   font-size: $h2-size;
-  @include respond-to(md) {
+  @include respond-to(xs) {
     font-size: $h2-size-mobile;
   }
 }
 h3,
 .h3 {
   font-size: $h3-size;
-  @include respond-to(md) {
+  @include respond-to(xs) {
     font-size: $h3-size-mobile;
   }
 }
 h4,
 .h4 {
   font-size: $h4-size;
-  @include respond-to(md) {
+  @include respond-to(xs) {
     font-size: $h4-size-mobile;
   }
 }
 h5,
 .h5 {
   font-size: $h5-size;
-  @include respond-to(md) {
+  @include respond-to(xs) {
     font-size: $h5-size-mobile;
   }
 }
 h6,
 .h6 {
   font-size: $h6-size;
-  @include respond-to(md) {
+  @include respond-to(xs) {
     font-size: $h6-size-mobile;
   }
 }
