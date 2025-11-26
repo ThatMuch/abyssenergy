@@ -6,14 +6,16 @@
 	'use strict';
 
 	$(document).ready(function () {
-		const $filterToggle = $('.filters-toggle');
-		const $filtersSidebar = $('.jobs-filters-sidebar');
-		const $filtersOverlay = $('.filters-overlay');
-		const $filtersClose = $('.filters-close');
+		console.log('Mobile filters script loaded');
+
 		const $body = $('body');
 
 		// Ouvrir les filtres
 		function openFilters() {
+			const $filtersSidebar = $('.jobs-filters-sidebar');
+			const $filtersOverlay = $('.filters-overlay');
+			const $filterToggle = $('.filters-toggle');
+
 			$filtersSidebar.addClass('active');
 			$filtersOverlay.addClass('active');
 			$body.addClass('filters-open');
@@ -22,14 +24,21 @@
 
 		// Fermer les filtres
 		function closeFilters() {
+			const $filtersSidebar = $('.jobs-filters-sidebar');
+			const $filtersOverlay = $('.filters-overlay');
+			const $filterToggle = $('.filters-toggle');
+
 			$filtersSidebar.removeClass('active');
 			$filtersOverlay.removeClass('active');
 			$body.removeClass('filters-open');
 			$filterToggle.attr('aria-expanded', 'false');
 		}
 
-		// Click sur le bouton toggle
-		$filterToggle.on('click', function () {
+		// Click sur le bouton toggle (délégation d'événement)
+		$(document).on('click', '.filters-toggle', function (e) {
+			e.preventDefault();
+			const $filtersSidebar = $('.jobs-filters-sidebar');
+
 			if ($filtersSidebar.hasClass('active')) {
 				closeFilters();
 			} else {
@@ -37,18 +46,20 @@
 			}
 		});
 
-		// Click sur le bouton fermer
-		$filtersClose.on('click', function () {
+		// Click sur le bouton fermer (délégation d'événement)
+		$(document).on('click', '.filters-close', function (e) {
+			e.preventDefault();
 			closeFilters();
 		});
 
-		// Click sur l'overlay
-		$filtersOverlay.on('click', function () {
+		// Click sur l'overlay (délégation d'événement)
+		$(document).on('click', '.filters-overlay', function () {
 			closeFilters();
 		});
 
 		// Fermer avec la touche Escape
 		$(document).on('keydown', function (e) {
+			const $filtersSidebar = $('.jobs-filters-sidebar');
 			if (e.key === 'Escape' && $filtersSidebar.hasClass('active')) {
 				closeFilters();
 			}
@@ -57,6 +68,8 @@
 		// Mettre à jour le compteur de filtres actifs
 		function updateFilterCount() {
 			const $searchFilter = $('.searchandfilter');
+			const $filterToggle = $('.filters-toggle');
+
 			if ($searchFilter.length) {
 				// Compter les filtres sélectionnés (inputs, selects avec valeur)
 				let activeCount = 0;
@@ -101,12 +114,12 @@
 		updateFilterCount();
 
 		// Mettre à jour le compteur quand les filtres changent
-		$('.searchandfilter').on('change', 'input, select', function () {
+		$(document).on('change', '.searchandfilter input, .searchandfilter select', function () {
 			updateFilterCount();
 		});
 
 		// Fermer les filtres après soumission (optionnel)
-		$('.searchandfilter form').on('submit', function () {
+		$(document).on('submit', '.searchandfilter form', function () {
 			setTimeout(function () {
 				closeFilters();
 			}, 300);
@@ -114,7 +127,8 @@
 
 		// Si Ajax est activé, fermer après le filtrage
 		$(document).on('sf:ajaxfinish', '.searchandfilter', function () {
-			closeFilters();
+			// closeFilters(); // Peut-être trop agressif si l'utilisateur veut affiner
+			updateFilterCount();
 		});
 	});
 
