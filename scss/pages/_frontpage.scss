@@ -6,7 +6,6 @@
     min-height: calc(100vh - 6rem);
     display: flex;
     flex-direction: column;
-    //  justify-content: center;
     gap: 2rem;
     background-image: url("./images/heroHome.webp");
     background-size: contain;
@@ -16,6 +15,7 @@
 
     @include respond-to(xs) {
       min-height: inherit;
+      background-position: 0 0;
     }
     .container {
       max-width: 52rem;
