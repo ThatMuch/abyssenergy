@@ -50,7 +50,7 @@
         .menu {
           display: flex;
           flex-direction: column;
-          gap: map.get($spacings, "component-md");
+          gap: map.get($spacings, "component-sm");
         }
       }
     }
@@ -136,9 +136,6 @@
         overflow: hidden;
         z-index: -1;
         display: none;
-        .menu-item {
-          margin-bottom: map.get($spacings, "component-md");
-        }
       }
 
       // Sur mobile, afficher les sous-menus par défaut
