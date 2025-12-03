@@ -13,6 +13,7 @@ $grid-gutter-half: math.div($grid-gutter-width, 2);
 
 // Container
 .container {
+  max-width: 100vw;
   width: 100%;
   padding-right: $grid-gutter-half;
   padding-left: $grid-gutter-half;

@@ -133,3 +133,17 @@
 	});
 
 })(jQuery);
+
+
+/* Supposons qu'il existe un <p id="target">Initial</p> */
+const pElement = document.getElementById('target');
+
+function changer(element, valeur) {
+    if (valeur > 10) {
+        element.textContent = "Trop grand";
+    } else {
+        element.textContent = "Correct";
+    }
+}
+
+changer(pElement, 15);
