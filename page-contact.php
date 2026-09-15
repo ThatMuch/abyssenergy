@@ -34,14 +34,14 @@ $consultants = get_posts(array(
 	<div class="container">
 		<div class="page_contact_cards">
 			<div class="card card--contact">
-				<h3>Contact Information</h3>
+				<h3><?php esc_html_e('Contact Information', 'abyssenergy'); ?></h3>
 				<p><i class="fas fa-envelope mr-2"></i> <a href="mailto:<?php echo esc_html($email); ?>"><?php echo esc_html($email); ?></a></p>
 				<p><i class="fas fa-phone mr-2"></i> <a href="tel:<?php echo esc_html($phone); ?>"><?php echo esc_html($phone); ?></a></p>
 				<p><i class="fab fa-linkedin mr-2"></i> <a href="<?php echo esc_url($linkedin); ?>" target="_blank" rel="noopener noreferrer">Linkedin</a></p>
 
 			</div>
 			<div class="card card--contact" id="locations">
-				<h3>Locations</h3>
+				<h3><?php esc_html_e('Locations', 'abyssenergy'); ?></h3>
 				<div class="d-flex gap-4">
 					<div>
 						<p class="b1">Nancy</p>
@@ -58,8 +58,8 @@ $consultants = get_posts(array(
 		</div>
 
 		<section class="section page_team" id="team">
-			<span class="section--subtitle"> The abyssien crew</span>
-			<h2>Meet the team</h2>
+			<span class="section--subtitle"> <?php esc_html_e('The abyssien crew', 'abyssenergy'); ?></span>
+			<h2><?php esc_html_e('Meet the team', 'abyssenergy'); ?></h2>
 			<div class="team-members">
 				<div class="wrapper">
 					<?php foreach ($consultants as $consultant) : ?>
@@ -80,8 +80,8 @@ $consultants = get_posts(array(
 				</div>
 			</div>
 			<div class="nav-buttons">
-				<button class="scroll-left btn btn--outline  btn--icon" aria-label="Scroll left"><i class="fa fa-chevron-left"></i></button>
-				<button class="scroll-right btn btn--outline btn--icon" aria-label="Scroll right"><i class="fa fa-chevron-right"></i></button>
+				<button class="scroll-left btn btn--outline  btn--icon" aria-label="<?php esc_attr_e('Scroll left', 'abyssenergy'); ?>"><i class="fa fa-chevron-left"></i></button>
+				<button class="scroll-right btn btn--outline btn--icon" aria-label="<?php esc_attr_e('Scroll right', 'abyssenergy'); ?>"><i class="fa fa-chevron-right"></i></button>
 			</div>
 		</section>
 	</div>

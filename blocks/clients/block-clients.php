@@ -38,7 +38,7 @@ $gallery = get_field('gallery') ?: array();
 
 <?php if ($is_preview) : ?>
 	<div class="block-preview-message">
-		<h3>Our clients</h3>
+		<h3><?php esc_html_e('Our clients', 'abyssenergy'); ?></h3>
 		<p><?php _e('Aperçu du slider des clients. Les logos des clients ne seront pas affichés dans l\'éditeur.', 'abyssenergy'); ?></p>
 	</div>
 <?php else : ?>

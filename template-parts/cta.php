@@ -20,11 +20,11 @@ if (!get_theme_mod('abyssenergy_cta_enabled', false)) {
 
 // Récupérer les paramètres du CTA
 $cta_data = array(
-	'title' => get_theme_mod('abyssenergy_cta_title', __('Rejoignez-nous dès aujourd\'hui', 'abyssenergy-child')),
-	'subtitle' => get_theme_mod('abyssenergy_cta_subtitle', __('Découvrez nos opportunités et faites partie de notre équipe innovante.', 'abyssenergy-child')),
-	'button_text' => get_theme_mod('abyssenergy_cta_button_text', __('Découvrir nos offres', 'abyssenergy-child')),
+	'title' => get_theme_mod('abyssenergy_cta_title', __('Rejoignez-nous dès aujourd\'hui', 'abyssenergy')),
+	'subtitle' => get_theme_mod('abyssenergy_cta_subtitle', __('Découvrez nos opportunités et faites partie de notre équipe innovante.', 'abyssenergy')),
+	'button_text' => get_theme_mod('abyssenergy_cta_button_text', __('Découvrir nos offres', 'abyssenergy')),
 	'button_url' => get_theme_mod('abyssenergy_cta_button_url', home_url('/emplois/')),
-	'secondary_text' => get_theme_mod('abyssenergy_cta_secondary_text', __('En savoir plus', 'abyssenergy-child')),
+	'secondary_text' => get_theme_mod('abyssenergy_cta_secondary_text', __('En savoir plus', 'abyssenergy')),
 	'secondary_url' => get_theme_mod('abyssenergy_cta_secondary_url', home_url('/about/')),
 	'style' => get_theme_mod('abyssenergy_cta_style', 'primary'),
 );

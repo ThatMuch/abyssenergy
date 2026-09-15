@@ -23,7 +23,7 @@ if (!empty($block['align'])) {
 $is_preview = isset($block['data']['is_preview']) && $block['data']['is_preview'];
 
 // Récupération des paramètres du bloc
-$title = get_field('title') ?: 'Explore EPC Project Jobs';
+$title = get_field('title') ?: __('Explore EPC Project Jobs', 'abyssenergy');
 $subtitle = get_field('subtitle');
 $description = get_field('description');
 

@@ -4,11 +4,11 @@
 	$query = isset($args['query']) ? $args['query'] : null;
 
 	// Récupérer les arguments additionnels
-	$button_text = isset($args['button_text']) ? $args['button_text'] : 'View more jobs';
+	$button_text = isset($args['button_text']) ? $args['button_text'] : __('View more jobs', 'abyssenergy');
 	$button_url = isset($args['button_url']) ? $args['button_url'] : site_url('search-jobs');
 	$show_button = isset($args['show_button']) ? $args['show_button'] : true;
-	$title = isset($args['title']) ? $args['title'] : 'Latest roles in Energy sector';
-	$subtitle = isset($args['subtitle']) ? $args['subtitle'] : 'Career opportunities';
+	$title = isset($args['title']) ? $args['title'] : __('Latest roles in Energy sector', 'abyssenergy');
+	$subtitle = isset($args['subtitle']) ? $args['subtitle'] : __('Career opportunities', 'abyssenergy');
 
 	// Display the jobs
 	if ($query && $query->have_posts()) : ?>

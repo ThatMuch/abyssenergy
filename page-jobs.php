@@ -48,7 +48,7 @@ $description = safe_get_field_with_default('description', false, '');
 			<!-- Bouton pour afficher les filtres sur mobile (visible uniquement < 768px) -->
 			<button class="btn btn--primary filters-toggle d-md-none mb-3" type="button" aria-expanded="false" aria-controls="jobs-filters-sidebar">
 				<i class="fas fa-filter"></i>
-				<span class="filter-text">Show Filters</span>
+				<span class="filter-text"><?php esc_html_e('Show Filters', 'abyssenergy'); ?></span>
 				<span class="filter-count"></span>
 			</button>
 
@@ -58,8 +58,8 @@ $description = safe_get_field_with_default('description', false, '');
 					<div class="jobs-filters-sidebar" id="jobs-filters-sidebar">
 						<!-- Header mobile uniquement -->
 						<div class="filters-header d-md-none">
-							<h3>Filters</h3>
-							<button class="filters-close" type="button" aria-label="Close filters">
+							<h3><?php esc_html_e('Filters', 'abyssenergy'); ?></h3>
+							<button class="filters-close" type="button" aria-label="<?php esc_attr_e('Close filters', 'abyssenergy'); ?>">
 								<i class="fas fa-times"></i>
 							</button>
 						</div>
@@ -79,14 +79,14 @@ $description = safe_get_field_with_default('description', false, '');
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 jobs-cta-content">
-					<h2>You didn't find the ideal position?</h2>
-					<p>Send us your CV for an unsolicited application.</p>
+					<h2><?php esc_html_e("You didn't find the ideal position?", 'abyssenergy'); ?></h2>
+					<p><?php esc_html_e('Send us your CV for an unsolicited application.', 'abyssenergy'); ?></p>
 					<a href="/contact-us/?position=Unsolicited%20Application" class="btn btn--primary">
-						Send my CV
+						<?php esc_html_e('Send my CV', 'abyssenergy'); ?>
 					</a>
 				</div>
 				<div class="col-md-4">
-					<img loading="lazy" src="<?php echo get_template_directory_uri(); ?>/images/opentowork.webp" alt="Company">
+					<img loading="lazy" src="<?php echo get_template_directory_uri(); ?>/images/opentowork.webp" alt="<?php esc_attr_e('Company', 'abyssenergy'); ?>">
 				</div>
 			</div>
 		</div>

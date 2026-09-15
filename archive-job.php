@@ -15,9 +15,9 @@ get_header(); ?>
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-8 text-center">
-					<h1 class="mb-3">Offres d'emploi</h1>
+					<h1 class="mb-3"><?php esc_html_e("Offres d'emploi", 'abyssenergy'); ?></h1>
 					<p class="archive-description">
-						Découvrez nos opportunités de carrière et rejoignez notre équipe dynamique.
+						<?php esc_html_e('Découvrez nos opportunités de carrière et rejoignez notre équipe dynamique.', 'abyssenergy'); ?>
 					</p>
 				</div>
 			</div>
@@ -36,7 +36,7 @@ get_header(); ?>
 								<?php
 								global $wp_query;
 								printf(
-									_n('%s emploi disponible', '%s emplois disponibles', $wp_query->found_posts, 'text-domain'),
+									_n('%s emploi disponible', '%s emplois disponibles', $wp_query->found_posts, 'abyssenergy'),
 									'<strong>' . number_format_i18n($wp_query->found_posts) . '</strong>'
 								);
 								?>
@@ -44,7 +44,7 @@ get_header(); ?>
 						</div>
 						<div class="col-md-6 text-md-right">
 							<a href="<?php echo esc_url(home_url('/emplois/')); ?>" class="btn btn--outline">
-								Recherche avancée
+								<?php esc_html_e('Recherche avancée', 'abyssenergy'); ?>
 							</a>
 						</div>
 					</div>
@@ -66,8 +66,8 @@ get_header(); ?>
 						<?php
 						the_posts_pagination(array(
 							'mid_size' => 2,
-							'prev_text' => '← Précédent',
-							'next_text' => 'Suivant →',
+							'prev_text' => '← ' . __('Précédent', 'abyssenergy'),
+							'next_text' => __('Suivant', 'abyssenergy') . ' →',
 							'type' => 'list'
 						));
 						?>
@@ -78,19 +78,19 @@ get_header(); ?>
 				<!-- Aucun emploi trouvé -->
 				<div class="no-posts-found text-center">
 					<div class="alert alert--warning">
-						<h3>Aucun emploi disponible</h3>
-						<p>Il n'y a actuellement aucune offre d'emploi publiée.</p>
-						<p>Revenez bientôt pour découvrir nos nouvelles opportunités !</p>
+						<h3><?php esc_html_e('Aucun emploi disponible', 'abyssenergy'); ?></h3>
+						<p><?php esc_html_e("Il n'y a actuellement aucune offre d'emploi publiée.", 'abyssenergy'); ?></p>
+						<p><?php esc_html_e('Revenez bientôt pour découvrir nos nouvelles opportunités !', 'abyssenergy'); ?></p>
 					</div>
 
 					<!-- CTA pour candidature spontanée -->
 					<div class="mt-4">
 						<div class="card bg-light">
 							<div class="card__content text-center">
-								<h4 class="text-blue">Intéressé par rejoindre notre équipe ?</h4>
-								<p>N'hésitez pas à nous envoyer votre CV pour une candidature spontanée.</p>
+								<h4 class="text-blue"><?php esc_html_e('Intéressé par rejoindre notre équipe ?', 'abyssenergy'); ?></h4>
+								<p><?php esc_html_e("N'hésitez pas à nous envoyer votre CV pour une candidature spontanée.", 'abyssenergy'); ?></p>
 								<a href="/contact-us/?position=Unsolicited%20Application" class="btn btn--outline">
-									Envoyer mon CV
+									<?php esc_html_e('Envoyer mon CV', 'abyssenergy'); ?>
 								</a>
 							</div>
 						</div>

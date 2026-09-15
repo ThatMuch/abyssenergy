@@ -3,7 +3,7 @@
 <section class='content job-detail'>
     <div class="container">
         <button onclick="history.back()" class="btn btn--outline mb-5">
-            <i class="fa fa-chevron-left"></i> Back
+            <i class="fa fa-chevron-left"></i> <?php esc_html_e('Back', 'abyssenergy'); ?>
         </button>
         <?php if ($post) : ?>
             <?php
@@ -23,7 +23,7 @@
                 </span>
                 <?php
                 if (get_the_time('U') > strtotime('-5 days')) {
-                    echo '<span class="tag tag-secondary">New</span>';
+                    echo '<span class="tag tag-secondary">' . esc_html__('New', 'abyssenergy') . '</span>';
                 }
                 ?>
                 <h1 class="job-detail-title"><?php the_title(); ?></h1>
@@ -41,7 +41,7 @@
             <section class="job-detail-info">
                 <div class="row">
                     <div class="col col-md-3">
-                        <p class="job-label">Location</p>
+                        <p class="job-label"><?php esc_html_e('Location', 'abyssenergy'); ?></p>
                         <?php
                         $city = get_field('job_city');
                         $state = get_field('job_state');
@@ -57,13 +57,13 @@
                             } elseif ($state) {
                                 echo esc_html($state);
                             } else {
-                                echo 'Location not specified';
+                                esc_html_e('Location not specified', 'abyssenergy');
                             }
                             ?>
                         </span>
                     </div>
                     <div class="col col-md-3">
-                        <p class="job-label">Category</p>
+                        <p class="job-label"><?php esc_html_e('Category', 'abyssenergy'); ?></p>
                         <?php
                         $category_meta = get_the_terms(get_the_ID(), 'job-category');
                         $category = '';
@@ -76,7 +76,7 @@
                         </span>
                     </div>
                     <div class="col col-md-5">
-                        <p class="job-label">Work type</p>
+                        <p class="job-label"><?php esc_html_e('Work type', 'abyssenergy'); ?></p>
                         <div class="d-inline">
                             <?php
                             $emp_meta = get_the_terms(get_the_ID(), 'job-type');
@@ -97,10 +97,10 @@
                 </div>
 
                 <div class="share-job">
-                    <p class="job-label">Share this job</p>
+                    <p class="job-label"><?php esc_html_e('Share this job', 'abyssenergy'); ?></p>
                     <div class="d-flex flex-wrap gap-2">
-                        <a href="#" onclick="navigator.clipboard.writeText('<?php echo esc_url(get_permalink()); ?>'); alert('Job link copied to clipboard!'); return false;" class="btn btn--outline">
-                            <i class="fas fa-link"></i> Copy Link
+                        <a href="#" onclick="navigator.clipboard.writeText('<?php echo esc_url(get_permalink()); ?>'); alert('<?php echo esc_js(__('Job link copied to clipboard!', 'abyssenergy')); ?>'); return false;" class="btn btn--outline">
+                            <i class="fas fa-link"></i> <?php esc_html_e('Copy Link', 'abyssenergy'); ?>
                         </a>
                         <a href="https://wa.me/?text=<?php echo urlencode(get_permalink()); ?>" target="_blank" class="btn btn--outline">
                             <i class="fab fa-whatsapp"></i> WhatsApp
@@ -108,20 +108,20 @@
                         <a href="https://www.linkedin.com/sharing/share-offsite/?url=<?php echo urlencode(get_permalink()); ?>" target="_blank" class="btn btn--outline">
                             <i class="fab fa-linkedin"></i> LinkedIn
                         </a>
-                        <a href="mailto:?subject=Check out this job&body=I found a job you might be interested in: <?php echo urlencode(get_permalink()); ?>" class="btn btn--outline">
-                            <i class="fas fa-envelope"></i> Email
+                        <a href="mailto:?subject=<?php echo esc_attr(rawurlencode(__('Check out this job', 'abyssenergy'))); ?>&body=<?php echo esc_attr(rawurlencode(__('I found a job you might be interested in: ', 'abyssenergy'))); ?><?php echo urlencode(get_permalink()); ?>" class="btn btn--outline">
+                            <i class="fas fa-envelope"></i> <?php esc_html_e('Email', 'abyssenergy'); ?>
                         </a>
                     </div>
                 </div>
             </section>
             <div class="row">
                 <div class="col col-xl-8">
-                    <h2 style='margin-top: 28px;padding-bottom: 0'>Job Description</h2>
+                    <h2 style='margin-top: 28px;padding-bottom: 0'><?php esc_html_e('Job Description', 'abyssenergy'); ?></h2>
                     <?php the_content(); ?>
                 </div>
                 <div class="col col-xl-4">
                     <div class="card">
-                        <h2 class="mt-0">Apply</h2>
+                        <h2 class="mt-0"><?php esc_html_e('Apply', 'abyssenergy'); ?></h2>
                         <script>
                             // Définir immédiatement le post ID pour les scripts Gravity Forms
                             window.abyssenergy_job_post_id = <?php echo get_the_ID(); ?>;

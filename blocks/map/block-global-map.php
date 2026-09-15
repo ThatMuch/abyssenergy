@@ -44,19 +44,19 @@ if ($markers) {
 			// Préparer les données du secteur avec les labels
 			$sector_value = $marker['sector'] ?: 'conventional';
 			$sector_labels = array(
-				'conventional' => 'Conventional Energy',
-				'renewable' => 'Renewable Energy',
-				'process' => 'Process Industry'
+				'conventional' => __('Conventional Energy', 'abyssenergy'),
+				'renewable' => __('Renewable Energy', 'abyssenergy'),
+				'process' => __('Process Industry', 'abyssenergy')
 			);
 
 			$marker_data = array(
 				'lat' => $marker['lat'],
 				'lng' => $marker['lng'],
 				'country' => $marker['country'] ?: '',
-				'project_name' => $marker['title'] ?: 'Projet Abyss Energy',
+				'project_name' => $marker['title'] ?: __('Projet Abyss Energy', 'abyssenergy'),
 				'sector' => array(
 					'value' => $sector_value,
-					'label' => $sector_labels[$sector_value] ?: 'Conventional Energy'
+					'label' => $sector_labels[$sector_value] ?: __('Conventional Energy', 'abyssenergy')
 				)
 			);
 
@@ -98,7 +98,7 @@ if ($markers) {
 								</div>
 							<?php endif; ?>
 							<?php if ($content) : ?>
-								<button class="btn btn--primary global-map-button" aria-label="Expand content">View more <i class="fa fa-plus"></i></button>
+								<button class="btn btn--primary global-map-button" aria-label="<?php echo esc_attr__('Expand content', 'abyssenergy'); ?>"><?php echo esc_html__('View more', 'abyssenergy'); ?> <i class="fa fa-plus"></i></button>
 							<?php endif; ?>
 
 						</div>
@@ -142,7 +142,7 @@ if ($markers) {
 					<?php if ($title) : ?>
 						<h3 id="<?php echo esc_attr($id); ?>-modal-title" class="global-map-modal-title"><?php echo esc_html($title); ?></h3>
 					<?php endif; ?>
-					<button class="modal-close" aria-label="Close content"><i class="fa fa-times"></i></button>
+					<button class="modal-close" aria-label="<?php echo esc_attr__('Close content', 'abyssenergy'); ?>"><i class="fa fa-times"></i></button>
 				</div>
 				<div class="global-map-modal-body">
 					<div class="global-map-content">

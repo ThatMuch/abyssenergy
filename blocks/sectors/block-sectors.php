@@ -102,7 +102,7 @@ $sectors_query = new WP_Query($args);
 				</div>
 			<?php else : ?>
 				<div class="sectors-list__empty">
-					<p>Aucun secteur trouvé.</p>
+					<p><?php esc_html_e('Aucun secteur trouvé.', 'abyssenergy'); ?></p>
 				</div>
 			<?php endif; ?>
 			<?php wp_reset_postdata(); ?>

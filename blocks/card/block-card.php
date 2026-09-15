@@ -41,7 +41,7 @@ if ($is_preview && empty($title)) {
 <?php if ($style === 'showmore'): ?>
 	<div id="<?php echo esc_attr($id); ?>" class="<?php echo esc_attr($className); ?>">
 		<div class="card-wrapper">
-			<button class="card-button" aria-label="Expand content"><i class="fa fa-plus"></i></button>
+			<button class="card-button" aria-label="<?php echo esc_attr__('Expand content', 'abyssenergy'); ?>"><i class="fa fa-plus"></i></button>
 			<div class="card-header <?php if ($image):  ?>has-image<?php endif; ?>">
 				<?php if ($image): ?>
 					<div class="card-image">
@@ -77,7 +77,7 @@ if ($is_preview && empty($title)) {
 						<?php endif; ?>
 						<?php if ($title): ?>
 							<h4 class="card-title"><?php echo wp_kses_post($title); ?></h4>
-							<button class="modal-close" aria-label="Close content"><i class="fa fa-times"></i></button>
+							<button class="modal-close" aria-label="<?php echo esc_attr__('Close content', 'abyssenergy'); ?>"><i class="fa fa-times"></i></button>
 						<?php endif; ?>
 					</div>
 					<div class="card-content">

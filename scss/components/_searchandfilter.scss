@@ -16,12 +16,18 @@
 }
 
 .home {
-  #search-filter-form-2538 ul {
+  #search-filter-form-2538 ul,
+  #search-filter-form-2295 ul,
+  #search-filter-form-2899 ul,
+  #search-filter-form-2901 ul {
     justify-content: center;
   }
 }
 #search-filter-form-2538 ul,
-#search-filter-form-2581 ul {
+#search-filter-form-2581 ul,
+#search-filter-form-2295 ul,
+#search-filter-form-2899 ul,
+#search-filter-form-2901 ul {
   display: flex;
   gap: 1rem;
   align-items: center;

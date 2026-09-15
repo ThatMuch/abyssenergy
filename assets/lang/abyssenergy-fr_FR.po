@@ -1,0 +1,757 @@
+# Copyright (C) 2026 THATMUCH
+# This file is distributed under the GNU General Public License v2.0 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Abyss Energy 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/abyssenergy\n"
+"POT-Creation-Date: 2026-09-15T12:11:26+00:00\n"
+"PO-Revision-Date: 2026-09-15T12:11:26+00:00\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Domain: abyssenergy\n"
+"X-Generator: WP-CLI 2.4.0\n"
+
+#. Theme Name of the theme
+#: inc/blocks.php:119
+msgid "Abyss Energy"
+msgstr "Abyss Energy"
+
+#. Theme URI of the theme
+msgid "https://thatmuch.fr"
+msgstr "https://thatmuch.fr"
+
+#. Description of the theme
+msgid "Custom theme description..."
+msgstr "Custom theme description..."
+
+#. Author of the theme
+msgid "THATMUCH"
+msgstr "THATMUCH"
+
+#. Author URI of the theme
+msgid "https://example.com"
+msgstr "https://example.com"
+
+#: archive-job.php:18 blocks/jobs-listing/jobs-listing-init.php:16
+msgid "Offres d'emploi"
+msgstr "Offres d'emploi"
+
+#: archive-job.php:20
+msgid ""
+"Découvrez nos opportunités de carrière et rejoignez notre équipe dynamique."
+msgstr ""
+"Découvrez nos opportunités de carrière et rejoignez notre équipe dynamique."
+
+#: archive-job.php:39
+msgid "%s emploi disponible"
+msgid_plural "%s emplois disponibles"
+msgstr[0] "%s emploi disponible"
+msgstr[1] "%s emplois disponibles"
+
+#: archive-job.php:47
+msgid "Recherche avancée"
+msgstr "Recherche avancée"
+
+#: archive-job.php:69
+msgid "Précédent"
+msgstr "Précédent"
+
+#: archive-job.php:70
+msgid "Suivant"
+msgstr "Suivant"
+
+#: archive-job.php:81
+msgid "Aucun emploi disponible"
+msgstr "Aucun emploi disponible"
+
+#: archive-job.php:82
+msgid "Il n'y a actuellement aucune offre d'emploi publiée."
+msgstr "Il n'y a actuellement aucune offre d'emploi publiée."
+
+#: archive-job.php:83
+msgid "Revenez bientôt pour découvrir nos nouvelles opportunités !"
+msgstr "Revenez bientôt pour découvrir nos nouvelles opportunités !"
+
+#: archive-job.php:90
+msgid "Intéressé par rejoindre notre équipe ?"
+msgstr "Intéressé par rejoindre notre équipe ?"
+
+#: archive-job.php:91
+msgid "N'hésitez pas à nous envoyer votre CV pour une candidature spontanée."
+msgstr "N'hésitez pas à nous envoyer votre CV pour une candidature spontanée."
+
+#: archive-job.php:93
+msgid "Envoyer mon CV"
+msgstr "Envoyer mon CV"
+
+#: blocks/card/block-card.php:44 blocks/map/block-global-map.php:101
+#: blocks/metrics/block-metrics.php:81
+msgid "Expand content"
+msgstr "Développer le contenu"
+
+#: blocks/card/block-card.php:80 blocks/map/block-global-map.php:145
+msgid "Close content"
+msgstr "Fermer le contenu"
+
+#: blocks/card/card-init.php:25
+msgid "Carte Simple"
+msgstr "Carte Simple"
+
+#: blocks/card/card-init.php:26
+msgid "Affiche une carte avec image, titre et description."
+msgstr "Affiche une carte avec image, titre et description."
+
+#: blocks/clients/block-clients.php:41
+msgid "Our clients"
+msgstr "Nos clients"
+
+#: blocks/clients/block-clients.php:42
+msgid ""
+"Aperçu du slider des clients. Les logos des clients ne seront pas affichés "
+"dans l'éditeur."
+msgstr ""
+"Aperçu du slider des clients. Les logos des clients ne seront pas affichés "
+"dans l'éditeur."
+
+#: blocks/clients/block-clients.php:72
+msgid "Aucun client trouvé."
+msgstr "Aucun client trouvé."
+
+#: blocks/clients/clients-init.php:16
+msgid "Clients"
+msgstr "Clients"
+
+#: blocks/clients/clients-init.php:17
+msgid "Un slider pour afficher les clients."
+msgstr "Un slider pour afficher les clients."
+
+#: blocks/features/block-features.php:34
+msgid ""
+"Aperçu du bloc des fonctionnalités. Configurez les champs dans le panneau de"
+" droite."
+msgstr ""
+"Aperçu du bloc des fonctionnalités. Configurez les champs dans le panneau de"
+" droite."
+
+#: blocks/features/block-features.php:36
+msgid ""
+"Aucune fonctionnalité ajoutée. Cliquez sur \"Ajouter un élément\" pour "
+"commencer."
+msgstr ""
+"Aucune fonctionnalité ajoutée. Cliquez sur \"Ajouter un élément\" pour "
+"commencer."
+
+#: blocks/features/block-features.php:85
+msgid ""
+"Aucune fonctionnalité à afficher. Ajoutez des éléments dans les paramètres "
+"du bloc."
+msgstr ""
+"Aucune fonctionnalité à afficher. Ajoutez des éléments dans les paramètres "
+"du bloc."
+
+#: blocks/features/features-init.php:24
+msgid "Features"
+msgstr "Fonctionnalités"
+
+#: blocks/features/features-init.php:25
+msgid "Affiche une liste de caractéristiques."
+msgstr "Affiche une liste de caractéristiques."
+
+#: blocks/fixed-jobs/block-fixed-jobs.php:26
+msgid "Explore EPC Project Jobs"
+msgstr "Explorez les postes de projets EPC"
+
+#: blocks/fixed-jobs/block-fixed-jobs.php:68
+msgid ""
+"Aperçu du bloc Fixed Jobs. Les onglets interactifs s'afficheront en mode "
+"front-end."
+msgstr ""
+"Aperçu du bloc Fixed Jobs. Les onglets interactifs s'afficheront en mode "
+"front-end."
+
+#: blocks/fixed-jobs/fixed-jobs-init.php:25
+msgid "Fixed Jobs"
+msgstr "Postes Fixes"
+
+#: blocks/fixed-jobs/fixed-jobs-init.php:26
+msgid "Affiche tous les postes fixes filtrés par catégorie dans des onglets."
+msgstr "Affiche tous les postes fixes filtrés par catégorie dans des onglets."
+
+#: blocks/fixed-jobs/fixed-jobs-init.php:213
+msgid "Voir le poste"
+msgstr "Voir le poste"
+
+#: blocks/google-reviews/block-google-reviews.php:79
+msgid ""
+"Affichage limité à %d avis sur %d récupérés (%d avis total sur Google)."
+msgstr ""
+"Affichage limité à %d avis sur %d récupérés (%d avis total sur Google)."
+
+#: blocks/google-reviews/block-google-reviews.php:86
+msgid ""
+"Affichage de tous les avis récupérés (%d avis sur %d total sur Google)."
+msgstr ""
+"Affichage de tous les avis récupérés (%d avis sur %d total sur Google)."
+
+#: blocks/google-reviews/block-google-reviews.php:93
+msgid "Note: L'API Google ne retourne que 5 avis maximum."
+msgstr "Note: L'API Google ne retourne que 5 avis maximum."
+
+#: blocks/google-reviews/block-google-reviews.php:102
+msgid ""
+"Aperçu du bloc d'avis Google. Les avis réels s'afficheront sur le site."
+msgstr ""
+"Aperçu du bloc d'avis Google. Les avis réels s'afficheront sur le site."
+
+#: blocks/google-reviews/block-google-reviews.php:119
+msgid "trees"
+msgstr "trees"
+
+#: blocks/google-reviews/block-google-reviews.php:178
+msgid "Based on %d reviews"
+msgstr "Based on %d reviews"
+
+#: blocks/google-reviews/block-google-reviews.php:195
+msgid "Logo Google"
+msgstr "Logo Google"
+
+#: blocks/google-reviews/block-google-reviews.php:236
+msgid "Erreur lors de la récupération des avis Google:"
+msgstr "Erreur lors de la récupération des avis Google:"
+
+#: blocks/google-reviews/block-google-reviews.php:240
+msgid ""
+"Veuillez configurer votre ID de lieu Google et votre clé API pour afficher "
+"les avis."
+msgstr ""
+"Veuillez configurer votre ID de lieu Google et votre clé API pour afficher "
+"les avis."
+
+#: blocks/google-reviews/google-reviews-init.php:26
+msgid "Avis Google"
+msgstr "Avis Google"
+
+#: blocks/google-reviews/google-reviews-init.php:27
+msgid "Affiche les avis Google de votre entreprise."
+msgstr "Affiche les avis Google de votre entreprise."
+
+#: blocks/google-reviews/google-reviews-init.php:386
+msgid "Actualiser les avis Google"
+msgstr "Actualiser les avis Google"
+
+#: blocks/jobs-listing/block-jobs-listing.php:34
+msgid "Connecting Professionals"
+msgstr "Connecter les professionnels"
+
+#: blocks/jobs-listing/block-jobs-listing.php:35
+msgid "Jobs & offers"
+msgstr "Emplois & offres"
+
+#: blocks/jobs-listing/block-jobs-listing.php:39
+#: template-parts/section-jobs.php:7
+msgid "View more jobs"
+msgstr "Voir plus d'offres"
+
+#: blocks/jobs-listing/block-jobs-listing.php:69
+msgid "Aperçu du bloc Jobs Listing"
+msgstr "Aperçu du bloc Jobs Listing"
+
+#: blocks/jobs-listing/jobs-listing-init.php:17
+msgid "Affiche une liste d'offres d'emploi avec filtrage par secteur."
+msgstr "Affiche une liste d'offres d'emploi avec filtrage par secteur."
+
+#: blocks/jobs-search/block-jobs-search.php:31
+msgid "Trouvez votre prochaine opportunité"
+msgstr "Trouvez votre prochaine opportunité"
+
+#: blocks/jobs-search/block-jobs-search.php:32
+msgid "Découvrez nos offres d'emploi et rejoignez notre équipe dynamique."
+msgstr "Découvrez nos offres d'emploi et rejoignez notre équipe dynamique."
+
+#: blocks/jobs-search/block-jobs-search.php:33
+msgid "Trouvez votre prochain poste..."
+msgstr "Trouvez votre prochain poste..."
+
+#: blocks/jobs-search/block-jobs-search.php:48
+msgid ""
+"Aperçu du bloc de recherche d'emplois. Le formulaire sera fonctionnel sur le"
+" site."
+msgstr ""
+"Aperçu du bloc de recherche d'emplois. Le formulaire sera fonctionnel sur le"
+" site."
+
+#: blocks/jobs-search/block-jobs-search.php:50
+msgid "Image sélectionnée"
+msgstr "Image sélectionnée"
+
+#: blocks/jobs-search/block-jobs-search.php:78
+msgid "Rechercher un emploi"
+msgstr "Rechercher un emploi"
+
+#: blocks/jobs-search/block-jobs-search.php:79
+msgid "Search"
+msgstr "Rechercher"
+
+#: blocks/jobs-search/jobs-search-init.php:27
+msgid "Jobs Search"
+msgstr "Recherche d'emplois"
+
+#: blocks/jobs-search/jobs-search-init.php:28
+msgid "Un bloc avec titre, texte, recherche d'emplois et image."
+msgstr "Un bloc avec titre, texte, recherche d'emplois et image."
+
+#: blocks/map/block-global-map.php:47 blocks/map/block-global-map.php:59
+msgid "Conventional Energy"
+msgstr "Énergie conventionnelle"
+
+#: blocks/map/block-global-map.php:48
+msgid "Renewable Energy"
+msgstr "Énergie renouvelable"
+
+#: blocks/map/block-global-map.php:49
+msgid "Process Industry"
+msgstr "Industrie de process"
+
+#: blocks/map/block-global-map.php:56
+msgid "Projet Abyss Energy"
+msgstr "Projet Abyss Energy"
+
+#: blocks/map/block-global-map.php:101
+msgid "View more"
+msgstr "Voir plus"
+
+#: blocks/map/global-map-init.php:25 inc/blocks.php:71
+msgid "Carte Globale"
+msgstr "Carte Globale"
+
+#: blocks/map/global-map-init.php:26
+msgid "Affiche une carte interactive des opérations mondiales."
+msgstr "Affiche une carte interactive des opérations mondiales."
+
+#: blocks/metrics/block-metrics.php:38
+msgid ""
+"Aperçu du bloc des métriques. Configurez les champs dans le panneau de "
+"droite."
+msgstr ""
+"Aperçu du bloc des métriques. Configurez les champs dans le panneau de "
+"droite."
+
+#: blocks/metrics/block-metrics.php:40
+msgid ""
+"Aucune métrique ajoutée. Cliquez sur \"Ajouter un élément\" pour commencer."
+msgstr ""
+"Aucune métrique ajoutée. Cliquez sur \"Ajouter un élément\" pour commencer."
+
+#: blocks/metrics/metrics-init.php:25
+msgid "Métriques"
+msgstr "Métriques"
+
+#: blocks/metrics/metrics-init.php:26
+msgid "Affiche des métriques clés avec des graphiques."
+msgstr "Affiche des métriques clés avec des graphiques."
+
+#: blocks/project-showcase/block-project-showcase.php:75
+msgid ""
+"Aperçu du bloc Projets Showcase. Les projets réels s'afficheront sur le "
+"site."
+msgstr ""
+"Aperçu du bloc Projets Showcase. Les projets réels s'afficheront sur le "
+"site."
+
+#: blocks/project-showcase/block-project-showcase.php:110
+msgid "Aucun projet trouvé pour les critères sélectionnés."
+msgstr "Aucun projet trouvé pour les critères sélectionnés."
+
+#: blocks/project-showcase/project-showcase-init.php:26
+msgid "Projets Showcase"
+msgstr "Projets Showcase"
+
+#: blocks/project-showcase/project-showcase-init.php:27
+msgid "Affiche une liste de projets showcase avec filtrage par secteur."
+msgstr "Affiche une liste de projets showcase avec filtrage par secteur."
+
+#: blocks/sectors/block-sectors.php:53
+msgid "Aperçu du bloc Sectors. Les secteurs réels s'afficheront sur le site."
+msgstr "Aperçu du bloc Sectors. Les secteurs réels s'afficheront sur le site."
+
+#: blocks/sectors/block-sectors.php:105
+msgid "Aucun secteur trouvé."
+msgstr "Aucun secteur trouvé."
+
+#: blocks/sectors/sectors-init.php:25
+msgid "Sectors Grid"
+msgstr "Grille de secteurs"
+
+#: blocks/sectors/sectors-init.php:26
+msgid "Affiche une grille de secteurs avec leurs informations."
+msgstr "Affiche une grille de secteurs avec leurs informations."
+
+#: blocks/sectors/sectors-init.php:39
+msgid "Nos Secteurs"
+msgstr "Nos Secteurs"
+
+#: blocks/sectors/sectors-init.php:40
+msgid "Découvrez nos domaines d'expertise"
+msgstr "Découvrez nos domaines d'expertise"
+
+#: blocks/tabs/block-tabs.php:42
+msgid ""
+"Aperçu du bloc de tabulation. Les onglets seront interactifs sur le site."
+msgstr ""
+"Aperçu du bloc de tabulation. Les onglets seront interactifs sur le site."
+
+#: blocks/tabs/block-tabs.php:44
+msgid "%d onglets configurés"
+msgstr "%d onglets configurés"
+
+#: blocks/tabs/block-tabs.php:112
+msgid "Veuillez ajouter au moins un onglet pour afficher le contenu."
+msgstr "Veuillez ajouter au moins un onglet pour afficher le contenu."
+
+#: blocks/tabs/tabs-init.php:26
+msgid "Tabs"
+msgstr "Onglets"
+
+#: blocks/tabs/tabs-init.php:27
+msgid "Un bloc de tabulation avec onglets verticaux et contenu."
+msgstr "Un bloc de tabulation avec onglets verticaux et contenu."
+
+#: blocks/testimonials-slider/block-testimonials-slider.php:34
+msgid "Témoignages de nos clients"
+msgstr "Témoignages de nos clients"
+
+#: blocks/testimonials-slider/block-testimonials-slider.php:66
+msgid "Aperçu du bloc Témoignages"
+msgstr "Aperçu du bloc Témoignages"
+
+#: blocks/testimonials-slider/block-testimonials-slider.php:140
+msgid "Aucun témoignage trouvé."
+msgstr "Aucun témoignage trouvé."
+
+#: blocks/testimonials-slider/testimonials-slider-init.php:16
+msgid "Testimonials Slider"
+msgstr "Slider de témoignages"
+
+#: blocks/testimonials-slider/testimonials-slider-init.php:17
+msgid "Un slider pour afficher les témoignages clients."
+msgstr "Un slider pour afficher les témoignages clients."
+
+#: blocks/timeline/block-timeline.php:28
+msgid "Aperçu du bloc Timeline"
+msgstr "Aperçu du bloc Timeline"
+
+#: blocks/timeline/block-timeline.php:84
+msgid "Open content"
+msgstr "Ouvrir le contenu"
+
+#: blocks/timeline/block-timeline.php:102
+msgid "Download icon"
+msgstr "Icône de téléchargement"
+
+#: blocks/timeline/timeline-init.php:25
+msgid "Timeline"
+msgstr "Ligne du temps"
+
+#: blocks/timeline/timeline-init.php:26
+msgid "Affiche une timeline verticale avec des événements."
+msgstr "Affiche une timeline verticale avec des événements."
+
+#: inc/blocks.php:30
+msgid "Liste de secteurs"
+msgstr "Liste de secteurs"
+
+#: inc/blocks.php:31
+msgid "Affiche les secteurs dans une liste verticale"
+msgstr "Affiche les secteurs dans une liste verticale"
+
+#: inc/blocks.php:55
+msgid "Grille de secteurs (Déprécié)"
+msgstr "Grille de secteurs (Déprécié)"
+
+#: inc/blocks.php:56
+msgid "Version dépréciée - Utilisez plutôt la Liste de secteurs"
+msgstr "Version dépréciée - Utilisez plutôt la Liste de secteurs"
+
+#: inc/blocks.php:72
+msgid ""
+"Affichez une carte interactive des projets Abyss Energy à travers le monde"
+msgstr ""
+"Affichez une carte interactive des projets Abyss Energy à travers le monde"
+
+#: inc/customizer.php:23
+msgid "CTA Header"
+msgstr "En-tête CTA"
+
+#: inc/customizer.php:24
+msgid ""
+"Configurez le bouton d'appel à l'action qui apparaît dans l'en-tête du site."
+msgstr ""
+"Configurez le bouton d'appel à l'action qui apparaît dans l'en-tête du site."
+
+#: inc/customizer.php:36
+msgid "Activer le CTA dans le header"
+msgstr "Activer le CTA dans le header"
+
+#: inc/customizer.php:44 inc/customizer.php:171 inc/customizer.php:194
+msgid "Nous contacter"
+msgstr "Nous contacter"
+
+#: inc/customizer.php:50
+msgid "Texte du bouton"
+msgstr "Texte du bouton"
+
+#: inc/customizer.php:64
+msgid "URL de destination"
+msgstr "URL de destination"
+
+#: inc/customizer.php:78
+msgid "Style du bouton"
+msgstr "Style du bouton"
+
+#: inc/customizer.php:83
+msgid "Primary"
+msgstr "Principal"
+
+#: inc/customizer.php:84
+msgid "Secondary"
+msgstr "Secondaire"
+
+#: inc/customizer.php:85
+msgid "Outline"
+msgstr "Contour"
+
+#: inc/customizer.php:97
+msgid "Taille du bouton"
+msgstr "Taille du bouton"
+
+#: inc/customizer.php:102
+msgid "Petit"
+msgstr "Petit"
+
+#: inc/customizer.php:103
+msgid "Moyen"
+msgstr "Moyen"
+
+#: inc/customizer.php:104
+msgid "Grand"
+msgstr "Grand"
+
+#: inc/customizer.php:116
+msgid "Icône (optionnel)"
+msgstr "Icône (optionnel)"
+
+#: inc/customizer.php:117
+msgid "Code HTML de l'icône (ex: &lt;i class=\"fas fa-phone\"&gt;&lt;/i&gt;)"
+msgstr "Code HTML de l'icône (ex: &lt;i class=\"fas fa-phone\"&gt;&lt;/i&gt;)"
+
+#: inc/customizer.php:131
+msgid "Ouvrir dans un nouvel onglet"
+msgstr "Ouvrir dans un nouvel onglet"
+
+#: inc/customizer.php:145
+msgid "Masquer sur mobile"
+msgstr "Masquer sur mobile"
+
+#: inc/customizer.php:265
+msgid "Logo du Footer"
+msgstr "Logo du Footer"
+
+#: inc/jobs.php:181
+msgid "Aucune offre d'emploi trouvée."
+msgstr "Aucune offre d'emploi trouvée."
+
+#: inc/widgets.php:23
+msgid "Sidebar principale"
+msgstr "Sidebar principale"
+
+#: inc/widgets.php:25
+msgid "Widgets affichés dans la sidebar principale."
+msgstr "Widgets affichés dans la sidebar principale."
+
+#: inc/widgets.php:34
+msgid "Footer Widgets"
+msgstr "Widgets du Footer"
+
+#: inc/widgets.php:36
+msgid "Widgets affichés dans le pied de page."
+msgstr "Widgets affichés dans le pied de page."
+
+#: inc/widgets.php:94
+msgid "Aucun emploi disponible."
+msgstr "Aucun emploi disponible."
+
+#. Template Name of the theme
+msgid "Classic Page"
+msgstr "Page Classique"
+
+#. Template Name of the theme
+msgid "Contact"
+msgstr "Contact"
+
+#: page-contact.php:37
+msgid "Contact Information"
+msgstr "Coordonnées"
+
+#: page-contact.php:44
+msgid "Locations"
+msgstr "Nos implantations"
+
+#: page-contact.php:61
+msgid "The abyssien crew"
+msgstr "L'équipe abyssienne"
+
+#: page-contact.php:62
+msgid "Meet the team"
+msgstr "Rencontrez l'équipe"
+
+#: page-contact.php:83
+msgid "Scroll left"
+msgstr "Défiler vers la gauche"
+
+#: page-contact.php:84
+msgid "Scroll right"
+msgstr "Défiler vers la droite"
+
+#. Template Name of the theme
+msgid "Jobs Listing"
+msgstr "Liste des offres d'emploi"
+
+#: page-jobs.php:51
+msgid "Show Filters"
+msgstr "Afficher les filtres"
+
+#: page-jobs.php:61
+msgid "Filters"
+msgstr "Filtres"
+
+#: page-jobs.php:62
+msgid "Close filters"
+msgstr "Fermer les filtres"
+
+#: page-jobs.php:82
+msgid "You didn't find the ideal position?"
+msgstr "Vous n'avez pas trouvé le poste idéal ?"
+
+#: page-jobs.php:83
+msgid "Send us your CV for an unsolicited application."
+msgstr "Envoyez-nous votre CV pour une candidature spontanée."
+
+#: page-jobs.php:85
+msgid "Send my CV"
+msgstr "Envoyer mon CV"
+
+#: page-jobs.php:89
+msgid "Company"
+msgstr "Entreprise"
+
+#: search-filter/results.php:35
+msgid "Your search resulted in %s matching job"
+msgid_plural "Your search resulted in %s matching jobs"
+msgstr[0] "Votre recherche a donné %s emploi correspondant"
+msgstr[1] "Votre recherche a donné %s emplois correspondants"
+
+#: search-filter/results.php:73
+msgid "No jobs found"
+msgstr "Aucun emploi trouvé"
+
+#: search-filter/results.php:74
+msgid "Sorry, no positions match your search criteria."
+msgstr "Désolé, aucun poste ne correspond à vos critères de recherche."
+
+#: single-fixed-job.php:13 single-job.php:6
+msgid "Back"
+msgstr "Retour"
+
+#: single-fixed-job.php:38 single-job.php:119
+msgid "Job Description"
+msgstr "Description du poste"
+
+#: single-fixed-job.php:49
+msgid "Other Job Categories"
+msgstr "Autres catégories d'emploi"
+
+#: single-fixed-job.php:106
+msgid "Show More"
+msgstr "Afficher plus"
+
+#: single-job.php:26
+msgid "New"
+msgstr "Nouveau"
+
+#: single-job.php:44
+msgid "Location"
+msgstr "Localisation"
+
+#: single-job.php:60
+msgid "Location not specified"
+msgstr "Localisation non précisée"
+
+#: single-job.php:66
+msgid "Category"
+msgstr "Catégorie"
+
+#: single-job.php:79
+msgid "Work type"
+msgstr "Type de contrat"
+
+#: single-job.php:100
+msgid "Share this job"
+msgstr "Partager cette offre"
+
+#: single-job.php:102
+msgid "Job link copied to clipboard!"
+msgstr "Lien de l'offre copié dans le presse-papiers !"
+
+#: single-job.php:103
+msgid "Copy Link"
+msgstr "Copier le lien"
+
+#: single-job.php:111
+msgid "Check out this job"
+msgstr "Découvrez cette offre d'emploi"
+
+#: single-job.php:111
+msgid "I found a job you might be interested in: "
+msgstr "J'ai trouvé une offre d'emploi qui pourrait vous intéresser : "
+
+#: single-job.php:112
+msgid "Email"
+msgstr "Email"
+
+#: single-job.php:124
+msgid "Apply"
+msgstr "Postuler"
+
+#: template-parts/cta.php:23
+msgid "Rejoignez-nous dès aujourd'hui"
+msgstr "Rejoignez-nous dès aujourd'hui"
+
+#: template-parts/cta.php:24
+msgid "Découvrez nos opportunités et faites partie de notre équipe innovante."
+msgstr ""
+"Découvrez nos opportunités et faites partie de notre équipe innovante."
+
+#: template-parts/cta.php:25
+msgid "Découvrir nos offres"
+msgstr "Découvrir nos offres"
+
+#: template-parts/cta.php:27
+msgid "En savoir plus"
+msgstr "En savoir plus"
+
+#: template-parts/project-card.php:30
+msgid "View the project"
+msgstr "Voir le projet"
+
+#: template-parts/section-jobs.php:10
+msgid "Latest roles in Energy sector"
+msgstr "Derniers postes dans le secteur de l'énergie"
+
+#: template-parts/section-jobs.php:11
+msgid "Career opportunities"
+msgstr "Opportunités de carrière"

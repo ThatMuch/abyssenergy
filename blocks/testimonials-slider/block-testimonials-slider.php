@@ -31,7 +31,7 @@ if (!empty($block['align'])) {
 }
 
 // Récupération des paramètres du bloc
-$title = get_field('title') ?: 'Témoignages de nos clients';
+$title = get_field('title') ?: __('Témoignages de nos clients', 'abyssenergy');
 $subtitle = get_field('subtitle');
 $image = get_field('image');
 $selection_type = get_field('selection_type') ?: 'all';

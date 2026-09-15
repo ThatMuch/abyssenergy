@@ -10,7 +10,7 @@ if ($job_category && !is_wp_error($job_category)) {
 }
 
 // Préparer le contenu personnalisé pour le header
-$custom_content = '<button onclick="history.back()" class="btn btn--outline mb-5"><i class="fa fa-chevron-left"></i> Back</button>';
+$custom_content = '<button onclick="history.back()" class="btn btn--outline mb-5"><i class="fa fa-chevron-left"></i> ' . esc_html__('Back', 'abyssenergy') . '</button>';
 if ($job_category) {
     $custom_content .= '<p class="section--subtitle">' . $job_category . '</p>';
 }
@@ -35,7 +35,7 @@ get_template_part('template-parts/page-header', null, array(
             <?php if (have_posts()) : ?>
                 <?php while (have_posts()) : the_post(); ?>
                     <div class="job-content">
-                        <h2 class="job-content-title">Job Description</h2>
+                        <h2 class="job-content-title"><?php esc_html_e('Job Description', 'abyssenergy'); ?></h2>
                         <div class="job-content-body">
                             <?php the_content(); ?>
                         </div>
@@ -46,7 +46,7 @@ get_template_part('template-parts/page-header', null, array(
 
         <div class="col-lg-4">
             <aside class="job-sidebar">
-                <h3 class="sidebar-title">Other Job Categories</h3>
+                <h3 class="sidebar-title"><?php esc_html_e('Other Job Categories', 'abyssenergy'); ?></h3>
 
                 <?php
                 // Récupérer toutes les catégories d'emploi
@@ -103,7 +103,7 @@ get_template_part('template-parts/page-header', null, array(
                                 <?php if ($total_jobs_count > 5) : ?>
                                     <div class="category-actions">
                                         <button class="btn btn--outline btn-show-more" data-category="<?php echo esc_attr($category->slug); ?>" data-loaded="5">
-                                            Show More
+                                            <?php esc_html_e('Show More', 'abyssenergy'); ?>
                                         </button>
                                     </div>
                                 <?php endif; ?>

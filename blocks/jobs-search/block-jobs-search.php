@@ -28,9 +28,9 @@ if (!empty($block['align'])) {
 }
 
 // Récupération des paramètres du bloc
-$title = get_field('title') ?: 'Trouvez votre prochaine opportunité';
-$text = get_field('text') ?: 'Découvrez nos offres d\'emploi et rejoignez notre équipe dynamique.';
-$search_placeholder = get_field('search_placeholder') ?: 'Trouvez votre prochain poste...';
+$title = get_field('title') ?: __('Trouvez votre prochaine opportunité', 'abyssenergy');
+$text = get_field('text') ?: __('Découvrez nos offres d\'emploi et rejoignez notre équipe dynamique.', 'abyssenergy');
+$search_placeholder = get_field('search_placeholder') ?: __('Trouvez votre prochain poste...', 'abyssenergy');
 $button_text = get_field('button_text') ?: '';
 $image = get_field('image');
 $background_color = get_field('background_color') ?: 'light';
@@ -76,7 +76,7 @@ if ($background_color && $background_color !== 'none') {
 									placeholder="<?php echo esc_attr($search_placeholder); ?>"
 									value="<?php echo esc_attr(get_query_var('job_search')); ?>"
 									aria-label="<?php esc_attr_e('Rechercher un emploi', 'abyssenergy'); ?>">
-								<button type="submit" class="btn btn--primary btn--icon" aria-label="Search"><i class="fas fa-search"></i></button>
+								<button type="submit" class="btn btn--primary btn--icon" aria-label="<?php esc_attr_e('Search', 'abyssenergy'); ?>"><i class="fas fa-search"></i></button>
 							</form>
 						</div>
 					</div>

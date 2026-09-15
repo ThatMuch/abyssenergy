@@ -91,7 +91,7 @@ class Abyssenergy_Recent_Jobs_Widget extends WP_Widget
 				<?php endwhile; ?>
 			</ul>
 		<?php else : ?>
-			<p>Aucun emploi disponible.</p>
+			<p><?php esc_html_e('Aucun emploi disponible.', 'abyssenergy'); ?></p>
 		<?php endif;
 
 		wp_reset_postdata();

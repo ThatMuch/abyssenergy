@@ -78,7 +78,7 @@ $excerpt = get_field('excerpt');
 							<?php endif; ?>
 							<?php if (!empty($metric['content'])) : ?>
 								<div class="metric-content"><?php echo wp_kses_post($metric['content']); ?></div>
-								<button class="metric-button" aria-label="Expand content"><i class="fa fa-plus"></i></button>
+								<button class="metric-button" aria-label="<?php echo esc_attr__('Expand content', 'abyssenergy'); ?>"><i class="fa fa-plus"></i></button>
 							<?php endif; ?>
 						</div>
 					</div>

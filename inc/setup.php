@@ -20,6 +20,9 @@ if (!defined('ABSPATH')) {
  */
 function abyssenergy_theme_setup()
 {
+	// Chargement des traductions du thème (fichiers .mo dans /assets/lang)
+	load_theme_textdomain('abyssenergy', get_template_directory() . '/assets/lang');
+
 	// Support des images mises en avant
 	add_theme_support('post-thumbnails');
 

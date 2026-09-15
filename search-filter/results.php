@@ -32,7 +32,7 @@ if ($query->have_posts()) : ?>
 	<p class="">
 		<?php
 		printf(
-			_n('Your search resulted in %s matching job', 'Your search resulted in %s matching jobs', $query->found_posts, 'text-domain'),
+			_n('Your search resulted in %s matching job', 'Your search resulted in %s matching jobs', $query->found_posts, 'abyssenergy'),
 			'<strong class="text-orange">' . number_format_i18n($query->found_posts) . '</strong>'
 		);
 		?>
@@ -70,8 +70,8 @@ if ($query->have_posts()) : ?>
 	<!-- Aucun emploi trouvé -->
 	<div class="no-jobs-found text-center">
 		<div class="alert">
-			<h3>No jobs found</h3>
-			<p>Sorry, no positions match your search criteria.</p>
+			<h3><?php esc_html_e('No jobs found', 'abyssenergy'); ?></h3>
+			<p><?php esc_html_e('Sorry, no positions match your search criteria.', 'abyssenergy'); ?></p>
 
 			<?php if (get_query_var('job_search') || get_query_var('job_sector') || get_query_var('job_location')) : ?>
 				<p>
