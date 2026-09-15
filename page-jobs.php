@@ -81,7 +81,12 @@ $description = safe_get_field_with_default('description', false, '');
 				<div class="col-md-8 jobs-cta-content">
 					<h2><?php esc_html_e("You didn't find the ideal position?", 'abyssenergy'); ?></h2>
 					<p><?php esc_html_e('Send us your CV for an unsolicited application.', 'abyssenergy'); ?></p>
-					<a href="/contact-us/?position=Unsolicited%20Application" class="btn btn--primary">
+					<?php
+					$contact_url = apply_filters('wpml_current_language', NULL) === 'fr'
+						? '/fr/contactez-nous/?position=Unsolicited%20Application'
+						: '/contact-us/?position=Unsolicited%20Application';
+					?>
+					<a href="<?php echo esc_url($contact_url); ?>" class="btn btn--primary">
 						<?php esc_html_e('Send my CV', 'abyssenergy'); ?>
 					</a>
 				</div>

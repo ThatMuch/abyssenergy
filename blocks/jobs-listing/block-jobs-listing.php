@@ -37,7 +37,9 @@ $show_title = get_field('show_title') !== false;
 $posts_per_page = get_field('posts_per_page') ?: 6;
 $show_button = get_field('show_button') !== false;
 $button_text = get_field('button_text') ?: __('View more jobs', 'abyssenergy');
-$button_url = get_field('button_url') ?: site_url('/search-jobs');
+$button_url = get_field('button_url') ?: (apply_filters('wpml_current_language', NULL) === 'fr'
+	? site_url('/fr/recherche-demploi/')
+	: site_url('/search-jobs'));
 $selected_sectors = get_field('job_sectors');
 
 // Définir les arguments de requête

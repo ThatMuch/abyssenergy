@@ -142,7 +142,9 @@ if (function_exists('acf_add_local_field_group')) {
 				'name' => 'button_url',
 				'type' => 'url',
 				'instructions' => 'Entrez l\'URL du bouton.',
-				'default_value' => site_url('/search-jobs'),
+				'default_value' => apply_filters('wpml_current_language', NULL) === 'fr'
+					? site_url('/fr/recherche-demploi/')
+					: site_url('/search-jobs'),
 				'placeholder' => '',
 				'conditional_logic' => array(
 					array(

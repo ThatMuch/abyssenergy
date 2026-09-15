@@ -66,8 +66,13 @@ if ($background_color && $background_color !== 'none') {
 						<?php endif; ?>
 
 						<!-- Formulaire de recherche -->
+						<?php
+						$search_jobs_url = apply_filters('wpml_current_language', NULL) === 'fr'
+							? home_url('/fr/recherche-demploi/')
+							: home_url('/search-jobs/');
+						?>
 						<div class="jobs-search-form-wrapper">
-							<form action="<?php echo esc_url(home_url('/search-jobs/')); ?>" method="GET" class="jobs-search-form  d-flex gap-2">
+							<form action="<?php echo esc_url($search_jobs_url); ?>" method="GET" class="jobs-search-form  d-flex gap-2">
 
 								<input
 									type="text"

@@ -89,7 +89,12 @@ get_header(); ?>
 							<div class="card__content text-center">
 								<h4 class="text-blue"><?php esc_html_e('Intéressé par rejoindre notre équipe ?', 'abyssenergy'); ?></h4>
 								<p><?php esc_html_e("N'hésitez pas à nous envoyer votre CV pour une candidature spontanée.", 'abyssenergy'); ?></p>
-								<a href="/contact-us/?position=Unsolicited%20Application" class="btn btn--outline">
+								<?php
+								$contact_url = apply_filters('wpml_current_language', NULL) === 'fr'
+									? '/fr/contactez-nous/?position=Unsolicited%20Application'
+									: '/contact-us/?position=Unsolicited%20Application';
+								?>
+								<a href="<?php echo esc_url($contact_url); ?>" class="btn btn--outline">
 									<?php esc_html_e('Envoyer mon CV', 'abyssenergy'); ?>
 								</a>
 							</div>
