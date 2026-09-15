@@ -387,3 +387,32 @@ function mon_plugin_executer_mise_a_jour_filtre()
 }
 // Assigner la fonction à l'événement planifié
 add_action('mon_action_mise_a_jour_filtre', 'mon_plugin_executer_mise_a_jour_filtre');
+
+
+//wpml autontranslate jobs only
+add_action('wp_insert_post', 'auto_translate_new_jobs', 10, 3);
+function auto_translate_new_jobs($post_id, $post, $update) {
+    // Only run for our 'job' post type and skip updates if you only want new posts
+    if ($post->post_type !== 'job' || $update || $post->post_status !== 'publish') {
+        return;
+    }
+
+    // Make sure WPML API is available
+    if (class_exists('WPML_Core_Version') && has_action('wpml_register_string')) {
+        // Get active target languages
+        $active_languages = apply_filters('wpml_active_languages', NULL);
+        $default_language = apply_filters('wpml_default_language', NULL);
+
+        $target_languages = array();
+        foreach ($active_languages as $lang_code => $lang_data) {
+            if ($lang_code !== $default_language) {
+                $target_languages[] = $lang_code;
+            }
+        }
+
+        if (!empty($target_languages)) {
+            // Programmatically submit the job post to automatic translation
+            do_action('wpml_send_post_to_automatic_translation', $post_id, $target_languages);
+        }
+    }
+}
