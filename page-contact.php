@@ -65,7 +65,11 @@ $consultants = get_posts(array(
 					<?php foreach ($consultants as $consultant) : ?>
 						<div class="card card--consultant">
 							<div class="card--consultant_img">
-								<a href="<?php echo esc_html(get_field('linkedin', $consultant->ID)); ?>" class="card--consultant_link" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin mr-2"></i> </a>
+								<?php
+								$consultant_linkedin = safe_get_field('linkedin_url', $consultant->ID);
+								if ($consultant_linkedin) : ?>
+									<a href="<?php echo esc_url($consultant_linkedin); ?>" class="card--consultant_link" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin mr-2"></i> </a>
+								<?php endif; ?>
 								<img src="<?php echo esc_url(get_the_post_thumbnail_url($consultant->ID, 'full')); ?>" alt="<?php echo esc_attr($consultant->post_title); ?>" loading="lazy" />
 							</div>
 							<div class="card--consultant_footer">

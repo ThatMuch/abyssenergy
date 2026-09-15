@@ -154,12 +154,87 @@
                         if ($skill_meta && !is_wp_error($skill_meta)) {
                             $skill = join(', ', wp_list_pluck($skill_meta, 'name'));
                         }
-                        echo do_shortcode('[gravityform id="1" title="false" ajax="true" field_values="jobID=' . $jobID . '&owner=' . $owner . '&screening=' . $screeningQuestion . '&position=' . $skill . '&post_id=' . get_the_ID() . '"]');
+
+                        // Détermine la source de la candidature (utm_source ou src) pour le suivi
+                        $referrer = $_GET['utm_source'] ?? null;
+                        $LIreferrer = $_GET['src'] ?? null;
+
+                        if (!empty($referrer)) {
+                            if ($referrer == 'hellowork') {
+                                $referrer = 'Apply on Hellowork';
+                            } else if ($referrer == 'linkedin') {
+                                $referrer = 'Apply on Linkedin';
+                            } else {
+                                $referrer = 'Apply on Website';
+                            }
+                        } else if (!empty($LIreferrer)) {
+                            // If src is present, force LinkedIn
+                            $referrer = 'Apply on Linkedin';
+                        } else {
+                            $referrer = 'Apply on Website';
+                        }
+
+                        echo do_shortcode('[gravityform id="1" title="false" ajax="true" field_values="jobID=' . $jobID . '&owner=' . $owner . '&referrer=' . $referrer . '&screening=' . $screeningQuestion . '&position=' . $skill . '&post_id=' . get_the_ID() . '"]');
                         ?>
                     </div>
                 </div>
             </div>
 
+            <!-- GOOGLE FOR JOBS -->
+            <?php
+            $contracts = null;
+            switch ($contracts) {
+                case "Consultant (Abyss Permanent contract - Freelance contract - Portage Salarial contract)":
+                    $employmentType = 'CONTRACTOR';
+                    break;
+                case "Permanent – Freelance – Portage Salarial":
+                    $employmentType = 'FULL_TIME';
+                    break;
+                default:
+                    $employmentType = 'FULL_TIME';
+            }
+            ?>
+            <script type="application/ld+json"><?php
+                echo json_encode([
+                    "@context"           => "http://schema.org/",
+                    "@type"              => "JobPosting",
+                    "title"              => get_the_title(),
+                    'description'        => get_the_content(),
+                    'identifier'         => [
+                        '@type' => 'PropertyValue',
+                        'name'  => 'Abyss Energy',
+                        'value' => get_the_ID(),
+                    ],
+                    'datePosted'         => get_the_date('m/d/Y'),
+                    'validThrough'       => (new \DateTime(get_the_date('m/d/Y')))->modify('+30 days')->format('Y-m-d'),
+                    'employmentType'     => $employmentType,
+                    'hiringOrganization' => [
+                        '@type'  => 'Organization',
+                        'name'   => 'Abyss Energy',
+                        'sameAs' => 'https://abyssenergy.fr/',
+                        'url'    => 'https://abyssenergy.fr/',
+                        'logo'   => 'https://abyssenergy.fr/wp-content/uploads/2025/08/ae_logo.webp'
+                    ],
+                    'jobLocation'        => [
+                        '@type'   => 'Place',
+                        'address' => [
+                            'type'            => 'PostalAddress',
+                            'addressLocality' => get_field("job_city"),
+                            'addressRegion'   => get_field("job_state"),
+                            'addressCountry'  => 'FR'
+                        ]
+                    ],
+                    'baseSalary'         => [
+                        '@type'    => 'MonetaryAmount',
+                        'currency' => 'EUR',
+                        'value'    => [
+                            '@type' => 'QuantitativeValue',
+                        ]
+                    ]
+                ], JSON_PRETTY_PRINT);
+                ?>
+            </script>
+            <!-- END GOOGLE FOR JOBS -->
 
         <?php endif; ?>
 
