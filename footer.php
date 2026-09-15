@@ -19,7 +19,7 @@
 <div class='footer-bottom'>
     <div class='container d-flex justify-content-center align-items-center'>
         <div class='footer-bottom-row'>
-            <p class='footer-bottom-copyright'>Copyright &copy; All Rights Reserved Abyss-Energy <?php echo date("Y"); ?></p>
+            <p class='footer-bottom-copyright mr-3'>Copyright &copy; All Rights Reserved Abyss-Energy <?php echo date("Y"); ?></p>
             <?php wp_nav_menu(array(
                 'theme_location' => 'footer-bottom-menu',
                 'container' => false,
