@@ -67,13 +67,13 @@ function abyssenergy_get_thumbnail_url($post_id = null, $size = 'thumbnail')
 /**
  * Obtenir le slug d'un terme de taxonomie indépendamment de la langue active
  *
- * WPML duplique les termes traduits avec un slug différent (ex: "renewables-fr"),
- * ce qui casse les classes CSS et les correspondances basées sur le slug
- * (ex: .renewables-card). Cette fonction résout toujours le terme dans la
- * langue par défaut du site pour garder un slug stable quelle que soit la langue.
+ * WPML duplique les termes traduits avec un slug suffixé par le code de langue
+ * (ex: "renewables-fr"), ce qui casse les classes CSS basées sur le slug
+ * (ex: .renewables-card). Cette fonction retire ce suffixe de langue pour
+ * garder un slug stable quelle que soit la langue affichée.
  *
  * @param WP_Term $term Terme de taxonomie
- * @return string Slug du terme dans la langue par défaut
+ * @return string Slug du terme sans suffixe de langue
  */
 function abyssenergy_get_language_independent_slug($term)
 {
@@ -81,19 +81,18 @@ function abyssenergy_get_language_independent_slug($term)
 		return '';
 	}
 
-	if (has_filter('wpml_object_id')) {
-		$default_language = apply_filters('wpml_default_language', null);
-		$default_term_id = apply_filters('wpml_object_id', $term->term_id, $term->taxonomy, false, $default_language);
+	$slug = $term->slug;
+	$languages = apply_filters('wpml_active_languages', null);
 
-		if ($default_term_id && (int) $default_term_id !== (int) $term->term_id) {
-			$default_term = get_term($default_term_id, $term->taxonomy);
-			if ($default_term && !is_wp_error($default_term)) {
-				return $default_term->slug;
-			}
-		}
+	if (is_array($languages) && !empty($languages)) {
+		$codes = array_map(function ($code) {
+			return preg_quote($code, '/');
+		}, array_keys($languages));
+
+		$slug = preg_replace('/-(' . implode('|', $codes) . ')$/', '', $slug);
 	}
 
-	return $term->slug;
+	return $slug;
 }
 
 /**
