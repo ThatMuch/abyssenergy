@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>">
     <link rel="apple-touch-icon"
-        href="/wp-content/themes/abyssenergy/images/Home+screen+icon.png" />
-    <link rel="icon" type="image/x-icon" href="/wp-content/themes/abyssenergy/images/site_favicon_16_1713442626756.ico" />
+        href="<?php echo get_template_directory_uri(); ?>/images/Home+screen+icon.png" />
+    <link rel="icon" type="image/x-icon" href="<?php echo get_template_directory_uri(); ?>/images/site_favicon_16_1713442626756.ico" />
     <!--[if lt IE 9]>
     <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->

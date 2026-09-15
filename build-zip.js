@@ -55,15 +55,20 @@ function ensureDirectoryExistence(dirPath) {
   }
 }
 
+// Dossier racine à l'intérieur du zip : toujours le slug du thème,
+// jamais le nom (versionné) du fichier zip, pour que l'extraction
+// donne systématiquement un dossier "abyssenergy" (et non "abyssenergy-v1.1.1")
+const themeFolder = path.join(tempDir, themeName);
+
 function copyFiles() {
-  // Créer le répertoire temporaire
-  ensureDirectoryExistence(tempDir);
+  // Créer le répertoire temporaire (avec le sous-dossier nommé d'après le thème)
+  ensureDirectoryExistence(themeFolder);
 
   // Copier les fichiers selon les patterns d'inclusion
   include.forEach(pattern => {
     try {
       // Utiliser cp avec glob patterns
-      const command = `cp -R ${pattern} ${tempDir}/`;
+      const command = `cp -R ${pattern} ${themeFolder}/`;
       execSync(command, { stdio: 'inherit' });
       console.log(`✅ Fichiers copiés: ${pattern}`);
     } catch (error) {
@@ -76,10 +81,10 @@ function copyFiles() {
   execSync('npm run build', { stdio: 'inherit' });
 
   // S'assurer que le style.css compilé est copié
-  execSync(`cp style.css ${tempDir}/`, { stdio: 'inherit' });
-  execSync(`cp style.min.css ${tempDir}/`, { stdio: 'inherit' });
+  execSync(`cp style.css ${themeFolder}/`, { stdio: 'inherit' });
+  execSync(`cp style.min.css ${themeFolder}/`, { stdio: 'inherit' });
   if (fs.existsSync('style.min.css.map')) {
-    execSync(`cp style.min.css.map ${tempDir}/`, { stdio: 'inherit' });
+    execSync(`cp style.min.css.map ${themeFolder}/`, { stdio: 'inherit' });
   }
 }
 
@@ -91,7 +96,7 @@ async function createZip() {
     const zipPath = path.resolve(`./${zipName}`);
 
     await bestzip({
-      source: '*',
+      source: themeName,
       destination: zipPath,
       cwd: tempDir
     });
