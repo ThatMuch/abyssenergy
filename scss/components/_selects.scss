@@ -1,6 +1,7 @@
 /**
  * Styles pour les éléments select
  */
+@use "sass:color";
 @use "../abstracts/variables" as *;
 @use "../abstracts/mixins" as *;
 
@@ -106,7 +107,7 @@ selectedcontent {
     display: flex;
     align-items: center;
     &:hover {
-      border-color: darken($color-primary, 10%);
+      border-color: color.adjust($color-primary, $lightness: -10%);
     }
 
     &:focus,
