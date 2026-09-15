@@ -387,6 +387,44 @@
   }
 }
 
+.footer-bottom-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  > * + * {
+    position: relative;
+    margin-left: 1.25rem;
+
+    &::before {
+      content: "|";
+      position: absolute;
+      left: -0.75rem;
+    }
+  }
+}
+
+.footer-bottom-menu {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li + li {
+    position: relative;
+    margin-left: 1.25rem;
+
+    &::before {
+      content: "|";
+      position: absolute;
+      left: -0.75rem;
+    }
+  }
+}
+
 .otgs-development-site-front-end {
   display: none;
 }

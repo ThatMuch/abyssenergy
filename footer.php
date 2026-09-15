@@ -18,8 +18,18 @@
 
 <div class='footer-bottom'>
     <div class='container d-flex justify-content-center align-items-center'>
-        <p>Copyright &copy; All Rights Reserved Abyss-Energy <?php echo date("Y"); ?> | <a href='/privacy-policy/'>Privacy Policy</a> | <a href='/general-conditions/'>General Conditions</a> | <a href='https://www.linkedin.com/company/abyss-energy' target='_blank' aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a></p>
-
+        <div class='footer-bottom-row'>
+            <p class='footer-bottom-copyright'>Copyright &copy; All Rights Reserved Abyss-Energy <?php echo date("Y"); ?></p>
+            <?php wp_nav_menu(array(
+                'theme_location' => 'footer-bottom-menu',
+                'container' => false,
+                'menu_class' => 'footer-bottom-menu',
+                'menu_id' => '',
+                'depth' => 1,
+                'fallback_cb' => false,
+            )); ?>
+            <a href='https://www.linkedin.com/company/abyss-energy' target='_blank' aria-label="LinkedIn" class="footer-bottom-linkedin"><i class="fab fa-linkedin-in"></i></a>
+        </div>
     </div>
 </div>
 

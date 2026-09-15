@@ -93,6 +93,7 @@ function register_my_menus()
 			'footer-menu4' => __('Footer menu col 4'),
 			'footer-menu5' => __('Footer menu col 5'),
 			'footer-menu6' => __('Footer menu col 6'),
+			'footer-bottom-menu' => __('Footer bottom menu'),
 		)
 	);
 }
