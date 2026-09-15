@@ -20,7 +20,7 @@ $sector = get_the_terms(get_the_ID(), 'sector-category');
 
 
 if ($sector && !is_wp_error($sector)) {
-    $sector = $sector[0]->slug;
+    $sector = abyssenergy_get_language_independent_slug($sector[0]);
 } else {
     $sector = '';
 }

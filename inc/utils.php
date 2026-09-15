@@ -65,6 +65,38 @@ function abyssenergy_get_thumbnail_url($post_id = null, $size = 'thumbnail')
 }
 
 /**
+ * Obtenir le slug d'un terme de taxonomie indépendamment de la langue active
+ *
+ * WPML duplique les termes traduits avec un slug différent (ex: "renewables-fr"),
+ * ce qui casse les classes CSS et les correspondances basées sur le slug
+ * (ex: .renewables-card). Cette fonction résout toujours le terme dans la
+ * langue par défaut du site pour garder un slug stable quelle que soit la langue.
+ *
+ * @param WP_Term $term Terme de taxonomie
+ * @return string Slug du terme dans la langue par défaut
+ */
+function abyssenergy_get_language_independent_slug($term)
+{
+	if (!($term instanceof WP_Term)) {
+		return '';
+	}
+
+	if (has_filter('wpml_object_id')) {
+		$default_language = apply_filters('wpml_default_language', null);
+		$default_term_id = apply_filters('wpml_object_id', $term->term_id, $term->taxonomy, false, $default_language);
+
+		if ($default_term_id && (int) $default_term_id !== (int) $term->term_id) {
+			$default_term = get_term($default_term_id, $term->taxonomy);
+			if ($default_term && !is_wp_error($default_term)) {
+				return $default_term->slug;
+			}
+		}
+	}
+
+	return $term->slug;
+}
+
+/**
  * Limiter un extrait à un nombre spécifique de mots
  *
  * @param string $text Texte à tronquer

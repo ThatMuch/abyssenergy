@@ -15,14 +15,14 @@ $country = safe_get_field('job_country', $post->ID);
 // Détermine la classe CSS basée sur le secteur (si disponible)
 $sector_class = '';
 if ($sectors && !is_wp_error($sectors) && !empty($sectors)) {
-	$sector_class = esc_html($sectors[0]->slug) . '-card';
+	$sector_class = abyssenergy_get_language_independent_slug($sectors[0]) . '-card';
 }
 
 // Vérifie si le job est nouveau (moins de 5 jours)
 $is_new = get_the_time('U') > strtotime('-5 days');
 ?>
 
-<article class="job-card card <?php echo $sector_class; ?>">
+<article class="job-card card <?php echo esc_attr($sector_class); ?>">
 	<a href="<?php the_permalink(); ?>" class="job-card-link">
 		<div class="border"></div>
 		<div class="card__content">

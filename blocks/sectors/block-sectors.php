@@ -72,11 +72,12 @@ $sectors_query = new WP_Query($args);
 							$sector_id = get_the_ID();
 							$permalink = get_permalink($sector_id);
 							$excerpt = get_the_excerpt();
-							$category = get_the_terms($sector_id, 'sector-category')[0]->name;
+							$category_term = get_the_terms($sector_id, 'sector-category')[0];
+							$category_class = abyssenergy_get_language_independent_slug($category_term) . '-card';
 							$image = get_field('image', $sector_id);
 
 						?>
-							<li class="sectors-list__item card <?php echo $category ?>">
+							<li class="sectors-list__item card <?php echo esc_attr($category_class); ?>">
 								<div class="sectors-list__item-inner">
 									<h3 class="sectors-list__item-title">
 										<?php the_title(); ?>

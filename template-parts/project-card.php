@@ -15,7 +15,7 @@ $sectors = get_the_terms(get_the_ID(), 'project-sector');
 $project_image = get_the_post_thumbnail_url(get_the_ID(), 'large');
 $project_excerpt = get_the_excerpt();
 
-$card_class = 'project-card ' . $sectors[0]->slug;
+$card_class = 'project-card ' . abyssenergy_get_language_independent_slug($sectors[0]);
 ?>
 
 <article class="<?php echo esc_attr($card_class); ?>">

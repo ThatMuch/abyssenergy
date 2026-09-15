@@ -90,7 +90,7 @@ $testimonials = new WP_Query($args);
 							$categories = get_the_terms(get_the_ID(), 'testimonial-category');
 							$category_class = '';
 							if ($categories && !is_wp_error($categories) && !empty($categories)) {
-								$category_class = esc_html($categories[0]->slug) . '-card';
+								$category_class = abyssenergy_get_language_independent_slug($categories[0]) . '-card';
 							}
 						?>
 							<div class="swiper-slide">
