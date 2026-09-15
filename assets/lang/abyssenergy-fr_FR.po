@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Abyss Energy 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/abyssenergy\n"
-"POT-Creation-Date: 2026-09-15T12:11:26+00:00\n"
+"POT-Creation-Date: 2026-09-15T14:08:13+00:00\n"
 "PO-Revision-Date: 2026-09-15T12:11:26+00:00\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -85,7 +85,7 @@ msgstr "Intéressé par rejoindre notre équipe ?"
 msgid "N'hésitez pas à nous envoyer votre CV pour une candidature spontanée."
 msgstr "N'hésitez pas à nous envoyer votre CV pour une candidature spontanée."
 
-#: archive-job.php:93
+#: archive-job.php:98
 msgid "Envoyer mon CV"
 msgstr "Envoyer mon CV"
 
@@ -132,11 +132,11 @@ msgstr "Un slider pour afficher les clients."
 
 #: blocks/features/block-features.php:34
 msgid ""
-"Aperçu du bloc des fonctionnalités. Configurez les champs dans le panneau de"
-" droite."
+"Aperçu du bloc des fonctionnalités. Configurez les champs dans le panneau de "
+"droite."
 msgstr ""
-"Aperçu du bloc des fonctionnalités. Configurez les champs dans le panneau de"
-" droite."
+"Aperçu du bloc des fonctionnalités. Configurez les champs dans le panneau de "
+"droite."
 
 #: blocks/features/block-features.php:36
 msgid ""
@@ -187,14 +187,12 @@ msgid "Voir le poste"
 msgstr "Voir le poste"
 
 #: blocks/google-reviews/block-google-reviews.php:79
-msgid ""
-"Affichage limité à %d avis sur %d récupérés (%d avis total sur Google)."
+msgid "Affichage limité à %d avis sur %d récupérés (%d avis total sur Google)."
 msgstr ""
 "Affichage limité à %d avis sur %d récupérés (%d avis total sur Google)."
 
 #: blocks/google-reviews/block-google-reviews.php:86
-msgid ""
-"Affichage de tous les avis récupérés (%d avis sur %d total sur Google)."
+msgid "Affichage de tous les avis récupérés (%d avis sur %d total sur Google)."
 msgstr ""
 "Affichage de tous les avis récupérés (%d avis sur %d total sur Google)."
 
@@ -203,8 +201,7 @@ msgid "Note: L'API Google ne retourne que 5 avis maximum."
 msgstr "Note: L'API Google ne retourne que 5 avis maximum."
 
 #: blocks/google-reviews/block-google-reviews.php:102
-msgid ""
-"Aperçu du bloc d'avis Google. Les avis réels s'afficheront sur le site."
+msgid "Aperçu du bloc d'avis Google. Les avis réels s'afficheront sur le site."
 msgstr ""
 "Aperçu du bloc d'avis Google. Les avis réels s'afficheront sur le site."
 
@@ -257,7 +254,7 @@ msgstr "Emplois & offres"
 msgid "View more jobs"
 msgstr "Voir plus d'offres"
 
-#: blocks/jobs-listing/block-jobs-listing.php:69
+#: blocks/jobs-listing/block-jobs-listing.php:71
 msgid "Aperçu du bloc Jobs Listing"
 msgstr "Aperçu du bloc Jobs Listing"
 
@@ -279,21 +276,21 @@ msgstr "Trouvez votre prochain poste..."
 
 #: blocks/jobs-search/block-jobs-search.php:48
 msgid ""
-"Aperçu du bloc de recherche d'emplois. Le formulaire sera fonctionnel sur le"
-" site."
+"Aperçu du bloc de recherche d'emplois. Le formulaire sera fonctionnel sur le "
+"site."
 msgstr ""
-"Aperçu du bloc de recherche d'emplois. Le formulaire sera fonctionnel sur le"
-" site."
+"Aperçu du bloc de recherche d'emplois. Le formulaire sera fonctionnel sur le "
+"site."
 
 #: blocks/jobs-search/block-jobs-search.php:50
 msgid "Image sélectionnée"
 msgstr "Image sélectionnée"
 
-#: blocks/jobs-search/block-jobs-search.php:78
+#: blocks/jobs-search/block-jobs-search.php:83
 msgid "Rechercher un emploi"
 msgstr "Rechercher un emploi"
 
-#: blocks/jobs-search/block-jobs-search.php:79
+#: blocks/jobs-search/block-jobs-search.php:84
 msgid "Search"
 msgstr "Rechercher"
 
@@ -357,11 +354,9 @@ msgstr "Affiche des métriques clés avec des graphiques."
 
 #: blocks/project-showcase/block-project-showcase.php:75
 msgid ""
-"Aperçu du bloc Projets Showcase. Les projets réels s'afficheront sur le "
-"site."
+"Aperçu du bloc Projets Showcase. Les projets réels s'afficheront sur le site."
 msgstr ""
-"Aperçu du bloc Projets Showcase. Les projets réels s'afficheront sur le "
-"site."
+"Aperçu du bloc Projets Showcase. Les projets réels s'afficheront sur le site."
 
 #: blocks/project-showcase/block-project-showcase.php:110
 msgid "Aucun projet trouvé pour les critères sélectionnés."
@@ -378,6 +373,10 @@ msgstr "Affiche une liste de projets showcase avec filtrage par secteur."
 #: blocks/sectors/block-sectors.php:53
 msgid "Aperçu du bloc Sectors. Les secteurs réels s'afficheront sur le site."
 msgstr "Aperçu du bloc Sectors. Les secteurs réels s'afficheront sur le site."
+
+#: blocks/sectors/block-sectors.php:91
+msgid "View our %s projects"
+msgstr "Voir nos projets %s"
 
 #: blocks/sectors/block-sectors.php:105
 msgid "Aucun secteur trouvé."
@@ -460,6 +459,10 @@ msgstr "Ligne du temps"
 #: blocks/timeline/timeline-init.php:26
 msgid "Affiche une timeline verticale avec des événements."
 msgstr "Affiche une timeline verticale avec des événements."
+
+#: footer.php:22
+msgid "Copyright © All Rights Reserved Abyss Energy %s"
+msgstr ""
 
 #: inc/blocks.php:30
 msgid "Liste de secteurs"
@@ -609,11 +612,11 @@ msgstr "L'équipe abyssienne"
 msgid "Meet the team"
 msgstr "Rencontrez l'équipe"
 
-#: page-contact.php:83
+#: page-contact.php:87
 msgid "Scroll left"
 msgstr "Défiler vers la gauche"
 
-#: page-contact.php:84
+#: page-contact.php:88
 msgid "Scroll right"
 msgstr "Défiler vers la droite"
 
@@ -641,11 +644,11 @@ msgstr "Vous n'avez pas trouvé le poste idéal ?"
 msgid "Send us your CV for an unsolicited application."
 msgstr "Envoyez-nous votre CV pour une candidature spontanée."
 
-#: page-jobs.php:85
+#: page-jobs.php:90
 msgid "Send my CV"
 msgstr "Envoyer mon CV"
 
-#: page-jobs.php:89
+#: page-jobs.php:94
 msgid "Company"
 msgstr "Entreprise"
 
@@ -733,8 +736,7 @@ msgstr "Rejoignez-nous dès aujourd'hui"
 
 #: template-parts/cta.php:24
 msgid "Découvrez nos opportunités et faites partie de notre équipe innovante."
-msgstr ""
-"Découvrez nos opportunités et faites partie de notre équipe innovante."
+msgstr "Découvrez nos opportunités et faites partie de notre équipe innovante."
 
 #: template-parts/cta.php:25
 msgid "Découvrir nos offres"

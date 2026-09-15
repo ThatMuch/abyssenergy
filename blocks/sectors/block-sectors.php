@@ -88,7 +88,7 @@ $sectors_query = new WP_Query($args);
 									<?php endif; ?>
 
 									<a href="<?php echo esc_url($permalink); ?>" class="btn btn--primary">
-										View our <?php the_title(); ?> projects
+										<?php printf(esc_html__('View our %s projects', 'abyssenergy'), esc_html(get_the_title())); ?>
 									</a>
 								</div>
 								<?php if (has_post_thumbnail()) : ?>
