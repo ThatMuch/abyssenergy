@@ -79,6 +79,15 @@ $sectors_query = new WP_Query($args);
 							$excerpt = get_the_excerpt();
 							$category_term = get_the_terms($sector_id, 'sector-category')[0];
 							$category_class = abyssenergy_get_language_independent_slug($category_term) . '-card';
+
+							// abyssenergy_get_language_independent_slug() appelle le filtre WPML
+							// 'wpml_active_languages', qui réinitialise $post sur la page principale
+							// en cours de consultation. On restaure le post du secteur pour que
+							// the_title()/has_post_thumbnail() plus bas affichent les bonnes données.
+							global $post;
+							$post = get_post($sector_id);
+							setup_postdata($post);
+
 							$image = get_field('image', $sector_id);
 
 						?>
