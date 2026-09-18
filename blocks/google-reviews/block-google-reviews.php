@@ -119,7 +119,7 @@ if ($is_preview && !empty($reviews_data) && !$reviews_data['error']) {
 		<img src="<?php echo get_stylesheet_directory_uri(); ?>/blocks/google-reviews/trees.svg" alt="<?php esc_attr_e('trees', 'abyssenergy'); ?>" class="trees-svg" loading="lazy">
 		<div class="container">
 			<div class="row justify-content-between mb-4">
-				<div class="col col-md-7">
+				<div class="col col-md-8">
 					<div class="d-flex gap-4">
 						<?php if ($image) : ?>
 							<div class="section--image">
