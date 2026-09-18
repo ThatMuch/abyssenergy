@@ -376,7 +376,7 @@ msgstr "Aperçu du bloc Sectors. Les secteurs réels s'afficheront sur le site."
 
 #: blocks/sectors/block-sectors.php:91
 msgid "View our %s projects"
-msgstr "Voir nos projets %s"
+msgstr "Voir nos référence en %s"
 
 #: blocks/sectors/block-sectors.php:105
 msgid "Aucun secteur trouvé."
