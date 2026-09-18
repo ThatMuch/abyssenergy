@@ -196,7 +196,7 @@ add_action('enqueue_block_editor_assets', 'abyssenergy_enqueue_block_editor_asse
  */
 function abyssenergy_add_editor_styles()
 {
-	add_editor_style('css/admin-theme-abyssenergy.css');
+	add_editor_style(array('css/admin-theme-abyssenergy.css', 'css/admin-editor-styles.css'));
 }
 add_action('admin_init', 'abyssenergy_add_editor_styles');
 

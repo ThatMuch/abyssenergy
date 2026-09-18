@@ -42,6 +42,11 @@ if ($selection_type === 'specific' && !empty($specific_sectors)) {
 	$args['orderby'] = 'post__in'; // Respecter l'ordre de sélection
 }
 
+// Exclure le secteur actuellement affiché pour éviter qu'il n'apparaisse dans sa propre liste
+if (is_singular('sector')) {
+	$args['post__not_in'] = array(get_the_ID());
+}
+
 $sectors_query = new WP_Query($args);
 ?>
 <?php if ($is_preview) : ?>
@@ -95,6 +100,10 @@ $sectors_query = new WP_Query($args);
 								<?php if (has_post_thumbnail()) : ?>
 									<div class="sectors-list__item__image">
 										<img src="<?php echo the_post_thumbnail_url('full'); ?>" alt="<?php echo esc_attr(get_the_title()); ?>" loading="lazy">
+									</div>
+								<?php elseif ($image) : ?>
+									<div class="sectors-list__item__image">
+										<img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt'] ?: get_the_title()); ?>" loading="lazy">
 									</div>
 								<?php endif; ?>
 							</li>
