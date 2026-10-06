@@ -37,9 +37,7 @@ $is_new = get_the_time('U') > strtotime('-5 days');
 		<div class="card__content">
 			<!-- Badges des secteurs -->
 			<?php if ($sectors && !is_wp_error($sectors) && !empty($sectors)) : ?>
-				<?php foreach ($sectors as $sector) : ?>
-					<span class="job-sector mb-3"><?php echo esc_html($sector->name); ?></span>
-				<?php endforeach; ?>
+				<span class="job-sector mb-3"><?php echo esc_html(reset($sectors)->name); ?></span>
 
 			<?php endif; ?>
 
