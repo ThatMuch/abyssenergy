@@ -6,6 +6,9 @@
  * @package AbyssEnergy
  */
 
+global $post;
+$current_job = $post;
+
 // Récupère les termes de taxonomie pour le secteur
 $sectors = get_the_terms(get_the_ID(), 'job-sector');
 $city = safe_get_field('job_city', $post->ID);
@@ -17,6 +20,12 @@ $sector_class = '';
 if ($sectors && !is_wp_error($sectors) && !empty($sectors)) {
 	$sector_class = abyssenergy_get_language_independent_slug($sectors[0]) . '-card';
 }
+
+// abyssenergy_get_language_independent_slug() appelle le filtre WPML
+// 'wpml_active_languages', qui réinitialise $post sur la page principale.
+// On restaure le job courant pour que get_the_title()/the_permalink() soient corrects.
+$post = $current_job;
+setup_postdata($post);
 
 // Vérifie si le job est nouveau (moins de 5 jours)
 $is_new = get_the_time('U') > strtotime('-5 days');
