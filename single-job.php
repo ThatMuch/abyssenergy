@@ -12,7 +12,7 @@
             $sector = '';
             $sector_slug = '';
             if ($sector_meta && !is_wp_error($sector_meta)) {
-                $sector = join(', ', wp_list_pluck($sector_meta, 'name'));
+                $sector = join(', ', array_unique(wp_list_pluck($sector_meta, 'name')));
                 $sector_slug = join(', ', wp_list_pluck($sector_meta, 'slug'));
             }
 
@@ -32,7 +32,7 @@
                     $skill_meta = get_the_terms(get_the_ID(), 'job-skill');
                     $skill = '';
                     if ($skill_meta && !is_wp_error($skill_meta)) {
-                        $skill = join(', ', wp_list_pluck($skill_meta, 'name'));
+                        $skill = join(', ', array_unique(wp_list_pluck($skill_meta, 'name')));
                     }
                     echo $skill;
                     ?>
@@ -68,7 +68,7 @@
                         $category_meta = get_the_terms(get_the_ID(), 'job-category');
                         $category = '';
                         if ($category_meta && !is_wp_error($category_meta)) {
-                            $category = join(', ', wp_list_pluck($category_meta, 'name'));
+                            $category = join(', ', array_unique(wp_list_pluck($category_meta, 'name')));
                         }
                         ?>
                         <span class="tag">
@@ -153,7 +153,7 @@
                         $skill_meta = get_the_terms(get_the_ID(), 'job-skill');
                         $skill = '';
                         if ($skill_meta && !is_wp_error($skill_meta)) {
-                            $skill = join(', ', wp_list_pluck($skill_meta, 'name'));
+                            $skill = join(', ', array_unique(wp_list_pluck($skill_meta, 'name')));
                         }
 
                         // Détermine la source de la candidature (utm_source ou src) pour le suivi
