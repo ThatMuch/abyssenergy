@@ -43,7 +43,7 @@
                     <div class="col col-md-3">
                         <p class="job-label"><?php esc_html_e('Location', 'abyssenergy'); ?></p>
                         <?php
-                        $city = get_field('job_city');
+                        $city = abyssenergy_translate_job_city(get_field('job_city'));
                         $state = get_field('job_state');
                         ?>
                         <span class="job-location tag">

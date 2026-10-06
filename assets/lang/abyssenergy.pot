@@ -717,3 +717,7 @@ msgstr ""
 #: template-parts/section-jobs.php:11
 msgid "Career opportunities"
 msgstr ""
+
+#: inc/jobs.php
+msgid "Nearby"
+msgstr ""

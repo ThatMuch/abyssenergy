@@ -744,3 +744,7 @@ msgstr "Latest roles in Energy sector"
 #: template-parts/section-jobs.php:11
 msgid "Career opportunities"
 msgstr "Career opportunities"
+
+#: inc/jobs.php
+msgid "Nearby"
+msgstr "Nearby"

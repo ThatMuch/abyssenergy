@@ -292,6 +292,14 @@ function abyssenergy_job_template_redirect()
 add_action('template_redirect', 'abyssenergy_job_template_redirect');
 
 /**
+ * Traduit le préfixe "Nearby" que Bullhorn ajoute à la ville (ex: "Nearby Paris")
+ */
+function abyssenergy_translate_job_city($city)
+{
+	return preg_replace('/^\s*Nearby\b/i', __('Nearby', 'abyssenergy'), (string) $city);
+}
+
+/**
  * Modifier les permaliens pour les jobs - utiliser le Bullhorn ID au lieu du slug
  */
 function abyssenergy_job_permalink($post_link, $post)
