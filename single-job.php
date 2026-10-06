@@ -87,6 +87,7 @@
                                 $emp_meta = array_map('trim', $emp_meta);
                             }
                             $work_types = explode('–', implode('–', $emp_meta));
+                            $work_types = array_unique(array_filter(array_map('trim', $work_types)));
 
                             foreach ($work_types as $type) {
                                 echo '<span class="tag">' . esc_html($type) . '</span>';
