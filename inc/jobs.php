@@ -307,12 +307,60 @@ function abyssenergy_job_permalink($post_link, $post)
 	if ($post->post_type === 'job') {
 		$bullhorn_id = get_field('job_id', $post->ID);
 		if ($bullhorn_id) {
-			return home_url('/job/' . $bullhorn_id . '/');
+			$url = home_url('/job/' . $bullhorn_id . '/');
+			$post_lang = apply_filters('wpml_element_language_code', null, array(
+				'element_id'   => $post->ID,
+				'element_type' => 'post_job',
+			));
+			if ($post_lang) {
+				$url = apply_filters('wpml_permalink', $url, $post_lang);
+			}
+			return $url;
 		}
 	}
 	return $post_link;
 }
 add_filter('post_type_link', 'abyssenergy_job_permalink', 10, 2);
+
+/**
+ * Sélecteur de langue WPML sur /job/ID : la requête n'étant pas un vrai post,
+ * WPML pointe vers la home. On force l'URL de la traduction du job.
+ */
+function abyssenergy_job_language_switcher($languages)
+{
+	$bullhorn_id = get_query_var('job_id');
+	if (!$bullhorn_id || !is_array($languages)) {
+		return $languages;
+	}
+
+	foreach ($languages as $code => $lang) {
+		$job = get_posts(array(
+			'post_type'        => 'job',
+			'post_status'      => 'publish',
+			'posts_per_page'   => 1,
+			'fields'           => 'ids',
+			'suppress_filters' => true,
+			'meta_query'       => array(
+				array('key' => 'job_id', 'value' => sanitize_text_field($bullhorn_id)),
+			),
+		));
+		// Recherche du job dans la langue cible
+		$translated = false;
+		if (!empty($job)) {
+			$translated = apply_filters('wpml_object_id', $job[0], 'job', false, $code);
+		}
+		if ($translated) {
+			$languages[$code]['url'] = apply_filters(
+				'wpml_permalink',
+				home_url('/job/' . $bullhorn_id . '/'),
+				$code
+			);
+		}
+	}
+
+	return $languages;
+}
+add_filter('icl_ls_languages', 'abyssenergy_job_language_switcher');
 
 /**
  * Vider les règles de réécriture lors de l'activation du thème
